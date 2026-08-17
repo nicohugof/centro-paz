@@ -15,6 +15,7 @@ BRAND = {
     "phone": "+56965163893",
     "email": "contacto.centropaz@gmail.com",
     "instagram": "@centropaz.cl",
+    "tiktok": "@centropaz.cl",
     "web": "https://www.centropaz.cl",
     "isapres": "Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres y Seguros Complementarios",
 }
