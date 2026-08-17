@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,700;1,500;1,700&family=Nunito+Sans:wght@400;600;700;800&display=swap');
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      width: 1080px;
+      height: 1350px;
+      background: #FAF6F3;
+      font-family: 'Nunito Sans', sans-serif;
+      color: #2B2B2B;
+      padding: 72px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo-badge {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #F0D9DE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Lora', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #7A2E3A;
+    }
+
+    .brand-name {
+      font-family: 'Lora', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #5C1F29;
+    }
+
+    .brand-sub {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #4A6E60;
+      font-weight: 700;
+    }
+
+    .tag-category {
+      background: #EAF2EE;
+      border: 1.5px solid #A9C4B8;
+      color: #4A6E60;
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .kicker {
+      font-size: 20px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #7A2E3A;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 54px;
+      line-height: 1.18;
+      color: #5C1F29;
+      margin-bottom: 36px;
+    }
+
+    .steps-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 36px;
+    }
+
+    .step-card {
+      background: #FFF;
+      border: 2px solid #EFE4DE;
+      border-radius: 20px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      box-shadow: 0 8px 24px rgba(122, 46, 58, 0.04);
+    }
+
+    .step-num {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #7A2E3A;
+      color: #FFF;
+      font-family: 'Lora', serif;
+      font-size: 24px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-text h3 {
+      font-size: 22px;
+      color: #5C1F29;
+      margin-bottom: 4px;
+    }
+
+    .step-text p {
+      font-size: 17px;
+      color: #5A534E;
+      line-height: 1.35;
+    }
+
+    .isapres-pill-row {
+      background: #F0D9DE;
+      border-radius: 14px;
+      padding: 16px 24px;
+      text-align: center;
+      font-size: 17px;
+      font-weight: 700;
+      color: #5C1F29;
+      margin-bottom: 28px;
+    }
+
+    .footer-cta {
+      background: #5C1F29;
+      color: #FFF;
+      border-radius: 20px;
+      padding: 24px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-cta-text h3 {
+      font-family: 'Lora', serif;
+      font-size: 22px;
+      color: #FFF;
+      margin-bottom: 4px;
+    }
+
+    .footer-cta-text p {
+      font-size: 15px;
+      color: #F0D9DE;
+    }
+
+    .wa-pill {
+      background: #25D366;
+      color: #FFF;
+      padding: 12px 24px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 17px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="header">
+      <div class="brand">
+        <div class="logo-badge">CP</div>
+        <div>
+          <div class="brand-name">Centro Paz</div>
+          <div class="brand-sub">Psicología Clínica</div>
+        </div>
+      </div>
+      <div class="tag-category">Reembolsos & Convenios</div>
+    </div>
+
+    <div class="kicker">Guía Práctica</div>
+    <h1>Cómo reembolsar tus sesiones en <span>3 simples pasos</span></h1>
+
+    <div class="steps-container">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <h3>Asistes a tu sesión online o presencial</h3>
+          <p>Al terminar, Valentina emite tu boleta electrónica de honorarios con código de psicología clínica.</p>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <h3>Subes la boleta a la app de tu Isapre</h3>
+          <p>En 1 minuto desde tu celular o portal web de Colmena, Banmédica, CruzBlanca, Consalud o Vida Tres.</p>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <h3>Recibes tu reembolso directo en tu cuenta</h3>
+          <p>Tu Isapre o seguro complementario te deposita entre el 50% y 80% del arancel según tu plan.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="isapres-pill-row">
+      🌿 Válido para todas las Isapres y Seguros Complementarios de Salud
+    </div>
+  </div>
+
+  <div class="footer-cta">
+    <div class="footer-cta-text">
+      <h3>Simula tu reembolso en nuestra web</h3>
+      <p>Calcula tu copago estimado y agenda por WhatsApp</p>
+    </div>
+    <div class="wa-pill">
+      <span>📲 Link en Bio</span>
+    </div>
+  </div>
+</body>
+</html>

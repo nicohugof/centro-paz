@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,700;1,500;1,700&family=Nunito+Sans:wght@400;600;700;800&display=swap');
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      width: 1080px;
+      height: 1350px;
+      background: #FAF6F3;
+      font-family: 'Nunito Sans', sans-serif;
+      color: #2B2B2B;
+      padding: 72px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Fondo decorativo sutil */
+    .bg-circle-1 {
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: #F0D9DE;
+      opacity: 0.6;
+      z-index: 1;
+    }
+    .bg-circle-2 {
+      position: absolute;
+      bottom: -80px;
+      left: -80px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: #A9C4B8;
+      opacity: 0.3;
+      z-index: 1;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 48px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo-badge {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #F0D9DE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Lora', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #7A2E3A;
+    }
+
+    .brand-name {
+      font-family: 'Lora', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #5C1F29;
+    }
+
+    .brand-sub {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #4A6E60;
+      font-weight: 700;
+    }
+
+    .tag-category {
+      background: #FFF;
+      border: 1.5px solid #F0D9DE;
+      color: #7A2E3A;
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .kicker {
+      font-size: 20px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #7A2E3A;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 58px;
+      line-height: 1.15;
+      color: #5C1F29;
+      margin-bottom: 36px;
+    }
+
+    h1 span {
+      background: #F0D9DE;
+      padding: 0 8px;
+      border-radius: 8px;
+    }
+
+    .symptoms-card {
+      background: #FFFFFF;
+      border: 2px solid #EFE4DE;
+      border-radius: 24px;
+      padding: 36px 40px;
+      box-shadow: 0 12px 36px rgba(122, 46, 58, 0.06);
+      margin-bottom: 36px;
+    }
+
+    .symptom-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+      font-size: 21px;
+      color: #2B2B2B;
+      line-height: 1.4;
+    }
+
+    .symptom-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .symptom-icon {
+      color: #7A2E3A;
+      font-size: 24px;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    .footer-cta {
+      background: #7A2E3A;
+      color: #FFF;
+      border-radius: 20px;
+      padding: 24px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-cta-text h3 {
+      font-family: 'Lora', serif;
+      font-size: 24px;
+      color: #FFF;
+      margin-bottom: 4px;
+    }
+
+    .footer-cta-text p {
+      font-size: 16px;
+      color: #F0D9DE;
+    }
+
+    .wa-pill {
+      background: #25D366;
+      color: #FFF;
+      padding: 12px 24px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-circle-1"></div>
+  <div class="bg-circle-2"></div>
+
+  <div class="content">
+    <div class="header">
+      <div class="brand">
+        <div class="logo-badge">CP</div>
+        <div>
+          <div class="brand-name">Centro Paz</div>
+          <div class="brand-sub">Psicología Clínica</div>
+        </div>
+      </div>
+      <div class="tag-category">Neurodivergencias</div>
+    </div>
+
+    <div class="kicker">Identificación & Salud Mental</div>
+    <h1>¿Y si tu cansancio no es flojera, sino <span>TDAH no diagnosticado</span>?</h1>
+
+    <div class="symptoms-card">
+      <div class="symptom-row">
+        <span class="symptom-icon">✦</span>
+        <span><strong>Procrastinación por sobrecarga:</strong> Querer empezar mil cosas y sentir una barrera invisible que te paraliza.</span>
+      </div>
+      <div class="symptom-row">
+        <span class="symptom-icon">✦</span>
+        <span><strong>Agotamiento por "Masking":</strong> El esfuerzo constante de forzarte a parecer "normal" en el trabajo o reuniones.</span>
+      </div>
+      <div class="symptom-row">
+        <span class="symptom-icon">✦</span>
+        <span><strong>Sensibilidad al rechazo o crítica:</strong> Sentir desproporcionadamente cuando alguien parece decepcionado.</span>
+      </div>
+      <div class="symptom-row">
+        <span class="symptom-icon">✦</span>
+        <span><strong>Hipersensibilidad sensorial:</strong> Ruidos, luces o texturas que te drenan la energía sin darte cuenta.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-cta">
+    <div class="footer-cta-text">
+      <h3>No tienes que transitarlo en soledad</h3>
+      <p>Acompañamiento neuroafirmativo con Valentina Castro Núñez</p>
+    </div>
+    <div class="wa-pill">
+      <span>📲 Link en Bio</span>
+    </div>
+  </div>
+</body>
+</html>
