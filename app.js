@@ -8,6 +8,7 @@ const CPAZ_CONFIG = {
   email: "contacto.centropaz@gmail.com",
   instagram: "centropaz.cl",
   tiktok: "centropaz.cl",
+  facebook: "https://www.facebook.com/profile.php?id=61593207820690",
   domain: "www.centropaz.cl",
   therapistName: "Valentina Castro Núñez",
   centerName: "Centro Paz",
