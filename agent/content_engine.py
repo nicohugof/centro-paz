@@ -11,7 +11,7 @@ BRAND = {
     "name": "Centro Paz",
     "therapist": "Valentina Castro Núñez",
     "title": "Psicóloga Clínica",
-    "approach": "Humanista, Sistémico e Integrativo",
+    "approach": "Humanista e Integrativo (Especialista en Neurodivergencias e Infanto-Juvenil)",
     "phone": "+56965163893",
     "web": "https://nicohugof.github.io/centro-paz/",
     "isapres": "Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres y Seguros Complementarios",
@@ -68,7 +68,7 @@ El copago real puede quedar tan bajo como $15.000 por sesión según tu plan.
         "hashtags": HASHTAGS_BASE + ["#ReembolsoPsicologia", "#IsapreColmena", "#IsapreBanmedica", "#IsapreCruzBlanca", "#CopagoPsicologia"]
     },
     "crianza_regulacion": {
-        "kicker": "Infancia & Familias",
+        "kicker": "Infancia & Crianza",
         "title": "Una rabieta intensa no es manipulación: es sobrecarga sensorial",
         "hook": "Cuando un niño/a se desborda, no busca molestarte: su sistema nervioso colapsó.",
         "points": [
@@ -98,7 +98,7 @@ def get_weekly_calendar() -> List[Dict]:
     types = [
         ("Educación & Validación (Neurodivergencias)", "tdah_adultos"),
         ("Derribador de Objeción (Reembolso Isapre)", "reembolso_isapre"),
-        ("Orientación Familiar & Crianza", "crianza_regulacion"),
+        ("Orientación a Padres & Crianza", "crianza_regulacion"),
         ("Autocuidado & Límites en Adultos", "tdah_adultos"),
         ("Llamado directo a Agendamiento", "reembolso_isapre")
     ]

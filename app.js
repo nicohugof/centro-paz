@@ -26,27 +26,21 @@ const triageData = {
     desc: "Selecciona quién recibirá el acompañamiento para orientar el enfoque terapéutico.",
     options: [
       { id: "adulto", icon: "👤", title: "Para mí (Adulto)", desc: "Acompañamiento individual, bienestar emocional y autoconocimiento." },
-      { id: "hijo", icon: "🌱", title: "Para mi hijo/a o adolescente", desc: "Apoyo infanto-juvenil, neurodivergencias y etapa escolar." },
-      { id: "familia", icon: "🏡", title: "Para la familia o pareja", desc: "Mejora de la dinámica vincular, comunicación y crianza." }
+      { id: "hijo", icon: "🌱", title: "Para mi hijo/a o adolescente", desc: "Apoyo infanto-juvenil, neurodivergencias y etapa escolar." }
     ]
   },
   reason: {
     adulto: [
       { id: "ansiedad", icon: "🌊", title: "Ansiedad, estrés o sobrecarga", desc: "Manejo de angustia, crisis y equilibrio diario." },
       { id: "tea_tdah_adulto", icon: "🧠", title: "Neurodivergencia (TEA / TDAH)", desc: "Sospecha, diagnóstico tardío o acompañamiento." },
-      { id: "trauma_duelo", icon: "🕯️", title: "Trauma, duelo o quiebres", desc: "Elaboración de pérdidas y experiencias difíciles." },
-      { id: "crecimiento", icon: "✨", title: "Autoestima y desarrollo personal", desc: "Reconexión con tus metas y bienestar integral." }
+      { id: "crecimiento", icon: "✨", title: "Autoestima y desarrollo personal", desc: "Reconexión con tus metas y bienestar integral." },
+      { id: "cambios", icon: "🧭", title: "Momentos de cambio y decisiones", desc: "Acompañamiento en transiciones vitales y laborales." }
     ],
     hijo: [
       { id: "tea_tdah_infantil", icon: "🧩", title: "Evaluación o apoyo TEA / TDAH", desc: "Estrategias de regulación, sensoriales y escolares." },
-      { id: "emocional_infantil", icon: "🎨", title: "Manejo emocional o conductual", desc: "Frustración, miedos, cambios familiares o escolares." },
-      { id: "adolescencia", icon: "🌿", title: "Etapa adolescente", desc: "Identidad, motivación, autoestima y relaciones sociales." },
-      { id: "orientacion_padres", icon: "🤝", title: "Orientación a padres", desc: "Pautas de crianza respetuosa y contención." }
-    ],
-    familia: [
-      { id: "comunicacion", icon: "💬", title: "Dificultades de comunicación", desc: "Conflictos recurrentes y distancia afectiva." },
-      { id: "crianza_compartida", icon: "🧭", title: "Crianza y acuerdos", desc: "Alineación en la dinámica del hogar y límites sanos." },
-      { id: "crisis_familiar", icon: "🛡️", title: "Crisis o transición familiar", desc: "Separaciones, mudanzas o duelos compartidos." }
+      { id: "emocional_infantil", icon: "🎨", title: "Manejo emocional y frustración", desc: "Desbordes, miedos o desafíos escolares." },
+      { id: "adolescencia", icon: "🌿", title: "Etapa adolescente y autoestima", desc: "Identidad, motivación y relaciones sociales." },
+      { id: "orientacion_padres", icon: "🤝", title: "Orientación a padres en crianza", desc: "Pautas de crianza respetuosa y contención." }
     ]
   },
   modality: [
@@ -61,9 +55,9 @@ const checklistData = {
   adultos: [
     "Sientes que vives con una sobrecarga mental o cansancio que no se quita descansando.",
     "Sospechas que podrías tener TDAH o TEA (dificultad para concentrarte, hipersensibilidad o desregulación).",
-    "Te cuesta poner límites sanos o tiendes a complacer a los demás a costa de tu bienestar.",
+    "Te cuesta poner límites sanos o tiendes a sobreexigirte a costa de tu bienestar.",
     "Experimentas angustia, ansiedad física (pecho apretado) o miedo constante al futuro.",
-    "Has pasado por un duelo, quiebre o experiencia traumática que aún duele.",
+    "Te cuesta regular tus niveles de estrés o desconectar de las exigencias cotidianas.",
     "Sientes que 'enmascaras' quién eres para encajar en el trabajo o la sociedad."
   ],
   padres: [
@@ -72,7 +66,7 @@ const checklistData = {
     "Notas que le afectan mucho los ruidos fuertes, texturas o cambios imprevistos de rutina.",
     "Te sientes sobrepasada/o o con dudas constantes sobre cómo ejercer una crianza respetuosa.",
     "Tu hijo/a o adolescente se aísla, muestra baja autoestima o dificultades para hacer amigos.",
-    "Deseas fortalecer el vínculo y la comunicación en el hogar sin gritos ni castigos."
+    "Deseas contar con pautas claras de contención y comunicación respetuosa en el hogar."
   ]
 };
 
@@ -216,15 +210,13 @@ function buildTriageResult() {
   const modLabel = triageState.modality?.label || "Por coordinar";
   const timePref = triageState.timePreference || "Horario flexible";
 
-  let recommendedApproach = "Acompañamiento Psicológico Integral";
+  let recommendedApproach = "Acompañamiento Psicológico Individual para Adultos";
   if (triageState.forWhom?.id === "hijo") {
-    recommendedApproach = "Terapia Infanto-Juvenil y Enfoque Neuroafirmativo";
-  } else if (triageState.forWhom?.id === "familia") {
-    recommendedApproach = "Terapia Familiar y Sistémica";
+    recommendedApproach = "Terapia Infanto-Juvenil & Orientación a Padres";
   } else if (triageState.reason?.id === "tea_tdah_adulto") {
     recommendedApproach = "Acompañamiento en Neurodivergencias Adultas";
-  } else if (triageState.reason?.id === "trauma_duelo") {
-    recommendedApproach = "Abordaje Integrativo del Trauma y Duelo";
+  } else if (triageState.reason?.id === "ansiedad") {
+    recommendedApproach = "Manejo Clínico de Ansiedad y Sobrecarga";
   }
 
   const resultBox = document.getElementById("triage-result-content");
@@ -440,11 +432,9 @@ function initWhatsAppLinks() {
     } else if (action === "neurodivergencia") {
       msg = "Hola Centro Paz 🧠 Quisiera consultar por atención especializada en Neurodivergencias (TEA / TDAH) y disponibilidad.";
     } else if (action === "infantil") {
-      msg = "Hola Centro Paz 🌱 Busco apoyo psicológico infanto-juvenil para mi hijo/a. ¿Cómo es el proceso de ingreso?";
-    } else if (action === "familia") {
-      msg = "Hola Centro Paz 🏡 Me gustaría consultar por terapia familiar o de vínculo.";
+      msg = "Hola Centro Paz 🌱 Busco apoyo psicológico infanto-juvenil / orientación a padres. ¿Cómo es el proceso de ingreso?";
     } else if (action === "lead-magnet") {
-      msg = "Hola Centro Paz ✨ Me gustaría solicitar la Guía Gratuita de Regulación Emocional y Sensorial para familias y adultos.";
+      msg = "Hola Centro Paz ✨ Me gustaría solicitar la Guía Gratuita de Regulación Emocional y Sensorial para adultos y familias.";
     }
 
     link.href = `https://wa.me/${CPAZ_CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`;
