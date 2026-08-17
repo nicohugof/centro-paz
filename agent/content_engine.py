@@ -14,6 +14,7 @@ BRAND = {
     "approach": "Humanista e Integrativo (Especialista en Neurodivergencias e Infanto-Juvenil)",
     "phone": "+56965163893",
     "email": "contacto.centropaz@gmail.com",
+    "instagram": "@centropaz.cl",
     "web": "https://www.centropaz.cl",
     "isapres": "Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres y Seguros Complementarios",
 }

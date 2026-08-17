@@ -6,6 +6,7 @@
 const CPAZ_CONFIG = {
   whatsappNumber: "56965163893",
   email: "contacto.centropaz@gmail.com",
+  instagram: "centropaz.cl",
   domain: "www.centropaz.cl",
   therapistName: "Valentina Castro Núñez",
   centerName: "Centro Paz",
