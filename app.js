@@ -5,6 +5,8 @@
 
 const CPAZ_CONFIG = {
   whatsappNumber: "56965163893",
+  email: "contacto.centropaz@gmail.com",
+  domain: "www.centropaz.cl",
   therapistName: "Valentina Castro Núñez",
   centerName: "Centro Paz",
   standardFee: 45000, // Arancel estándar de referencia en CLP
