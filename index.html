@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centro Paz — Psicología Clínica, Neurodivergencias y Terapia Familiar</title>
+  <meta name="description" content="Centro Paz: Acompañamiento psicológico clínico con enfoque humanista, sistémico e integrativo. Especialistas en adultos, neurodivergencias (TEA/TDAH) e infanto-juvenil. Sesiones online y presenciales con reembolso Isapre.">
+  <meta name="keywords" content="psicología clínica santiago, psicóloga neurodivergencias chile, tea adultos santiago, tdah adultos chile, terapia infanto juvenil, psicóloga valentina castro, reembolso isapre psicologia">
+  <meta property="og:title" content="Centro Paz — Psicología Clínica, Neurodivergencias y Terapia Familiar">
+  <meta property="og:description" content="Acompañamiento psicológico clínico con enfoque humanista e integrativo. Especialistas en neurodivergencias (TEA/TDAH). Sesiones online y presenciales.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CL">
+  
+  <!-- Preconnect Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,300..900;1,6..12,300..900&display=swap" rel="stylesheet">
+  
+  <!-- Favicon / Brand SVG -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%23F0D9DE'/><text x='50' y='60' font-family='Georgia,serif' font-size='42' font-weight='700' fill='%237A2E3A' text-anchor='middle'>CP</text></svg>">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Barra de Notificación Superior -->
+  <div class="top-notice">
+    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.8 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+    <span>🌿 Agenda abierta para nuevas consultas · Modalidad Online y Presencial · Boletas reembolsables en Isapres y Seguros</span>
+  </div>
+
+  <!-- Navegación -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="logo-brand">
+        <div class="logo-symbol">
+          <span>CP</span>
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">Centro Paz</span>
+          <span class="logo-tagline">Psicología Clínica</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#especialidades">Especialidades</a></li>
+          <li><a href="#autodiagnostico">¿Te identificas?</a></li>
+          <li><a href="#orientador">Orientador</a></li>
+          <li><a href="#calculadora">Reembolso Isapre</a></li>
+          <li><a href="#terapeuta">Sobre Valentina</a></li>
+          <li><a href="#faq">Preguntas</a></li>
+          <li><a href="#orientador" class="nav-cta">Agendar Consulta</a></li>
+        </ul>
+      </nav>
+
+      <button class="nav-toggle" aria-label="Abrir menú de navegación">
+        <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Principal -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          <span>Acompañamiento cercano y riguroso</span>
+        </div>
+        <h1>Un espacio de calma, confianza y <span class="hero-highlight">salud emocional</span></h1>
+        <p class="hero-desc">
+          Te acompañamos a transitar momentos difíciles, comprender tus emociones o apoyar el desarrollo de tus hijos desde un enfoque humanista, sistémico e integrativo.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#orientador" class="btn btn-primary">
+            <span>Orientador de Consulta (3 pasos)</span>
+            <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#" class="btn btn-whatsapp" data-wa-action="general">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm.01 1.67c4.54 0 8.24 3.7 8.24 8.24 0 2.2-.86 4.27-2.42 5.82-1.55 1.56-3.62 2.42-5.82 2.42-1.47 0-2.9-.39-4.16-1.13l-.3-.18-3.1.81.83-3.02-.2-.31c-.81-1.3-1.24-2.8-1.24-4.41 0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.25-1.5-1.4-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.07-.1-.23-.17-.48-.29z"/></svg>
+            <span>Escribir por WhatsApp</span>
+          </a>
+        </div>
+
+        <div class="hero-trust-badges">
+          <div class="trust-item">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            <span>Reembolso Isapre y Seguros</span>
+          </div>
+          <div class="trust-item">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            <span>Online y Presencial</span>
+          </div>
+          <div class="trust-item">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            <span>Espacio Neuroafirmativo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta Visual Terapeuta en Hero -->
+      <div class="hero-card-container">
+        <div class="hero-therapist-card">
+          <div class="therapist-header">
+            <div class="therapist-avatar">
+              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+              <div class="therapist-status" title="Disponibilidad activa"></div>
+            </div>
+            <div class="therapist-info">
+              <h3>Valentina Castro Núñez</h3>
+              <div class="therapist-role">Psicóloga Clínica · Fundadora</div>
+            </div>
+          </div>
+
+          <div class="therapist-tags">
+            <span class="tag-pill">Neurodivergencias TEA/TDAH</span>
+            <span class="tag-pill">Adultos</span>
+            <span class="tag-pill">Infanto-Juvenil</span>
+            <span class="tag-pill">Trauma y Vínculo</span>
+          </div>
+
+          <div class="therapist-quote">
+            "La terapia no se trata de encajar en moldes, sino de construir un espacio seguro donde puedas comprenderte y florecer a tu propio ritmo."
+          </div>
+
+          <div class="therapist-card-footer">
+            <span>📍 Santiago / Todo Chile</span>
+            <span>⭐ Atención Personalizada</span>
+          </div>
+
+          <div class="badge-float">
+            <span>🌿 Enfoque Humanista</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Especialidades -->
+  <section class="specialties-section" id="especialidades">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-kicker">Áreas de Atención</div>
+        <h2>Acompañamiento especializado para cada etapa de la vida</h2>
+        <p>Brindamos atención clínica personalizada orientada a tus necesidades y las de tu familia.</p>
+      </div>
+
+      <div class="specialties-grid">
+        <!-- Tarjeta 1: Adultos -->
+        <div class="specialty-card">
+          <div>
+            <div class="specialty-icon-box">
+              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+            </div>
+            <h3>Terapia para Adultos</h3>
+            <p>Espacio para procesar momentos de crisis, sobrecarga laboral, angustia, toma de decisiones o búsqueda de bienestar.</p>
+            <ul class="specialty-list">
+              <li>Ansiedad, pánico y estrés</li>
+              <li>Duelo y quiebres vitales</li>
+              <li>Autoestima y autoconocimiento</li>
+            </ul>
+          </div>
+          <a href="#" class="btn btn-secondary btn-sm" data-wa-action="adultos">Consultar por Adultos</a>
+        </div>
+
+        <!-- Tarjeta 2: Neurodivergencias -->
+        <div class="specialty-card">
+          <div>
+            <div class="specialty-icon-box">
+              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.22 19.58 10.57 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>
+            </div>
+            <h3>Neurodivergencias (TEA / TDAH)</h3>
+            <p>Atención con perspectiva neuroafirmativa. Acompañamiento a personas autistas y con TDAH en todas las edades.</p>
+            <ul class="specialty-list">
+              <li>Identificación y diagnóstico tardío</li>
+              <li>Regulación sensorial y emocional</li>
+              <li>Estrategias para la vida diaria y laboral</li>
+            </ul>
+          </div>
+          <a href="#" class="btn btn-secondary btn-sm" data-wa-action="neurodivergencia">Consultar por TEA / TDAH</a>
+        </div>
+
+        <!-- Tarjeta 3: Infanto-Juvenil -->
+        <div class="specialty-card">
+          <div>
+            <div class="specialty-icon-box">
+              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            </div>
+            <h3>Infanto-Juvenil</h3>
+            <p>Atención cálida y lúdica para niños y adolescentes, facilitando la expresión emocional y el fortalecimiento de su autoestima.</p>
+            <ul class="specialty-list">
+              <li>Manejo de frustración y miedos</li>
+              <li>Desafíos escolares y sociales</li>
+              <li>Orientación continua a padres</li>
+            </ul>
+          </div>
+          <a href="#" class="btn btn-secondary btn-sm" data-wa-action="infantil">Consultar Infanto-Juvenil</a>
+        </div>
+
+        <!-- Tarjeta 4: Familia y Trauma -->
+        <div class="specialty-card">
+          <div>
+            <div class="specialty-icon-box">
+              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+            </div>
+            <h3>Familia y Vínculo</h3>
+            <p>Enfoque sistémico para sanar dinámicas familiares, resolver conflictos y fortalecer el apego seguro.</p>
+            <ul class="specialty-list">
+              <li>Pautas de crianza respetuosa</li>
+              <li>Transiciones y crisis familiares</li>
+              <li>Abordaje del trauma vincular</li>
+            </ul>
+          </div>
+          <a href="#" class="btn btn-secondary btn-sm" data-wa-action="familia">Consultar Terapia Familiar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Autodiagnóstico / Checklist Interactivo (HERRAMIENTA DE CONEXIÓN EMOCIONAL) -->
+  <section class="checklist-section" id="autodiagnostico">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-kicker">Autodiagnóstico y Reflexión</div>
+        <h2>¿Te identificas con alguna de estas vivencias?</h2>
+        <p>Selecciona las situaciones que resuenen contigo para descubrir cómo podemos apoyarte.</p>
+      </div>
+
+      <div class="checklist-tabs">
+        <button type="button" class="tab-btn active" data-tab="adultos" onclick="switchChecklistTab('adultos')">🧠 Adultos (Sobrecarga, Ansiedad o TDAH/TEA)</button>
+        <button type="button" class="tab-btn" data-tab="padres" onclick="switchChecklistTab('padres')">🌱 Familias y Crianza (Desafíos Infantiles)</button>
+      </div>
+
+      <div class="checklist-container">
+        <div class="symptoms-grid" id="symptoms-container">
+          <!-- Renderizado dinámicamente -->
+        </div>
+
+        <div class="checklist-feedback" id="checklist-feedback">
+          <!-- Feedback dinámico según selección -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Orientador / Triaje Interactivo (HERRAMIENTA CLAVE DE CONVERSIÓN) -->
+  <section class="triage-section" id="orientador">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-kicker">Orientador de Consulta</div>
+        <h2>Encuentra el acompañamiento adecuado en 3 simples pasos</h2>
+        <p>Responde estas breves preguntas para orientar tu motivo de consulta y contactarte directamente por WhatsApp.</p>
+      </div>
+
+      <div class="triage-card">
+        <!-- Barra de Progreso -->
+        <div class="triage-progress">
+          <div class="triage-progress-bar" id="triage-progress-bar"></div>
+          <div class="step-node active" id="node-step-1">1</div>
+          <div class="step-node" id="node-step-2">2</div>
+          <div class="step-node" id="node-step-3">3</div>
+          <div class="step-node" id="node-step-4">✓</div>
+        </div>
+
+        <!-- Paso 1: Para quién -->
+        <div class="triage-step active" id="triage-step-1">
+          <h3>¿Para quién es la atención psicológica?</h3>
+          <p class="triage-step-desc">Selecciona el perfil de quien recibirá las sesiones.</p>
+          <div class="options-grid" id="step1-options">
+            <!-- Renderizado dinámicamente con JS -->
+          </div>
+        </div>
+
+        <!-- Paso 2: Motivo -->
+        <div class="triage-step" id="triage-step-2">
+          <h3>¿Cuál es el motivo principal de la consulta?</h3>
+          <p class="triage-step-desc">Elige la opción que mejor describa la situación actual.</p>
+          <div class="options-grid" id="step2-options">
+            <!-- Renderizado dinámicamente con JS -->
+          </div>
+          <div class="triage-nav">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="goToStep(1)">← Volver al paso anterior</button>
+          </div>
+        </div>
+
+        <!-- Paso 3: Modalidad -->
+        <div class="triage-step" id="triage-step-3">
+          <h3>¿Qué modalidad de atención prefieres?</h3>
+          <p class="triage-step-desc">Ambas modalidades cuentan con la misma dedicación clínica y confidencialidad.</p>
+          <div class="options-grid" id="step3-options">
+            <!-- Renderizado dinámicamente con JS -->
+          </div>
+          <div class="triage-nav">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="goToStep(2)">← Volver al paso anterior</button>
+          </div>
+        </div>
+
+        <!-- Paso 4: Resultado y WhatsApp -->
+        <div class="triage-step" id="triage-step-4">
+          <h3 style="color:var(--verde-dark);">¡Tu orientación está lista!</h3>
+          <p class="triage-step-desc">Hemos preparado tu resumen de atención para enviarlo directamente a Valentina.</p>
+          
+          <div class="triage-result-box" id="triage-result-content">
+            <!-- Contenido dinámico del resumen con selector de horario -->
+          </div>
+
+          <div style="text-align: center; margin-top: 28px;">
+            <a href="#" class="btn btn-whatsapp" id="triage-whatsapp-btn" style="font-size:1.15rem; padding:16px 36px;">
+              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm.01 1.67c4.54 0 8.24 3.7 8.24 8.24 0 2.2-.86 4.27-2.42 5.82-1.55 1.56-3.62 2.42-5.82 2.42-1.47 0-2.9-.39-4.16-1.13l-.3-.18-3.1.81.83-3.02-.2-.31c-.81-1.3-1.24-2.8-1.24-4.41 0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.25-1.5-1.4-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.07-.1-.23-.17-.48-.29z"/></svg>
+              <span>Enviar consulta por WhatsApp y Agendar</span>
+            </a>
+            <div style="margin-top: 14px;">
+              <button type="button" class="btn btn-secondary btn-sm" onclick="restartTriage()">Reiniciar orientador</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Simulador de Reembolso Isapre (DERRIBA OBJECIÓN DE PRECIO) -->
+  <section class="calculator-section" id="calculadora">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-kicker">Claridad y Transparencia</div>
+        <h2>Simula tu Reembolso con Isapre y Seguros</h2>
+        <p>Todas nuestras boletas electrónicas de honorarios profesionales son 100% reembolsables en tu plan de salud.</p>
+      </div>
+
+      <div class="calculator-card">
+        <div class="calc-grid">
+          <div class="calc-form">
+            <div class="calc-input-group">
+              <label class="calc-label" for="calc-isapre">Selecciona tu Isapre o Cobertura:</label>
+              <select id="calc-isapre" class="calc-select">
+                <option value="0.70">Colmena (60% - 80% aprox.)</option>
+                <option value="0.65">Banmédica (50% - 75% aprox.)</option>
+                <option value="0.65">CruzBlanca (50% - 75% aprox.)</option>
+                <option value="0.60">Consalud (50% - 70% aprox.)</option>
+                <option value="0.75">Vida Tres (60% - 80% aprox.)</option>
+                <option value="0.60">Nueva Masvida (50% - 70% aprox.)</option>
+                <option value="0.50">Fonasa (Atención particular reembolsable en seguro)</option>
+              </select>
+            </div>
+
+            <div class="calc-input-group">
+              <label class="calc-label" for="calc-insurance">¿Cuentas con Seguro Complementario?</label>
+              <select id="calc-insurance" class="calc-select">
+                <option value="yes">Sí, tengo Seguro Complementario de Salud</option>
+                <option value="no">No, solo Isapre</option>
+              </select>
+            </div>
+
+            <p style="font-size:0.85rem; color:var(--gris);">
+              *Los porcentajes son estimaciones de referencia según los planes habituales de psicología clínica en Chile.
+            </p>
+          </div>
+
+          <div class="calc-result-panel">
+            <div class="calc-result-kicker">Copago Estimado por Sesión</div>
+            <div class="calc-result-amount" id="calc-copay-amount">$15.000</div>
+            <div class="calc-result-sub" id="calc-reimburse-sub">Reembolso estimado de ~$30.000 por sesión</div>
+            
+            <a href="#" id="calc-whatsapp-btn" class="btn btn-primary btn-sm" style="width:100%;">
+              <span>Consultar cobertura por WhatsApp</span>
+            </a>
+
+            <div class="calc-steps-info">
+              📄 <strong>¿Cómo se reembolsa?</strong> Valentina emite tu boleta electrónica al finalizar la sesión. La subes a la app o web de tu Isapre y te transfieren directamente a tu cuenta corriente.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Conoce a tu Terapeuta -->
+  <section class="therapist-section" id="terapeuta">
+    <div class="container">
+      <div class="therapist-full-grid">
+        <div class="therapist-photo-frame">
+          <div class="therapist-portrait">
+            <div class="portrait-monogram">
+              <span>VC</span>
+            </div>
+            <h3 style="font-size:1.5rem; margin-bottom:4px;">Valentina Castro Núñez</h3>
+            <p style="color:var(--verde-dark); font-weight:700; font-size:1rem;">Psicóloga Clínica</p>
+            <p style="font-size:0.9rem; color:var(--gris); margin-top:8px;">Fundadora de Centro Paz</p>
+          </div>
+        </div>
+
+        <div class="therapist-bio-content">
+          <div class="section-kicker">Tu Terapeuta</div>
+          <h2>Un enfoque humano, cercano y con sustento clínico</h2>
+          <p style="margin-bottom:16px;">
+            Mi compromiso es ofrecer un espacio seguro donde puedas sentirte escuchado, comprendido y validado, sin juicios ni etiquetas limitantes.
+          </p>
+          <p style="margin-bottom:24px;">
+            Trabajo desde una perspectiva <strong>humanista, sistémica e integrativa</strong>, entendiendo a cada persona dentro de su contexto familiar y relacional. Cuento con formación especializada en el acompañamiento a personas neurodivergentes (TEA y TDAH) y en la reparación de vivencias complejas.
+          </p>
+
+          <div class="therapist-creds">
+            <div class="cred-card">
+              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+              <div>
+                <h4>Formación y Registro Profesional</h4>
+                <p>Psicóloga Clínica titulada con registro en la Superintendencia de Salud de Chile.</p>
+              </div>
+            </div>
+
+            <div class="cred-card">
+              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <div>
+                <h4>Perspectiva Neuroafirmativa y Humana</h4>
+                <p>Respeto absoluto por la singularidad cognitiva y emocional de cada paciente y familia.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Testimonios y Experiencias Clínicas (Social Proof Ético) -->
+  <section class="testimonials-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-kicker">Experiencias y Calidez</div>
+        <h2>Lo que valoran quienes han caminado con nosotros</h2>
+        <p>Acompañamos procesos reales con respeto, contención y herramientas concretas.</p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div>
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">
+              "Llegué buscando respuestas tras sospechar de TDAH a mis 32 años. Valentina me acogió con una calidez inmensa, sin juzgarme y ayudándome a entender por qué me sentía tan sobrepasada. Fue un antes y un después para mi paz mental."
+            </p>
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">MC</div>
+            <div class="author-info">
+              <h4>M. C. (32 años)</h4>
+              <span>Terapia de Adultos · Neurodivergencia</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div>
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">
+              "Como papás nos sentíamos muy perdidos con los desbordes emocionales de nuestro hijo. En Centro Paz encontramos pautas claras de regulación y un espacio de juego donde él se sintió completamente seguro y querido."
+            </p>
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">FP</div>
+            <div class="author-info">
+              <h4>Familia P. (Hijo de 8 años)</h4>
+              <span>Terapia Infanto-Juvenil y Orientación a Padres</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div>
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">
+              "Las sesiones online fueron súper cómodas y rigurosas. Pude trabajar mi ansiedad y duelo a mi propio ritmo, con la tranquilidad de poder reembolsar fácilmente las boletas en mi Isapre."
+            </p>
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">AL</div>
+            <div class="author-info">
+              <h4>A. L. (28 años)</h4>
+              <span>Terapia Online · Manejo de Ansiedad</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Magnet / Guía Gratuita de Regulación Sensorial (CAPTURA DE PROSPECTOS INDECISOS) -->
+  <section class="lead-magnet-section">
+    <div class="container">
+      <div class="lead-magnet-card">
+        <div>
+          <h2>🎁 Guía Gratuita: 7 Claves de Regulación Emocional y Sensorial</h2>
+          <p>
+            Diseñada especialmente para adultos y familias que experimentan sobrecarga mental, ansiedad o características neurodivergentes (TEA/TDAH).
+          </p>
+          <ul class="lead-features">
+            <li>Estrategias de pausa sensorial para momentos de crisis</li>
+            <li>Pautas de comunicación sin fricción en el hogar</li>
+            <li>Técnicas de autorregulación respaldadas clínicamente</li>
+          </ul>
+        </div>
+        <div style="text-align: center;">
+          <a href="#" class="btn btn-whatsapp" data-wa-action="lead-magnet" style="font-size:1rem; padding:16px 24px;">
+            <span>Solicitar Guía por WhatsApp (Gratis)</span>
+          </a>
+          <p style="font-size:0.75rem; color:var(--rosado); margin-top:10px;">Te la enviamos en PDF directamente a tu chat 📲</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cómo funciona el proceso -->
+  <section class="process-section" id="proceso">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-kicker">Paso a Paso</div>
+        <h2>¿Cómo comenzar tu proceso terapéutico?</h2>
+        <p>Queremos que dar el primer paso sea claro, simple y sin complicaciones.</p>
+      </div>
+
+      <div class="process-steps">
+        <div class="process-step-card">
+          <div class="step-number">01</div>
+          <h3>Primer Contacto y Orientación</h3>
+          <p>Escríbenos por WhatsApp o usa nuestro orientador. Resolveremos tus dudas sobre aranceles, horarios y modalidad sin compromiso.</p>
+        </div>
+
+        <div class="process-step-card">
+          <div class="step-number">02</div>
+          <h3>Primera Sesión de Acogida</h3>
+          <p>Un primer encuentro para conocernos, comprender tu motivo de consulta y definir juntos los objetivos del espacio.</p>
+        </div>
+
+        <div class="process-step-card">
+          <div class="step-number">03</div>
+          <h3>Acompañamiento Continuo</h3>
+          <p>Sesiones estructuradas a tu ritmo, con herramientas prácticas para tu bienestar y el de tu familia.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preguntas Frecuentes (FAQ) -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-kicker">Resolvemos tus dudas</div>
+        <h2>Preguntas Frecuentes</h2>
+        <p>Todo lo que necesitas saber antes de tu primera consulta.</p>
+      </div>
+
+      <div class="faq-container">
+        <div class="faq-item active">
+          <div class="faq-question">
+            <span>¿Cómo funciona el reembolso con Isapre y Seguros Complementarios?</span>
+            <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <div class="faq-answer">
+            Al finalizar cada sesión emitimos tu boleta electrónica de honorarios profesionales con el código correspondiente de psicología clínica. Con este documento puedes solicitar el reembolso en tu Isapre y en tu Seguro Complementario de Salud de forma 100% digital.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>¿En qué se diferencian las sesiones online de las presenciales?</span>
+            <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <div class="faq-answer">
+            Ambas modalidades cuentan con la misma rigurosidad y efectividad clínica. La modalidad online se realiza mediante videollamada segura y te permite atenderte desde la comodidad de tu hogar, sin tiempos de traslado. La modalidad presencial se lleva a cabo en consulta clínica en un entorno cuidado y libre de interrupciones.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>¿Cómo es el abordaje en Neurodivergencias (TEA y TDAH)?</span>
+            <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <div class="faq-answer">
+            Trabajamos desde el modelo neuroafirmativo. No buscamos "corregir" ni enmascarar, sino comprender el perfil sensorial, cognitivo y emocional de la persona, entregando herramientas de autorregulación, bienestar y adaptación respetuosa al entorno escolar, laboral y familiar.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>¿Cuánto dura cada sesión y con qué frecuencia se asiste?</span>
+            <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <div class="faq-answer">
+            Cada sesión individual tiene una duración aproximada de 50 minutos. La frecuencia habitual al inicio del proceso es semanal o quincenal, acordada en conjunto según tus necesidades particulares.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Banner de Conversión Final -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2>Da el primer paso hacia tu bienestar</h2>
+      <p>Estamos aquí para escucharte y acompañarte con calidez, respeto y profesionalismo.</p>
+      <div class="cta-buttons">
+        <a href="#orientador" class="btn btn-primary" style="background:#FFF; color:var(--burdeo-dark);">
+          <span>Usar Orientador de Consulta</span>
+        </a>
+        <a href="#" class="btn btn-whatsapp" data-wa-action="general">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm.01 1.67c4.54 0 8.24 3.7 8.24 8.24 0 2.2-.86 4.27-2.42 5.82-1.55 1.56-3.62 2.42-5.82 2.42-1.47 0-2.9-.39-4.16-1.13l-.3-.18-3.1.81.83-3.02-.2-.31c-.81-1.3-1.24-2.8-1.24-4.41 0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.25-1.5-1.4-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.07-.1-.23-.17-.48-.29z"/></svg>
+          <span>Escribir directo a WhatsApp (+569 6516 3893)</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <h3>Centro Paz</h3>
+        <p>Centro de Psicología clínica con enfoque humanista, sistémico e integrativo. Cercanía, contención y rigor profesional.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Especialidades</h4>
+        <ul class="footer-links">
+          <li><a href="#especialidades">Atención a Adultos</a></li>
+          <li><a href="#especialidades">Neurodivergencias (TEA / TDAH)</a></li>
+          <li><a href="#especialidades">Infanto-Juvenil</a></li>
+          <li><a href="#especialidades">Terapia Familiar y Vínculo</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contacto y Atención</h4>
+        <ul class="footer-links">
+          <li><a href="#" data-wa-action="general">WhatsApp: +56 9 6516 3893</a></li>
+          <li><a href="#proceso">Modalidad Online y Presencial</a></li>
+          <li><a href="#calculadora">Simulador Reembolso Isapre</a></li>
+          <li><span style="color:#A89F9A;">Santiago, Chile</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 Centro Paz (CPAZ) · Valentina Castro Núñez · Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Botón Flotante WhatsApp -->
+  <a href="#" class="whatsapp-float" data-wa-action="general" aria-label="Escribir por WhatsApp a Centro Paz">
+    <div class="whatsapp-pulse"></div>
+    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm.01 1.67c4.54 0 8.24 3.7 8.24 8.24 0 2.2-.86 4.27-2.42 5.82-1.55 1.56-3.62 2.42-5.82 2.42-1.47 0-2.9-.39-4.16-1.13l-.3-.18-3.1.81.83-3.02-.2-.31c-.81-1.3-1.24-2.8-1.24-4.41 0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.25-1.5-1.4-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.07-.1-.23-.17-.48-.29z"/></svg>
+  </a>
+
+  <!-- Barra Fija Móvil de Alta Conversión -->
+  <div class="mobile-sticky-bar">
+    <div class="mobile-sticky-inner">
+      <div class="mobile-sticky-info">
+        <span class="mobile-sticky-title">¿Buscas atención psicológica?</span>
+        <span class="mobile-sticky-sub">🌿 Agenda abierta · Valentina Castro</span>
+      </div>
+      <a href="#" class="btn btn-whatsapp mobile-sticky-btn" data-wa-action="general">
+        <span>Agendar vía WhatsApp</span>
+      </a>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

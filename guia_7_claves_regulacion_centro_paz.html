@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Guía: 7 Claves de Regulación Emocional y Sensorial — Centro Paz</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,300..900;1,6..12,300..900&display=swap');
+
+    @page {
+      size: A4;
+      margin: 18mm 16mm 18mm 16mm;
+    }
+
+    :root {
+      --burdeo: #7A2E3A;
+      --burdeo-dark: #5C1F29;
+      --rosado: #F0D9DE;
+      --rosado-light: #FBF4F5;
+      --verde: #A9C4B8;
+      --verde-dark: #4A6E60;
+      --celeste: #CFE3E8;
+      --crema: #FAF6F3;
+      --negro: #2B2B2B;
+      --gris: #5A534E;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Nunito Sans', sans-serif;
+      color: var(--negro);
+      background: #FFF;
+      line-height: 1.5;
+      font-size: 10.5pt;
+    }
+
+    h1, h2, h3, h4, .serif {
+      font-family: 'Lora', Georgia, serif;
+      color: var(--burdeo-dark);
+    }
+
+    .page {
+      page-break-after: always;
+      position: relative;
+      min-height: 250mm;
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+    }
+
+    /* Portada */
+    .cover-container {
+      border: 3px solid var(--rosado);
+      border-radius: 16px;
+      padding: 36px 30px;
+      background: linear-gradient(180deg, var(--crema) 0%, #FFFFFF 100%);
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .brand-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .logo-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--rosado);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Lora', serif;
+      font-weight: 700;
+      font-size: 18pt;
+      color: var(--burdeo);
+    }
+
+    .brand-text {
+      text-align: left;
+    }
+
+    .brand-title {
+      font-family: 'Lora', serif;
+      font-size: 16pt;
+      font-weight: 700;
+      color: var(--burdeo-dark);
+    }
+
+    .brand-subtitle {
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--verde-dark);
+      font-weight: 700;
+    }
+
+    .badge-tag {
+      display: inline-block;
+      background: var(--rosado);
+      color: var(--burdeo-dark);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    .cover-title {
+      font-size: 24pt;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      color: var(--burdeo-dark);
+    }
+
+    .cover-desc {
+      font-size: 11pt;
+      color: var(--gris);
+      max-width: 500px;
+      margin: 0 auto 20px;
+    }
+
+    .therapist-badge {
+      display: inline-block;
+      background: #FFF;
+      border: 1px solid var(--rosado);
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-size: 9pt;
+      color: var(--burdeo-dark);
+      font-weight: 600;
+    }
+
+    /* Claves */
+    .key-card {
+      background: #FFF;
+      border: 1.5px solid #F0E6E2;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      border-left: 5px solid var(--burdeo);
+    }
+
+    .key-card.green {
+      border-left-color: var(--verde-dark);
+    }
+
+    .key-card.rose {
+      border-left-color: var(--rosado);
+    }
+
+    .key-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .key-number {
+      font-family: 'Lora', serif;
+      font-size: 16pt;
+      font-weight: 700;
+      color: var(--burdeo);
+    }
+
+    .key-title {
+      font-size: 12pt;
+      font-weight: 700;
+      color: var(--burdeo-dark);
+    }
+
+    .key-body {
+      font-size: 9.5pt;
+      color: var(--gris);
+      line-height: 1.45;
+    }
+
+    .key-tip {
+      background: var(--rosado-light);
+      border-radius: 6px;
+      padding: 6px 12px;
+      margin-top: 8px;
+      font-size: 8.5pt;
+      color: var(--burdeo-dark);
+      font-style: italic;
+    }
+
+    /* Call to Action Final */
+    .cta-box {
+      background: var(--crema);
+      border: 2px dashed var(--burdeo);
+      border-radius: 12px;
+      padding: 20px 24px;
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    .cta-box h3 {
+      font-size: 14pt;
+      margin-bottom: 6px;
+    }
+
+    .cta-box p {
+      font-size: 9.5pt;
+      color: var(--gris);
+      margin-bottom: 12px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: #25D366;
+      color: #FFF;
+      padding: 10px 22px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 10pt;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 8pt;
+      color: #999;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PÁGINA 1 -->
+  <div class="page">
+    <div class="cover-container">
+      <div class="brand-logo">
+        <div class="logo-circle">CP</div>
+        <div class="brand-text">
+          <div class="brand-title">Centro Paz</div>
+          <div class="brand-subtitle">Psicología Clínica</div>
+        </div>
+      </div>
+      <br>
+      <div class="badge-tag">GUÍA PRÁCTICA Y CLINICA · DESCARGA GRATUITA</div>
+      <h1 class="cover-title">7 Claves de Regulación Emocional y Sensorial</h1>
+      <p class="cover-desc">
+        Herramientas concretas para adultos, personas neurodivergentes (TEA/TDAH) y familias que buscan transitar momentos de sobrecarga hacia la calma.
+      </p>
+      <div class="therapist-badge">
+        Por <strong>Valentina Castro Núñez</strong> · Psicóloga Clínica (Enfoque Humanista e Integrativo)
+      </div>
+    </div>
+
+    <!-- Clave 1 -->
+    <div class="key-card">
+      <div class="key-header">
+        <span class="key-number">01</span>
+        <h3 class="key-title">Nombrar la Emoción antes de Intentar 'Resolverla'</h3>
+      </div>
+      <p class="key-body">
+        Cuando experimentamos angustia o frustración, el cerebro entra en modo alerta. Intentar razonar en ese instante suele aumentar la tensión. La regla clínica de oro es validar: *"Estoy sintiendo sobrecarga y es comprensible que me sienta así"*.
+      </p>
+      <div class="key-tip">
+        💡 <strong>Pauta para padres:</strong> Evita el "no es para tanto". Reemplázalo por: "Veo que esto te frustró mucho, estoy aquí contigo mientras pasa".
+      </div>
+    </div>
+
+    <!-- Clave 2 -->
+    <div class="key-card green">
+      <div class="key-header">
+        <span class="key-number">02</span>
+        <h3 class="key-title">Pausa Sensorial Descompresiva (Para Adultos y Niños TEA/TDAH)</h3>
+      </div>
+      <p class="key-body">
+        Muchas crisis no son conductuales ni emocionales, sino <strong>sensoriales</strong> (exceso de ruido, luces fluorescentes o multitarea). Tomar 5 minutos en penumbra, usar audífonos con cancelación de ruido o aplicar presión profunda en hombros reduce la activación del sistema nervioso.
+      </p>
+      <div class="key-tip">
+        💡 <strong>Estrategia diaria:</strong> Programa 2 micro-pausas sensoriales en tu jornada laboral antes de llegar al punto de agotamiento.
+      </div>
+    </div>
+
+    <!-- Clave 3 -->
+    <div class="key-card rose">
+      <div class="key-header">
+        <span class="key-number">03</span>
+        <h3 class="key-title">Anclaje Corporal 5-4-3-2-1 para Cortar el Pánico y la Rumiación</h3>
+      </div>
+      <p class="key-body">
+        Si tu mente no se detiene o sientes el pecho apretado: nombra en voz alta <strong>5 cosas que ves</strong>, <strong>4 que puedes tocar</strong>, <strong>3 que escuchas</strong>, <strong>2 que hueles</strong> y <strong>1 sabor</strong>. Esto fuerza a tu corteza prefrontal a reconectarse con el presente.
+      </p>
+    </div>
+  </div>
+
+  <!-- PÁGINA 2 -->
+  <div class="page">
+    <!-- Clave 4 -->
+    <div class="key-card">
+      <div class="key-header">
+        <span class="key-number">04</span>
+        <h3 class="key-title">La Técnica del 'Déficit de Dopamina' en TDAH: Fraccionar en Micro-Pasos</h3>
+      </div>
+      <p class="key-body">
+        La procrastinación en personas con TDAH no es flojera, es una barrera neurobiológica de inicio. El antídoto es reducir la tarea a algo ridículamente pequeño: en vez de "limpiar la casa", proponte "guardar solo 2 objetos". El inicio desbloquea la dopamina.
+      </p>
+      <div class="key-tip">
+        💡 <strong>Regla de los 3 minutos:</strong> Comprométete solo con 3 minutos de reloj. Si quieres parar después, tienes permiso.
+      </div>
+    </div>
+
+    <!-- Clave 5 -->
+    <div class="key-card green">
+      <div class="key-header">
+        <span class="key-number">05</span>
+        <h3 class="key-title">Límites Sanos: Decir 'No' sin Culpa para Evitar el Burnout</h3>
+      </div>
+      <p class="key-body">
+        Aprender a decir: *"Me encantaría ayudarte, pero hoy no cuento con la energía para hacerlo"* protege tu salud emocional. Cada vez que dices un 'sí' por compromiso, te estás diciendo un 'no' a ti mismo/a.
+      </p>
+    </div>
+
+    <!-- Clave 6 -->
+    <div class="key-card rose">
+      <div class="key-header">
+        <span class="key-number">06</span>
+        <h3 class="key-title">Respiración Fisiológica en Suspiro (Descarga Inmediata)</h3>
+      </div>
+      <p class="key-body">
+        Dos inhalaciones rápidas y profundas por la nariz (la segunda para expandir los alvéolos al máximo) seguidas de una exhalación lenta y prolongada por la boca. Repite 3 veces para activar el nervio vago y bajar el ritmo cardíaco.
+      </p>
+    </div>
+
+    <!-- Clave 7 -->
+    <div class="key-card">
+      <div class="key-header">
+        <span class="key-number">07</span>
+        <h3 class="key-title">Pedir Ayuda Profesional es un Acto de Amor Propio</h3>
+      </div>
+      <p class="key-body">
+        No tienes que cargar todo en soledad. Un espacio terapéutico con sustento clínico y calidez te entrega el mapa para comprender tu funcionamiento singular y construir bienestar duradero.
+      </p>
+    </div>
+
+    <!-- CTA Box -->
+    <div class="cta-box">
+      <h3>¿Sientes que es momento de dar el siguiente paso?</h3>
+      <p>
+        En <strong>Centro Paz</strong> te acompañamos en sesiones online (todo Chile) y presenciales (Santiago) con boletas reembolsables en Isapres y Seguros.
+      </p>
+      <a href="https://wa.me/56965163893" class="cta-btn">
+        💬 Agendar Primera Sesión por WhatsApp (+569 6516 3893)
+      </a>
+      <div style="font-size:8.5pt; color:var(--gris); margin-top:8px;">
+        Valentina Castro Núñez · Psicóloga Clínica
+      </div>
+    </div>
+
+    <div class="footer-note">
+      © 2026 Centro Paz (CPAZ) · Documento clínico y psicoeducativo de libre distribución.
+    </div>
+  </div>
+
+</body>
+</html>
