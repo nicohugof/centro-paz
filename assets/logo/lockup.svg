@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 140">
+  <circle cx="70" cy="70" r="68" fill="#FAF6F3"/>
+  <path d="M 39 88 C 24 65, 47 32, 74 30 C 63 49, 61 77, 39 88 Z" fill="#A9C4B8"/>
+  <path d="M 101 88 C 116 65, 93 32, 66 30 C 77 49, 79 77, 101 88 Z" fill="#7A2E3A"/>
+  <circle cx="70" cy="79" r="6.5" fill="#F0D9DE"/>
+  <text x="158" y="72" font-family="Lora, Georgia, serif" font-size="34" fill="#7A2E3A">Centro Paz</text>
+  <text x="158" y="98" font-family="'Nunito Sans', -apple-system, sans-serif" font-size="16" fill="#8a8078" letter-spacing="0.5">Psicología Clínica</text>
+</svg>

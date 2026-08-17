@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,700;1,500;1,700&family=Nunito+Sans:wght@400;600;700;800&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 1080px; height: 1350px; background: #FAF6F3;
+      font-family: 'Nunito Sans', sans-serif; color: #2B2B2B;
+      padding: 72px 80px; display: flex; flex-direction: column;
+      justify-content: space-between; position: relative; overflow: hidden;
+    }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 36px; }
+    .brand { display: flex; align-items: center; gap: 16px; }
+    .logo-badge {
+      width: 56px; height: 56px; border-radius: 50%; background: #F0D9DE;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Lora', serif; font-size: 26px; font-weight: 700; color: #7A2E3A;
+    }
+    .brand-name { font-family: 'Lora', serif; font-size: 24px; font-weight: 700; color: #5C1F29; }
+    .brand-sub { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: #4A6E60; font-weight: 700; }
+    .tag-category { background: #CFE3E8; color: #4A7A85; padding: 8px 20px; border-radius: 40px; font-size: 16px; font-weight: 700; }
+    .kicker { font-size: 20px; text-transform: uppercase; letter-spacing: 3px; color: #7A2E3A; font-weight: 800; margin-bottom: 14px; }
+    h1 { font-family: 'Lora', Georgia, serif; font-size: 52px; line-height: 1.18; color: #5C1F29; margin-bottom: 30px; }
+    h1 span { background: #F0D9DE; padding: 0 8px; border-radius: 8px; }
+    .content-box {
+      background: #FFFFFF; border: 2px solid #EFE4DE; border-radius: 24px;
+      padding: 32px 36px; box-shadow: 0 10px 30px rgba(122, 46, 58, 0.05); margin-bottom: 30px;
+    }
+    .item-row { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 18px; font-size: 20px; color: #2B2B2B; line-height: 1.4; }
+    .item-row:last-child { margin-bottom: 0; }
+    .bullet-icon { color: #7A2E3A; font-size: 22px; margin-top: 2px; }
+    .footer-cta {
+      background: #7A2E3A; color: #FFF; border-radius: 20px;
+      padding: 24px 32px; display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-cta-text h3 { font-family: 'Lora', serif; font-size: 22px; color: #FFF; margin-bottom: 4px; }
+    .footer-cta-text p { font-size: 15px; color: #F0D9DE; }
+    .wa-pill { background: #25D366; color: #FFF; padding: 12px 24px; border-radius: 40px; font-weight: 700; font-size: 17px; }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="header">
+      <div class="brand">
+        <div class="logo-badge">CP</div>
+        <div>
+          <div class="brand-name">Centro Paz</div>
+          <div class="brand-sub">Psicología Clínica</div>
+        </div>
+      </div>
+      <div class="tag-category">Infancia & Crianza</div>
+    </div>
+
+    <div class="kicker">Acompañamiento a Familias</div>
+    <h1>¿Cuándo consultar por tu hijo/a? <span>4 señales clave</span></h1>
+
+    <div class="content-box">
+      <div class="item-row">
+        <span class="bullet-icon">🌱</span>
+        <span><strong>Desbordes desmedidos:</strong> Episodios de llanto o frustración extrema ante pequeños cambios de rutina.</span>
+      </div>
+      <div class="item-row">
+        <span class="bullet-icon">🌱</span>
+        <span><strong>Sensibilidad sensorial:</strong> Rechazo a ciertas texturas de ropa, ruidos fuertes o lugares concurridos.</span>
+      </div>
+      <div class="item-row">
+        <span class="bullet-icon">🌱</span>
+        <span><strong>Sugerencia escolar:</strong> El colegio o profesores notan dispersión, aislamiento o desregulación en el aula.</span>
+      </div>
+      <div class="item-row">
+        <span class="bullet-icon">🌱</span>
+        <span><strong>Agotamiento en la crianza:</strong> Sentirte sin herramientas y con necesidad de orientación clínica respetuosa.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-cta">
+    <div class="footer-cta-text">
+      <h3>Evaluación Infanto-Juvenil & Orientación a Padres</h3>
+      <p>Espacio seguro con Valentina Castro Núñez</p>
+    </div>
+    <div class="wa-pill">
+      <span>📲 Link en Bio</span>
+    </div>
+  </div>
+</body>
+</html>
