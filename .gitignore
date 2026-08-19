@@ -2,3 +2,4 @@
 *.log
 .vscode/
 .claude/
+agent/meta_config.json

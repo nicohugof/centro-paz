@@ -146,11 +146,13 @@ def save_config(cfg: dict) -> None:
 
 
 def http_post(url: str, data: dict) -> dict:
+    import ssl
+    ctx = ssl._create_unverified_context()
     encoded_data = urllib.parse.urlencode(data).encode("utf-8")
     req = urllib.request.Request(url, data=encoded_data, method="POST")
     req.add_header("User-Agent", "CentroPaz-AutoPublisher/1.0")
     try:
-        with urllib.request.urlopen(req) as resp:
+        with urllib.request.urlopen(req, context=ctx) as resp:
             return json.loads(resp.read().decode("utf-8"))
     except urllib.error.HTTPError as e:
         body = e.read().decode("utf-8")
@@ -158,6 +160,8 @@ def http_post(url: str, data: dict) -> dict:
             return {"error": json.loads(body)}
         except Exception:
             return {"error": body, "status_code": e.code}
+    except Exception as e:
+        return {"error": str(e)}
 
 
 def publish_to_instagram_graph(post_num: int, config: dict) -> bool:
