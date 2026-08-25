@@ -1,0 +1,110 @@
+{
+  "name": "🌿 Centro Paz (CPAZ) — Motor de Publicación Autónoma RRSS",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cpaz-auto-publish",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        100,
+        300
+      ],
+      "id": "node-webhook-cpaz",
+      "name": "Webhook CPAZ (Incoming Post)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v19.0/{{$json.body.instagram_account_id || 'YOUR_IG_ID'}}/media",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"image_url\": \"{{$json.body.image_url}}\",\n  \"caption\": \"{{$json.body.caption}}\",\n  \"access_token\": \"{{$json.body.access_token}}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        350,
+        200
+      ],
+      "id": "node-ig-container",
+      "name": "1. Crear Contenedor IG"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v19.0/{{$node[\"Webhook CPAZ (Incoming Post)\"].json.body.instagram_account_id || 'YOUR_IG_ID'}}/media_publish",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"creation_id\": \"{{$json.id}}\",\n  \"access_token\": \"{{$node[\"Webhook CPAZ (Incoming Post)\"].json.body.access_token}}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        600,
+        200
+      ],
+      "id": "node-ig-publish",
+      "name": "2. Publicar en Instagram"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v19.0/{{$json.body.facebook_page_id || '61593207820690'}}/photos",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"url\": \"{{$json.body.image_url}}\",\n  \"caption\": \"{{$json.body.caption}}\",\n  \"access_token\": \"{{$json.body.access_token}}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        350,
+        420
+      ],
+      "id": "node-fb-publish",
+      "name": "Publicar en Facebook Page"
+    }
+  ],
+  "connections": {
+    "Webhook CPAZ (Incoming Post)": {
+      "main": [
+        [
+          {
+            "node": "1. Crear Contenedor IG",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Publicar en Facebook Page",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "1. Crear Contenedor IG": {
+      "main": [
+        [
+          {
+            "node": "2. Publicar en Instagram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "tags": [
+    {
+      "name": "CPAZ"
+    }
+  ]
+}
