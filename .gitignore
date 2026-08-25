@@ -3,3 +3,6 @@
 .vscode/
 .claude/
 agent/meta_config.json
+
+__pycache__/
+*.pyc
