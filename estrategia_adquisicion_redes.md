@@ -12,7 +12,7 @@ Tu perfil de Instagram no es un currículum; es una **puerta de entrada acogedor
 * **Nombre en el Perfil (Buscable en Instagram):** `Centro Paz | Psicóloga Clínica & Neurodivergencias` *(Incluir palabras clave que la gente busca)*
 * **Biografía Optimizada:**
   ```text
-  🌿 Centro de Psicología Clínica · Enfoque Humanista & Sistémico
+  🌿 Centro de Psicología Clínica · Enfoque Humanista e Integrativo
   🧠 Especialista en Neurodivergencias (TEA / TDAH) · Adultos e Infanto-Juvenil
   💻 Sesiones Online (Todo Chile) y Presencial (Santiago)
   📋 Boletas reembolsables en Isapre y Seguros
