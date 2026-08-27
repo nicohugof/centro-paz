@@ -44,6 +44,9 @@ python3 -m agent.auto_publisher --set-ig-id "TU_IG_ACCOUNT_ID"
 Una vez guardado el token, puedes publicar cualquier post de la semana con un solo comando:
 
 ```bash
+# Verificar que el token y las cuentas responden:
+python3 -m agent.auto_publisher --test-connection
+
 # Publicar el Post 1 (TDAH en Adultos) en Instagram y Facebook simultáneamente:
 python3 -m agent.auto_publisher --post 1
 
@@ -53,8 +56,8 @@ python3 -m agent.auto_publisher --post 2
 # Publicar solo en Instagram:
 python3 -m agent.auto_publisher --post 3 --platform instagram
 
-# Publicar solo en Facebook:
-python3 -m agent.auto_publisher --post 3 --platform facebook
+# Publicar toda la parrilla (1 al 7) con 5 segundos de pausa:
+python3 -m agent.auto_publisher --post-all
 ```
 
 ---

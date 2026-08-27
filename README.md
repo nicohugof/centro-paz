@@ -64,11 +64,14 @@ Centro Paz es un centro de psicología clínica enfocado en acompañamiento huma
 ```text
 /Users/nigoku/CPAZ/
 ├── index.html                           # Landing page completa y responsive
+├── privacidad.html                      # Política de privacidad (Ley 19.628 + secreto profesional)
+├── 404.html                             # Página de error para GitHub Pages
+├── robots.txt / sitemap.xml             # SEO básico
 ├── styles.css                           # Sistema de diseño CSS y variables de marca
 ├── app.js                               # Motor de triaje, simulador de Isapres y screener
 ├── CNAME                                # Configuración de dominio www.centropaz.cl
 ├── guia_7_claves_regulacion_centro_paz.html # Plantilla HTML del Lead Magnet
-├── guia_7_claves_regulacion_centro_paz.pdf  # PDF descargable para enviar por WhatsApp (201 KB)
+├── guia_7_claves_regulacion_centro_paz.pdf  # PDF descargable para enviar por WhatsApp
 ├── protocolo_captacion_whatsapp.md      # Playbook de atención y cierre de pacientes por WhatsApp
 ├── estrategia_adquisicion_redes.md      # Estrategia de contenidos, reels y SEO local
 ├── README.md                            # Documentación maestra del proyecto
@@ -95,10 +98,14 @@ El agente permite automatizar la generación de calendarios y renderizado de im�
 python3 -m agent.marketing_agent --calendar
 
 # 2. Re-renderizar todas las piezas gráficas a PNG de alta resolución (1080x1350)
+#    Usa Chrome/Chromium en Linux, macOS o Windows (o la variable CHROME_BIN)
 python3 -m agent.marketing_agent --render-posts
 
 # 3. Exportar el JSON actualizado para n8n / webhooks
 python3 -m agent.marketing_agent --export-json
+
+# 4. Probar conexión Meta Graph API (requiere token en agent/meta_config.json)
+python3 -m agent.auto_publisher --test-connection
 ```
 
 ---

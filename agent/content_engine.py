@@ -3,8 +3,6 @@ Motor de Contenidos Clínicos y Copywriting de Alta Conversión para Centro Paz 
 """
 from __future__ import annotations
 
-import json
-from dataclasses import dataclass, field
 from typing import List, Dict
 
 BRAND = {
@@ -89,32 +87,106 @@ En Centro Paz acompañamos a niños, niñas y adolescentes, y brindamos orientac
 
 👉 Para coordinar una primera sesión de orientación infanto-juvenil, encuéntranos en el link de la biografía o al WhatsApp +56 9 6516 3893.""",
         "hashtags": HASHTAGS_BASE + ["#CrianzaRespetuosa", "#PsicologiaInfantil", "#TEAInfantil", "#TDAHInfantil", "#OrientacionAPadres"]
+    },
+    "masking": {
+        "kicker": "Agotamiento Invisible",
+        "title": "El costo invisible del masking: llegar a casa sin energía ni para hablar",
+        "hook": "¿Llegas a casa después del trabajo sintiendo que no te queda energía ni para hablar?",
+        "points": [
+            "Forzar gestos, tono de voz y contacto visual para 'pasar desapercibido'.",
+            "Reprimir incomodidades sensoriales (ruidos, luces, ropa, olores) durante horas.",
+            "El colapso llega en privado: mutismo, irritabilidad o necesidad de aislamiento.",
+            "El descanso no alcanza porque el sistema nervioso estuvo en alerta todo el día."
+        ],
+        "category": "Neurodivergencias",
+        "caption": """¿Llegas a casa después del trabajo o reuniones sintiendo que no te queda energía ni para hablar? 🧠
+
+El "masking" es el esfuerzo consciente o inconsciente de forzar gestos, reprimir incomodidades sensoriales y actuar "como los demás esperan" para no ser juzgado/a.
+
+En Centro Paz te acompañamos a construir un espacio seguro donde puedas desenmascarar con tranquilidad y proteger tu salud mental.
+
+📍 Sesiones online y presenciales con boleta reembolsable en Isapres y Seguros.
+👉 Agenda en el enlace de la bio o al WhatsApp +56 9 6516 3893.""",
+        "hashtags": HASHTAGS_BASE + ["#Masking", "#AutismoAdultos", "#TEAChile", "#BurnoutAutista", "#NeurodivergenciaChile"]
+    },
+    "terapia_online": {
+        "kicker": "Acceso desde todo Chile",
+        "title": "Terapia online con la misma rigurosidad clínica, desde tu espacio de calma",
+        "hook": "Atenderte desde tu habitación reduce la ansiedad y elimina los tiempos de traslado.",
+        "points": [
+            "Misma duración (50 minutos) y confidencialidad que una sesión presencial.",
+            "Boleta electrónica válida para reembolso en Isapre y seguro complementario.",
+            "Ideal si vives fuera de Santiago o tu sistema nervioso agradece menos transiciones.",
+            "Solo necesitas un espacio privado y conexión estable."
+        ],
+        "category": "Modalidad",
+        "caption": """Atenderte desde tu habitación o espacio de calma reduce la ansiedad y elimina los tiempos de traslado 💻🌿
+
+La terapia online cuenta con la misma rigurosidad y efectividad clínica, y recibes tu boleta electrónica exactamente igual para reembolsar en tu Isapre o Seguro.
+
+👉 Encuentra el acompañamiento que necesitas en www.centropaz.cl (Link en Bio).""",
+        "hashtags": HASHTAGS_BASE + ["#TerapiaOnline", "#PsicologiaOnlineChile", "#SaludMentalDigital"]
+    },
+    "evaluacion_infantil": {
+        "kicker": "Infancia & Escuela",
+        "title": "¿Cuándo consultar con una psicóloga infantil?",
+        "hook": "Los desbordes frecuentes y la hipersensibilidad no son 'mala conducta': son un pedido de ayuda.",
+        "points": [
+            "Desbordes intensos difíciles de calmar, incluso en casa.",
+            "Hipersensibilidad a ruidos, texturas, luces o cambios de rutina.",
+            "El colegio sugiere evaluación por atención, adaptación o regulación.",
+            "Tú como mamá o papá necesitas pautas claras, no más culpa."
+        ],
+        "category": "Infanto-Juvenil",
+        "caption": """¿Cuándo es momento de consultar con una psicóloga infantil? 🌱
+
+Desbordes intensos frecuentes, hipersensibilidad a ruidos o texturas, y dificultades de adaptación escolar son señales de que tu hijo/a necesita apoyo y tú como mamá o papá necesitas pautas clínicas claras.
+
+👉 Contáctanos por WhatsApp al +56 9 6516 3893 para coordinar una primera sesión de orientación.""",
+        "hashtags": HASHTAGS_BASE + ["#PsicologiaInfantil", "#OrientacionAPadres", "#TDAHInfantil", "#TEAInfantil"]
+    },
+    "autocuidado_adultos": {
+        "kicker": "Primer paso",
+        "title": "Pedir ayuda no es debilidad: es cuidar tu sistema nervioso",
+        "hook": "No tienes que poder con todo sola/o.",
+        "points": [
+            "50 minutos a la semana dedicados 100% a ti.",
+            "Espacio sin juicios, con Valentina Castro Núñez.",
+            "Herramientas concretas para ansiedad, límites y sobrecarga.",
+            "Boleta reembolsable: el copago puede quedar cerca de $15.000."
+        ],
+        "category": "Captación",
+        "caption": """Pedir ayuda profesional no es debilidad: es reconocer que tu salud mental y tu bienestar importan ✨
+
+50 minutos a la semana dedicados 100% a ti, con la psicóloga Valentina Castro Núñez.
+
+👉 Da el primer paso hoy. Agenda en www.centropaz.cl o al WhatsApp +56 9 6516 3893.""",
+        "hashtags": HASHTAGS_BASE + ["#Autocuidado", "#PedirAyuda", "#TerapiaAdultosChile"]
     }
 }
 
 
 def get_weekly_calendar() -> List[Dict]:
-    """Genera una parrilla semanal completa de 5 publicaciones de alta conversión."""
-    days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"]
-    keys = list(TOPICS.keys())
-    calendar = []
-    
-    types = [
-        ("Educación & Validación (Neurodivergencias)", "tdah_adultos"),
-        ("Derribador de Objeción (Reembolso Isapre)", "reembolso_isapre"),
-        ("Orientación a Padres & Crianza", "crianza_regulacion"),
-        ("Autocuidado & Límites en Adultos", "tdah_adultos"),
-        ("Llamado directo a Agendamiento", "reembolso_isapre")
+    """Genera una parrilla semanal de 7 publicaciones alineada al catálogo visual."""
+    plan = [
+        ("Lunes", "Educación & Validación (Neurodivergencias)", "tdah_adultos"),
+        ("Martes", "Derribador de Objeción (Reembolso Isapre)", "reembolso_isapre"),
+        ("Miércoles", "Orientación a Padres & Crianza", "crianza_regulacion"),
+        ("Jueves", "Agotamiento Invisible (Masking)", "masking"),
+        ("Viernes", "Acceso (Terapia Online)", "terapia_online"),
+        ("Sábado", "Infancia: cuándo consultar", "evaluacion_infantil"),
+        ("Domingo", "Llamado a agendar (Autocuidado)", "autocuidado_adultos"),
     ]
-    
-    for i, (theme, key) in enumerate(types):
+    calendar = []
+    for day, theme, key in plan:
         topic = TOPICS[key]
         calendar.append({
-            "dia": days[i],
+            "dia": day,
             "tipo": theme,
             "titulo": topic["title"],
             "gancho": topic["hook"],
             "copy": topic["caption"],
-            "hashtags": " ".join(topic["hashtags"])
+            "hashtags": " ".join(topic["hashtags"]),
+            "topic_key": key,
         })
     return calendar
