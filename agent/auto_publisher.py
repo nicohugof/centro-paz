@@ -145,14 +145,11 @@ def save_config(cfg: dict) -> None:
     CONFIG_FILE.write_text(json.dumps(cfg, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
-def http_post(url: str, data: dict) -> dict:
-    import ssl
-    ctx = ssl._create_unverified_context()
-    encoded_data = urllib.parse.urlencode(data).encode("utf-8")
-    req = urllib.request.Request(url, data=encoded_data, method="POST")
+def http_get(url: str) -> dict:
+    req = urllib.request.Request(url, method="GET")
     req.add_header("User-Agent", "CentroPaz-AutoPublisher/1.0")
     try:
-        with urllib.request.urlopen(req, context=ctx) as resp:
+        with urllib.request.urlopen(req, timeout=30) as resp:
             return json.loads(resp.read().decode("utf-8"))
     except urllib.error.HTTPError as e:
         body = e.read().decode("utf-8")
@@ -162,6 +159,57 @@ def http_post(url: str, data: dict) -> dict:
             return {"error": body, "status_code": e.code}
     except Exception as e:
         return {"error": str(e)}
+
+
+def http_post(url: str, data: dict) -> dict:
+    encoded_data = urllib.parse.urlencode(data).encode("utf-8")
+    req = urllib.request.Request(url, data=encoded_data, method="POST")
+    req.add_header("User-Agent", "CentroPaz-AutoPublisher/1.0")
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            return json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8")
+        try:
+            return {"error": json.loads(body)}
+        except Exception:
+            return {"error": body, "status_code": e.code}
+    except Exception as e:
+        return {"error": str(e)}
+
+
+def test_connection(config: dict) -> bool:
+    token = config.get("access_token")
+    if not token:
+        print("⚠️ Falta 'access_token' en agent/meta_config.json o META_ACCESS_TOKEN")
+        return False
+    print("🔌 Verificando token con Meta Graph API...")
+    me = http_get(f"https://graph.facebook.com/v19.0/me?fields=id,name&access_token={urllib.parse.quote(token)}")
+    if "error" in me:
+        print(f"❌ Token inválido: {me['error']}")
+        return False
+    print(f"   ✓ Token válido. App/usuario: {me.get('name')} ({me.get('id')})")
+    ig_id = config.get("instagram_account_id")
+    if ig_id:
+        ig = http_get(
+            f"https://graph.facebook.com/v19.0/{urllib.parse.quote(str(ig_id))}"
+            f"?fields=id,username&access_token={urllib.parse.quote(token)}"
+        )
+        if "error" in ig:
+            print(f"⚠️ Instagram Account ID no accesible: {ig['error']}")
+        else:
+            print(f"   ✓ Instagram: @{ig.get('username', ig.get('id'))}")
+    page_id = config.get("facebook_page_id")
+    if page_id:
+        page = http_get(
+            f"https://graph.facebook.com/v19.0/{urllib.parse.quote(str(page_id))}"
+            f"?fields=id,name&access_token={urllib.parse.quote(token)}"
+        )
+        if "error" in page:
+            print(f"⚠️ Facebook Page ID no accesible: {page['error']}")
+        else:
+            print(f"   ✓ Facebook Page: {page.get('name')} ({page.get('id')})")
+    return True
 
 
 def publish_to_instagram_graph(post_num: int, config: dict) -> bool:
@@ -271,13 +319,22 @@ def trigger_n8n_webhook(webhook_url: str, post_num: int = 1) -> None:
         print(f"❌ Error conectando con n8n: {e}")
 
 
+def publish_one(post_num: int, config: dict, platform: str) -> None:
+    if platform in ["all", "instagram"]:
+        publish_to_instagram_graph(post_num, config)
+    if platform in ["all", "facebook"]:
+        publish_to_facebook_page(post_num, config)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Centro Paz — Publicador Automático de Redes Sociales")
     parser.add_argument("--post", type=int, choices=range(1, 8), help="Número de post a publicar (1 al 7)")
+    parser.add_argument("--post-all", action="store_true", help="Publicar toda la parrilla (posts 1 al 7) con pausa entre cada uno")
     parser.add_argument("--platform", choices=["all", "instagram", "facebook"], default="all", help="Plataforma de destino")
     parser.add_argument("--webhook-url", type=str, help="Disparar webhook a n8n / Make")
     parser.add_argument("--set-token", type=str, help="Guardar Meta Graph API Access Token")
     parser.add_argument("--set-ig-id", type=str, help="Guardar Instagram Account ID")
+    parser.add_argument("--test-connection", action="store_true", help="Verificar tokens y conexión con Meta Graph API")
     parser.add_argument("--list", action="store_true", help="Listar publicaciones disponibles")
     args = parser.parse_args()
 
@@ -295,7 +352,15 @@ def main():
         print("✅ Instagram Account ID guardado en agent/meta_config.json")
         return
 
-    if args.list or not any(vars(args).values()):
+    if args.test_connection:
+        test_connection(config)
+        return
+
+    no_action = not (
+        args.list or args.post or args.post_all or args.webhook_url
+        or args.set_token or args.set_ig_id or args.test_connection
+    )
+    if args.list or no_action:
         print("\n" + "=" * 65)
         print(" 🌿 CENTRO PAZ (CPAZ) — CATÁLOGO DE POSTS AUTOMATIZABLES")
         print("=" * 65)
@@ -308,11 +373,15 @@ def main():
         trigger_n8n_webhook(args.webhook_url, args.post or 1)
         return
 
+    if args.post_all:
+        for n in range(1, 8):
+            publish_one(n, config, args.platform)
+            if n < 7:
+                time.sleep(5)
+        return
+
     if args.post:
-        if args.platform in ["all", "instagram"]:
-            publish_to_instagram_graph(args.post, config)
-        if args.platform in ["all", "facebook"]:
-            publish_to_facebook_page(args.post, config)
+        publish_one(args.post, config, args.platform)
 
 
 if __name__ == "__main__":

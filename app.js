@@ -98,7 +98,7 @@ function initTriage() {
 
   // Render Paso 1
   step1Container.innerHTML = triageData.who.options.map(opt => `
-    <button type="button" class="option-btn" onclick="selectTriageWho('${opt.id}', '${opt.title}')">
+    <button type="button" class="option-btn" data-id="${opt.id}" onclick="selectTriageWho('${opt.id}', '${opt.title.replace(/'/g, "\\'")}')">
       <span class="option-icon">${opt.icon}</span>
       <span class="option-title">${opt.title}</span>
       <span class="option-sub">${opt.desc}</span>
@@ -107,7 +107,7 @@ function initTriage() {
 
   // Render Paso 3
   step3Container.innerHTML = triageData.modality.map(opt => `
-    <button type="button" class="option-btn" onclick="selectTriageModality('${opt.id}', '${opt.title}')">
+    <button type="button" class="option-btn" data-id="${opt.id}" onclick="selectTriageModality('${opt.id}', '${opt.title.replace(/'/g, "\\'")}')">
       <span class="option-icon">${opt.icon}</span>
       <span class="option-title">${opt.title}</span>
       <span class="option-sub">${opt.desc}</span>
@@ -123,7 +123,7 @@ window.selectTriageWho = function(id, label) {
   const reasons = triageData.reason[id] || triageData.reason.adulto;
 
   step2Container.innerHTML = reasons.map(opt => `
-    <button type="button" class="option-btn" onclick="selectTriageReason('${opt.id}', '${opt.title}')">
+    <button type="button" class="option-btn" data-id="${opt.id}" onclick="selectTriageReason('${opt.id}', '${opt.title.replace(/'/g, "\\'")}')">
       <span class="option-icon">${opt.icon}</span>
       <span class="option-title">${opt.title}</span>
       <span class="option-sub">${opt.desc}</span>
@@ -148,12 +148,12 @@ window.selectTriageModality = function(id, label) {
   }, 250);
 };
 
-window.setTimePreference = function(timeStr) {
+window.setTimePreference = function(timeStr, evt) {
   triageState.timePreference = timeStr;
   document.querySelectorAll(".time-btn").forEach(b => b.classList.remove("active"));
-  const clickedBtn = event?.currentTarget;
+  const clickedBtn = evt && evt.currentTarget;
   if (clickedBtn) clickedBtn.classList.add("active");
-  buildTriageResult(); // Actualiza el mensaje final
+  buildTriageResult();
 };
 
 window.goToStep = function(stepNum) {
@@ -205,8 +205,9 @@ window.restartTriage = function() {
 function updateOptionSelection(containerId, selectedId) {
   const container = document.getElementById(containerId);
   if (!container) return;
-  const buttons = container.querySelectorAll(".option-btn");
-  buttons.forEach(btn => btn.classList.remove("selected"));
+  container.querySelectorAll(".option-btn").forEach(btn => {
+    btn.classList.toggle("selected", btn.dataset.id === selectedId);
+  });
 }
 
 function buildTriageResult() {
@@ -248,9 +249,9 @@ function buildTriageResult() {
           ¿Qué horario te acomoda más para tus sesiones?
         </label>
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <button type="button" class="tab-btn time-btn ${timePref === 'Mañana' ? 'active' : ''}" onclick="setTimePreference('Mañana')">🌅 Mañana (09:00 - 13:00)</button>
-          <button type="button" class="tab-btn time-btn ${timePref === 'Tarde' ? 'active' : ''}" onclick="setTimePreference('Tarde')">🌇 Tarde (14:00 - 20:00)</button>
-          <button type="button" class="tab-btn time-btn ${timePref === 'Sábado' ? 'active' : ''}" onclick="setTimePreference('Sábado')">🌿 Sábado</button>
+          <button type="button" class="tab-btn time-btn ${timePref === 'Mañana' ? 'active' : ''}" onclick="setTimePreference('Mañana', event)">🌅 Mañana (09:00 - 13:00)</button>
+          <button type="button" class="tab-btn time-btn ${timePref === 'Tarde' ? 'active' : ''}" onclick="setTimePreference('Tarde', event)">🌇 Tarde (14:00 - 20:00)</button>
+          <button type="button" class="tab-btn time-btn ${timePref === 'Sábado' ? 'active' : ''}" onclick="setTimePreference('Sábado', event)">🌿 Sábado</button>
         </div>
       </div>
 
@@ -457,26 +458,16 @@ function initMobileNav() {
 
   if (navToggle && navLinks) {
     navToggle.addEventListener("click", () => {
-      const isVisible = navLinks.style.display === "flex";
-      navLinks.style.display = isVisible ? "none" : "flex";
-      if (!isVisible) {
-        navLinks.style.flexDirection = "column";
-        navLinks.style.position = "absolute";
-        navLinks.style.top = "100%";
-        navLinks.style.left = "0";
-        navLinks.style.right = "0";
-        navLinks.style.background = "var(--crema)";
-        navLinks.style.padding = "20px";
-        navLinks.style.borderBottom = "1px solid var(--borde-suave)";
-        navLinks.style.boxShadow = "var(--shadow-md)";
-      }
+      const isOpen = navLinks.classList.toggle("is-open");
+      navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      navToggle.setAttribute("aria-label", isOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación");
     });
 
     navLinks.querySelectorAll("a").forEach(a => {
       a.addEventListener("click", () => {
-        if (window.innerWidth <= 768) {
-          navLinks.style.display = "none";
-        }
+        navLinks.classList.remove("is-open");
+        navToggle.setAttribute("aria-expanded", "false");
+        navToggle.setAttribute("aria-label", "Abrir menú de navegación");
       });
     });
   }
