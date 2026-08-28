@@ -84,3 +84,54 @@ Este documento contiene la configuración exacta para lanzar una campaña de anu
   ```
 * **Titular del Anuncio:** *Orientación a Padres y Terapia Infantil*
 * **Botón CTA:** *Enviar mensaje de WhatsApp*
+
+---
+
+### 📌 Anuncio D: Burnout Autista & Masking en Adultos
+* **Imagen:** [`assets/instagram/post_08_burnout_autista.png`](file:///Users/nigoku/CPAZ/assets/instagram/post_08_burnout_autista.png)
+* **Texto Principal:**
+  ```text
+  ¿Sientes que dormir un fin de semana entero ya no te devuelve la energía? 🧠✨
+
+  El Burnout Autista ocurre tras meses de "masking" (forzarte a encajar y modular tu conducta para cumplir expectativas del entorno).
+
+  En Centro Paz trabajamos desde un enfoque 100% neuroafirmativo con la psicóloga clínica Valentina Castro Núñez.
+  🌿 Rediseño de demandas sensoriales.
+  🌿 Validación de límites y descanso real.
+  💳 Boleta reembolsable en Isapres y Seguros.
+
+  👇 Chatea directo con nosotros en WhatsApp para agendar.
+  ```
+* **Titular del Anuncio:** *Acompañamiento Neuroafirmativo · TEA Adulto*
+* **Botón CTA:** *Enviar mensaje de WhatsApp*
+
+---
+
+### 📌 Anuncio E: Parálisis Ejecutiva en TDAH
+* **Imagen:** [`assets/instagram/post_09_paralisis_ejecutiva.png`](file:///Users/nigoku/CPAZ/assets/instagram/post_09_paralisis_ejecutiva.png)
+* **Texto Principal:**
+  ```text
+  ¿Te quedas horas frente a la pantalla sabiendo exactamente qué hacer, pero tu mente no "arranca"? 🧠
+
+  No es flojera ni falta de ganas: es un bloqueo en la función ejecutiva característico del TDAH en adultos.
+
+  Aprende herramientas clínicas y estrategias diseñadas para tu química cerebral.
+  📍 Online para todo Chile y Presencial en Santiago.
+  💳 Reembolso Isapres y Seguros Complementarios.
+
+  👇 Haz clic para agendar tu primera sesión por WhatsApp.
+  ```
+* **Titular del Anuncio:** *TDAH en Adultos · Estrategias Reales*
+* **Botón CTA:** *Enviar mensaje de WhatsApp*
+
+---
+
+## 🔗 4. Parámetros de URL / UTM para Atribución en WhatsApp
+
+Si lanzas anuncios con destino al sitio web (`https://www.centropaz.cl`), usa estos parámetros para que el sistema de la web identifique el anuncio automáticamente:
+
+* **Para Anuncio TDAH:** `https://www.centropaz.cl/?utm_source=meta_ads&utm_campaign=tdah_adultos`
+* **Para Anuncio Reembolso:** `https://www.centropaz.cl/?utm_source=meta_ads&utm_campaign=reembolso_isapre`
+* **Para Anuncio Crianza:** `https://www.centropaz.cl/?utm_source=meta_ads&utm_campaign=crianza_infantil`
+* **Para Anuncio TEA / Masking:** `https://www.centropaz.cl/?utm_source=meta_ads&utm_campaign=tea_masking`
+
