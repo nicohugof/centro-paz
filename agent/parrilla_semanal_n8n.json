@@ -1,0 +1,331 @@
+{
+  "version": "1.0.0",
+  "brand": {
+    "name": "Centro Paz",
+    "therapist": "Valentina Castro Núñez",
+    "title": "Psicóloga Clínica",
+    "registration": "Superintendencia de Salud de Chile (SIS)",
+    "approach": "Humanista, Integrativo y Neuroafirmativo",
+    "accounts": {
+      "instagram": "@centropaz.cl",
+      "tiktok": "@centropaz.cl",
+      "facebook": "Centro Paz (ID: 61593207820690)"
+    },
+    "cta": {
+      "whatsapp": "+56 9 6516 3893",
+      "whatsapp_url": "https://wa.me/56965163893",
+      "website": "https://www.centropaz.cl"
+    },
+    "lead_magnet": "https://www.centropaz.cl/guia_7_claves_regulacion_centro_paz.pdf"
+  },
+  "schedule": [
+    {
+      "id": "cpaz_d1_01",
+      "dia": "Lunes",
+      "dia_numero": 1,
+      "hora": "09:00",
+      "tipo": "story",
+      "titulo": "Comenzando la semana: fatiga vs sobrecarga sensorial",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_01_tdah_adultos.png",
+      "caption": "🌿 Comenzando la semana: ¿Tu cansancio de hoy viene de sobrecargarte el fin de semana o de un sistema nervioso sobreestimulado?\n\nEn Centro Paz acompañamos a personas adultas y familias desde un enfoque humanista y neuroafirmativo.\n\n📲 WhatsApp: +56 9 6516 3893\n🌐 Sitio web: https://www.centropaz.cl",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d1_02",
+      "dia": "Lunes",
+      "dia_numero": 1,
+      "hora": "13:00",
+      "tipo": "feed",
+      "titulo": "¿Y si ese cansancio crónico no es flojera, sino TDAH tardío?",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_01_tdah_adultos.png",
+      "caption": "¿Te pasa que quieres empezar mil cosas y sientes una pared invisible que te frena? 🧠✨\n\nMuchas personas adultas descubren su neurodivergencia (TDAH o TEA) después de los 25 o 30 años, tras décadas de sentirse 'diferentes' o sobrecargadas sin entender por qué.\n\nEn Centro Paz no buscamos encajarte en moldes ni juzgarte: trabajamos desde un enfoque neuroafirmativo para ayudarte a comprender tu funcionamiento singular y construir estrategias reales para tu vida cotidiana y laboral.\n\n📍 Sesiones online (todo Chile) y presenciales (Santiago).\n💳 Boletas 100% reembolsables en Isapres y Seguros Complementarios.\n\n👉 Para agendar tu primera sesión con Valentina Castro Núñez, escríbenos a WhatsApp al +56 9 6516 3893 o ingresa a https://www.centropaz.cl\n\n.\n.\n#CentroPaz #PsicologiaChile #PsicologaClinica #SaludMentalChile #TerapiaOnlineChile #ReembolsoIsapre #TDAHAdultos #TDAHChile #NeurodivergenciaChile #AutismoAdultos #TEAChile #PsicologiaSantiago",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d1_03",
+      "dia": "Lunes",
+      "dia_numero": 1,
+      "hora": "18:00",
+      "tipo": "reel",
+      "titulo": "Procrastinación vs. Parálisis de Dopamina en TDAH",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_09_paralisis_ejecutiva.png",
+      "caption": "¿Por qué postergas lo importante aunque tengas muchas ganas de hacerlo? 🧠\n\nNo es falta de voluntad: en el cerebro con TDAH existe un bloqueo en la función ejecutiva para iniciar acciones de baja estimulación inmediata.\n\nEl antídoto clínico no es forzarte con culpa, sino la micro-fricción cero.\n\n📍 Acompañamiento neuroafirmativo online y presencial en Santiago.\n👉 Contáctanos por WhatsApp al +56 9 6516 3893 o en https://www.centropaz.cl\n\n#ParalisisEjecutiva #TDAHAdultos #TDAHChile #FuncionesEjecutivas #Procrastinacion #CentroPaz #SaludMentalChile",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d1_04",
+      "dia": "Lunes",
+      "dia_numero": 1,
+      "hora": "21:00",
+      "tipo": "story",
+      "titulo": "Recordatorio nocturno: validar tu ritmo",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_01_tdah_adultos.png",
+      "caption": "🧠 Recordatorio nocturno: No estás roto/a, tu cerebro procesa distinto.\n\nSesiones online y presenciales con reembolso Isapre y seguros de salud.\n\n📲 Escríbenos por WhatsApp: +56 9 6516 3893\n🌐 Agenda en: https://www.centropaz.cl",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d2_01",
+      "dia": "Martes",
+      "dia_numero": 2,
+      "hora": "09:00",
+      "tipo": "story",
+      "titulo": "Cómo funciona el reembolso Isapre en psicología",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_02_reembolso_isapre.png",
+      "caption": "💳 ¿Sabías que tu Isapre puede cubrir entre el 50% y el 80% de cada sesión psicológica?\n\nEmitimos boletas electrónicas de honorarios con código de psicología clínica válidas para Colmena, Banmédica, CruzBlanca, Consalud y Vida Tres.\n\n📲 Consulta tu cobertura en WhatsApp: +56 9 6516 3893\n🌐 Más información en: https://www.centropaz.cl",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d2_02",
+      "dia": "Martes",
+      "dia_numero": 2,
+      "hora": "13:00",
+      "tipo": "feed",
+      "titulo": "Cómo reembolsar tus sesiones de psicología en 3 pasos",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_02_reembolso_isapre.png",
+      "caption": "Cuidar tu salud mental no tiene por qué ser una carga económica abrumadora 🌿💳\n\nEn Centro Paz emitimos boletas electrónicas de honorarios profesionales con código de psicología clínica válidas para:\n✨ Todas las Isapres (Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres, Nueva Masvida).\n✨ Seguros Complementarios de Salud (MetLife, Bice, Bci, etc.).\n\nEl copago real puede quedar tan bajo como $12.000 a $18.000 por sesión según tu plan.\n\n👉 Usa el simulador de reembolsos en https://www.centropaz.cl o escríbenos por WhatsApp al +56 9 6516 3893 para orientarte con tu cobertura.\n\n.\n.\n#CentroPaz #ReembolsoIsapre #ReembolsoPsicologia #IsapreColmena #IsapreBanmedica #IsapreCruzBlanca #CopagoPsicologia #PsicologiaChile #TerapiaOnlineChile",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d2_03",
+      "dia": "Martes",
+      "dia_numero": 2,
+      "hora": "18:00",
+      "tipo": "reel",
+      "titulo": "Reembolsa tu sesión en 3 toques desde la App",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_14_reembolso_matematica.png",
+      "caption": "¿Sabías que tu Isapre te puede devolver hasta el 70% del valor de tu sesión de psicología? 💳✨\n\n1. Asistes a tu sesión online o presencial en Centro Paz.\n2. Recibes tu boleta oficial con código de la Superintendencia de Salud.\n3. La subes a la app de tu Isapre y recibes el depósito directo en tu cuenta bancaria.\n\n👉 Simula tu reembolso en https://www.centropaz.cl o escríbenos por WhatsApp al +56 9 6516 3893.\n\n#ReembolsoIsapre #IsapreChile #SaludMentalChile #PsicologiaSantiago #CentroPaz",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d2_04",
+      "dia": "Martes",
+      "dia_numero": 2,
+      "hora": "21:00",
+      "tipo": "story",
+      "titulo": "Simulador de cobertura disponible",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_14_reembolso_matematica.png",
+      "caption": "📊 Calcula tu copago real en 10 segundos con nuestro simulador web.\n\nBoletas 100% reembolsables en Isapres y seguros.\n\n📲 Escríbenos a WhatsApp: +56 9 6516 3893\n🌐 Ingresa a: https://www.centropaz.cl",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d3_01",
+      "dia": "Miércoles",
+      "dia_numero": 3,
+      "hora": "09:00",
+      "tipo": "story",
+      "titulo": "Crianza y desbordes emocionales",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_03_crianza_regulacion.png",
+      "caption": "🌱 Cuando un niño o niña se desborda, no busca molestarte: su sistema nervioso colapsó.\n\nPrestarle tu calma antes de intentar razonar es el primer paso de la corregulación.\n\n📲 WhatsApp: +56 9 6516 3893\n🌐 Orientación a padres en: https://www.centropaz.cl",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d3_02",
+      "dia": "Miércoles",
+      "dia_numero": 3,
+      "hora": "13:00",
+      "tipo": "feed",
+      "titulo": "Una rabieta intensa no es manipulación: es sobrecarga sensorial",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_03_crianza_regulacion.png",
+      "caption": "Criar a un hijo/a con desafíos de regulación emocional o características neurodivergentes puede ser agotador cuando no se tienen las herramientas adecuadas 🌱🤍\n\nEl castigo o el aislamiento en momentos de desborde aumentan la angustia. Lo que ayuda es la corregulación: prestarle tu calma hasta que su sistema nervioso vuelva al equilibrio.\n\nEn Centro Paz acompañamos a niños, niñas y adolescentes, y brindamos orientación continua a padres para construir un hogar en calma y sin gritos.\n\n👉 Para coordinar una primera sesión de orientación infanto-juvenil, escríbenos a WhatsApp al +56 9 6516 3893 o ingresa a https://www.centropaz.cl\n\n.\n.\n#CentroPaz #CrianzaRespetuosa #PsicologiaInfantil #TEAInfantil #TDAHInfantil #OrientacionAPadres #SaludMentalChile #PsicologaClinica",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d3_03",
+      "dia": "Miércoles",
+      "dia_numero": 3,
+      "hora": "18:00",
+      "tipo": "reel",
+      "titulo": "Qué hacer ante una rabieta intensa en 4 pasos",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_11_apoyo_neurodivergente_hijos.png",
+      "caption": "Deja de decirle 'cálmate' a un niño en plena rabieta. Esto es lo que pasa en su cerebro 🧠🌱\n\nDurante el desborde la corteza lógica está apagada. Primero baja luces, atenúa ruidos, ofrece presencia física segura y valida lo que siente. La conversación se tiene después, con el sistema nervioso en calma.\n\n👉 Pídenos gratis la Guía de 7 Claves de Regulación en PDF por WhatsApp al +56 9 6516 3893 o descárgala en https://www.centropaz.cl\n\n#CrianzaRespetuosa #PsicologiaInfantil #OrientacionParental #CentroPaz #TDAHInfantil",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d3_04",
+      "dia": "Miércoles",
+      "dia_numero": 3,
+      "hora": "21:00",
+      "tipo": "story",
+      "titulo": "Guía gratuita de 7 claves en PDF",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_03_crianza_regulacion.png",
+      "caption": "📖 ¿Quieres recibir nuestra Guía Gratuita de Regulación Emocional y Sensorial en PDF?\n\nRespóndenos a este estado o escríbenos directo por WhatsApp.\n\n📲 WhatsApp: +56 9 6516 3893\n🌐 https://www.centropaz.cl",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d4_01",
+      "dia": "Jueves",
+      "dia_numero": 4,
+      "hora": "09:00",
+      "tipo": "story",
+      "titulo": "El costo del enmascaramiento social",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_04_masking.png",
+      "caption": "🧠 ¿Llegas a casa después del trabajo sintiendo que no te queda energía ni para hablar?\n\nEl sobreesfuerzo de modular tu conducta para encajar agota profundamente tu sistema nervioso.\n\n📲 WhatsApp: +56 9 6516 3893\n🌐 Conoce nuestro enfoque en: https://www.centropaz.cl",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d4_02",
+      "dia": "Jueves",
+      "dia_numero": 4,
+      "hora": "13:00",
+      "tipo": "feed",
+      "titulo": "El costo invisible del masking: llegar a casa sin energía ni para hablar",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_04_masking.png",
+      "caption": "¿Llegas a casa después del trabajo o reuniones sintiendo que no te queda energía ni para hablar? 🧠\n\nEl 'masking' es el esfuerzo consciente o inconsciente de forzar gestos, reprimir incomodidades sensoriales y actuar 'como los demás esperan' para no ser juzgado/a.\n\nEn Centro Paz te acompañamos a construir un espacio seguro donde puedas desenmascarar con tranquilidad y proteger tu salud mental.\n\n📍 Sesiones online y presenciales con boleta reembolsable en Isapres y Seguros.\n👉 Agenda en https://www.centropaz.cl o al WhatsApp +56 9 6516 3893.\n\n.\n.\n#CentroPaz #Masking #AutismoAdultos #TEAChile #BurnoutAutista #NeurodivergenciaChile #PsicologiaAdultos #SaludMentalChile",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d4_03",
+      "dia": "Jueves",
+      "dia_numero": 4,
+      "hora": "18:00",
+      "tipo": "reel",
+      "titulo": "Qué es el Burnout Autista y por qué no se cura durmiendo",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_08_burnout_autista.png",
+      "caption": "¿Sientes que dormir un fin de semana entero ya no te devuelve la energía? 🧠✨\n\nEl Burnout Autista no es simplemente estrés laboral: es un colapso del sistema nervioso tras meses o años de sobreexigirse para encajar.\n\nRequiere reestructurar demandas sensoriales, validar límites y recibir acompañamiento neuroafirmativo.\n\n👉 Escríbenos por WhatsApp al +56 9 6516 3893 o visita https://www.centropaz.cl\n\n#BurnoutAutista #TEAAdultos #AutismoChile #Neurodivergencia #CentroPaz",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d4_04",
+      "dia": "Jueves",
+      "dia_numero": 4,
+      "hora": "21:00",
+      "tipo": "story",
+      "titulo": "Espacio neuroafirmativo sin juicios",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_08_burnout_autista.png",
+      "caption": "🌿 Un espacio de calma para desenmascarar y construir límites sanos.\n\nValentina Castro Núñez · Psicóloga Clínica (Registro SIS)\n\n📲 WhatsApp: +56 9 6516 3893\n🌐 Agenda en: https://www.centropaz.cl",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d5_01",
+      "dia": "Viernes",
+      "dia_numero": 5,
+      "hora": "09:00",
+      "tipo": "story",
+      "titulo": "Terapia online desde todo Chile",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_05_terapia_online.png",
+      "caption": "💻 Atenderte desde tu habitación reduce la ansiedad y elimina tiempos de traslado.\n\nMisma rigurosidad clínica y boleta electrónica para reembolso Isapre.\n\n📲 Consulta horas en WhatsApp: +56 9 6516 3893\n🌐 https://www.centropaz.cl",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d5_02",
+      "dia": "Viernes",
+      "dia_numero": 5,
+      "hora": "13:00",
+      "tipo": "feed",
+      "titulo": "Terapia online con la misma rigurosidad clínica, desde tu espacio de calma",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_05_terapia_online.png",
+      "caption": "Atenderte desde tu habitación o espacio de calma reduce la ansiedad y elimina los tiempos de traslado 💻🌿\n\nLa terapia online cuenta con la misma rigurosidad y efectividad clínica, y recibes tu boleta electrónica exactamente igual para reembolsar en tu Isapre o Seguro.\n\n✨ Sesiones estructuradas de 50 minutos.\n✨ Confidencialidad y cercanía humana.\n✨ Cobertura para todo Chile y presencial en Santiago.\n\n👉 Encuentra el acompañamiento que necesitas en https://www.centropaz.cl o escríbenos a WhatsApp al +56 9 6516 3893.\n\n.\n.\n#CentroPaz #TerapiaOnline #PsicologiaOnlineChile #SaludMentalDigital #TerapiaChile #ReembolsoIsapre",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d5_03",
+      "dia": "Viernes",
+      "dia_numero": 5,
+      "hora": "18:00",
+      "tipo": "reel",
+      "titulo": "3 Anclas para regular la ansiedad del fin de semana",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_10_regulacion_ansiedad.png",
+      "caption": "Si tu mente no para de proyectar escenarios y sobrepensar, haz este ejercicio somático de 30 segundos 🌊\n\n1. Suspiro fisiológico (dos inhalaciones y exhalación larga).\n2. Presión propioceptiva en los pies o manos.\n3. Orientación sensorial hacia objetos verdes.\n\n👉 Aprende a regular tu sistema nervioso en consulta. Escríbenos a WhatsApp (+56 9 6516 3893) o ingresa a https://www.centropaz.cl\n\n#AnsiedadChile #Sobrepensar #RegulacionEmocional #SistemaNervioso #CentroPaz",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d5_04",
+      "dia": "Viernes",
+      "dia_numero": 5,
+      "hora": "21:00",
+      "tipo": "story",
+      "titulo": "Cupos disponibles para la próxima semana",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_05_terapia_online.png",
+      "caption": "🌿 Abriendo cupos para sesiones online y presenciales de la próxima semana.\n\nBoletas reembolsables en Isapres y Seguros de Salud.\n\n📲 Escríbenos por WhatsApp: +56 9 6516 3893\n🌐 Revisa disponibilidad en: https://www.centropaz.cl",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d6_01",
+      "dia": "Sábado",
+      "dia_numero": 6,
+      "hora": "09:00",
+      "tipo": "story",
+      "titulo": "Desarrollo infantil y señales tempranas",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_06_evaluacion_infantil.png",
+      "caption": "🌱 ¿El colegio sugiere evaluación o notas desbordes intensos difíciles de calmar en casa?\n\nNo estás solo/a en la crianza. Ofrecemos pautas clínicas claras y respetuosas.\n\n📲 WhatsApp: +56 9 6516 3893\n🌐 Orientador infantil en: https://www.centropaz.cl",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d6_02",
+      "dia": "Sábado",
+      "dia_numero": 6,
+      "hora": "13:00",
+      "tipo": "feed",
+      "titulo": "¿Cuándo consultar con una psicóloga infantil?",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_06_evaluacion_infantil.png",
+      "caption": "¿Cuándo es momento de consultar con una psicóloga infantil? 🌱\n\nDesbordes intensos frecuentes, hipersensibilidad a ruidos o texturas, y dificultades de adaptación escolar son señales de que tu hijo/a necesita apoyo y tú como mamá o papá necesitas pautas clínicas claras.\n\nEn Centro Paz acompañamos a niños y adolescentes desde un enfoque lúdico y cálido, con orientación continua a la familia.\n\n👉 Contáctanos por WhatsApp al +56 9 6516 3893 o en https://www.centropaz.cl para coordinar una primera sesión de orientación.\n\n.\n.\n#CentroPaz #PsicologiaInfantil #OrientacionAPadres #TDAHInfantil #TEAInfantil #CrianzaRespetuosa #SaludMentalChile",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d6_03",
+      "dia": "Sábado",
+      "dia_numero": 6,
+      "hora": "18:00",
+      "tipo": "reel",
+      "titulo": "Soltar la culpa en la crianza: padres regulados vs perfectos",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_13_culpa_parental.png",
+      "caption": "Para los papás y mamás que terminan el día sintiendo que perdieron la paciencia 🌱\n\nTus hijos no necesitan padres perfectos: necesitan padres que sepan regularse y reparar la conexión después de un mal momento.\n\n👉 Agenda tu sesión de orientación a padres en https://www.centropaz.cl o al WhatsApp +56 9 6516 3893.\n\n#CulpaParental #CrianzaRespetuosa #MaternidadReal #PaternidadConsciente #CentroPaz",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d6_04",
+      "dia": "Sábado",
+      "dia_numero": 6,
+      "hora": "21:00",
+      "tipo": "story",
+      "titulo": "Orientación a padres y crianza consciente",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_13_culpa_parental.png",
+      "caption": "🤍 La capacidad de reparar es más valiosa que la exigencia de no equivocarse nunca.\n\nEspacio clínico de acogida para familias.\n\n📲 WhatsApp: +56 9 6516 3893\n🌐 https://www.centropaz.cl",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d7_01",
+      "dia": "Domingo",
+      "dia_numero": 7,
+      "hora": "09:00",
+      "tipo": "story",
+      "titulo": "Domingo de autocuidado y reflexión",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_07_autocuidado_adultos.png",
+      "caption": "✨ Pedir ayuda profesional no es debilidad: es reconocer que tu salud mental y tu bienestar importan.\n\n50 minutos a la semana dedicados 100% a ti.\n\n📲 WhatsApp: +56 9 6516 3893\n🌐 Agenda en: https://www.centropaz.cl",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d7_02",
+      "dia": "Domingo",
+      "dia_numero": 7,
+      "hora": "13:00",
+      "tipo": "feed",
+      "titulo": "Pedir ayuda no es debilidad: es cuidar tu sistema nervioso",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_07_autocuidado_adultos.png",
+      "caption": "Pedir ayuda profesional no es debilidad: es reconocer que tu salud mental y tu bienestar importan ✨\n\n50 minutos a la semana dedicados 100% a ti, con la psicóloga clínica Valentina Castro Núñez.\n\n🌿 Espacio sin juicios ni imposiciones.\n🌿 Enfoque humanista, integrativo y neuroafirmativo.\n💳 Boletas 100% reembolsables en todas las Isapres y Seguros.\n\n👉 Da el primer paso hoy. Agenda en https://www.centropaz.cl o al WhatsApp +56 9 6516 3893.\n\n.\n.\n#CentroPaz #Autocuidado #PedirAyuda #TerapiaAdultosChile #SaludMentalChile #PsicologaValentinaCastro #PsicologiaSantiago",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d7_03",
+      "dia": "Domingo",
+      "dia_numero": 7,
+      "hora": "18:00",
+      "tipo": "reel",
+      "titulo": "Qué pasa en tu primera sesión de terapia psicológica",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_12_primera_sesion.png",
+      "caption": "¿Te da nervios dar el primer paso hacia la terapia? 🌿✨\n\nNo tienes que llegar con todo resuelto ni saber exactamente qué decir. La primera sesión es un encuentro cálido para conocerte, validar lo que estás viviendo y trazar juntos los objetivos a tu propio ritmo.\n\n📍 Modalidad Online (todo Chile) y Presencial (Santiago).\n👉 Escríbenos a WhatsApp (+56 9 6516 3893) para agendar tu horario o visita https://www.centropaz.cl\n\n#PrimeraSesion #TerapiaChile #SaludMentalChile #PsicologaValentinaCastro #CentroPaz",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    },
+    {
+      "id": "cpaz_d7_04",
+      "dia": "Domingo",
+      "dia_numero": 7,
+      "hora": "21:00",
+      "tipo": "story",
+      "titulo": "Planifica tu semana priorizando tu bienestar",
+      "url_imagen": "https://www.centropaz.cl/assets/instagram/post_12_primera_sesion.png",
+      "caption": "🌿 Empieza la semana cuidando tu bienestar emocional.\n\nAgenda tu primera sesión online o presencial en Santiago.\n\n📲 Escríbenos a WhatsApp: +56 9 6516 3893\n🌐 https://www.centropaz.cl",
+      "cta": "WhatsApp +56 9 6516 3893 · https://www.centropaz.cl"
+    }
+  ]
+}
