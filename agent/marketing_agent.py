@@ -136,13 +136,27 @@ def render_all_posts() -> None:
     print(f"\n✅ {success_count}/{len(html_files)} piezas gráficas generadas exitosamente en assets/instagram/")
 
 
+def display_multiplatform() -> None:
+    matrix = content_engine.get_multiplatform_matrix()
+    print("🌐 MATRIZ DE CONTENIDO OMNICANAL PARA TODAS LAS REDES SOCIALES:\n")
+    print("1. 📸 INSTAGRAM & FACEBOOK (Feed + Stories): 14 publicaciones gráficas (1080x1350).")
+    print("2. 🎥 TIKTOK & REELS: 7 guiones de video de 30-40s con ganchos y audio sugerido.")
+    print("3. 🧵 THREADS & X (Twitter): 3 micro-hilos clínicos para debate y engagement.")
+    print("4. 👥 FACEBOOK COMUNIDADES / GRUPOS: 2 publicaciones de discusión comunitaria.")
+    print("-" * 70)
+
+
 def export_n8n_json() -> None:
     cal_w1 = content_engine.get_weekly_calendar(week=1)
     cal_w2 = content_engine.get_weekly_calendar(week=2)
     catalog = content_engine.get_all_catalog()
     reels = content_engine.get_reels_catalog()
+    matrix = content_engine.get_multiplatform_matrix()
 
     out_file = ROOT / "agent" / "n8n_marketing_payload.json"
+    multi_file_agent = ROOT / "agent" / "multiplatform_content_n8n.json"
+    multi_file_root = ROOT / "multiplatform_content_n8n.json"
+
     data = {
         "brand": content_engine.BRAND,
         "lead_magnet_pdf": "https://www.centropaz.cl/guia_7_claves_regulacion_centro_paz.pdf",
@@ -153,15 +167,20 @@ def export_n8n_json() -> None:
         "status": "ready_for_dispatch"
     }
     out_file.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"✅ Payload extendido exportado para n8n en: {out_file}")
+    multi_file_agent.write_text(json.dumps(matrix, indent=2, ensure_ascii=False), encoding="utf-8")
+    multi_file_root.write_text(json.dumps(matrix, indent=2, ensure_ascii=False), encoding="utf-8")
+
+    print(f"✅ Payload maestro exportado en: {out_file}")
+    print(f"✅ Matriz omnicanal (TikTok/Threads/Facebook/IG) exportada en: {multi_file_root}")
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Centro Paz Marketing Agent")
     parser.add_argument("--calendar", action="store_true", help="Mostrar calendario de 14 días de publicaciones")
     parser.add_argument("--reels", action="store_true", help="Mostrar guiones virales de Reels y TikTok")
+    parser.add_argument("--multiplatform", action="store_true", help="Mostrar resumen de distribución omnicanal")
     parser.add_argument("--render-posts", action="store_true", help="Renderizar imágenes de Instagram a PNG")
-    parser.add_argument("--export-json", action="store_true", help="Exportar JSON maestro para n8n")
+    parser.add_argument("--export-json", action="store_true", help="Exportar JSON maestro y matriz omnicanal para n8n")
     args = parser.parse_args()
 
     print_banner()
@@ -170,6 +189,8 @@ def main() -> None:
         display_calendar()
     if args.reels:
         display_reels()
+    if args.multiplatform:
+        display_multiplatform()
     if args.render_posts:
         render_all_posts()
     if args.export_json:
@@ -177,9 +198,10 @@ def main() -> None:
 
     if not any(vars(args).values()):
         display_calendar()
-        print("\n💡 Tip: Ejecuta con --reels para ver guiones de video, --render-posts para generar PNGs, o --export-json para n8n.\n")
+        print("\n💡 Tip: Ejecuta con --multiplatform, --reels, --render-posts, o --export-json para n8n.\n")
 
 
 if __name__ == "__main__":
     main()
+
 

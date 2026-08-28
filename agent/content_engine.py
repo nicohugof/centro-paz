@@ -386,6 +386,76 @@ REELS_SCRIPTS: Dict[str, Dict[str, Any]] = {
         ],
         "cta": "Aprende herramientas clínicas para tu bienestar emocional. Agenda tu hora en Centro Paz por WhatsApp.",
         "recommended_audio": "Sonido calmante con ondas binaurales"
+    },
+    "reel_06_tdah_paralisis": {
+        "title": "Parálisis ejecutiva en TDAH adulto",
+        "duration": "35 segundos",
+        "hook_visual": "'Cuando tu mente quiere pero tu cuerpo no responde'",
+        "hook_audio": "¿Te has quedado horas sentado mirando una tarea sabiendo que debes hacerla, sintiendo una barrera invisible?",
+        "development": [
+            "No es falta de voluntad: es una dificultad en la regulación de dopamina en la corteza prefrontal.",
+            "Obligarte con culpa aumenta la respuesta de amenaza y empeora el bloqueo.",
+            "La solución clínica: micro-fricción cero y estímulos sensoriales adaptados."
+        ],
+        "cta": "Atención neuroafirmativa para adultos en Centro Paz. WhatsApp en el perfil.",
+        "recommended_audio": "Voz en off explicativa con fondo lo-fi"
+    },
+    "reel_07_culpa_maternidad": {
+        "title": "Soltar la culpa en la crianza",
+        "duration": "35 segundos",
+        "hook_visual": "'Para la mamá o papá que siente que hoy lo hizo todo mal'",
+        "hook_audio": "Si hoy perdiste la paciencia con tus hijos y te invade la culpa, escucha esto.",
+        "development": [
+            "No necesitas ser un padre o madre perfecto: la neurociencia demuestra que la clave es la capacidad de reparar.",
+            "Pedir disculpas y validar a tu hijo/a le enseña que equivocarse es humano.",
+            "Aprender a regularte tú es el mayor regalo emocional que puedes darles."
+        ],
+        "cta": "Orientación continua a padres en Centro Paz. Link a WhatsApp en bio.",
+        "recommended_audio": "Piano acústico suave y reflexivo"
+    }
+}
+
+THREADS_POSTS: Dict[str, List[str]] = {
+    "tdah_masking": [
+        "🧵 1/3 El cansancio crónico en personas adultas muchas veces no es flojera ni falta de vitaminas: es el costo invisible del 'masking'.",
+        "2/3 Pasar 8 horas al día forzando contacto visual, modulando tu tono de voz y reprimiendo incomodidades sensoriales para 'encajar' consume el doble de energía que una jornada laboral común.",
+        "3/3 En Centro Paz acompañamos a adultos con TDAH y TEA desde un enfoque neuroafirmativo. Sesiones online y presenciales con boleta reembolsable en Isapres. Escríbenos por WhatsApp (+56 9 6516 3893) o en https://www.centropaz.cl"
+    ],
+    "reembolso_claridad": [
+        "🧵 1/3 Mucha gente pospone la terapia psicológica creyendo que es inaccesible con Isapre. Aquí te dejamos la matemática real:",
+        "2/3 Sesión particular oficial: $45.000 CLP. Con boleta electrónica de psicología clínica, tu Isapre (Colmena, Banmédica, CruzBlanca, Consalud, etc.) y seguro te reembolsan entre el 50% y el 80%.",
+        "3/3 Tu copago real puede quedar tan bajo como $12.000 a $18.000 por sesión. Simula tu cobertura en https://www.centropaz.cl o al WhatsApp +56 9 6516 3893."
+    ],
+    "desbordes_infantiles": [
+        "🧵 1/3 Por qué decirle 'cálmate' a un niño en plena rabieta nunca funciona:",
+        "2/3 Durante un desborde emocional, la corteza prefrontal (lógica y lenguaje) está temporalmente desconectada por la sobrecarga del sistema límbico. Hablar de consecuencias en ese instante solo aumenta el cortisol.",
+        "3/3 Primero baja luces, habla en voz baja y ofrece presencia física segura (corregulación). Descarga nuestra Guía gratuita de 7 Claves en PDF pidiéndola por WhatsApp al +56 9 6516 3893 o en https://www.centropaz.cl"
+    ]
+}
+
+FACEBOOK_COMMUNITY_POSTS: Dict[str, Dict[str, str]] = {
+    "tdah_adultos_comunidad": {
+        "title": "¿Cómo experimentas la sobrecarga mental en la semana laboral?",
+        "text": """¿Te pasa que en el trabajo logras funcionar, pero al llegar a casa sientes que no te queda energía ni para responder un mensaje? 🧠
+
+Muchas personas adultas descubren su TDAH o condición dentro del espectro autista después de los 25 o 30 años, tras haber vivido con la sensación de tener que esforzarse el triple para cumplir lo cotidiano.
+
+En Centro Paz trabajamos desde un enfoque humanista y neuroafirmativo con la psicóloga clínica Valentina Castro Núñez (Registro Superintendencia de Salud).
+
+📍 Sesiones online para todo Chile y presenciales en Santiago.
+💳 Boletas electrónicas 100% reembolsables en todas las Isapres y Seguros Complementarios.
+
+👉 Escríbenos directamente por WhatsApp al +56 9 6516 3893 o visita www.centropaz.cl para coordinar tu primera hora."""
+    },
+    "crianza_comunidad": {
+        "title": "Orientación a Padres: Crianza Respetuosa sin Desgaste",
+        "text": """Mamás y papás: ¿Cómo acompañar a un hijo o hija con alta sensibilidad o sospecha de TEA/TDAH sin caer en la culpa ni en el agotamiento? 🌱
+
+Criar desde la comprensión del perfil sensorial y la corregulación transforma la dinámica del hogar sin recurrir a gritos ni castigos.
+
+En Centro Paz ofrecemos psicoterapia infanto-juvenil con sesiones continuas de orientación a padres.
+
+👉 Agenda una sesión de orientación familiar por WhatsApp al +56 9 6516 3893 o en www.centropaz.cl"""
     }
 }
 
@@ -437,6 +507,7 @@ def get_all_catalog() -> List[Dict[str, Any]]:
             "key": key,
             "id": topic["id"],
             "image_file": f"post_{topic['id']:02d}_{key}.png",
+            "image_url": f"https://www.centropaz.cl/assets/instagram/post_{topic['id']:02d}_{key}.png",
             "title": topic["title"],
             "kicker": topic["kicker"],
             "hook": topic["hook"],
@@ -451,3 +522,24 @@ def get_all_catalog() -> List[Dict[str, Any]]:
 def get_reels_catalog() -> List[Dict[str, Any]]:
     """Retorna los guiones virales de alta retención para video."""
     return [{"key": k, **v} for k, v in REELS_SCRIPTS.items()]
+
+
+def get_threads_catalog() -> List[Dict[str, Any]]:
+    """Retorna micro-hilos listos para Threads y X."""
+    return [{"key": k, "tweets": v} for k, v in THREADS_POSTS.items()]
+
+
+def get_multiplatform_matrix() -> Dict[str, Any]:
+    """Genera una matriz omnicanal para Instagram, Facebook, TikTok y Threads."""
+    return {
+        "brand": BRAND,
+        "lead_magnet_pdf": "https://www.centropaz.cl/guia_7_claves_regulacion_centro_paz.pdf",
+        "channels": {
+            "instagram_facebook_feed": get_all_catalog(),
+            "tiktok_reels_video_scripts": get_reels_catalog(),
+            "threads_micro_threads": get_threads_catalog(),
+            "facebook_community_posts": [{"key": k, **v} for k, v in FACEBOOK_COMMUNITY_POSTS.items()]
+        },
+        "status": "ready_for_omnichannel_dispatch"
+    }
+
