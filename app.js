@@ -15,6 +15,18 @@ const CPAZ_CONFIG = {
   standardFee: 45000, // Arancel estándar de referencia en CLP
 };
 
+function getUTMContext() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const source = params.get("utm_source") || params.get("source") || params.get("ref");
+    const campaign = params.get("utm_campaign") || params.get("c");
+    if (source || campaign) {
+      return `\n\n[Ref: ${source || "web"}${campaign ? ' · ' + campaign : ''}]`;
+    }
+  } catch (e) {}
+  return "";
+}
+
 // Estado del Triaje / Orientador
 const triageState = {
   step: 1,
@@ -262,12 +274,13 @@ function buildTriageResult() {
   }
 
   // Generar mensaje personalizado de WhatsApp
+  const utmSuffix = getUTMContext();
   const rawMessage = `Hola Centro Paz 🌿 Estuve revisando su sitio web y completé el orientador de consulta.\n\n` +
     `• Paciente: ${whoLabel}\n` +
     `• Motivo: ${reasonLabel}\n` +
     `• Modalidad preferida: ${modLabel}\n` +
     `• Preferencia de horario: ${timePref}\n\n` +
-    `Me gustaría coordinar mi primera sesión con Valentina. ¿Qué opciones de fecha tienen disponibles? Muchas gracias.`;
+    `Me gustaría coordinar mi primera sesión con Valentina. ¿Qué opciones de fecha tienen disponibles? Muchas gracias.${utmSuffix}`;
 
   const encodedMessage = encodeURIComponent(rawMessage);
   const whatsappUrl = `https://wa.me/${CPAZ_CONFIG.whatsappNumber}?text=${encodedMessage}`;
@@ -321,7 +334,8 @@ window.updateReimbursementCalc = function() {
   resultSub.textContent = `Reembolso estimado de ~$${estimatedReimbursed.toLocaleString("es-CL")} por sesión`;
 
   const isapreText = isapreSelect.options[isapreSelect.selectedIndex].text;
-  const waMessage = `Hola Centro Paz 🌿 Estuve usando el simulador de reembolsos de su web. Tengo Isapre ${isapreText}${hasInsurance ? ' + Seguro Complementario' : ''} y quisiera consultar por aranceles y disponibilidad para agendar mi primera sesión.`;
+  const utmSuffix = getUTMContext();
+  const waMessage = `Hola Centro Paz 🌿 Estuve usando el simulador de reembolsos de su web. Tengo Isapre ${isapreText}${hasInsurance ? ' + Seguro Complementario' : ''} y quisiera consultar por aranceles y disponibilidad para agendar mi primera sesión.${utmSuffix}`;
 
   if (calcWaBtn) {
     calcWaBtn.href = `https://wa.me/${CPAZ_CONFIG.whatsappNumber}?text=${encodeURIComponent(waMessage)}`;
@@ -358,7 +372,7 @@ function renderChecklist() {
   container.innerHTML = items.map((text, idx) => `
     <div class="symptom-item ${selectedSymptoms.has(idx) ? 'checked' : ''}" onclick="toggleSymptom(${idx})">
       <div class="symptom-checkbox">
-        ${selectedSymptoms.has(idx) ? '✓' : ''}
+        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
       </div>
       <div class="symptom-text">${text}</div>
     </div>
@@ -391,7 +405,8 @@ function updateChecklistFeedback() {
     `;
   } else {
     const tabLabel = currentChecklistTab === "adultos" ? "Bienestar de Adultos" : "Apoyo Infanto-Juvenil y Crianza";
-    const rawWa = `Hola Valentina 🌿 Estuve revisando el checklist de ${tabLabel} en la web de Centro Paz y me identifiqué con ${count} de los puntos descritos. Me gustaría consultar por una primera sesión para trabajar en esto.`;
+    const utmSuffix = getUTMContext();
+    const rawWa = `Hola Valentina 🌿 Estuve revisando el checklist de ${tabLabel} en la web de Centro Paz y me identifiqué con ${count} de los puntos descritos. Me gustaría consultar por una primera sesión para trabajar en esto.${utmSuffix}`;
 
     feedbackEl.innerHTML = `
       <div>
@@ -429,6 +444,8 @@ function initFAQ() {
 ---------------------------------------------------- */
 function initWhatsAppLinks() {
   const genericLinks = document.querySelectorAll("[data-wa-action]");
+  const utmSuffix = getUTMContext();
+
   genericLinks.forEach(link => {
     const action = link.getAttribute("data-wa-action");
     let msg = "Hola Centro Paz, me gustaría solicitar información para agendar una primera sesión psicológica.";
@@ -443,7 +460,7 @@ function initWhatsAppLinks() {
       msg = "Hola Centro Paz ✨ Me gustaría solicitar la Guía Gratuita de Regulación Emocional y Sensorial para adultos y familias.";
     }
 
-    link.href = `https://wa.me/${CPAZ_CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`;
+    link.href = `https://wa.me/${CPAZ_CONFIG.whatsappNumber}?text=${encodeURIComponent(msg + utmSuffix)}`;
     link.target = "_blank";
     link.rel = "noopener noreferrer";
   });
