@@ -1,4 +1,14 @@
+#!/usr/bin/env python3
 """
+Actualiza agent/content_engine.py para contener los 28 tópicos clínicos completos,
+las 4 semanas de calendario y la matriz omnicanal para n8n y redes sociales.
+"""
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+TARGET_FILE = ROOT / "agent" / "content_engine.py"
+
+CONTENT = '''"""
 Motor de Contenidos Clínicos y Copywriting de Alta Conversión para Centro Paz (CPAZ).
 Diseñado para alimentar publicaciones de redes sociales, anuncios y guiones de Reels/TikTok
 con derivación directa a WhatsApp (+56 9 6516 3893) y atención en Ñuñoa / Online.
@@ -840,3 +850,7 @@ def get_multiplatform_matrix() -> Dict[str, Any]:
         },
         "status": "ready_for_omnichannel_dispatch"
     }
+'''
+
+TARGET_FILE.write_text(CONTENT, encoding="utf-8")
+print("✅ agent/content_engine.py actualizado con los 28 tópicos clínicos y 4 semanas completas.")

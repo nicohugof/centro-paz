@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,700;1,500;1,700&family=Nunito+Sans:wght@400;600;700;800&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 1080px; height: 1350px; background: #FAF6F3;
+      font-family: 'Nunito Sans', sans-serif; color: #2B2B2B;
+      padding: 72px 80px; display: flex; flex-direction: column;
+      justify-content: space-between; position: relative; overflow: hidden;
+    }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 36px; }
+    .brand { display: flex; align-items: center; gap: 16px; }
+    .logo-badge {
+      width: 56px; height: 56px; border-radius: 50%; background: #F0D9DE;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Lora', serif; font-size: 26px; font-weight: 700; color: #7A2E3A;
+    }
+    .brand-name { font-family: 'Lora', serif; font-size: 24px; font-weight: 700; color: #5C1F29; }
+    .brand-sub { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: #4A6E60; font-weight: 700; }
+    .tag-category { background: #F0D9DE; color: #7A2E3A; padding: 8px 20px; border-radius: 40px; font-size: 16px; font-weight: 700; }
+    .kicker { font-size: 20px; text-transform: uppercase; letter-spacing: 3px; color: #7A2E3A; font-weight: 800; margin-bottom: 14px; }
+    h1 { font-family: 'Lora', Georgia, serif; font-size: 48px; line-height: 1.18; color: #5C1F29; margin-bottom: 28px; }
+    h1 span { background: #F0D9DE; padding: 0 8px; border-radius: 8px; }
+    .content-box {
+      background: #FFFFFF; border: 2px solid #EFE4DE; border-radius: 24px;
+      padding: 30px 34px; box-shadow: 0 10px 30px rgba(122, 46, 58, 0.05); margin-bottom: 28px;
+    }
+    .item-row { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; font-size: 19.5px; color: #2B2B2B; line-height: 1.4; }
+    .item-row:last-child { margin-bottom: 0; }
+    .bullet-icon { color: #7A2E3A; font-size: 22px; margin-top: 2px; }
+    .footer-cta {
+      background: #7A2E3A; color: #FFF; border-radius: 20px;
+      padding: 24px 32px; display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-cta-text h3 { font-family: 'Lora', serif; font-size: 22px; color: #FFF; margin-bottom: 4px; }
+    .footer-cta-text p { font-size: 15px; color: #F0D9DE; }
+    .wa-pill { background: #25D366; color: #FFF; padding: 12px 24px; border-radius: 40px; font-weight: 700; font-size: 17px; }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="header">
+      <div class="brand">
+        <div class="logo-badge">CP</div>
+        <div>
+          <div class="brand-name">Centro Paz</div>
+          <div class="brand-sub">Psicología Clínica</div>
+        </div>
+      </div>
+      <div class="tag-category">Neurodivergencias</div>
+    </div>
+
+    <div class="kicker">Diagnóstico Tardío</div>
+    <h1>¿Por qué el <span>TDAH en mujeres</span> se descubre 10 años más tarde?</h1>
+
+    <div class="content-box">
+      <div class="item-row">
+        <span class="bullet-icon">✦</span>
+        <span><strong>Manifestación internalizada:</strong> Menos hiperactividad física, más sobrepensamiento, desorganización y ansiedad silenciosa.</span>
+      </div>
+      <div class="item-row">
+        <span class="bullet-icon">✦</span>
+        <span><strong>Hiper-compensación (Masking):</strong> Ser 'la niña perfecta y autoexigente' a costa de un desgaste emocional inmenso.</span>
+      </div>
+      <div class="item-row">
+        <span class="bullet-icon">✦</span>
+        <span><strong>Diagnósticos previos erróneos:</strong> Años tratada por depresión o ansiedad sin abordar la raíz neurobiológica.</span>
+      </div>
+      <div class="item-row">
+        <span class="bullet-icon">✦</span>
+        <span><strong>Terapia neuroafirmativa:</strong> Comprenderte sin culpa y construir estrategias adaptadas a tu energía.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-cta">
+    <div class="footer-cta-text">
+      <h3>Atención Neuroafirmativa Adultos</h3>
+      <p>Sesiones online y presenciales en Ñuñoa · Reembolso Isapre</p>
+    </div>
+    <div class="wa-pill">
+      <span>📲 Link en Bio</span>
+    </div>
+  </div>
+</body>
+</html>
