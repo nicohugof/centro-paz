@@ -1,31 +1,38 @@
 """
 Motor de Contenidos Clínicos y Copywriting de Alta Conversión para Centro Paz (CPAZ).
+Diseñado para alimentar publicaciones de redes sociales, anuncios y guiones de Reels/TikTok
+con derivación directa a WhatsApp (+56 9 6516 3893).
 """
 from __future__ import annotations
 
-from typing import List, Dict
+from typing import List, Dict, Any
 
 BRAND = {
     "name": "Centro Paz",
     "therapist": "Valentina Castro Núñez",
     "title": "Psicóloga Clínica",
-    "approach": "Humanista e Integrativo (Especialista en Neurodivergencias e Infanto-Juvenil)",
+    "registration": "Superintendencia de Salud de Chile (SIS)",
+    "approach": "Humanista, Integrativo y Neuroafirmativo",
     "phone": "+56965163893",
+    "phone_display": "+56 9 6516 3893",
     "email": "contacto.centropaz@gmail.com",
     "instagram": "@centropaz.cl",
     "tiktok": "@centropaz.cl",
     "facebook": "https://www.facebook.com/profile.php?id=61593207820690",
     "web": "https://www.centropaz.cl",
-    "isapres": "Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres y Seguros Complementarios",
+    "wa_link": "https://wa.me/56965163893",
+    "isapres": "Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres, Nueva Masvida y Seguros Complementarios",
+    "session_price": "$45.000 CLP (Boleta 100% reembolsable)",
 }
 
 HASHTAGS_BASE = [
     "#CentroPaz", "#PsicologiaChile", "#PsicologaClinica", "#SaludMentalChile",
-    "#TerapiaOnlineChile", "#ReembolsoIsapre", "#ValentinaCastroPsicologa"
+    "#TerapiaOnlineChile", "#ReembolsoIsapre", "#ValentinaCastroPsicologa", "#PsicologiaSantiago"
 ]
 
-TOPICS = {
+TOPICS: Dict[str, Dict[str, Any]] = {
     "tdah_adultos": {
+        "id": 1,
         "kicker": "Neurodivergencias en Adultos",
         "title": "¿Y si ese cansancio crónico no es flojera, sino TDAH tardío?",
         "hook": "¿Siempre te dijeron que eras 'demasiado disperso' o que no te esforzabas lo suficiente?",
@@ -49,6 +56,7 @@ En Centro Paz no buscamos encajarte en moldes ni juzgarte: trabajamos desde un e
         "hashtags": HASHTAGS_BASE + ["#TDAHAdultos", "#TDAHChile", "#NeurodivergenciaChile", "#AutismoAdultos", "#TEAChile"]
     },
     "reembolso_isapre": {
+        "id": 2,
         "kicker": "Claridad y Cobertura",
         "title": "Cómo reembolsar tus sesiones de psicología en 3 pasos",
         "hook": "¿Sabías que tu Isapre o Seguro puede cubrir entre el 50% y el 80% de tu terapia?",
@@ -70,6 +78,7 @@ El copago real puede quedar tan bajo como $15.000 por sesión según tu plan.
         "hashtags": HASHTAGS_BASE + ["#ReembolsoPsicologia", "#IsapreColmena", "#IsapreBanmedica", "#IsapreCruzBlanca", "#CopagoPsicologia"]
     },
     "crianza_regulacion": {
+        "id": 3,
         "kicker": "Infancia & Crianza",
         "title": "Una rabieta intensa no es manipulación: es sobrecarga sensorial",
         "hook": "Cuando un niño/a se desborda, no busca molestarte: su sistema nervioso colapsó.",
@@ -89,6 +98,7 @@ En Centro Paz acompañamos a niños, niñas y adolescentes, y brindamos orientac
         "hashtags": HASHTAGS_BASE + ["#CrianzaRespetuosa", "#PsicologiaInfantil", "#TEAInfantil", "#TDAHInfantil", "#OrientacionAPadres"]
     },
     "masking": {
+        "id": 4,
         "kicker": "Agotamiento Invisible",
         "title": "El costo invisible del masking: llegar a casa sin energía ni para hablar",
         "hook": "¿Llegas a casa después del trabajo sintiendo que no te queda energía ni para hablar?",
@@ -110,6 +120,7 @@ En Centro Paz te acompañamos a construir un espacio seguro donde puedas desenma
         "hashtags": HASHTAGS_BASE + ["#Masking", "#AutismoAdultos", "#TEAChile", "#BurnoutAutista", "#NeurodivergenciaChile"]
     },
     "terapia_online": {
+        "id": 5,
         "kicker": "Acceso desde todo Chile",
         "title": "Terapia online con la misma rigurosidad clínica, desde tu espacio de calma",
         "hook": "Atenderte desde tu habitación reduce la ansiedad y elimina los tiempos de traslado.",
@@ -128,6 +139,7 @@ La terapia online cuenta con la misma rigurosidad y efectividad clínica, y reci
         "hashtags": HASHTAGS_BASE + ["#TerapiaOnline", "#PsicologiaOnlineChile", "#SaludMentalDigital"]
     },
     "evaluacion_infantil": {
+        "id": 6,
         "kicker": "Infancia & Escuela",
         "title": "¿Cuándo consultar con una psicóloga infantil?",
         "hook": "Los desbordes frecuentes y la hipersensibilidad no son 'mala conducta': son un pedido de ayuda.",
@@ -146,6 +158,7 @@ Desbordes intensos frecuentes, hipersensibilidad a ruidos o texturas, y dificult
         "hashtags": HASHTAGS_BASE + ["#PsicologiaInfantil", "#OrientacionAPadres", "#TDAHInfantil", "#TEAInfantil"]
     },
     "autocuidado_adultos": {
+        "id": 7,
         "kicker": "Primer paso",
         "title": "Pedir ayuda no es debilidad: es cuidar tu sistema nervioso",
         "hook": "No tienes que poder con todo sola/o.",
@@ -162,21 +175,244 @@ Desbordes intensos frecuentes, hipersensibilidad a ruidos o texturas, y dificult
 
 👉 Da el primer paso hoy. Agenda en www.centropaz.cl o al WhatsApp +56 9 6516 3893.""",
         "hashtags": HASHTAGS_BASE + ["#Autocuidado", "#PedirAyuda", "#TerapiaAdultosChile"]
+    },
+    "burnout_autista": {
+        "id": 8,
+        "kicker": "Neurodivergencias & Regulación",
+        "title": "Burnout Autista: cuando el descanso común no alcanza para recuperarte",
+        "hook": "¿Sientes que dormir un fin de semana entero no te devuelve la energía?",
+        "points": [
+            "Pérdida temporal de habilidades que antes ejecutabas con fluidez.",
+            "Aumento drástico de la sensibilidad a ruidos, luces o texturas.",
+            "Dificultad severa para tomar decisiones simples o comunicarse.",
+            "Se origina por meses acumulados de 'masking' y sobreexigencia ambiental."
+        ],
+        "category": "Neurodivergencias",
+        "caption": """El Burnout Autista no es simplemente estrés laboral: es un colapso profundo del sistema nervioso tras meses o años de sobreexigirse para encajar 🧠✨
+
+A diferencia del cansancio habitual, no se soluciona con "tomar aire" el fin de semana. Requiere reestructurar demandas sensoriales, validar límites y recibir acompañamiento neuroafirmativo.
+
+En Centro Paz te ayudamos a identificar tus detonantes y construir un plan de descompresión real.
+
+📍 Sesiones online y presenciales con reembolso Isapre.
+👉 Escríbenos al WhatsApp +56 9 6516 3893 para coordinar tu hora.""",
+        "hashtags": HASHTAGS_BASE + ["#BurnoutAutista", "#AutismoAdultos", "#TEAChile", "#Neurodivergente", "#SaludMental"]
+    },
+    "paralisis_ejecutiva": {
+        "id": 9,
+        "kicker": "TDAH en la Vida Cotidiana",
+        "title": "Parálisis ejecutiva en TDAH: cuando tu mente quiere, pero tu cuerpo no responde",
+        "hook": "¿Te quedas sentado/a horas sabiendo exactamente lo que tienes que hacer sin poder moverte?",
+        "points": [
+            "No es holgazanería: es falta de dopamina para iniciar la secuencia motora.",
+            "La culpa interna empeora el bloqueo y agota tus reservas de energía.",
+            "Intentar obligarte con exigencia solo genera más resistencia.",
+            "La solución pasa por micro-pasos de fricción cero y estímulos sensoriales."
+        ],
+        "category": "TDAH Adultos",
+        "caption": """¿Alguna vez te has quedado mirando la pantalla o el techo sintiendo la urgencia de trabajar, pero tu cerebro simplemente no 'arranca'? 🧠
+
+La parálisis ejecutiva es uno de los síntomas más frustrantes del TDAH en adultos. No se cura con regaños ni con 'fuerza de voluntad', sino con estrategias neuroafirmativas adaptadas a tu química cerebral.
+
+En Centro Paz trabajamos contigo para diseñar sistemas que sí funcionen para ti.
+
+👉 Consulta disponible en Santiago y Online. Escríbenos a WhatsApp: +56 9 6516 3893.""",
+        "hashtags": HASHTAGS_BASE + ["#ParalisisEjecutiva", "#TDAHAdultos", "#TDAHChile", "#FuncionesEjecutivas", "#Procrastinacion"]
+    },
+    "regulacion_ansiedad": {
+        "id": 10,
+        "kicker": "Herramientas Prácticas",
+        "title": "3 Anclas para regular tu sistema nervioso cuando el sobrepensamiento no para",
+        "hook": "¿Tu cabeza no para de proyectar escenarios catastróficos?",
+        "points": [
+            "1. Suspiro fisiológico: dos inhalaciones profundas por la nariz y una exhalación larga por la boca.",
+            "2. Apoyo propioceptivo: siente el peso de tus pies en el suelo o abraza un cojín firme.",
+            "3. Nombra 3 objetos de color verde o texturas suaves a tu alrededor."
+        ],
+        "category": "Manejo de Ansiedad",
+        "caption": """Cuando la mente entra en bucle de sobrepensamiento, intentar 'pensar positivo' rara vez funciona porque la alarma está en el cuerpo 🌿
+
+Para calmar la mente, primero debemos enviar señales de seguridad al sistema nervioso a través de la respiración y los sentidos.
+
+En psicoterapia clínica aprendes a reconocer tus señales tempranas de desregulación y a construir tu propio botiquín emocional.
+
+👉 Da el primer paso hacia una mente más tranquila. Agenda en www.centropaz.cl o al WhatsApp +56 9 6516 3893.""",
+        "hashtags": HASHTAGS_BASE + ["#AnsiedadChile", "#Sobrepensar", "#RegulacionEmocional", "#SistemaNervioso", "#CalmaMental"]
+    },
+    "apoyo_neurodivergente_hijos": {
+        "id": 11,
+        "kicker": "Paternidad & Neurodiversidad",
+        "title": "Acompañar a un hijo/a neurodivergente sin descuidar tu propia salud mental",
+        "hook": "¿Sientes que todo el día estás apagando incendios y mediando con el colegio?",
+        "points": [
+            "El acompañamiento efectivo comienza cuando mamá o papá tienen contención.",
+            "Aprender a leer el perfil sensorial de tu hijo/a evita el 80% de los desbordes.",
+            "No estás solo/a: coordinamos pautas con la escuela y la familia.",
+            "Reemplazar la exigencia de normalidad por adaptaciones respetuosas."
+        ],
+        "category": "Orientación a Padres",
+        "caption": """Acompañar a un hijo o hija con TDAH o TEA implica un desafío constante frente a un entorno escolar que muchas veces no comprende sus necesidades 🌱
+
+Tener un espacio clínico donde expresar tus dudas, miedos y aprender pautas concretas de regulación es vital para el bienestar de toda la familia.
+
+En Centro Paz ofrecemos terapia infanto-juvenil con sesiones continuas de orientación a padres.
+
+👉 Contáctanos por WhatsApp al +56 9 6516 3893 para coordinar una primera consulta.""",
+        "hashtags": HASHTAGS_BASE + ["#CrianzaNeurodivergente", "#TEAChile", "#TDAHChile", "#OrientacionParental", "#PsicologiaChile"]
+    },
+    "primera_sesion": {
+        "id": 12,
+        "kicker": "Transparencia Clínica",
+        "title": "¿Qué pasa realmente en una primera sesión de terapia psicológica?",
+        "hook": "¿Te da nervios o incertidumbre dar el primer paso?",
+        "points": [
+            "No tienes que tener todo claro: puedes llegar con un nudo en la garganta y desordenado.",
+            "Es un espacio confidencial donde exploramos lo que te preocupa a tu propio ritmo.",
+            "Definimos juntos qué esperas del proceso y cómo evaluaremos tu avance.",
+            "Recibes pautas iniciales y tu boleta para reembolso inmediato."
+        ],
+        "category": "Educación Clínica",
+        "caption": """Dar el primer paso hacia la terapia puede generar dudas: '¿Qué voy a decir?', '¿Me van a juzgar?', '¿Por dónde empiezo?' 🌿✨
+
+En Centro Paz, la primera sesión es un encuentro cálido de acogida. No hay respuestas correctas ni incorrectas. Valentina Castro Núñez te acompaña a poner en palabras lo que sientes y trazar un camino claro hacia tu bienestar.
+
+📍 Modalidad Online (todo Chile) y Presencial (Santiago).
+👉 Escríbenos a WhatsApp (+56 9 6516 3893) para agendar tu horario.""",
+        "hashtags": HASHTAGS_BASE + ["#PrimeraSesion", "#TerapiaChile", "#SaludMentalChile", "#PsicologaValentinaCastro"]
+    },
+    "culpa_parental": {
+        "id": 13,
+        "kicker": "Crianza Sin Culpa",
+        "title": "Soltar la culpa parental: tus hijos no necesitan padres perfectos, necesitan padres regulados",
+        "hook": "¿Terminas el día sintiendo que perdiste la paciencia y te invade la culpa?",
+        "points": [
+            "La parentalidad perfecta no existe: la clave es la capacidad de reparar.",
+            "Cuando gritas o pierdes la paciencia, tu sistema nervioso también colapsó.",
+            "Pedir disculpas a tus hijos les enseña que equivocarse es humano y reparable.",
+            "Aprender a regularte tú es el mayor regalo emocional que puedes darles."
+        ],
+        "category": "Crianza Consciente",
+        "caption": """La culpa parental es una de las cargas más pesadas y silenciosas. Querer hacerlo bien todo el tiempo agota y genera más reactividad en casa 🌱
+
+En Centro Paz trabajamos la orientación a padres desde la compasión, entregando estrategias prácticas para descomprimir la rutina y recuperar la armonía en el hogar.
+
+👉 ¿Quieres conversar sobre la crianza de tus hijos? Escríbenos por WhatsApp al +56 9 6516 3893.""",
+        "hashtags": HASHTAGS_BASE + ["#CulpaParental", "#CrianzaRespetuosa", "#MaternidadReal", "#PaternidadConsciente"]
+    },
+    "reembolso_matematica": {
+        "id": 14,
+        "kicker": "Transparencia Financiera",
+        "title": "La matemática real del reembolso: ¿Cuánto pagas y cuánto te devuelven?",
+        "hook": "¿Crees que la atención psicológica particular es inaccesible con Isapre?",
+        "points": [
+            "Arancel sesión particular oficial: $45.000 CLP.",
+            "Reembolso Isapre habitual (50% a 70%): $22.500 a $31.500 CLP devueltos.",
+            "Seguro Complementario adicional: cubre hasta el 50%-80% del saldo restante.",
+            "Copago final real estimado: entre $10.000 y $18.000 CLP por sesión."
+        ],
+        "category": "Reembolso Isapres",
+        "caption": """¿Sabías que con tu plan de Isapre y seguro complementario tu sesión de psicología clínica puede tener un copago similar o menor que Fonasa? 💳🌿
+
+En Centro Paz emitimos boleta electrónica oficial con código SIS para que reembolses en minutos desde el celular.
+
+👉 Usa nuestro simulador en www.centropaz.cl o escríbenos a WhatsApp al +56 9 6516 3893 para guiarte en tu reembolso.""",
+        "hashtags": HASHTAGS_BASE + ["#IsapreChile", "#ReembolsoIsapre", "#Banmedica", "#Colmena", "#CruzBlanca", "#Consalud"]
+    }
+}
+
+REELS_SCRIPTS: Dict[str, Dict[str, Any]] = {
+    "reel_01_procrastinacion_tdah": {
+        "title": "Procrastinación vs. Parálisis de Dopamina",
+        "duration": "35 segundos",
+        "hook_visual": "Texto en grande: '¿Por qué no puedo empezar tareas simples si de verdad quiero?'",
+        "hook_audio": "¿Alguna vez te has quedado horas sentado mirando el celular sabiendo exactamente lo que tienes que hacer, pero sintiendo que tu cuerpo pesa una tonelada?",
+        "development": [
+            "No es pereza: en el cerebro con TDAH la corteza prefrontal tiene un déficit en la liberación de dopamina para iniciar secuencias de baja estimulación.",
+            "Decirte 'esfuérzate más' solo genera frustración y culpa.",
+            "El truco es la micro-fricción cero: divide la tarea en un paso ridículamente pequeño (ej. solo abrir el documento) y asócialo a un estímulo sensorial."
+        ],
+        "cta": "En Centro Paz te acompañamos a comprender tu cerebro neurodivergente. Link directo a WhatsApp en nuestra biografía.",
+        "recommended_audio": "Lo-fi relajante / tendencia explicativa suave"
+    },
+    "reel_02_reembolso_express": {
+        "title": "Cómo Reembolsar tu Sesión en 3 Toques",
+        "duration": "30 segundos",
+        "hook_visual": "Boleta electrónica + App de Isapre en pantalla",
+        "hook_audio": "¿Sabías que tu Isapre te puede devolver hasta el 70% del valor de tu sesión de psicología?",
+        "development": [
+            "Paso 1: Asistes a tu sesión online o presencial en Centro Paz con Valentina.",
+            "Paso 2: Al terminar, te llega la boleta electrónica con código clínico a tu correo.",
+            "Paso 3: La subes en la app de tu Isapre y el reembolso entra directo a tu cuenta bancaria."
+        ],
+        "cta": "Escríbenos a nuestro WhatsApp oficial (+56 9 6516 3893) y te ayudamos a simular tu cobertura.",
+        "recommended_audio": "Upbeat acústico claro"
+    },
+    "reel_03_rabietas_desbordes": {
+        "title": "Qué hacer ante una rabieta intensa",
+        "duration": "40 segundos",
+        "hook_visual": "Primer plano empático: 'Deja de decirle cálmate a un niño desbordado'",
+        "hook_audio": "Cuando un niño o niña tiene un desborde emocional intenso, su cerebro lógico está completamente apagado.",
+        "development": [
+            "No es manipulación: es sobrecarga sensorial o emocional.",
+            "Hablarle de consecuencias o castigos en ese instante solo eleva el cortisol.",
+            "Primero correcibe: baja tu tono de voz, atenúa luces, ponte a su nivel visual y ofrece presencia física segura.",
+            "La conversación sobre lo sucedido se hace horas después, cuando su sistema nervioso volvió a la calma."
+        ],
+        "cta": "Descarga gratis nuestra Guía de 7 Claves de Regulación en PDF. Pídenosla por WhatsApp.",
+        "recommended_audio": "Piano suave y reflexivo"
+    },
+    "reel_04_masking_agotamiento": {
+        "title": "El costo invisible del Masking",
+        "duration": "35 segundos",
+        "hook_visual": "'Llegar a casa y no querer que nadie te hable...'",
+        "hook_audio": "¿Te pasa que en el trabajo eres súper funcional, pero llegas a tu casa sintiendo que no puedes ni pronunciar una palabra?",
+        "development": [
+            "Se llama 'Masking': el esfuerzo invisible de modular tu tono de voz, contacto visual y reprimir incomodidades sensoriales todo el día.",
+            "Tu cuerpo gastó el doble de energía que el resto para parecer 'normal'.",
+            "El colapso llega en privado y no se quita solo durmiendo."
+        ],
+        "cta": "Acompañamiento neuroafirmativo online y presencial en Santiago. Escríbenos por WhatsApp.",
+        "recommended_audio": "Música ambient suave y reflexiva"
+    },
+    "reel_05_ansiedad_ancla": {
+        "title": "Ejercicio de 30s para frenar el sobrepensamiento nocturno",
+        "duration": "30 segundos",
+        "hook_visual": "'Si estás sobrepensando en la cama, haz esto ahora'",
+        "hook_audio": "Si tu mente no para de proyectar problemas a las 2 AM, haz este ejercicio de estimulación del nervio vago.",
+        "development": [
+            "Haz dos inhalaciones cortas por la nariz y una exhalación muy lenta por la boca (suspiro fisiológico).",
+            "Presiona suavemente las palmas de tus manos una contra la otra.",
+            "Le estás indicando físicamente a tu amígdala que no hay ningún peligro inminente."
+        ],
+        "cta": "Aprende herramientas clínicas para tu bienestar emocional. Agenda tu hora en Centro Paz por WhatsApp.",
+        "recommended_audio": "Sonido calmante con ondas binaurales"
     }
 }
 
 
-def get_weekly_calendar() -> List[Dict]:
-    """Genera una parrilla semanal de 7 publicaciones alineada al catálogo visual."""
-    plan = [
-        ("Lunes", "Educación & Validación (Neurodivergencias)", "tdah_adultos"),
-        ("Martes", "Derribador de Objeción (Reembolso Isapre)", "reembolso_isapre"),
-        ("Miércoles", "Orientación a Padres & Crianza", "crianza_regulacion"),
-        ("Jueves", "Agotamiento Invisible (Masking)", "masking"),
-        ("Viernes", "Acceso (Terapia Online)", "terapia_online"),
-        ("Sábado", "Infancia: cuándo consultar", "evaluacion_infantil"),
-        ("Domingo", "Llamado a agendar (Autocuidado)", "autocuidado_adultos"),
-    ]
+def get_weekly_calendar(week: int = 1) -> List[Dict[str, Any]]:
+    """Genera una parrilla semanal estructurada de 7 publicaciones."""
+    if week == 1:
+        plan = [
+            ("Lunes", "Educación & Validación (Neurodivergencias)", "tdah_adultos"),
+            ("Martes", "Derribador de Objeción (Reembolso Isapre)", "reembolso_isapre"),
+            ("Miércoles", "Orientación a Padres & Crianza", "crianza_regulacion"),
+            ("Jueves", "Agotamiento Invisible (Masking)", "masking"),
+            ("Viernes", "Acceso (Terapia Online)", "terapia_online"),
+            ("Sábado", "Infancia: cuándo consultar", "evaluacion_infantil"),
+            ("Domingo", "Llamado a agendar (Autocuidado)", "autocuidado_adultos"),
+        ]
+    else:
+        plan = [
+            ("Lunes", "Neurodivergencias Profundas (Burnout Autista)", "burnout_autista"),
+            ("Martes", "Manejo Cotidiano (Parálisis Ejecutiva TDAH)", "paralisis_ejecutiva"),
+            ("Miércoles", "Herramientas Prácticas (Regulación Ansiedad)", "regulacion_ansiedad"),
+            ("Jueves", "Paternidad Neurodivergente", "apoyo_neurodivergente_hijos"),
+            ("Viernes", "Educación Clínica (Primera Sesión)", "primera_sesion"),
+            ("Sábado", "Crianza Sin Culpa (Reparación Emocional)", "culpa_parental"),
+            ("Domingo", "Transparencia Financiera (Reembolso Isapre)", "reembolso_matematica"),
+        ]
+
     calendar = []
     for day, theme, key in plan:
         topic = TOPICS[key]
@@ -188,5 +424,30 @@ def get_weekly_calendar() -> List[Dict]:
             "copy": topic["caption"],
             "hashtags": " ".join(topic["hashtags"]),
             "topic_key": key,
+            "id": topic["id"],
         })
     return calendar
+
+
+def get_all_catalog() -> List[Dict[str, Any]]:
+    """Retorna los 14 posts completos estructurados para publicación y n8n."""
+    items = []
+    for key, topic in TOPICS.items():
+        items.append({
+            "key": key,
+            "id": topic["id"],
+            "image_file": f"post_{topic['id']:02d}_{key}.png",
+            "title": topic["title"],
+            "kicker": topic["kicker"],
+            "hook": topic["hook"],
+            "points": topic["points"],
+            "category": topic["category"],
+            "caption": topic["caption"],
+            "hashtags": " ".join(topic["hashtags"]),
+        })
+    return items
+
+
+def get_reels_catalog() -> List[Dict[str, Any]]:
+    """Retorna los guiones virales de alta retención para video."""
+    return [{"key": k, **v} for k, v in REELS_SCRIPTS.items()]
