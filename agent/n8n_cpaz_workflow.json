@@ -1,5 +1,9 @@
 {
   "name": "🌿 Centro Paz (CPAZ) — Publicación Autónoma 28 Días (IG + FB)",
+  "settings": {
+    "timezone": "America/Santiago",
+    "executionOrder": "v1"
+  },
   "nodes": [
     {
       "parameters": {
@@ -23,13 +27,43 @@
     },
     {
       "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cfg-ig",
+              "name": "instagram_account_id",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "cfg-fb",
+              "name": "facebook_page_id",
+              "value": "61593207820690",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        200
+      ],
+      "id": "node-config",
+      "name": "Config CPAZ",
+      "notes": "Unico lugar donde se editan los ids. NO van secretos aca: el access_token vive en la credencial Query Auth de n8n. Pega el instagram_account_id (el mismo de agent/meta_config.json) antes de activar."
+    },
+    {
+      "parameters": {
         "url": "https://www.centropaz.cl/parrilla_semanal_n8n.json",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        220,
+        440,
         200
       ],
       "id": "node-fetch-schedule",
@@ -37,12 +71,12 @@
     },
     {
       "parameters": {
-        "jsCode": "const schedule = $json.schedule || [];\nif (!schedule.length) return [];\n\n// Obtenemos el día del mes actual (1 a 28) y la hora aproximada\nconst now = new Date();\nconst currentHour = now.getHours();\nconst dayOfMonth = ((now.getDate() - 1) % 28) + 1;\n\nlet targetTime = \"13:00\";\nif (currentHour < 11) targetTime = \"09:00\";\nelse if (currentHour < 16) targetTime = \"13:00\";\nelse if (currentHour < 20) targetTime = \"18:00\";\nelse targetTime = \"21:00\";\n\nconst item = schedule.find(s => s.dia_global === dayOfMonth && s.hora === targetTime) || schedule[0];\n\nreturn [{\n  json: {\n    id: item.id,\n    title: item.titulo,\n    type: item.tipo,\n    image_url: item.url_imagen,\n    caption: item.caption,\n    cta: item.cta\n  }\n}];"
+        "jsCode": "// Elige el post que toca segun dia y hora de Chile.\n// Falla ruidoso a proposito: antes hacia `|| schedule[0]`, asi que cuando no\n// encontraba el slot republicaba el post 1 en silencio, para siempre.\n\nconst cfg = $('Config CPAZ').first().json;\nif (!cfg.instagram_account_id) {\n  throw new Error('Falta instagram_account_id en el nodo \"Config CPAZ\". Pegalo antes de activar el workflow.');\n}\n\nconst schedule = $json.schedule || [];\nif (!schedule.length) {\n  throw new Error('La parrilla vino vacia desde centropaz.cl/parrilla_semanal_n8n.json');\n}\n\n// Hora de Chile explicita: no depender del timezone del contenedor.\nconst partes = Object.fromEntries(\n  new Intl.DateTimeFormat('en-CA', {\n    timeZone: 'America/Santiago',\n    hourCycle: 'h23',\n    day: '2-digit',\n    hour: '2-digit'\n  }).formatToParts(new Date()).map(p => [p.type, p.value])\n);\n\nconst hora = Number(partes.hour);\nconst diaGlobal = ((Number(partes.day) - 1) % 28) + 1;\n\nlet horario;\nif (hora < 11) horario = '09:00';\nelse if (hora < 16) horario = '13:00';\nelse if (hora < 20) horario = '18:00';\nelse horario = '21:00';\n\nconst item = schedule.find(s => s.dia_global === diaGlobal && s.hora === horario);\nif (!item) {\n  throw new Error(`No hay post para dia_global=${diaGlobal} hora=${horario}. Revisa la parrilla.`);\n}\n\nreturn [{\n  json: {\n    id: item.id,\n    title: item.titulo,\n    type: item.tipo,\n    image_url: item.url_imagen,\n    caption: item.caption,\n    cta: item.cta,\n    instagram_account_id: cfg.instagram_account_id,\n    facebook_page_id: cfg.facebook_page_id\n  }\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        440,
+        660,
         200
       ],
       "id": "node-select-post",
@@ -51,34 +85,39 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "=https://graph.facebook.com/v19.0/{{$env.INSTAGRAM_ACCOUNT_ID || 'YOUR_IG_ACCOUNT_ID'}}/media",
+        "url": "=https://graph.facebook.com/v19.0/{{$json.instagram_account_id}}/media",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"image_url\": \"{{$json.image_url}}\",\n  \"caption\": \"{{$json.caption}}\",\n  \"access_token\": \"{{$env.META_ACCESS_TOKEN || 'YOUR_META_TOKEN'}}\"\n}",
+        "jsonBody": "={\n  \"image_url\": \"{{$json.image_url}}\",\n  \"caption\": {{ JSON.stringify($json.caption) }}\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        680,
+        900,
         100
       ],
       "id": "node-ig-container",
-      "name": "1. Crear Contenedor IG"
+      "name": "1. Crear Contenedor IG",
+      "notes": "El access_token lo agrega la credencial Query Auth de n8n (nombre del parametro: access_token). Nunca en el body ni en el repo."
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "=https://graph.facebook.com/v19.0/{{$env.INSTAGRAM_ACCOUNT_ID || 'YOUR_IG_ACCOUNT_ID'}}/media_publish",
+        "url": "=https://graph.facebook.com/v19.0/{{ $('Seleccionar Post del Horario').first().json.instagram_account_id }}/media_publish",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"creation_id\": \"{{$json.id}}\",\n  \"access_token\": \"{{$env.META_ACCESS_TOKEN || 'YOUR_META_TOKEN'}}\"\n}",
+        "jsonBody": "={\n  \"creation_id\": \"{{$json.id}}\"\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        920,
+        1140,
         100
       ],
       "id": "node-ig-publish",
@@ -87,16 +126,18 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "=https://graph.facebook.com/v19.0/{{$env.FACEBOOK_PAGE_ID || '61593207820690'}}/photos",
+        "url": "=https://graph.facebook.com/v19.0/{{$json.facebook_page_id}}/photos",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"url\": \"{{$node[\"Seleccionar Post del Horario\"].json.image_url}}\",\n  \"caption\": \"{{$node[\"Seleccionar Post del Horario\"].json.caption}}\",\n  \"access_token\": \"{{$env.META_ACCESS_TOKEN || 'YOUR_META_TOKEN'}}\"\n}",
+        "jsonBody": "={\n  \"url\": \"{{$json.image_url}}\",\n  \"caption\": {{ JSON.stringify($json.caption) }}\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        680,
+        900,
         320
       ],
       "id": "node-fb-publish",
@@ -105,6 +146,17 @@
   ],
   "connections": {
     "Cron (09:00, 13:00, 18:00, 21:00)": {
+      "main": [
+        [
+          {
+            "node": "Config CPAZ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config CPAZ": {
       "main": [
         [
           {
