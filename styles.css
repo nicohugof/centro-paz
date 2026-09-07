@@ -1529,44 +1529,88 @@ footer {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.96);
+  background: var(--crema);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding: 12px 16px;
-  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+  padding: 12px 12px calc(12px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -8px 24px rgba(122, 46, 58, 0.12);
   z-index: 9999;
-  border-top: 1px solid var(--borde-suave);
+  border-top: 3px solid var(--burdeo);
+}
+
+.mobile-sticky-bar[hidden] {
+  display: none !important;
 }
 
 .mobile-sticky-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
 }
 
 .mobile-sticky-info {
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  flex: 1;
 }
 
 .mobile-sticky-title {
-  font-size: 0.85rem;
-  font-weight: 700;
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.95rem;
+  font-weight: 600;
   color: var(--burdeo-dark);
   line-height: 1.2;
 }
 
 .mobile-sticky-sub {
   font-size: 0.75rem;
-  color: var(--verde-dark);
+  color: var(--gris);
   font-weight: 600;
 }
 
 .mobile-sticky-btn {
   flex-shrink: 0;
-  padding: 10px 18px;
+  width: auto;
+  min-height: 44px;
+  padding: 10px 16px;
   font-size: 0.9rem;
+}
+
+.mobile-sticky-dismiss {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent;
+  color: var(--gris);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+
+.mobile-sticky-dismiss:hover,
+.mobile-sticky-dismiss:focus-visible {
+  color: var(--burdeo-dark);
+  background: var(--burdeo-subtle);
+}
+
+.triage-result-cta {
+  text-align: center;
+  margin-top: 28px;
+}
+
+.triage-result-cta .btn-whatsapp {
+  font-size: 1.15rem;
+  padding: 16px 36px;
+}
+
+.triage-wa-hint {
+  margin: 12px 0 14px;
+  font-size: 0.9rem;
+  color: var(--gris);
 }
 
 /* ----------------------------------------------------
@@ -1639,6 +1683,9 @@ footer {
   .btn {
     width: 100%;
   }
+  .mobile-sticky-btn {
+    width: auto;
+  }
   .triage-card {
     padding: 24px 18px;
   }
@@ -1656,12 +1703,19 @@ footer {
     display: block;
   }
   .whatsapp-float {
-    bottom: 80px;
+    display: none;
+  }
+  body {
+    padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+  }
+  body.sticky-wa-dismissed {
+    padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  }
+  body.sticky-wa-dismissed .whatsapp-float {
+    display: flex;
+    bottom: calc(18px + env(safe-area-inset-bottom, 0px));
     right: 18px;
     width: 52px;
     height: 52px;
-  }
-  body {
-    padding-bottom: 70px;
   }
 }
