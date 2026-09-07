@@ -97,6 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initMobileNav();
   initCalculator();
   initChecklist();
+  initStickyWhatsApp();
 });
 
 /* ----------------------------------------------------
@@ -289,6 +290,7 @@ function buildTriageResult() {
   if (ctaBtn) {
     ctaBtn.href = whatsappUrl;
     ctaBtn.target = "_blank";
+    ctaBtn.rel = "noopener noreferrer";
   }
 }
 
@@ -458,6 +460,8 @@ function initWhatsAppLinks() {
       msg = "Hola Centro Paz 🌱 Busco apoyo psicológico infanto-juvenil / orientación a padres. ¿Cómo es el proceso de ingreso?";
     } else if (action === "lead-magnet") {
       msg = "Hola Centro Paz ✨ Me gustaría solicitar la Guía Gratuita de Regulación Emocional y Sensorial para adultos y familias.";
+    } else if (action === "hero" || action === "sticky") {
+      msg = "Hola Centro Paz 🌿 Vi su sitio web y me gustaría coordinar una primera sesión con Valentina.";
     }
 
     link.href = `https://wa.me/${CPAZ_CONFIG.whatsappNumber}?text=${encodeURIComponent(msg + utmSuffix)}`;
@@ -488,4 +492,29 @@ function initMobileNav() {
       });
     });
   }
+}
+
+/* ----------------------------------------------------
+   BARRA STICKY MÓVIL (DISMISSIBLE)
+---------------------------------------------------- */
+function initStickyWhatsApp() {
+  const bar = document.getElementById("mobile-sticky-bar");
+  const dismiss = document.getElementById("mobile-sticky-dismiss");
+  if (!bar || !dismiss) return;
+
+  const hideBar = () => {
+    bar.hidden = true;
+    document.body.classList.add("sticky-wa-dismissed");
+    try {
+      sessionStorage.setItem("cpaz-sticky-wa-dismissed", "1");
+    } catch (e) {}
+  };
+
+  try {
+    if (sessionStorage.getItem("cpaz-sticky-wa-dismissed") === "1") {
+      hideBar();
+    }
+  } catch (e) {}
+
+  dismiss.addEventListener("click", hideBar);
 }
