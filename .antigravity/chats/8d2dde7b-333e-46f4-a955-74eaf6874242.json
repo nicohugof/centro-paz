@@ -1,0 +1,33 @@
+{
+  "sessionId": "8d2dde7b-333e-46f4-a955-74eaf6874242",
+  "name": "WEB CPAZ",
+  "createdAt": "2026-09-07T01:27:03.467Z",
+  "filename": "8d2dde7b-333e-46f4-a955-74eaf6874242.json",
+  "geminiStarted": true,
+  "messages": [
+    {
+      "id": "1f91d764-e8df-46eb-8a9e-d602592d5f67",
+      "role": "user",
+      "content": "Consulta en github estado del proyecto?",
+      "status": "pending",
+      "model": "gemini-2.5-flash",
+      "client_type": "gemini-bridge",
+      "parent_message_id": null,
+      "created_at": "2026-09-07T01:36:03.636+00:00",
+      "sender": "ios",
+      "is_cancelled": false
+    },
+    {
+      "id": "e3a59a1b-e1bd-4042-a0fb-48838b05cf4c",
+      "role": "agent",
+      "content": "[INTERACTIVE_STEP_REQUIRED] Gemini CLI requested an interactive terminal step.\nPlease complete the prompt in Terminal on your computer (for example approval/login), then retry from the app.",
+      "status": "error",
+      "model": "gemini-2.5-flash",
+      "client_type": "gemini-bridge",
+      "parent_message_id": "1f91d764-e8df-46eb-8a9e-d602592d5f67",
+      "created_at": "2026-09-07T01:36:05.675Z",
+      "sender": "macOS",
+      "is_cancelled": false
+    }
+  ]
+}
