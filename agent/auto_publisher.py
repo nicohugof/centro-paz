@@ -258,6 +258,70 @@ def test_connection(config: dict) -> bool:
     return True
 
 
+def auto_setup_from_token(token: str) -> bool:
+    print("🔍 Inspeccionando token con Meta Graph API...")
+    me = http_get(f"https://graph.facebook.com/v19.0/me?fields=id,name&access_token={urllib.parse.quote(token)}")
+    if "error" in me:
+        print(f"❌ Error al validar token: {me['error']}")
+        return False
+    print(f"   ✓ Conectado como: {me.get('name')} (ID: {me.get('id')})")
+
+    accounts = http_get(f"https://graph.facebook.com/v19.0/me/accounts?fields=id,name,access_token,instagram_business_account&access_token={urllib.parse.quote(token)}")
+    pages = accounts.get("data", [])
+
+    page_id = "61593207820690"
+    page_token = token
+    ig_id = ""
+
+    target_page = None
+    for p in pages:
+        if str(p.get("id")) == page_id or "paz" in p.get("name", "").lower():
+            target_page = p
+            break
+    if not target_page and pages:
+        target_page = pages[0]
+
+    if target_page:
+        page_id = str(target_page.get("id", page_id))
+        page_token = target_page.get("access_token", token)
+        ig_obj = target_page.get("instagram_business_account", {})
+        if ig_obj:
+            ig_id = str(ig_obj.get("id", ""))
+        print(f"   ✓ Página detectada: {target_page.get('name')} (ID: {page_id})")
+
+    if not ig_id:
+        page_info = http_get(f"https://graph.facebook.com/v19.0/{page_id}?fields=name,instagram_business_account&access_token={urllib.parse.quote(page_token)}")
+        ig_obj = page_info.get("instagram_business_account", {})
+        if ig_obj:
+            ig_id = str(ig_obj.get("id", ""))
+
+    if ig_id:
+        print(f"   ✓ Cuenta de Instagram Business detectada: ID {ig_id}")
+    else:
+        print("   ⚠️ No se detectó cuenta de Instagram vinculada automáticamente. Puedes ingresarla con --set-ig-id")
+
+    cfg = load_config()
+    cfg["access_token"] = page_token
+    cfg["facebook_page_id"] = page_id
+    if ig_id:
+        cfg["instagram_account_id"] = ig_id
+    save_config(cfg)
+    print("   ✓ Configuración guardada en agent/meta_config.json")
+
+    import subprocess
+    try:
+        subprocess.run(["gh", "secret", "set", "META_ACCESS_TOKEN", "--body", page_token], check=True, capture_output=True)
+        subprocess.run(["gh", "secret", "set", "META_FB_PAGE_ID", "--body", page_id], check=True, capture_output=True)
+        if ig_id:
+            subprocess.run(["gh", "secret", "set", "META_IG_ACCOUNT_ID", "--body", ig_id], check=True, capture_output=True)
+        print("   ✓ Secretos META_ACCESS_TOKEN, META_FB_PAGE_ID, META_IG_ACCOUNT_ID guardados en GitHub Actions.")
+    except Exception as e:
+        print(f"   ⚠️ No se pudieron guardar secretos en GitHub automáticamente vía gh: {e}")
+
+    print("\n🎉 ¡CONFIGURACIÓN COMPLETADA CON ÉXITO! El publicador automático multi-slot está activo.")
+    return True
+
+
 def publish_to_instagram_graph(post_num: int, config: dict) -> bool:
     """Publica imagen en el Feed de Instagram."""
     ig_id = config.get("instagram_account_id")
@@ -480,9 +544,14 @@ def main():
     parser.add_argument("--list", action="store_true", help="Listar las 28 infografías")
     parser.add_argument("--list-videos", action="store_true", help="Listar los 10 videos verticales")
     parser.add_argument("--test-connection", action="store_true", help="Verificar tokens de Meta")
+    parser.add_argument("--setup-token", type=str, help="Auto-configurar Meta Graph API y secretos de GitHub con un token")
     args = parser.parse_args()
 
     config = load_config()
+
+    if args.setup_token:
+        auto_setup_from_token(args.setup_token)
+        return
 
     if args.test_connection:
         test_connection(config)
