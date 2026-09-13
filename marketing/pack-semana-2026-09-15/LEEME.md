@@ -9,7 +9,8 @@ No inventar claims clínicos ni testimonios. Usar solo el copy y los hashtags de
 | Campo | Valor |
 | :--- | :--- |
 | CTA WhatsApp | **PERSONAL de Valentina Castro Núñez** · `+56 9 6516 3893` · [wa.me/56965163893](https://wa.me/56965163893) |
-| Web | [https://www.centropaz.cl](https://www.centropaz.cl) |
+| Web Principal | [https://www.centropaz.cl](https://www.centropaz.cl) |
+| Link en Bio Oficial | [https://www.centropaz.cl/links](https://www.centropaz.cl/links) |
 | Instagram / TikTok | `@centropaz.cl` |
 
 **Nunca** usar este WhatsApp para Ironcross ni ironcross-web. Solo Centro Paz.
@@ -18,21 +19,22 @@ JSON listo para n8n: [`pack_semana_n8n.json`](./pack_semana_n8n.json).
 
 ## Ritmo diario (America/Santiago)
 
-| Hora | Pieza | Dónde |
-| :--- | :--- | :--- |
-| 07:30 | Stories | Instagram (+ Facebook Stories si está conectado) |
-| 12:00 | Feed | Instagram + Facebook |
-| 18:00 | Reel = TikTok | Mismo video/pieza en Instagram Reels y TikTok |
-| 21:00 | Stories | Instagram (+ Facebook Stories si está conectado) |
+| Hora | Pieza | Dónde | Video Corto Asociado (YouTube IA) |
+| :--- | :--- | :--- | :--- |
+| 07:30 | Stories | Instagram (+ Facebook Stories) | — |
+| 12:00 | Feed (Estático) | Instagram + Facebook | Publicación automática / manual de infografía del día |
+| 18:00 | Reel · TikTok · Shorts | Instagram Reels, TikTok, YouTube Shorts | **Video Vertical 9:16 de YouTube IA (ver asignación diaria abajo)** |
+| 21:00 | Stories | Instagram (+ Facebook Stories) | Repost del Reel o sticker de WhatsApp directo |
 
-En stories: gancho del día + sticker de WhatsApp o enlace a `https://wa.me/56965163893`. En feed: caption + hashtags de abajo. En Reel/TikTok: el mismo gancho, CTA a bio / WhatsApp.
+En stories: gancho del día + sticker de WhatsApp o enlace a `https://www.centropaz.cl/links`. En feed: caption + hashtags de abajo. En Reel/TikTok/Shorts: video vertical generado por YouTube IA con el comentario fijado hacia WhatsApp.
 
 ---
 
 ## Lunes 2026-09-15 — `post_08_burnout_autista.png`
 
-- **Archivo:** [`assets/instagram/post_08_burnout_autista.png`](../../assets/instagram/post_08_burnout_autista.png)
-- **URL:** https://www.centropaz.cl/assets/instagram/post_08_burnout_autista.png
+- **Pieza Feed (12:00):** [`assets/instagram/post_08_burnout_autista.png`](../../assets/instagram/post_08_burnout_autista.png)
+- **Video Reels / Shorts / TikTok (18:00):** `cpaz_short04_burnout_autista_es_local.mp4` (generado en YouTube IA)
+- **URL Feed:** https://www.centropaz.cl/assets/instagram/post_08_burnout_autista.png
 - **topic_key:** `burnout_autista`
 
 **Caption**
@@ -53,8 +55,9 @@ Requiere reestructurar demandas sensoriales, validar límites y recibir acompañ
 
 ## Martes 2026-09-16 — `post_09_paralisis_ejecutiva.png`
 
-- **Archivo:** [`assets/instagram/post_09_paralisis_ejecutiva.png`](../../assets/instagram/post_09_paralisis_ejecutiva.png)
-- **URL:** https://www.centropaz.cl/assets/instagram/post_09_paralisis_ejecutiva.png
+- **Pieza Feed (12:00):** [`assets/instagram/post_09_paralisis_ejecutiva.png`](../../assets/instagram/post_09_paralisis_ejecutiva.png)
+- **Video Reels / Shorts / TikTok (18:00):** `cpaz_short01_tdah_es_local.mp4` (generado en YouTube IA)
+- **URL Feed:** https://www.centropaz.cl/assets/instagram/post_09_paralisis_ejecutiva.png
 - **topic_key:** `paralisis_ejecutiva`
 
 **Caption**
@@ -75,8 +78,9 @@ Obligarte con culpa aumenta la respuesta de amenaza y empeora el bloqueo. En ter
 
 ## Miércoles 2026-09-17 — `post_10_regulacion_ansiedad.png`
 
-- **Archivo:** [`assets/instagram/post_10_regulacion_ansiedad.png`](../../assets/instagram/post_10_regulacion_ansiedad.png)
-- **URL:** https://www.centropaz.cl/assets/instagram/post_10_regulacion_ansiedad.png
+- **Pieza Feed (12:00):** [`assets/instagram/post_10_regulacion_ansiedad.png`](../../assets/instagram/post_10_regulacion_ansiedad.png)
+- **Video Reels / Shorts / TikTok (18:00):** `cpaz_short03_crianza_es_local.mp4` (generado en YouTube IA)
+- **URL Feed:** https://www.centropaz.cl/assets/instagram/post_10_regulacion_ansiedad.png
 - **topic_key:** `regulacion_ansiedad`
 
 **Caption**
@@ -97,8 +101,9 @@ El nervio vago responde a señales fisiológicas directas como la respiración p
 
 ## Jueves 2026-09-18 — `post_11_apoyo_neurodivergente_hijos.png`
 
-- **Archivo:** [`assets/instagram/post_11_apoyo_neurodivergente_hijos.png`](../../assets/instagram/post_11_apoyo_neurodivergente_hijos.png)
-- **URL:** https://www.centropaz.cl/assets/instagram/post_11_apoyo_neurodivergente_hijos.png
+- **Pieza Feed (12:00):** [`assets/instagram/post_11_apoyo_neurodivergente_hijos.png`](../../assets/instagram/post_11_apoyo_neurodivergente_hijos.png)
+- **Video Reels / Shorts / TikTok (18:00):** `cpaz_short02_isapre_es_local.mp4` (generado en YouTube IA)
+- **URL Feed:** https://www.centropaz.cl/assets/instagram/post_11_apoyo_neurodivergente_hijos.png
 - **topic_key:** `apoyo_neurodivergente_hijos`
 
 **Caption**
@@ -119,8 +124,9 @@ En Centro Paz trabajamos en conjunto con los padres para entregarles herramienta
 
 ## Viernes 2026-09-19 — `post_12_primera_sesion.png`
 
-- **Archivo:** [`assets/instagram/post_12_primera_sesion.png`](../../assets/instagram/post_12_primera_sesion.png)
-- **URL:** https://www.centropaz.cl/assets/instagram/post_12_primera_sesion.png
+- **Pieza Feed (12:00):** [`assets/instagram/post_12_primera_sesion.png`](../../assets/instagram/post_12_primera_sesion.png)
+- **Video Reels / Shorts / TikTok (18:00):** `cpaz_short05_tdah_mujeres_es_local.mp4` (generado en YouTube IA)
+- **URL Feed:** https://www.centropaz.cl/assets/instagram/post_12_primera_sesion.png
 - **topic_key:** `primera_sesion`
 
 **Caption**
