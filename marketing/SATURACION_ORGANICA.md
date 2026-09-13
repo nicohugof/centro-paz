@@ -2,9 +2,10 @@
 
 Playbook corto para ocupar el algoritmo **sin Meta Ads**. Esta semana no se pagan anuncios: se publica a ritmo fijo en las cuentas propias.
 
-Pack activo: [`marketing/pack-semana-2026-09-08/`](./pack-semana-2026-09-08/)  
-Guía de publicación: [`pack-semana-2026-09-08/LEEME.md`](./pack-semana-2026-09-08/LEEME.md)  
-JSON n8n: [`pack-semana-2026-09-08/pack_semana_n8n.json`](./pack-semana-2026-09-08/pack_semana_n8n.json)
+Pack en cierre (Semana 1): [`marketing/pack-semana-2026-09-08/`](./pack-semana-2026-09-08/)  
+Pack siguiente (Semana 2): [`marketing/pack-semana-2026-09-15/`](./pack-semana-2026-09-15/)  
+Guía Semana 2: [`pack-semana-2026-09-15/LEEME.md`](./pack-semana-2026-09-15/LEEME.md)  
+JSON n8n Semana 2: [`pack-semana-2026-09-15/pack_semana_n8n.json`](./pack-semana-2026-09-15/pack_semana_n8n.json)
 
 ## Ritmo (America/Santiago)
 
@@ -24,6 +25,8 @@ CTA único: WhatsApp personal de Valentina `+56 9 6516 3893` · [wa.me/569651638
 - **No:** Meta Ads, Boost, ni campañas Express mientras este playbook esté activo.
 - **No:** mezclar este WhatsApp con Ironcross.
 
-## Semana 2026-09-08 → 2026-09-14
+## Calendario de packs
 
-Piezas ya en `assets/instagram/`: lun `post_01` · mar `post_02` · mié `post_03` · jue `post_04` · vie `post_05` · sáb `post_06` · dom `post_07`.
+- **Semana 1 (2026-09-08 → 2026-09-14):** `post_01` a `post_07` (TDAH, reembolso, crianza, masking, online, infantil, autocuidado).
+- **Semana 2 (2026-09-15 → 2026-09-21):** `post_08` a `post_14` (Burnout autista, parálisis ejecutiva, regulación ansiedad, apoyo neurodivergente, primera sesión, culpa parental, matemática reembolso).
+
