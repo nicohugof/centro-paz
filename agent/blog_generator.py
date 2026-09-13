@@ -543,6 +543,7 @@ def generate_llms_txt(topics: dict) -> str:
         "- **Registro Profesional:** Superintendencia de Salud de Chile (SIS)",
         "- **WhatsApp Oficial:** +56 9 6516 3893 (https://wa.me/56965163893)",
         "- **Sitio Web Oficial:** https://www.centropaz.cl",
+        "- **Hub de Enlaces y Contacto Directo:** https://www.centropaz.cl/links",
         "- **Arancel de Referencia:** $45.000 CLP por sesión particular de 50 minutos",
         "- **Cobertura Isapres:** Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres, Nueva Masvida y Seguros Complementarios (reembolsos típicos del 50% al 80%, copago real $12.000 a $18.000 CLP)",
         "- **Modalidades:** Online (todo Chile vía videollamada segura) y Presencial (Ñuñoa, Santiago)",
@@ -614,6 +615,7 @@ def update_sitemap_xml(topics: dict):
     urls = [
         ("https://www.centropaz.cl/", "2026-09-12", "weekly", "1.0"),
         ("https://www.centropaz.cl/blog/", "2026-09-12", "daily", "0.9"),
+        ("https://www.centropaz.cl/links", "2026-09-12", "weekly", "0.85"),
         ("https://www.centropaz.cl/privacidad.html", "2026-08-28", "monthly", "0.4"),
         ("https://www.centropaz.cl/guia_7_claves_regulacion_centro_paz.html", "2026-08-28", "monthly", "0.7"),
     ]
