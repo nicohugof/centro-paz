@@ -240,6 +240,17 @@ def trigger_n8n_webhook(webhook_url: str, post_num: int = 1) -> None:
         print(f"❌ Error conectando con n8n: {e}")
 
 
+import datetime
+
+def get_current_slot_post_num() -> int:
+    base_date = datetime.date(2026, 9, 8)
+    today = datetime.date.today()
+    diff = (today - base_date).days
+    if diff < 0:
+        diff = 0
+    return (diff % len(POSTS_CATALOG)) + 1
+
+
 def publish_one(post_num: int, config: dict, platform: str) -> None:
     if platform in ["all", "instagram"]:
         publish_to_instagram_graph(post_num, config)
@@ -251,6 +262,8 @@ def main():
     max_posts = len(POSTS_CATALOG)
     parser = argparse.ArgumentParser(description="Centro Paz — Publicador Automático de Redes Sociales")
     parser.add_argument("--post", type=int, choices=range(1, max_posts + 1), help=f"Número de post a publicar (1 al {max_posts})")
+    parser.add_argument("--auto-slot", action="store_true", help="Calcular automáticamente el post del día y publicarlo")
+    parser.add_argument("--dry-run", action="store_true", help="Simulación de publicación sin llamar a la API de Meta")
     parser.add_argument("--post-all", action="store_true", help=f"Publicar toda la parrilla (posts 1 al {max_posts}) con pausa entre cada uno")
     parser.add_argument("--platform", choices=["all", "instagram", "facebook"], default="all", help="Plataforma de destino")
     parser.add_argument("--webhook-url", type=str, help="Disparar webhook a n8n / Make")
@@ -278,9 +291,27 @@ def main():
         test_connection(config)
         return
 
+    if args.auto_slot:
+        target_post = get_current_slot_post_num()
+        item = POSTS_CATALOG[target_post]
+        print(f"📅 [Auto-Slot] Fecha actual: {datetime.date.today()} | Post asignado #{target_post:02d} ({item['title']})")
+        if args.dry_run:
+            print(f"🧪 [DRY-RUN] Simulación exitosa para Post #{target_post:02d}. Archivo: {item['file']}")
+            return
+
+        token = config.get("access_token")
+        ig_id = config.get("instagram_account_id")
+        if not token or not ig_id:
+            print("ℹ️ [Auto-Slot] No se encontraron credenciales de Meta Graph API (META_ACCESS_TOKEN / META_IG_ACCOUNT_ID).")
+            print("ℹ️ El contenido se mantiene publicado en el sitio web y blog. Para activar publicación automática en Meta, configure los secretos en GitHub.")
+            return
+        publish_one(target_post, config, args.platform)
+        return
+
     no_action = not (
         args.list or args.post or args.post_all or args.webhook_url
         or args.set_token or args.set_ig_id or args.test_connection
+        or args.auto_slot
     )
     if args.list or no_action:
         print("\n" + "=" * 70)

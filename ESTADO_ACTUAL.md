@@ -11,8 +11,11 @@ Ecosistema digital y motor de captación de pacientes de Centro Paz.
 - La copia activa está limpia y coincide con GitHub en `main`.
 - Se eliminaron las ramas remotas de features ya mergeadas (`cursor/*`).
 - El sitio en producción [www.centropaz.cl](https://www.centropaz.cl) responde HTTP 200 con GitHub Pages activo.
-- Pack Semana 1 (2026-09-08 → 2026-09-14) en fase de cierre (posts 06 y 07).
-- Pack Semana 2 (2026-09-15 → 2026-09-21) empaquetado y listo para ejecución en `marketing/pack-semana-2026-09-15/`.
+- Sistema de Blog Clínico desplegado en `/blog/` con 28 artículos estructurados con Schema JSON-LD (`MedicalWebPage`, `FAQPage`, `Article`) optimizado para motores de búsqueda conversacional de Inteligencia Artificial (ChatGPT Search, Perplexity, Gemini, Claude) y Google.
+- Implementado el estándar abierto [`llms.txt`](file:///Users/nigoku/Proyectos/centro-paz/llms.txt) en la raíz para citación directa por modelos de lenguaje.
+- `robots.txt` y `sitemap.xml` actualizados para permitir y priorizar crawlers de IA (`GPTBot`, `PerplexityBot`, `ClaudeBot`, `Google-Extended`).
+- Workflow de GitHub Actions (`.github/workflows/auto_publish.yml`) configurado con cron diario (12:00 CLT / 15:00 UTC) para publicación 100% desatendida en blog y redes sociales (Meta Graph API).
+- Pack Semana 1 en fase de cierre y Pack Semana 2 empaquetado en `marketing/pack-semana-2026-09-15/`.
 
 ## Dependencias
 

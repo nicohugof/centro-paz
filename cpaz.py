@@ -24,6 +24,7 @@ def print_menu():
     print(" 4. 📅 Ver Parrilla de Contenidos y Matriz Omnicanal")
     print(" 5. 🎨 Renderizar las 14 Infografías a PNG (1080x1350)")
     print(" 6. 📡 Exportar Payloads Actualizados para n8n y Redes Sociales")
+    print(" 7. 🌐 Regenerar Blog Clínico, llms.txt y Sitemap para Motores de IA")
     print(" 0. 🚪 Salir")
     print("=" * 70 + "\n")
 
@@ -32,7 +33,7 @@ def main():
     while True:
         try:
             print_menu()
-            choice = input("👉 Selecciona una opción (0-6): ").strip()
+            choice = input("👉 Selecciona una opción (0-7): ").strip()
             if choice == "1":
                 whatsapp_assistant.interactive_mode()
             elif choice == "2":
@@ -46,11 +47,14 @@ def main():
                 marketing_agent.render_all_posts()
             elif choice == "6":
                 marketing_agent.export_n8n_json()
+            elif choice == "7":
+                from agent import blog_generator
+                blog_generator.build_all()
             elif choice in ["0", "salir", "exit", "quit", "q"]:
                 print("\n🌿 Hasta pronto. Centro Paz en operación continua.\n")
                 break
             else:
-                print("⚠️ Opción no válida. Ingresa un número del 0 al 6.")
+                print("⚠️ Opción no válida. Ingresa un número del 0 al 7.")
         except (KeyboardInterrupt, EOFError):
             print("\n\n🌿 Sesión finalizada.")
             break
