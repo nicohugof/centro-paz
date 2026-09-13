@@ -14,6 +14,7 @@ from typing import List, Dict, Any
 SHORTS_CATALOG: List[Dict[str, Any]] = [
     {
         "id": "short_01",
+        "episode_id": "cpaz_short01_tdah",
         "platform": ["TikTok", "YouTube Shorts", "Instagram Reels"],
         "target": "Adultos con sospecha de TDAH",
         "title": "3 Señales de TDAH en Adultos que siempre confundiste con flojera",
@@ -56,6 +57,7 @@ SHORTS_CATALOG: List[Dict[str, Any]] = [
     },
     {
         "id": "short_02",
+        "episode_id": "cpaz_short02_isapre",
         "platform": ["TikTok", "YouTube Shorts", "Instagram Reels"],
         "target": "Pacientes con Isapre que no se atienden por costo",
         "title": "La matemática secreta del reembolso de Isapre en psicología",
@@ -92,6 +94,7 @@ SHORTS_CATALOG: List[Dict[str, Any]] = [
     },
     {
         "id": "short_03",
+        "episode_id": "cpaz_short03_crianza",
         "platform": ["TikTok", "YouTube Shorts", "Pinterest Video"],
         "target": "Madres y Padres con hijos en edad escolar",
         "title": "Qué hacer cuando tu hijo entra en un desborde emocional intenso",
@@ -125,6 +128,80 @@ SHORTS_CATALOG: List[Dict[str, Any]] = [
         ],
         "hashtags": "#CrianzaRespetuosa #PsicologiaInfantil #MaternidadChile #PaternidadConsciente #OrientacionAPadres",
         "recommended_sound": "Música acústica cálida y reflexiva"
+    },
+    {
+        "id": "short_04",
+        "episode_id": "cpaz_short04_burnout_autista",
+        "platform": ["TikTok", "YouTube Shorts", "Instagram Reels"],
+        "target": "Adultos en el espectro autista o con sospecha",
+        "title": "Llegar a casa sin poder hablar: Burnout Autista vs Estrés común",
+        "duration": "35-40 seg",
+        "visual_hook_text": "¿Llegas a casa mudo/a y sin energía? Esto es Burnout Autista 🔋",
+        "steps": [
+            {
+                "time": "0:00 - 0:04",
+                "scene": "Expresión de agotamiento profundo / Texto grande",
+                "audio": "¿Te pasa que después de un día normal de trabajo llegas a casa sin energía ni para responder un mensaje de texto?",
+                "on_screen_text": "Agotamiento que no se quita durmiendo"
+            },
+            {
+                "time": "0:04 - 0:15",
+                "scene": "Explicación del colapso sensorial",
+                "audio": "A diferencia del estrés común, el burnout autista ocurre por semanas o meses de masking y sobrecarga sensorial acumulada: ruidos, luces y demandas sociales.",
+                "on_screen_text": "Masking + Sobrecarga sensorial"
+            },
+            {
+                "time": "0:15 - 0:25",
+                "scene": "Señales de alerta clínica",
+                "audio": "Tus funciones ejecutivas colapsan, pierdes temporalmente habilidades y necesitas días de aislamiento en oscuridad para regularte.",
+                "on_screen_text": "Pérdida temporal de habilidades"
+            },
+            {
+                "time": "0:25 - 0:35",
+                "scene": "Acompañamiento neuroafirmativo",
+                "audio": "En Centro Paz realizamos evaluación y terapia con enfoque neuroafirmativo en Santiago y Online. Escríbenos directamente a WhatsApp en el enlace del perfil.",
+                "on_screen_text": "Evaluación Adultos · Sesiones Online y Ñuñoa"
+            }
+        ],
+        "hashtags": "#BurnoutAutista #AutismoAdultos #TEAAdultos #NeurodivergenciaChile #SaludMentalChile",
+        "recommended_sound": "Audio ambiental lofi suave y contemplativo"
+    },
+    {
+        "id": "short_05",
+        "episode_id": "cpaz_short05_tdah_mujeres",
+        "platform": ["TikTok", "YouTube Shorts", "Instagram Reels"],
+        "target": "Mujeres adultas con sospecha de TDAH no diagnosticado",
+        "title": "Por qué el TDAH en mujeres se diagnostica recién a los 30 años",
+        "duration": "35-40 seg",
+        "visual_hook_text": "Por qué te dijeron 'ansiedad' cuando en realidad era TDAH 🧠",
+        "steps": [
+            {
+                "time": "0:00 - 0:04",
+                "scene": "Pregunta reflexiva a cámara",
+                "audio": "¿Pasaste años diagnosticada con ansiedad o depresión, pero sientes que la raíz de todo siempre fue la desorganización interna?",
+                "on_screen_text": "¿Ansiedad o TDAH no diagnosticado?"
+            },
+            {
+                "time": "0:04 - 0:15",
+                "scene": "Diferencia de presentación en mujeres",
+                "audio": "En mujeres, el TDAH rara vez se muestra como hiperactividad física. Se manifiesta como ensoñación excesiva, perfeccionismo agotador y autoexigencia extrema para compensar.",
+                "on_screen_text": "Hiperactividad interna y perfeccionismo"
+            },
+            {
+                "time": "0:15 - 0:25",
+                "scene": "Punto de quiebre en la adultez",
+                "audio": "El quiebre suele llegar en la universidad, la maternidad o ascensos laborales, cuando el costo de compensar supera tus fuerzas.",
+                "on_screen_text": "Cuando compensar ya no alcanza"
+            },
+            {
+                "time": "0:25 - 0:35",
+                "scene": "Contacto Centro Paz",
+                "audio": "Comprender tu neurotipo cambia tu vida. En Centro Paz te acompañamos. Escríbenos a WhatsApp para consultar disponibilidad de horas.",
+                "on_screen_text": "WhatsApp Directo: +56 9 6516 3893"
+            }
+        ],
+        "hashtags": "#TDAHMujeres #TDAHAdultosChile #MujeresConTDAH #SaludMentalChile #PsicologiaChile",
+        "recommended_sound": "Melodía de piano cálida y empática"
     }
 ]
 
@@ -150,35 +227,74 @@ def display_catalog():
 def export_markdown() -> Path:
     target = Path(__file__).resolve().parent.parent / "marketing" / "GUIONES_VIDEO_VERTICALES.md"
     lines = [
-        "# 🎬 Guiones de Video Vertical (Reels · TikTok · YouTube Shorts) — Centro Paz\n",
-        "> Diseñados para grabación directa con teléfono celular por **Valentina Castro Núñez**. Duración óptima: 30 a 45 segundos. Formato vertical 9:16.\n"
+        "# 🎬 Guiones y Publicación de Video Vertical (Shorts · Reels · TikTok) — Centro Paz\n",
+        "> Estructurados como insumos directos para el pipeline automatizado de **YouTube IA** (`/Proyectos/youtube-ia`) y publicación en redes. Formato vertical 9:16 (1080x1920).\n",
+        "> **Atención por WhatsApp:** Gestionada **100% de forma exclusiva, personal y directa por Valentina Castro Núñez** (`+56 9 6516 3893`). No se utilizan bots ni respuestas pre-enlatadas.\n",
+        "---\n"
     ]
     for s in SHORTS_CATALOG:
+        ep_id = s.get("episode_id", f"cpaz_{s['id']}")
         lines.append(f"## [{s['id'].upper()}] {s['title']}\n")
+        lines.append(f"- **ID en YouTube IA:** `{ep_id}`")
         lines.append(f"- **Plataformas:** {', '.join(s['platform'])}")
         lines.append(f"- **Audiencia:** {s['target']}")
         lines.append(f"- **Duración estimada:** {s['duration']}")
         lines.append(f"- **Gancho visual (texto grande al inicio):** `{s['visual_hook_text']}`")
         lines.append(f"- **Sonido recomendado:** {s['recommended_sound']}")
         lines.append(f"- **Hashtags:** `{s['hashtags']}`\n")
-        lines.append("### Bloques de Grabación:\n")
-        lines.append("| Tiempo | Texto en Pantalla | Lo que dice Valentina a cámara |")
+        lines.append("### Bloques del Video:\n")
+        lines.append("| Tiempo | Texto en Pantalla | Audio / Locución Valentina |")
         lines.append("| :--- | :--- | :--- |")
         for step in s["steps"]:
             lines.append(f"| `{step['time']}` | {step['on_screen_text']} | \"{step['audio']}\" |")
+        lines.append("\n### Texto para Publicar (Copy & Paste):\n")
+        lines.append("**Descripción para Reels / TikTok / YouTube Shorts:**")
+        lines.append(f"> {s['visual_hook_text']}\n>\n"
+                     f"> ¿Te identificas con estas señales? En Centro Paz te acompañamos con un enfoque neuroafirmativo y basado en evidencia clínica.\n>\n"
+                     f"> 📍 Sesiones Online (todo Chile) y Presenciales en Ñuñoa, Santiago.\n"
+                     f"> 💳 Boletas electrónicas reembolsables en tu Isapre y Seguro Complementario.\n>\n"
+                     f"> {s['hashtags']}\n")
+        lines.append("**Comentario Fijado (Pinned Comment):**")
+        lines.append(f"> 💬 ¿Quieres conversar o agendar con Valentina? Escríbenos directamente a WhatsApp: https://wa.me/56965163893\n")
         lines.append("\n---\n")
 
     target.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print(f"✅ Guiones exportados exitosamente a {target}")
+    print(f"✅ Guiones y copys exportados exitosamente a {target}")
     return target
 
 
+def render_short(episode_id: str):
+    import subprocess
+    yt_ia_dir = Path(__file__).resolve().parent.parent.parent / "youtube-ia"
+    if not yt_ia_dir.exists():
+        print(f"❌ No se encontró el repositorio youtube-ia en {yt_ia_dir}")
+        return
+
+    print(f"\n🚀 Renderizando video vertical en YouTube IA: {episode_id}...")
+    cmd = [
+        "python3", "-m", "agent.pipeline",
+        "--episode", episode_id,
+        "--lang", "es",
+        "--images", "local",
+    ]
+    res = subprocess.run(cmd, cwd=str(yt_ia_dir))
+    if res.returncode == 0:
+        out_mp4 = yt_ia_dir / "output" / f"{episode_id}_es_local.mp4"
+        print(f"✅ Video generado con éxito: {out_mp4}")
+    else:
+        print(f"❌ Error al renderizar {episode_id} (exit code {res.returncode})")
+
+
 def main():
-    parser = argparse.ArgumentParser(description="Generador de guiones para YouTube Shorts y TikTok")
+    parser = argparse.ArgumentParser(description="Generador de guiones y puente hacia YouTube IA")
     parser.add_argument("--list", "-l", action="store_true", help="Listar todos los guiones de video")
     parser.add_argument("--export-md", action="store_true", help="Exportar catálogo a marketing/GUIONES_VIDEO_VERTICALES.md")
+    parser.add_argument("--render", type=str, default=None, help="Renderizar video en YouTube IA (ej. cpaz_short01_tdah)")
     args = parser.parse_args()
-    if args.export_md:
+
+    if args.render:
+        render_short(args.render)
+    elif args.export_md:
         export_markdown()
     else:
         display_catalog()
