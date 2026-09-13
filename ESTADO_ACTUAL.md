@@ -15,9 +15,9 @@ Ecosistema digital y motor de captación de pacientes de Centro Paz.
 - Implementado el estándar abierto [`llms.txt`](file:///Users/nigoku/Proyectos/centro-paz/llms.txt) en la raíz para citación directa por modelos de lenguaje.
 - `robots.txt` y `sitemap.xml` actualizados para permitir y priorizar crawlers de IA (`GPTBot`, `PerplexityBot`, `ClaudeBot`, `Google-Extended`).
 - Workflow de GitHub Actions (`.github/workflows/auto_publish.yml`) configurado con cron diario (12:00 CLT / 15:00 UTC) para publicación 100% desatendida en blog y redes sociales (Meta Graph API).
-- Pack Semana 1 en fase de cierre y Pack Semana 2 empaquetado en `marketing/pack-semana-2026-09-15/`.
+- Packs Semanales estructurados: Pack Semana 1 (2026-09-08), Pack Semana 2 (2026-09-15) y Pack Semana 3 (2026-09-22) empaquetados en `marketing/` con copys, infografías, JSON n8n y asignación de video diario.
 - Playbooks de captación directa añadidos: Ficha Google Maps Ñuñoa (`docs/GOOGLE_BUSINESS_PROFILE_NUNOA.md`) y Red de derivación interprofesional (`docs/RED_DERIVACION_CLINICA_LOCAL.md`).
-- Pipeline de video vertical integrado con YouTube IA: 5 videos cortos generados en resolución 9:16 (1080x1920) con voz chilena empática, música adaptativa y subtítulos sincronizados, listos para YouTube Shorts, Reels y TikTok con textos y comentarios fijados hacia WhatsApp.
+- Pipeline de video vertical integrado con YouTube IA: **10 videos cortos generados en resolución 9:16 (1080x1920)** con voz chilena empática (`es-CL-CatalinaNeural`), banda sonora adaptativa y subtítulos sincronizados, listos para YouTube Shorts, Reels y TikTok con textos y comentarios fijados hacia WhatsApp y el hub móvil `/links`.
 - Comando puente operativo implementado: `python3 -m agent.video_shorts_generator --render <id>` para compilar videos a demanda.
 
 ## Directrices Operativas Clave

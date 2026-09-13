@@ -192,3 +192,188 @@
 
 ---
 
+## [SHORT_06] Sensibilidad al Rechazo (RSD): Por qué una crítica duele tanto
+
+- **ID en YouTube IA:** `cpaz_short06_rsd`
+- **Plataformas:** TikTok, YouTube Shorts, Instagram Reels
+- **Audiencia:** Adultos con TDAH y sensibilidad emocional
+- **Duración estimada:** 35-40 seg
+- **Gancho visual (texto grande al inicio):** `¿Por qué una crítica te arruina el día entero? Esto se llama RSD 💔`
+- **Sonido recomendado:** Audio introspectivo suave con cuerdas sutiles
+- **Hashtags:** `#RSDChile #SensibilidadAlRechazo #TDAHEmocional #TDAHAdultos #SaludMentalChile`
+
+### Bloques del Video:
+
+| Tiempo | Texto en Pantalla | Audio / Locución Valentina |
+| :--- | :--- | :--- |
+| `0:00 - 0:04` | Dolor físico ante el rechazo percibido | "¿Te pasa que un comentario neutro en el trabajo o un mensaje sin responder te genera una angustia física real en el pecho?" |
+| `0:04 - 0:15` | RSD: Respuesta neurológica real | "No eres débil ni exagerado. En personas con TDAH existe la Disforia Sensible al Rechazo o RSD: una respuesta neurológica donde el cerebro procesa la percepción de rechazo con la misma intensidad que el dolor físico." |
+| `0:15 - 0:25` | Perfeccionismo y sobre-adaptación | "Esto suele llevarte al perfeccionismo extremo o a complacer a todos para evitar ser juzgado, dejando tu energía en cero al final del día." |
+| `0:25 - 0:35` | Terapia Neuroafirmativa · Sesiones Online y Ñuñoa | "En Centro Paz te acompañamos con terapia neuroafirmativa para desarmar la culpa y regular tu sistema nervioso. Escríbenos por WhatsApp en el enlace de la bio." |
+
+### Texto para Publicar (Copy & Paste):
+
+**Descripción para Reels / TikTok / YouTube Shorts:**
+> ¿Por qué una crítica te arruina el día entero? Esto se llama RSD 💔
+>
+> ¿Te identificas con estas señales? En Centro Paz te acompañamos con un enfoque neuroafirmativo y basado en evidencia clínica.
+>
+> 📍 Sesiones Online (todo Chile) y Presenciales en Ñuñoa, Santiago.
+> 💳 Boletas electrónicas reembolsables en tu Isapre y Seguro Complementario.
+>
+> #RSDChile #SensibilidadAlRechazo #TDAHEmocional #TDAHAdultos #SaludMentalChile
+
+**Comentario Fijado (Pinned Comment):**
+> 💬 ¿Quieres conversar o agendar con Valentina? Escríbenos directamente a WhatsApp: https://wa.me/56965163893
+
+
+---
+
+## [SHORT_07] Hipersensibilidad al Ruido y Sobrecarga Sensorial
+
+- **ID en YouTube IA:** `cpaz_short07_sobrecarga`
+- **Plataformas:** TikTok, YouTube Shorts, Instagram Reels
+- **Audiencia:** Adultos con hipersensibilidad sensorial, autistas y TDAH
+- **Duración estimada:** 35 seg
+- **Gancho visual (texto grande al inicio):** `¿El ruido de fondo te agota y te irrita? No es mal genio, es sobrecarga 🎧`
+- **Sonido recomendado:** Transición de ruido caótico a silencio lofi relajante
+- **Hashtags:** `#SobrecargaSensorial #MisofoniaChile #TEAAdultos #TDAHChile #Hipersensibilidad`
+
+### Bloques del Video:
+
+| Tiempo | Texto en Pantalla | Audio / Locución Valentina |
+| :--- | :--- | :--- |
+| `0:00 - 0:04` | ¿Te satura el ruido ambiental? | "¿El ruido de la oficina, los centros comerciales o la masticación de alguien cerca te provocan ganas de escapar o irritabilidad repentina?" |
+| `0:04 - 0:15` | Filtro sensorial reducido | "Esto no es mal carácter ni falta de paciencia. Tu cerebro no filtra los estímulos auditivos de fondo de forma automática, recibiendo todo el volumen al mismo tiempo." |
+| `0:15 - 0:25` | Descompresión sensorial, no culpa | "Cuando el umbral se satura, tu sistema entra en respuesta de lucha o huida. Necesitas descompresión sensorial, no culparte por sentirte abrumado." |
+| `0:25 - 0:35` | Reembolso Isapre · WhatsApp: +56 9 6516 3893 | "Aprende a mapear tu perfil sensorial y proteger tu energía. Sesiones online y en Ñuñoa con reembolso Isapre. Contáctanos al WhatsApp de la bio." |
+
+### Texto para Publicar (Copy & Paste):
+
+**Descripción para Reels / TikTok / YouTube Shorts:**
+> ¿El ruido de fondo te agota y te irrita? No es mal genio, es sobrecarga 🎧
+>
+> ¿Te identificas con estas señales? En Centro Paz te acompañamos con un enfoque neuroafirmativo y basado en evidencia clínica.
+>
+> 📍 Sesiones Online (todo Chile) y Presenciales en Ñuñoa, Santiago.
+> 💳 Boletas electrónicas reembolsables en tu Isapre y Seguro Complementario.
+>
+> #SobrecargaSensorial #MisofoniaChile #TEAAdultos #TDAHChile #Hipersensibilidad
+
+**Comentario Fijado (Pinned Comment):**
+> 💬 ¿Quieres conversar o agendar con Valentina? Escríbenos directamente a WhatsApp: https://wa.me/56965163893
+
+
+---
+
+## [SHORT_08] Ansiedad Somática: Cuando el cuerpo habla lo que la mente calla
+
+- **ID en YouTube IA:** `cpaz_short08_ansiedad_somatica`
+- **Plataformas:** TikTok, YouTube Shorts, Instagram Reels
+- **Audiencia:** Personas con tensión muscular crónica, bruxismo o molestias digestivas por estrés
+- **Duración estimada:** 35 seg
+- **Gancho visual (texto grande al inicio):** `¿Opresión en el pecho o colon irritable? Así habla la ansiedad somática 🌿`
+- **Sonido recomendado:** Música acústica calmante y frecuencias armónicas
+- **Hashtags:** `#AnsiedadSomatica #SaludMentalChile #NervioVago #PsicologiaClinica #BruxismoChile`
+
+### Bloques del Video:
+
+| Tiempo | Texto en Pantalla | Audio / Locución Valentina |
+| :--- | :--- | :--- |
+| `0:00 - 0:04` | Tensión crónica y bruxismo | "¿Sientes que mentalmente tienes todo 'bajo control', pero tu cuerpo vive con dolor de cuello, mandíbula apretada o problemas estomacales?" |
+| `0:04 - 0:15` | Sistema nervioso en modo supervivencia | "La ansiedad somática ocurre cuando sobrepensamos para resolver problemas, pero el sistema nervioso autónomo se queda atrapado en modo supervivencia." |
+| `0:15 - 0:25` | Activar el nervio vago y la calma | "Tratarla solo desde la lógica no alcanza: necesitamos técnicas de corregulación fisiológica y respiración diafragmática para activar el nervio vago." |
+| `0:25 - 0:35` | Sesiones Presenciales Ñuñoa y Online Chile | "En Centro Paz integramos cuerpo y mente con enfoque humanista y evidencia clínica. Escríbenos a WhatsApp para coordinar tu primera sesión." |
+
+### Texto para Publicar (Copy & Paste):
+
+**Descripción para Reels / TikTok / YouTube Shorts:**
+> ¿Opresión en el pecho o colon irritable? Así habla la ansiedad somática 🌿
+>
+> ¿Te identificas con estas señales? En Centro Paz te acompañamos con un enfoque neuroafirmativo y basado en evidencia clínica.
+>
+> 📍 Sesiones Online (todo Chile) y Presenciales en Ñuñoa, Santiago.
+> 💳 Boletas electrónicas reembolsables en tu Isapre y Seguro Complementario.
+>
+> #AnsiedadSomatica #SaludMentalChile #NervioVago #PsicologiaClinica #BruxismoChile
+
+**Comentario Fijado (Pinned Comment):**
+> 💬 ¿Quieres conversar o agendar con Valentina? Escríbenos directamente a WhatsApp: https://wa.me/56965163893
+
+
+---
+
+## [SHORT_09] Por qué los niños no van al psicólogo a hablar sentados
+
+- **ID en YouTube IA:** `cpaz_short09_terapia_infantil`
+- **Plataformas:** TikTok, YouTube Shorts, Instagram Reels
+- **Audiencia:** Padres y madres con dudas sobre el proceso terapéutico infanto-juvenil
+- **Duración estimada:** 35 seg
+- **Gancho visual (texto grande al inicio):** `¿Por qué en psicología infantil jugamos en vez de solo hablar? 🧸🌱`
+- **Sonido recomendado:** Melodía dulce y esperanzadora de piano
+- **Hashtags:** `#TerapiaInfantil #PsicologiaInfantil #CrianzaRespetuosa #OrientacionAPadres #SantiagoOriente`
+
+### Bloques del Video:
+
+| Tiempo | Texto en Pantalla | Audio / Locución Valentina |
+| :--- | :--- | :--- |
+| `0:00 - 0:04` | ¿Por qué jugar en terapia infantil? | "Muchos papás se preguntan con honestidad: ¿si mi hijo va a terapia, de verdad le sirve ir a jugar?" |
+| `0:04 - 0:15` | El juego es el lenguaje del niño | "Los niños no tienen el lenguaje abstracto de un adulto para decir 'siento angustia o frustración'. Su lenguaje natural de expresión y procesamiento es el juego simbólico." |
+| `0:15 - 0:25` | Resolución de conflictos y regulación | "A través del juego proyectan vivencias complejas, ensayan soluciones de conflicto y regulan su mundo emocional en un entorno terapéutico seguro." |
+| `0:25 - 0:35` | Orientación a Padres · WhatsApp: +56 9 6516 3893 | "Además, orientamos a los padres semana a semana con pautas prácticas para la casa. Consulta por cupos disponibles en el WhatsApp de la bio." |
+
+### Texto para Publicar (Copy & Paste):
+
+**Descripción para Reels / TikTok / YouTube Shorts:**
+> ¿Por qué en psicología infantil jugamos en vez de solo hablar? 🧸🌱
+>
+> ¿Te identificas con estas señales? En Centro Paz te acompañamos con un enfoque neuroafirmativo y basado en evidencia clínica.
+>
+> 📍 Sesiones Online (todo Chile) y Presenciales en Ñuñoa, Santiago.
+> 💳 Boletas electrónicas reembolsables en tu Isapre y Seguro Complementario.
+>
+> #TerapiaInfantil #PsicologiaInfantil #CrianzaRespetuosa #OrientacionAPadres #SantiagoOriente
+
+**Comentario Fijado (Pinned Comment):**
+> 💬 ¿Quieres conversar o agendar con Valentina? Escríbenos directamente a WhatsApp: https://wa.me/56965163893
+
+
+---
+
+## [SHORT_10] El ciclo de pantallas y TDAH: Romper el bucle sin culpa
+
+- **ID en YouTube IA:** `cpaz_short10_dopamina`
+- **Plataformas:** TikTok, YouTube Shorts, Instagram Reels
+- **Audiencia:** Adultos y jóvenes con TDAH atrapados en el uso compulsivo de pantallas
+- **Duración estimada:** 35 seg
+- **Gancho visual (texto grande al inicio):** `¿Atrapado en el teléfono sin poder soltarlo? Es tu dopamina 📱⚡`
+- **Sonido recomendado:** Beat lofi dinámico y motivador
+- **Hashtags:** `#TDAHAdultos #DopaminaTDAH #Procrastinacion #SaludMentalChile #PsicologiaSantiago`
+
+### Bloques del Video:
+
+| Tiempo | Texto en Pantalla | Audio / Locución Valentina |
+| :--- | :--- | :--- |
+| `0:00 - 0:04` | El bucle del scrolling infinito | "¿Te sientas a descansar cinco minutos en el celular y de pronto pasaron dos horas sintiéndote más agotado y culpable que antes?" |
+| `0:04 - 0:15` | Dopamina rápida vs Subestimulación | "Las pantallas entregan microdosis continuas de dopamina. Para un cerebro neurodivergente, soltar el teléfono se siente literalmente como un abismo de subestimulación física." |
+| `0:15 - 0:25` | Estrategias de transición de baja fricción | "La culpa no ayuda. La clave está en transiciones de baja fricción: sustituir la pantalla por movimiento físico, música estimulante o temporizadores visuales." |
+| `0:25 - 0:35` | Sesiones Online y en Ñuñoa · Reembolso Isapre | "Aprende a gestionar tu energía con acompañamiento profesional. Boletas reembolsables en Isapre. Escríbenos a WhatsApp en el enlace del perfil." |
+
+### Texto para Publicar (Copy & Paste):
+
+**Descripción para Reels / TikTok / YouTube Shorts:**
+> ¿Atrapado en el teléfono sin poder soltarlo? Es tu dopamina 📱⚡
+>
+> ¿Te identificas con estas señales? En Centro Paz te acompañamos con un enfoque neuroafirmativo y basado en evidencia clínica.
+>
+> 📍 Sesiones Online (todo Chile) y Presenciales en Ñuñoa, Santiago.
+> 💳 Boletas electrónicas reembolsables en tu Isapre y Seguro Complementario.
+>
+> #TDAHAdultos #DopaminaTDAH #Procrastinacion #SaludMentalChile #PsicologiaSantiago
+
+**Comentario Fijado (Pinned Comment):**
+> 💬 ¿Quieres conversar o agendar con Valentina? Escríbenos directamente a WhatsApp: https://wa.me/56965163893
+
+
+---
+
