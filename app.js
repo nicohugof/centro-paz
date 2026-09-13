@@ -238,6 +238,32 @@ function buildTriageResult() {
     recommendedApproach = "Manejo Clínico de Ansiedad y Sobrecarga";
   }
 
+  let relevantArticle = {
+    title: "Guía clínica: ¿Cómo saber si tengo TDAH en la adultez?",
+    url: "blog/tdah-adultos.html"
+  };
+  if (triageState.forWhom?.id === "hijo") {
+    relevantArticle = {
+      title: "Artículo clínico: Manejo de desbordes emocionales y crisis sensoriales en niños",
+      url: "blog/crianza-regulacion.html"
+    };
+  } else if (triageState.reason?.id === "ansiedad") {
+    relevantArticle = {
+      title: "Artículo clínico: 3 Técnicas somáticas para regular la ansiedad cuando sobrepiensas",
+      url: "blog/regulacion-ansiedad.html"
+    };
+  } else if (triageState.reason?.id === "tea_tdah_adulto") {
+    relevantArticle = {
+      title: "Artículo clínico: TDAH tardío, parálisis ejecutiva y masking en adultos",
+      url: "blog/tdah-adultos.html"
+    };
+  } else {
+    relevantArticle = {
+      title: "Guía paso a paso: Cómo reembolsar tus sesiones en Isapre y Seguros",
+      url: "blog/reembolso-isapre.html"
+    };
+  }
+
   const resultBox = document.getElementById("triage-result-content");
   if (resultBox) {
     resultBox.innerHTML = `
@@ -270,6 +296,11 @@ function buildTriageResult() {
 
       <div class="result-guarantee">
         🛡️ <strong>Boletas 100% Reembolsables:</strong> Emitimos boleta electrónica para reembolso en tu Isapre y Seguro Complementario de Salud.
+      </div>
+
+      <div style="margin-top:16px; padding:12px 16px; background:var(--crema-warm); border-radius:var(--radius-md); border-left:3px solid var(--verde-dark); font-size:0.9rem;">
+        <span style="font-weight:700; color:var(--verde-dark); display:block; margin-bottom:4px;">📖 Lectura clínica recomendada para tu caso:</span>
+        <a href="${relevantArticle.url}" target="_blank" rel="noopener noreferrer" style="color:var(--burdeo); font-weight:700; text-decoration:none;">${relevantArticle.title} →</a>
       </div>
     `;
   }
