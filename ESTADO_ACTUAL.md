@@ -16,6 +16,7 @@ Ecosistema digital y motor de captación de pacientes de Centro Paz.
 - `robots.txt` y `sitemap.xml` actualizados para permitir y priorizar crawlers de IA (`GPTBot`, `PerplexityBot`, `ClaudeBot`, `Google-Extended`).
 - Workflow de GitHub Actions (`.github/workflows/auto_publish.yml`) configurado con cron diario (12:00 CLT / 15:00 UTC) para publicación 100% desatendida en blog y redes sociales (Meta Graph API).
 - Pack Semana 1 en fase de cierre y Pack Semana 2 empaquetado en `marketing/pack-semana-2026-09-15/`.
+- Playbooks de captación directa añadidos: Ficha Google Maps Ñuñoa (`docs/GOOGLE_BUSINESS_PROFILE_NUNOA.md`), Red de derivación interprofesional (`docs/RED_DERIVACION_CLINICA_LOCAL.md`) y Respuestas rápidas de WhatsApp Business (`docs/WHATSAPP_RESPUESTAS_RAPIDAS.md`).
 
 ## Dependencias
 
