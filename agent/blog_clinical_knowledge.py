@@ -144,14 +144,14 @@ Al encontrarte en tu propio espacio familiar, tu sistema nervioso activa con may
             ("Transición de 5 minutos antes", "Tómate un vaso de agua o té y respira unos minutos antes de conectarte para desacelerar la mente."),
             ("Reembolso digital idéntico", "La boleta de honorarios emitida cuenta con el mismo código SIS oficial y se reembolsa con las mismas condiciones en tu Isapre.")
         ],
-        "how_valentina_works": """Valentina Castro Núñez atiende a pacientes de todo Chile mediante videollamada confidencial. El encuadre es cálido, estructurado y centrado en tus metas terapéuticas personales.
+        "how_valentina_works": """Valentina Castro Núñez atiende a pacientes de todo Chile mediante videollamada confidencial para personas adultas y jóvenes desde los 12 años en adelante, además de sesiones remotas de orientación a padres. El encuadre es cálido, estructurado y centrado en tus metas personales.
 
 Boleta electrónica de psicología clínica entregada inmediatamente tras la sesión.""",
         "whatsapp_prompt": "¿Prefieres la comodidad de atenderte online desde tu hogar? Escríbenos a WhatsApp para consultar horarios disponibles.",
         "faqs": [
+            ("¿Atienden a niños de forma online?", "No. En Centro Paz la terapia individual online está disponible para adultos y jóvenes desde los 12 años. En menores de 12 años la terapia requiere juego y presencia física en nuestra consulta de Ñuñoa. Para familias en regiones ofrecemos Orientación a Padres 100% online."),
             ("¿La Isapre reembolsa igual la terapia online?", "Sí, el reembolso es exactamente idéntico al de una consulta presencial según tu plan de salud."),
-            ("¿Qué plataforma se utiliza?", "Plataformas seguras y encriptadas como Google Meet o Zoom, fáciles de abrir desde el celular o computador."),
-            ("¿Puedo alternar entre online y presencial?", "Sí, pacientes que residen en Santiago pueden coordinar un formato mixto según su conveniencia.")
+            ("¿Qué plataforma se utiliza?", "Plataformas seguras y encriptadas como Google Meet o Zoom, fáciles de abrir desde el celular o computador.")
         ]
     },
 
@@ -690,14 +690,14 @@ En la terapia infantil basada en el juego, la psicóloga clínica no es una espe
             ("No interrogues a la salida", "Evita preguntarle '¿qué le contaste a la psicóloga?'. Respeta la privacidad de su espacio de juego terapéutico."),
             ("Participa activamente en las orientaciones parentales", "Gran parte del éxito radica en las herramientas que los padres aplican en casa tras las sesiones.")
         ],
-        "how_valentina_works": """Valentina Castro Núñez cuenta con formación en psicología infanto-juvenil y abordaje lúdico. Trabajamos de forma coordinada con la familia para que los avances en sesión se reflejen en la vida cotidiana y escolar.
+        "how_valentina_works": """Valentina Castro Núñez cuenta con formación en psicología infanto-juvenil y abordaje lúdico. La terapia con niños menores de 12 años se realiza de manera presencial en nuestra consulta de Ñuñoa para garantizar el vínculo y el trabajo lúdico directo, con sesiones complementarias de orientación a padres (presencial u online).
 
-Atención en Ñuñoa y Online con boletas reembolsables en Isapres.""",
+Boletas reembolsables en todas las Isapres y seguros.""",
         "whatsapp_prompt": "¿Buscas un espacio clínico cálido y respetuoso para acompañar a tu hijo/a? Escríbele a Valentina por WhatsApp para coordinar una primera evaluación.",
         "faqs": [
+            ("¿Por qué la terapia infantil no se realiza de forma online?", "En la infancia, el juego, el contacto corporal, la regulación sensorial y el uso de juguetes terapéuticos requieren la presencia física en la sala clínica. Para familias fuera de Santiago, ofrecemos Orientación Online a Padres."),
             ("¿A qué edad se utiliza la terapia a través del juego?", "Principalmente entre los 3 y 11 años, adaptando los materiales conforme a la etapa del desarrollo."),
-            ("¿Cada cuánto tiempo se reúnen con los padres?", "Habitualmente cada 3 o 4 sesiones del niño se realiza una sesión exclusiva de orientación a padres."),
-            ("¿Las sesiones se reembolsan en Isapre?", "Sí, 100% reembolsables con boleta oficial de psicología clínica.")
+            ("¿Cada cuánto tiempo se reúnen con los padres?", "Habitualmente cada 3 o 4 sesiones del niño se realiza una sesión exclusiva de orientación a padres.")
         ]
     },
 

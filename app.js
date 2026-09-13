@@ -40,30 +40,41 @@ const triageState = {
 const triageData = {
   who: {
     title: "¿Para quién buscas atención psicológica?",
-    desc: "Selecciona quién recibirá el acompañamiento para orientar el enfoque terapéutico.",
+    desc: "Selecciona el perfil de quien recibirá las sesiones para orientar el enfoque terapéutico.",
     options: [
-      { id: "adulto", icon: "👤", title: "Para mí (Adulto)", desc: "Acompañamiento individual, bienestar emocional y autoconocimiento." },
-      { id: "hijo", icon: "🌱", title: "Para mi hijo/a o adolescente", desc: "Apoyo infanto-juvenil, neurodivergencias y etapa escolar." }
+      { id: "adulto", icon: "👤", title: "Adulto (18+ años)", desc: "Online (todo Chile) o Presencial en Ñuñoa. Ansiedad, sobrecarga o TDAH/TEA." },
+      { id: "joven", icon: "🌱", title: "Joven / Adolescente (12 a 17 años)", desc: "Online (todo Chile) o Presencial en Ñuñoa. Regulación, colegio y autoestima." },
+      { id: "nino", icon: "🧸", title: "Niño/a (menor de 12 años)", desc: "Presencial en Ñuñoa (terapia lúdica) u Orientación Online a Padres." }
     ]
   },
   reason: {
     adulto: [
-      { id: "ansiedad", icon: "🌊", title: "Ansiedad, estrés o sobrecarga", desc: "Manejo de angustia, crisis y equilibrio diario." },
+      { id: "ansiedad", icon: "🌊", title: "Ansiedad, estrés o sobrecarga", desc: "Manejo de angustia, crisis y sobreexigencia diaria." },
       { id: "tea_tdah_adulto", icon: "🧠", title: "Neurodivergencia (TEA / TDAH)", desc: "Sospecha, diagnóstico tardío o acompañamiento." },
       { id: "crecimiento", icon: "✨", title: "Autoestima y desarrollo personal", desc: "Reconexión con tus metas y bienestar integral." },
       { id: "cambios", icon: "🧭", title: "Momentos de cambio y decisiones", desc: "Acompañamiento en transiciones vitales y laborales." }
     ],
-    hijo: [
-      { id: "tea_tdah_infantil", icon: "🧩", title: "Evaluación o apoyo TEA / TDAH", desc: "Estrategias de regulación, sensoriales y escolares." },
-      { id: "emocional_infantil", icon: "🎨", title: "Manejo emocional y frustración", desc: "Desbordes, miedos o desafíos escolares." },
-      { id: "adolescencia", icon: "🌿", title: "Etapa adolescente y autoestima", desc: "Identidad, motivación y relaciones sociales." },
-      { id: "orientacion_padres", icon: "🤝", title: "Orientación a padres en crianza", desc: "Pautas de crianza respetuosa y contención." }
+    joven: [
+      { id: "emocional_joven", icon: "🎨", title: "Regulación emocional y frustración", desc: "Manejo de crisis, desbordes o angustia en la adolescencia." },
+      { id: "tea_tdah_joven", icon: "🧠", title: "TDAH o TEA en etapa juvenil", desc: "Estrategias de estudio, funciones ejecutivas y adaptación." },
+      { id: "escolar_social", icon: "🤝", title: "Autoestima, vínculos y colegio", desc: "Presión académica, relaciones con pares e identidad." },
+      { id: "familia_joven", icon: "🌿", title: "Comunicación y clima familiar", desc: "Acompañamiento respetuoso a la dinámica familiar." }
+    ],
+    nino: [
+      { id: "terapia_infantil_presencial", icon: "🧩", title: "Terapia Infantil Presencial (Ñuñoa)", desc: "Sesiones lúdicas directas en sala clínica adaptada para tu hijo/a." },
+      { id: "tea_tdah_nino", icon: "🧠", title: "Sospecha o apoyo TEA / TDAH", desc: "Perfil sensorial, autorregulación y adaptación escolar." },
+      { id: "orientacion_padres", icon: "🤝", title: "Orientación a Padres en Crianza", desc: "Sesiones para padres (Online o Presencial) con pautas respetuosas." },
+      { id: "desbordes_conducta", icon: "🌱", title: "Desbordes emocionales y límites", desc: "Estrategias de corregulación sin gritos ni castigos." }
     ]
   },
-  modality: [
-    { id: "online", icon: "💻", title: "Online (Videollamada)", desc: "Comodidad y flexibilidad desde cualquier lugar de Chile o el extranjero." },
-    { id: "presencial", icon: "🛋️", title: "Presencial (Consulta)", desc: "Sesión en consulta clínica en un entorno de calma y confidencialidad." },
-    { id: "indiferente", icon: "✨", title: "Cualquiera de las dos", desc: "Sujeto a disponibilidad y recomendación de la terapeuta." }
+  modality_general: [
+    { id: "online", icon: "💻", title: "Online (Videollamada Segura)", desc: "Disponible para todo Chile para adultos y jóvenes desde los 12 años." },
+    { id: "presencial", icon: "🛋️", title: "Presencial en Ñuñoa (Santiago)", desc: "Sesión en consulta clínica en un entorno de calma y confidencialidad." },
+    { id: "indiferente", icon: "✨", title: "Cualquiera de las dos", desc: "Sujeto a disponibilidad y recomendación de Valentina." }
+  ],
+  modality_nino: [
+    { id: "presencial", icon: "🛋️", title: "Presencial en Consulta (Ñuñoa)", desc: "Terapia infantil lúdica e interactiva en sala clínica (menores de 12 años)." },
+    { id: "orientacion_online", icon: "💻", title: "Online: Orientación a Padres", desc: "Sesión remota por videollamada para madres/padres sobre crianza y pautas." }
   ]
 };
 
@@ -118,14 +129,16 @@ function initTriage() {
     </button>
   `).join("");
 
-  // Render Paso 3
-  step3Container.innerHTML = triageData.modality.map(opt => `
-    <button type="button" class="option-btn" data-id="${opt.id}" onclick="selectTriageModality('${opt.id}', '${opt.title.replace(/'/g, "\\'")}')">
-      <span class="option-icon">${opt.icon}</span>
-      <span class="option-title">${opt.title}</span>
-      <span class="option-sub">${opt.desc}</span>
-    </button>
-  `).join("");
+  // Render Paso 3 inicial
+  if (step3Container) {
+    step3Container.innerHTML = triageData.modality_general.map(opt => `
+      <button type="button" class="option-btn" data-id="${opt.id}" onclick="selectTriageModality('${opt.id}', '${opt.title.replace(/'/g, "\\'")}')">
+        <span class="option-icon">${opt.icon}</span>
+        <span class="option-title">${opt.title}</span>
+        <span class="option-sub">${opt.desc}</span>
+      </button>
+    `).join("");
+  }
 }
 
 window.selectTriageWho = function(id, label) {
@@ -135,13 +148,15 @@ window.selectTriageWho = function(id, label) {
   const step2Container = document.getElementById("step2-options");
   const reasons = triageData.reason[id] || triageData.reason.adulto;
 
-  step2Container.innerHTML = reasons.map(opt => `
-    <button type="button" class="option-btn" data-id="${opt.id}" onclick="selectTriageReason('${opt.id}', '${opt.title.replace(/'/g, "\\'")}')">
-      <span class="option-icon">${opt.icon}</span>
-      <span class="option-title">${opt.title}</span>
-      <span class="option-sub">${opt.desc}</span>
-    </button>
-  `).join("");
+  if (step2Container) {
+    step2Container.innerHTML = reasons.map(opt => `
+      <button type="button" class="option-btn" data-id="${opt.id}" onclick="selectTriageReason('${opt.id}', '${opt.title.replace(/'/g, "\\'")}')">
+        <span class="option-icon">${opt.icon}</span>
+        <span class="option-title">${opt.title}</span>
+        <span class="option-sub">${opt.desc}</span>
+      </button>
+    `).join("");
+  }
 
   setTimeout(() => goToStep(2), 220);
 };
@@ -149,6 +164,32 @@ window.selectTriageWho = function(id, label) {
 window.selectTriageReason = function(id, label) {
   triageState.reason = { id, label };
   updateOptionSelection("step2-options", id);
+
+  // Adaptar dinámicamente el Paso 3 (Modalidad)
+  const step3Desc = document.querySelector("#triage-step-3 .triage-step-desc");
+  const step3Container = document.getElementById("step3-options");
+
+  if (step3Container) {
+    const isChild = triageState.forWhom?.id === "nino";
+    const modalities = isChild ? triageData.modality_nino : triageData.modality_general;
+
+    if (step3Desc) {
+      if (isChild) {
+        step3Desc.innerHTML = `<span style="display:block; background:var(--verde-light); border:1.5px solid var(--verde-suave); border-radius:var(--radius-md); padding:14px 18px; margin-bottom:18px; text-align:left; color:var(--verde-dark);">🌿 <strong>Criterio Clínico Infantil:</strong> En Centro Paz <strong>no realizamos terapia individual online a menores de 12 años</strong>; la psicoterapia infantil es presencial en nuestra consulta de Ñuñoa. Para familias a distancia o con niños pequeños, disponemos de <strong>Orientación Online para Padres</strong>.</span>`;
+      } else {
+        step3Desc.innerHTML = "Modalidad <strong>Online</strong> disponible para todo Chile para adultos y jóvenes desde los 12 años, y <strong>Presencial</strong> en Ñuñoa (Santiago).";
+      }
+    }
+
+    step3Container.innerHTML = modalities.map(opt => `
+      <button type="button" class="option-btn" data-id="${opt.id}" onclick="selectTriageModality('${opt.id}', '${opt.title.replace(/'/g, "\\'")}')">
+        <span class="option-icon">${opt.icon}</span>
+        <span class="option-title">${opt.title}</span>
+        <span class="option-sub">${opt.desc}</span>
+      </button>
+    `).join("");
+  }
+
   setTimeout(() => goToStep(3), 220);
 };
 
@@ -230,10 +271,16 @@ function buildTriageResult() {
   const timePref = triageState.timePreference || "Horario flexible";
 
   let recommendedApproach = "Acompañamiento Psicológico Individual para Adultos";
-  if (triageState.forWhom?.id === "hijo") {
-    recommendedApproach = "Terapia Infanto-Juvenil & Orientación a Padres";
+  if (triageState.forWhom?.id === "nino") {
+    if (triageState.modality?.id === "orientacion_online") {
+      recommendedApproach = "Orientación Online en Crianza para Padres y Madres";
+    } else {
+      recommendedApproach = "Terapia Infantil Presencial en Ñuñoa & Orientación a Padres";
+    }
+  } else if (triageState.forWhom?.id === "joven") {
+    recommendedApproach = "Acompañamiento Psicológico a Jóvenes y Adolescentes (12 a 17 años)";
   } else if (triageState.reason?.id === "tea_tdah_adulto") {
-    recommendedApproach = "Acompañamiento en Neurodivergencias Adultas";
+    recommendedApproach = "Acompañamiento en Neurodivergencias Adultas (TEA / TDAH)";
   } else if (triageState.reason?.id === "ansiedad") {
     recommendedApproach = "Manejo Clínico de Ansiedad y Sobrecarga";
   }
@@ -242,20 +289,20 @@ function buildTriageResult() {
     title: "Guía clínica: ¿Cómo saber si tengo TDAH en la adultez?",
     url: "blog/tdah-adultos.html"
   };
-  if (triageState.forWhom?.id === "hijo") {
+  if (triageState.forWhom?.id === "nino") {
     relevantArticle = {
-      title: "Artículo clínico: Manejo de desbordes emocionales y crisis sensoriales en niños",
-      url: "blog/crianza-regulacion.html"
+      title: "Artículo clínico: Acompañar a tu hijo/a sin agotarte en el intento",
+      url: "blog/apoyo-neurodivergente-hijos.html"
+    };
+  } else if (triageState.forWhom?.id === "joven") {
+    relevantArticle = {
+      title: "Artículo clínico: Regulación y límites sin culpa",
+      url: "blog/comunicacion-asertiva-limites.html"
     };
   } else if (triageState.reason?.id === "ansiedad") {
     relevantArticle = {
-      title: "Artículo clínico: 3 Técnicas somáticas para regular la ansiedad cuando sobrepiensas",
+      title: "Artículo clínico: 3 Técnicas somáticas para regular la ansiedad",
       url: "blog/regulacion-ansiedad.html"
-    };
-  } else if (triageState.reason?.id === "tea_tdah_adulto") {
-    relevantArticle = {
-      title: "Artículo clínico: TDAH tardío, parálisis ejecutiva y masking en adultos",
-      url: "blog/tdah-adultos.html"
     };
   } else {
     relevantArticle = {
