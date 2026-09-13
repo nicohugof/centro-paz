@@ -1,4 +1,27 @@
 User-agent: *
 Allow: /
 
+# Rastreo de Motores de IA y Búsqueda Conversacional
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
 Sitemap: https://www.centropaz.cl/sitemap.xml
+LLMs-Txt: https://www.centropaz.cl/llms.txt

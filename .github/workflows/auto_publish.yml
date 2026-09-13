@@ -1,0 +1,57 @@
+name: Publicación Automática Desatendida (Blog + Redes Sociales)
+
+on:
+  schedule:
+    # 15:00 UTC = 12:00 Chile (America/Santiago UTC-3) - Hora oficial de publicación de Feed diario
+    - cron: '0 15 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Modo simulación (Dry Run) sin publicar en Meta'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  auto_publish:
+    name: Ejecutar Publicación Diaria
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar Repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Generar y Sincronizar Blog Clínico, llms.txt y Sitemap para Motores de IA
+        run: |
+          PYTHONPATH=. python3 agent/blog_generator.py
+
+      - name: Publicar Post del Día en Instagram y Facebook (Meta Graph API)
+        env:
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          META_IG_ACCOUNT_ID: ${{ secrets.META_IG_ACCOUNT_ID }}
+          META_FB_PAGE_ID: ${{ secrets.META_FB_PAGE_ID }}
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            PYTHONPATH=. python3 -m agent.auto_publisher --auto-slot --dry-run
+          else
+            PYTHONPATH=. python3 -m agent.auto_publisher --auto-slot
+          fi
+
+      - name: Confirmar y Sincronizar Cambios de la Web si Hubo Novedades
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add blog/ sitemap.xml robots.txt llms.txt styles.css index.html
+          if ! git diff --staged --quiet; then
+            git commit -m "chore(auto): sincronizar blog clínico, llms.txt y sitemap [skip ci]"
+            git push
+          else
+            echo "Sin cambios pendientes en el árbol de trabajo web."
+          fi
