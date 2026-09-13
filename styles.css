@@ -141,12 +141,15 @@ a:hover {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: var(--rosado);
+  background: #FFFFFF;
+  border: 1.5px solid #E2EAD8;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: var(--shadow-sm);
   transition: transform var(--trans-fast);
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 .logo-brand:hover .logo-symbol {
