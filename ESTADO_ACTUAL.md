@@ -16,11 +16,11 @@ Ecosistema digital y motor de captación de pacientes de Centro Paz.
 - `robots.txt` y `sitemap.xml` actualizados para permitir y priorizar crawlers de IA (`GPTBot`, `PerplexityBot`, `ClaudeBot`, `Google-Extended`).
 - Workflow de GitHub Actions (`.github/workflows/auto_publish.yml`) configurado con cron diario (12:00 CLT / 15:00 UTC) para publicación 100% desatendida en blog y redes sociales (Meta Graph API).
 - Pack Semana 1 en fase de cierre y Pack Semana 2 empaquetado en `marketing/pack-semana-2026-09-15/`.
-- Playbooks de captación directa añadidos: Ficha Google Maps Ñuñoa (`docs/GOOGLE_BUSINESS_PROFILE_NUNOA.md`), Red de derivación interprofesional (`docs/RED_DERIVACION_CLINICA_LOCAL.md`) y Respuestas rápidas de WhatsApp Business (`docs/WHATSAPP_RESPUESTAS_RAPIDAS.md`).
+- Playbooks de captación directa añadidos: Ficha Google Maps Ñuñoa (`docs/GOOGLE_BUSINESS_PROFILE_NUNOA.md`) y Red de derivación interprofesional (`docs/RED_DERIVACION_CLINICA_LOCAL.md`).
 
 ## Directrices Operativas Clave
 
-- **Atención por WhatsApp:** Atendido 100% de forma exclusiva y personal por **Valentina Castro Núñez** (`+56 9 6516 3893`). No se integran bots que simulen ser la psicóloga; se preserva la calidez humana, la confidencialidad y el secreto profesional.
+- **Atención por WhatsApp:** Atendida 100% de forma exclusiva, personal y directa por **Valentina Castro Núñez** (`+56 9 6516 3893`). No se utilizan bots conversacionales ni respuestas automatizadas/prefabricadas: Valentina lidera toda la relación y triaje humano con clientes y pacientes nuevos, preservando la calidez clínica, la empatía y el secreto profesional.
 - **Producción de Videos:** Se delega al pipeline automatizado de **YouTube IA** (`/Proyectos/youtube-ia`), alimentándose de los guiones clínicos en [`marketing/GUIONES_VIDEO_VERTICALES.md`](file:///Users/nigoku/Proyectos/centro-paz/marketing/GUIONES_VIDEO_VERTICALES.md).
 - **Separación total de Ironcross:** Negocio clínico independiente, sin canales de WhatsApp compartidos ni cruces operativos.
 
