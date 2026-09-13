@@ -237,10 +237,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     .header {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 36px; }}
     .brand {{ display: flex; align-items: center; gap: 16px; }}
     .logo-badge {{
-      width: 56px; height: 56px; border-radius: 50%; background: #F0D9DE;
+      width: 64px; height: 64px; border-radius: 50%; background: #FFFFFF; border: 2px solid #E2EAD8;
       display: flex; align-items: center; justify-content: center;
-      font-family: 'Lora', serif; font-size: 26px; font-weight: 700; color: #7A2E3A;
+      box-shadow: 0 4px 14px rgba(66, 97, 19, 0.08); overflow: hidden; flex-shrink: 0;
     }}
+    .logo-badge img {{ width: 52px; height: 52px; object-fit: contain; display: block; }}
     .brand-name {{ font-family: 'Lora', serif; font-size: 24px; font-weight: 700; color: #5C1F29; }}
     .brand-sub {{ font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: #4A6E60; font-weight: 700; }}
     .tag-category {{ background: #F0D9DE; color: #7A2E3A; padding: 8px 20px; border-radius: 40px; font-size: 16px; font-weight: 700; }}
@@ -258,16 +259,22 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       background: #7A2E3A; color: #FFF; border-radius: 20px;
       padding: 24px 32px; display: flex; justify-content: space-between; align-items: center;
     }}
-    .footer-cta-text h3 {{ font-family: 'Lora', serif; font-size: 22px; color: #FFF; margin-bottom: 4px; }}
+    .footer-cta-text h3 {{ font-size: 21px; margin-bottom: 4px; }}
     .footer-cta-text p {{ font-size: 15px; color: #F0D9DE; }}
-    .wa-pill {{ background: #25D366; color: #FFF; padding: 12px 24px; border-radius: 40px; font-weight: 700; font-size: 17px; }}
+    .wa-pill {{
+      background: #25D366; color: #FFF; padding: 10px 20px; border-radius: 40px;
+      font-weight: 700; font-size: 16px; display: flex; align-items: center; gap: 8px;
+    }}
   </style>
 </head>
 <body>
-  <div>
+  <div class="bg-circle-1"></div>
+  <div class="bg-circle-2"></div>
+
+  <div class="content">
     <div class="header">
       <div class="brand">
-        <div class="logo-badge">CP</div>
+        <div class="logo-badge"><img src="../logo/icon.png" alt="Centro Paz" width="52" height="52"></div>
         <div>
           <div class="brand-name">Centro Paz</div>
           <div class="brand-sub">Psicología Clínica</div>
