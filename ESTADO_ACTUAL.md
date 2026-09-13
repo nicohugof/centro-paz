@@ -18,6 +18,7 @@ Ecosistema digital y motor de captación de pacientes de Centro Paz.
 - Packs Semanales estructurados: Pack Semana 1 (2026-09-08), Pack Semana 2 (2026-09-15) y Pack Semana 3 (2026-09-22) empaquetados en `marketing/` con copys, infografías, JSON n8n y asignación de video diario.
 - Playbooks de captación directa añadidos: Ficha Google Maps Ñuñoa (`docs/GOOGLE_BUSINESS_PROFILE_NUNOA.md`) y Red de derivación interprofesional (`docs/RED_DERIVACION_CLINICA_LOCAL.md`).
 - Pipeline de video vertical integrado con YouTube IA: **10 videos cortos generados en resolución 9:16 (1080x1920)** con voz chilena empática (`es-CL-CatalinaNeural`), banda sonora adaptativa y subtítulos sincronizados, listos para YouTube Shorts, Reels y TikTok con textos y comentarios fijados hacia WhatsApp y el hub móvil `/links`.
+- Identidad visual unificada con el **Nuevo Logotipo Oficial de Centro Paz** (símbolo de Psicología Ψ abrazado por ramas de laurel en verde oliva y bosque): generado en formatos de alta resolución (`assets/logo/icon-profile-1024.png`, `lockup-1200.png`, `icon.svg`), integrado en la barra de navegación web (`index.html`) y aplicado a las **28 piezas gráficas completas de Instagram** (`assets/instagram/*.html` y `assets/instagram/*.png` a 1080x1350).
 - Comando puente operativo implementado: `python3 -m agent.video_shorts_generator --render <id>` para compilar videos a demanda.
 
 ## Directrices Operativas Clave
