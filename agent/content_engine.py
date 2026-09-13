@@ -127,14 +127,15 @@ En Centro Paz te acompañamos a construir un espacio seguro donde puedas soltar 
         "title": "3 Razones por las que la terapia online es tan efectiva",
         "hook": "¿El tráfico de Santiago o vivir en regiones te frena de empezar terapia?",
         "points": [
-            "Atiéndete desde tu habitación, sin traslados ni salas de espera.",
-            "Misma eficacia clínica y boleta electrónica para reembolso en Isapres.",
-            "Plataforma segura y confidencial con Valentina Castro Núñez."
+            "Online para adultos y jóvenes (12+ años) desde su espacio de calma.",
+            "Para menores de 12 años: terapia presencial en Ñuñoa u orientación online a padres.",
+            "Misma rigurosidad clínica y boleta electrónica para reembolso en Isapres."
         ],
         "category": "Modalidad",
-        "caption": """Atenderte desde tu habitación o espacio de calma reduce la ansiedad y elimina los tiempos de traslado 💻🌿
+        "caption": """Atenderte online (para adultos y jóvenes desde 12 años) reduce la ansiedad y elimina traslados 💻🌿
+En niños menores de 12 años, priorizamos la terapia presencial en Ñuñoa o la orientación online a padres.
 
-La terapia online cuenta con la misma rigurosidad y calidez clínica. Recibes tu boleta electrónica para reembolsar en tu Isapre o Seguro.
+La atención cuenta con boleta electrónica para reembolsar en tu Isapre o Seguro Complementario.
 
 👉 Encuentra tu horario disponible en www.centropaz.cl o escríbenos a WhatsApp al +56 9 6516 3893.""",
         "hashtags": HASHTAGS_BASE + ["#TerapiaOnline", "#PsicologiaOnlineChile", "#SaludMentalChile"]
