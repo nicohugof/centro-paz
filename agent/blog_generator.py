@@ -195,8 +195,10 @@ def generate_article_html(topic_key: str, topic: dict) -> str:
   <title>{html.escape(title)} | Centro Paz Psicología Clínica</title>
   <meta name="description" content="{html.escape(hook)} Guía clínica por Valentina Castro Núñez, Centro Paz (Ñuñoa y Online para todo Chile). Boletas reembolsables en Isapre.">
   <link rel="canonical" href="{canonical_url}">
+  <link rel="icon" type="image/svg+xml" href="../assets/logo/icon.svg">
+  <link rel="apple-touch-icon" href="../assets/logo/icon-profile-1024.png">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-  <meta name="theme-color" content="#7A2E3A">
+  <meta name="theme-color" content="#385E28">
   <meta name="author" content="Valentina Castro Núñez">
 
   <!-- Open Graph / Redes Sociales -->
@@ -218,7 +220,7 @@ def generate_article_html(topic_key: str, topic: dict) -> str:
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,300..900;1,6..12,300..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../styles.css?v=20260913.3">
 
   <!-- Schemas JSON-LD para Google y Motores de IA -->
   <script type="application/ld+json">
@@ -473,7 +475,9 @@ def generate_blog_index_html(topics: dict) -> str:
   <title>Blog Clínico y Recursos de Salud Mental | Centro Paz Chile</title>
   <meta name="description" content="Artículos clínicos y guías prácticas sobre Neurodivergencias (TDAH y TEA en adultos), crianza respetuosa, regulación emocional y reembolso de Isapres en Chile.">
   <link rel="canonical" href="{SITE_URL}/blog/">
-  <meta name="theme-color" content="#7A2E3A">
+  <link rel="icon" type="image/svg+xml" href="../assets/logo/icon.svg">
+  <link rel="apple-touch-icon" href="../assets/logo/icon-profile-1024.png">
+  <meta name="theme-color" content="#385E28">
   <meta name="robots" content="index, follow">
 
   <meta property="og:site_name" content="Centro Paz — Psicología Clínica">
@@ -486,7 +490,7 @@ def generate_blog_index_html(topics: dict) -> str:
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,300..900;1,6..12,300..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../styles.css?v=20260913.3">
 </head>
 <body class="blog-index-page">
 
