@@ -18,11 +18,13 @@ Ecosistema digital y motor de captación de pacientes de Centro Paz.
 - Pack Semana 1 en fase de cierre y Pack Semana 2 empaquetado en `marketing/pack-semana-2026-09-15/`.
 - Playbooks de captación directa añadidos: Ficha Google Maps Ñuñoa (`docs/GOOGLE_BUSINESS_PROFILE_NUNOA.md`), Red de derivación interprofesional (`docs/RED_DERIVACION_CLINICA_LOCAL.md`) y Respuestas rápidas de WhatsApp Business (`docs/WHATSAPP_RESPUESTAS_RAPIDAS.md`).
 
-## Dependencias
+## Directrices Operativas Clave
 
-- Negocio clínica 100% separado de Ironcross: no comparte canales de WhatsApp (`+56 9 6516 3893` es exclusivo de Valentina para Centro Paz) ni automatizaciones operativas.
+- **Atención por WhatsApp:** Atendido 100% de forma exclusiva y personal por **Valentina Castro Núñez** (`+56 9 6516 3893`). No se integran bots que simulen ser la psicóloga; se preserva la calidez humana, la confidencialidad y el secreto profesional.
+- **Producción de Videos:** Se delega al pipeline automatizado de **YouTube IA** (`/Proyectos/youtube-ia`), alimentándose de los guiones clínicos en [`marketing/GUIONES_VIDEO_VERTICALES.md`](file:///Users/nigoku/Proyectos/centro-paz/marketing/GUIONES_VIDEO_VERTICALES.md).
+- **Separación total de Ironcross:** Negocio clínico independiente, sin canales de WhatsApp compartidos ni cruces operativos.
 
 ## Próximo control
 
-Monitorear tráfico de captación hacia WhatsApp y mantener publicaciones orgánicas según el ritmo diario fijado.
+Monitorear el flujo de pacientes que llegan al WhatsApp de Valentina y avanzar en la prueba de generación de videos cortos desde YouTube IA.
 

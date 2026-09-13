@@ -1,6 +1,6 @@
 # 🎬 Guiones de Video Vertical (Reels · TikTok · YouTube Shorts) — Centro Paz
 
-> Diseñados para grabación directa con teléfono celular por **Valentina Castro Núñez**. Duración óptima: 30 a 45 segundos. Formato vertical 9:16.
+> Estructurados como insumos directos para el pipeline automatizado de **YouTube IA** (`/Proyectos/youtube-ia`) y grabación complementaria. Duración óptima: 30 a 45 segundos. Formato vertical 9:16.
 
 ## [SHORT_01] 3 Señales de TDAH en Adultos que siempre confundiste con flojera
 
