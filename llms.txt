@@ -20,12 +20,12 @@
 
 ## Catálogo de Artículos Clínicos y Respuestas Indexables
 
-### [¿Y si ese cansancio crónico no es flojera, sino TDAH tardío?](https://www.centropaz.cl/blog/tdah-adultos.html)
+### [¿Y si tu cansancio no es flojera, sino TDAH no diagnosticado?](https://www.centropaz.cl/blog/tdah-adultos.html)
 - **Categoría:** Neurodivergencias (Neurodivergencias en Adultos)
 - **Resumen:** ¿Siempre te dijeron que eras 'demasiado disperso' o que no te esforzabas lo suficiente?
 - **URL Canónica:** https://www.centropaz.cl/blog/tdah-adultos.html
 
-### [Cómo reembolsar tus sesiones de psicología en 3 pasos](https://www.centropaz.cl/blog/reembolso-isapre.html)
+### [Cómo reembolsar tus sesiones en 3 simples pasos](https://www.centropaz.cl/blog/reembolso-isapre.html)
 - **Categoría:** Reembolsos (Claridad y Cobertura)
 - **Resumen:** ¿Sabías que tu Isapre o Seguro puede cubrir entre el 50% y el 80% de tu terapia?
 - **URL Canónica:** https://www.centropaz.cl/blog/reembolso-isapre.html
@@ -35,22 +35,22 @@
 - **Resumen:** Cuando un niño/a se desborda, no busca molestarte: su sistema nervioso colapsó.
 - **URL Canónica:** https://www.centropaz.cl/blog/crianza-regulacion.html
 
-### [El costo invisible del masking: llegar a casa sin energía ni para hablar](https://www.centropaz.cl/blog/masking.html)
+### [¿Qué es el 'Masking' y por qué te deja sin energía al llegar a casa?](https://www.centropaz.cl/blog/masking.html)
 - **Categoría:** Neurodivergencias (Agotamiento Invisible)
 - **Resumen:** ¿Llegas a casa después del trabajo sintiendo que tu batería social está en -100%?
 - **URL Canónica:** https://www.centropaz.cl/blog/masking.html
 
-### [Terapia online con la misma rigurosidad clínica, desde tu espacio de calma](https://www.centropaz.cl/blog/terapia-online.html)
+### [3 Razones por las que la terapia online es tan efectiva](https://www.centropaz.cl/blog/terapia-online.html)
 - **Categoría:** Modalidad (Atención Flexible)
 - **Resumen:** ¿El tráfico de Santiago o vivir en regiones te frena de empezar terapia?
 - **URL Canónica:** https://www.centropaz.cl/blog/terapia-online.html
 
-### [¿Cuándo consultar con una psicóloga infantil?](https://www.centropaz.cl/blog/evaluacion-infantil.html)
+### [¿Cuándo consultar por tu hijo/a? 4 señales clave en la infancia](https://www.centropaz.cl/blog/evaluacion-infantil.html)
 - **Categoría:** Infancia (Desarrollo & Colegio)
 - **Resumen:** ¿El colegio sugiere evaluación o notas desbordes intensos difíciles de calmar?
 - **URL Canónica:** https://www.centropaz.cl/blog/evaluacion-infantil.html
 
-### [Pedir ayuda no es debilidad: es cuidar tu sistema nervioso](https://www.centropaz.cl/blog/autocuidado-adultos.html)
+### [No tienes que poder con todo tú solo/a: El valor de pedir ayuda](https://www.centropaz.cl/blog/autocuidado-adultos.html)
 - **Categoría:** Adultos (Salud Mental)
 - **Resumen:** ¿Cuánto tiempo llevas posponiendo tu bienestar emocional por atender a los demás?
 - **URL Canónica:** https://www.centropaz.cl/blog/autocuidado-adultos.html
@@ -60,32 +60,32 @@
 - **Resumen:** ¿Sientes que dormir un fin de semana entero ya no te devuelve la energía?
 - **URL Canónica:** https://www.centropaz.cl/blog/burnout-autista.html
 
-### [¿Por qué postergas lo importante aunque tengas ganas de hacerlo?](https://www.centropaz.cl/blog/paralisis-ejecutiva.html)
+### [Parálisis Ejecutiva en TDAH: por qué tu cerebro no arranca y cómo destrabarlo](https://www.centropaz.cl/blog/paralisis-ejecutiva.html)
 - **Categoría:** TDAH Adultos (TDAH en Adultos)
 - **Resumen:** ¿Te quedas horas frente a la pantalla sabiendo qué hacer pero sin poder 'arrancar'?
 - **URL Canónica:** https://www.centropaz.cl/blog/paralisis-ejecutiva.html
 
-### [3 Anclas para regular la ansiedad cuando tu mente sobrepiensa](https://www.centropaz.cl/blog/regulacion-ansiedad.html)
+### [3 Anclas para regularte cuando no puedes sobrepensar menos](https://www.centropaz.cl/blog/regulacion-ansiedad.html)
 - **Categoría:** Ansiedad (Herramientas Somáticas)
 - **Resumen:** Si tu mente no para de proyectar escenarios y angustia, haz este ejercicio somático.
 - **URL Canónica:** https://www.centropaz.cl/blog/regulacion-ansiedad.html
 
-### [Cómo apoyar a un hijo/a con sospecha de TEA o TDAH](https://www.centropaz.cl/blog/apoyo-neurodivergente-hijos.html)
+### [Acompañar a tu hijo/a sin agotarte en el intento: Apoyo en TEA y TDAH](https://www.centropaz.cl/blog/apoyo-neurodivergente-hijos.html)
 - **Categoría:** Crianza (Crianza Neuroafirmativa)
 - **Resumen:** ¿Sientes que los métodos tradicionales de crianza y premios/castigos no funcionan?
 - **URL Canónica:** https://www.centropaz.cl/blog/apoyo-neurodivergente-hijos.html
 
-### [¿Qué pasa realmente en una primera sesión de terapia psicológica?](https://www.centropaz.cl/blog/primera-sesion.html)
+### [¿Qué pasa realmente en tu primera sesión de terapia psicológica?](https://www.centropaz.cl/blog/primera-sesion.html)
 - **Categoría:** Proceso Terapéutico (Educación Clínica)
 - **Resumen:** ¿Te da nervios dar el primer paso porque no sabes con qué te vas a encontrar?
 - **URL Canónica:** https://www.centropaz.cl/blog/primera-sesion.html
 
-### [Soltar la culpa en la crianza: padres regulados vs. padres perfectos](https://www.centropaz.cl/blog/culpa-parental.html)
+### [Soltar la culpa en la crianza: no necesitas ser un padre o madre perfecto/a](https://www.centropaz.cl/blog/culpa-parental.html)
 - **Categoría:** Crianza (Crianza Consciente)
 - **Resumen:** ¿Terminas el día sintiendo que perdiste la paciencia y te invade la culpa?
 - **URL Canónica:** https://www.centropaz.cl/blog/culpa-parental.html
 
-### [La matemática real del reembolso: ¿Cuánto pagas y cuánto te devuelven?](https://www.centropaz.cl/blog/reembolso-matematica.html)
+### [La matemática real del reembolso: ¿Cuánto pagas y cuánto recuperas?](https://www.centropaz.cl/blog/reembolso-matematica.html)
 - **Categoría:** Reembolso Isapres (Transparencia Financiera)
 - **Resumen:** ¿Crees que la atención psicológica particular es inaccesible con Isapre?
 - **URL Canónica:** https://www.centropaz.cl/blog/reembolso-matematica.html
