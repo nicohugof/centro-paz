@@ -35,7 +35,7 @@ TOPICS: Dict[str, Dict[str, Any]] = {
     "tdah_adultos": {
         "id": 1,
         "kicker": "Neurodivergencias en Adultos",
-        "title": "¿Y si ese cansancio crónico no es flojera, sino TDAH tardío?",
+        "title": "¿Y si tu cansancio no es flojera, sino TDAH no diagnosticado?",
         "hook": "¿Siempre te dijeron que eras 'demasiado disperso' o que no te esforzabas lo suficiente?",
         "points": [
             "Procrastinación paralizante ante tareas que parecen simples para otros.",
@@ -59,7 +59,7 @@ En Centro Paz no buscamos encajarte en moldes ni juzgarte: trabajamos desde un e
     "reembolso_isapre": {
         "id": 2,
         "kicker": "Claridad y Cobertura",
-        "title": "Cómo reembolsar tus sesiones de psicología en 3 pasos",
+        "title": "Cómo reembolsar tus sesiones en 3 simples pasos",
         "hook": "¿Sabías que tu Isapre o Seguro puede cubrir entre el 50% y el 80% de tu terapia?",
         "points": [
             "1. Asistes a tu sesión online o presencial con Valentina.",
@@ -101,7 +101,7 @@ En Centro Paz acompañamos a niños, niñas y adolescentes, y brindamos orientac
     "masking": {
         "id": 4,
         "kicker": "Agotamiento Invisible",
-        "title": "El costo invisible del masking: llegar a casa sin energía ni para hablar",
+        "title": "¿Qué es el 'Masking' y por qué te deja sin energía al llegar a casa?",
         "hook": "¿Llegas a casa después del trabajo sintiendo que tu batería social está en -100%?",
         "points": [
             "Forzar contacto visual, modular gestos y reprimir incomodidades sensoriales todo el día.",
@@ -124,7 +124,7 @@ En Centro Paz te acompañamos a construir un espacio seguro donde puedas soltar 
     "terapia_online": {
         "id": 5,
         "kicker": "Atención Flexible",
-        "title": "Terapia online con la misma rigurosidad clínica, desde tu espacio de calma",
+        "title": "3 Razones por las que la terapia online es tan efectiva",
         "hook": "¿El tráfico de Santiago o vivir en regiones te frena de empezar terapia?",
         "points": [
             "Atiéndete desde tu habitación, sin traslados ni salas de espera.",
@@ -142,7 +142,7 @@ La terapia online cuenta con la misma rigurosidad y calidez clínica. Recibes tu
     "evaluacion_infantil": {
         "id": 6,
         "kicker": "Desarrollo & Colegio",
-        "title": "¿Cuándo consultar con una psicóloga infantil?",
+        "title": "¿Cuándo consultar por tu hijo/a? 4 señales clave en la infancia",
         "hook": "¿El colegio sugiere evaluación o notas desbordes intensos difíciles de calmar?",
         "points": [
             "Señales de alerta: cambios bruscos de conducta, irritabilidad o aislamiento.",
@@ -162,7 +162,7 @@ En Centro Paz acompañamos a niños y adolescentes desde un enfoque lúdico y c�
     "autocuidado_adultos": {
         "id": 7,
         "kicker": "Salud Mental",
-        "title": "Pedir ayuda no es debilidad: es cuidar tu sistema nervioso",
+        "title": "No tienes que poder con todo tú solo/a: El valor de pedir ayuda",
         "hook": "¿Cuánto tiempo llevas posponiendo tu bienestar emocional por atender a los demás?",
         "points": [
             "50 minutos a la semana dedicados 100% a ti, sin juicios.",
@@ -203,7 +203,7 @@ Requiere reestructurar demandas sensoriales, validar límites y recibir acompañ
     "paralisis_ejecutiva": {
         "id": 9,
         "kicker": "TDAH en Adultos",
-        "title": "¿Por qué postergas lo importante aunque tengas ganas de hacerlo?",
+        "title": "Parálisis Ejecutiva en TDAH: por qué tu cerebro no arranca y cómo destrabarlo",
         "hook": "¿Te quedas horas frente a la pantalla sabiendo qué hacer pero sin poder 'arrancar'?",
         "points": [
             "No es flojera: es un bloqueo en la función ejecutiva de la corteza prefrontal.",
@@ -221,7 +221,7 @@ Obligarte con culpa aumenta la respuesta de amenaza y empeora el bloqueo. En ter
     "regulacion_ansiedad": {
         "id": 10,
         "kicker": "Herramientas Somáticas",
-        "title": "3 Anclas para regular la ansiedad cuando tu mente sobrepiensa",
+        "title": "3 Anclas para regularte cuando no puedes sobrepensar menos",
         "hook": "Si tu mente no para de proyectar escenarios y angustia, haz este ejercicio somático.",
         "points": [
             "1. Suspiro fisiológico: 2 inhalaciones nasales y 1 exhalación lenta por la boca.",
@@ -239,7 +239,7 @@ El nervio vago responde a señales fisiológicas directas como la respiración p
     "apoyo_neurodivergente_hijos": {
         "id": 11,
         "kicker": "Crianza Neuroafirmativa",
-        "title": "Cómo apoyar a un hijo/a con sospecha de TEA o TDAH",
+        "title": "Acompañar a tu hijo/a sin agotarte en el intento: Apoyo en TEA y TDAH",
         "hook": "¿Sientes que los métodos tradicionales de crianza y premios/castigos no funcionan?",
         "points": [
             "Comprender su perfil sensorial: anticipar sobrecargas por ropa, ruidos o texturas.",
@@ -258,7 +258,7 @@ En Centro Paz trabajamos en conjunto con los padres para entregarles herramienta
     "primera_sesion": {
         "id": 12,
         "kicker": "Educación Clínica",
-        "title": "¿Qué pasa realmente en una primera sesión de terapia psicológica?",
+        "title": "¿Qué pasa realmente en tu primera sesión de terapia psicológica?",
         "hook": "¿Te da nervios dar el primer paso porque no sabes con qué te vas a encontrar?",
         "points": [
             "No tienes que llegar con todo claro ni saber exactamente qué decir.",
@@ -280,7 +280,7 @@ La primera sesión es un encuentro protegido y sin juicios para escucharte y aco
     "culpa_parental": {
         "id": 13,
         "kicker": "Crianza Consciente",
-        "title": "Soltar la culpa en la crianza: padres regulados vs. padres perfectos",
+        "title": "Soltar la culpa en la crianza: no necesitas ser un padre o madre perfecto/a",
         "hook": "¿Terminas el día sintiendo que perdiste la paciencia y te invade la culpa?",
         "points": [
             "Tus hijos no necesitan padres perfectos: necesitan adultos que sepan reparar la conexión.",
@@ -298,7 +298,7 @@ La capacidad de reparar la conexión emocional después de un mal momento es má
     "reembolso_matematica": {
         "id": 14,
         "kicker": "Transparencia Financiera",
-        "title": "La matemática real del reembolso: ¿Cuánto pagas y cuánto te devuelven?",
+        "title": "La matemática real del reembolso: ¿Cuánto pagas y cuánto recuperas?",
         "hook": "¿Crees que la atención psicológica particular es inaccesible con Isapre?",
         "points": [
             "Arancel sesión particular oficial: $45.000 CLP.",

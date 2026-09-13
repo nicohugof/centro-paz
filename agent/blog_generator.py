@@ -4,7 +4,7 @@ Centro Paz (CPAZ) — Motor Generador de Blog y Optimización para Motores de IA
 
 Genera:
 1. Artículos clínicos semánticos en blog/<slug>.html con Schema JSON-LD (MedicalWebPage, FAQPage, Article).
-2. Portada del blog en blog/index.html.
+2. Portada del blog en blog/index.html con tarjetas 100% sincronizadas con las infografías.
 3. llms.txt en la raíz para indexación directa por ChatGPT, Perplexity, Claude y Gemini.
 4. Actualización automática de sitemap.xml y robots.txt.
 """
@@ -16,7 +16,9 @@ import os
 import re
 import urllib.parse
 from pathlib import Path
+
 from agent import content_engine
+from agent.blog_clinical_knowledge import CLINICAL_ARTICLES
 
 ROOT = Path(__file__).resolve().parent.parent
 BLOG_DIR = ROOT / "blog"
@@ -25,57 +27,16 @@ SITE_URL = "https://www.centropaz.cl"
 WA_NUMBER = "56965163893"
 WA_DISPLAY = "+56 9 6516 3893"
 
-FAQ_DATA = {
-    "tdah_adultos": [
-        ("¿Cómo sé si tengo TDAH o solo estrés?", "El estrés suele remitir cuando disminuye la sobrecarga. El TDAH es una condición del neurodesarrollo presente desde la infancia, caracterizada por fallas persistentes en las funciones ejecutivas, impulsividad, variabilidad atencional y fatiga por sobreesfuerzo adaptativo."),
-        ("¿A qué edad se puede diagnosticar el TDAH en adultos?", "No hay límite de edad. Cada vez más personas reciben su diagnóstico entre los 25 y 45 años tras descartar falsos diagnósticos de ansiedad o depresión refractaria."),
-        ("¿Las sesiones son reembolsables en Isapre?", "Sí, en Centro Paz emitimos boletas electrónicas de honorarios con código de psicología clínica válidas para reembolso en todas las Isapres y seguros complementarios.")
-    ],
-    "reembolso_isapre": [
-        ("¿Cuánto demora el reembolso en la Isapre?", "Una vez subida la boleta a la app de tu Isapre (Colmena, Banmédica, CruzBlanca, etc.), la transferencia bancaria suele realizarse entre 48 horas y 5 días hábiles."),
-        ("¿Qué porcentaje reembolsa la Isapre?", "Depende de tu plan particular, pero habitualmente reembolsan entre el 50% y el 80% del valor de la sesión de $45.000 CLP, dejando el copago real entre $12.000 y $18.000 CLP."),
-        ("¿Sirve también para Seguros Complementarios?", "Sí, el saldo que no cubre la Isapre puede presentarse ante tu seguro complementario laboral o personal para cubrir hasta el 100% según tu póliza.")
-    ],
-    "crianza_regulacion": [
-        ("¿Por qué no funcionan los castigos en un desborde?", "Durante un desborde emocional intenso la amígdala cerebral toma el control y la corteza prefrontal (lógica y lenguaje) se desconecta temporalmente. Exigir calma o castigar aumenta la sensación de amenaza y empeora la crisis."),
-        ("¿Qué es la corregulación?", "Es el proceso mediante el cual el adulto presta la calma de su propio sistema nervioso (tono de voz sereno, contacto visual suave, presencia física no invasiva) para guiar al niño de vuelta al equilibrio fisiológico."),
-        ("¿Cómo ayuda Centro Paz a los padres?", "Realizamos sesiones de orientación continua a padres donde entregamos pautas concretas de crianza respetuosa adaptadas al perfil sensorial y emocional singular de cada hijo/a.")
-    ],
-    "burnout_autista": [
-        ("¿Por qué el descanso habitual no cura el Burnout Autista?", "A diferencia del cansancio físico, el burnout autista es un colapso sistémico acumulativo por sostener demandas sensoriales, sociales y de enmascaramiento (masking) por encima de la capacidad de procesamiento durante meses o años."),
-        ("¿Qué señales indican burnout autista?", "Pérdida temporal de habilidades cotidianas, aumento de la sensibilidad sensorial, mutismo situacional, fatiga crónica severa y baja tolerancia a la frustración."),
-        ("¿Cómo se aborda en terapia?", "Trabajamos en la reducción de sobrecarga sensorial, diseño de adaptaciones ambientales, deconstrucción del masking y autocompasión neuroafirmativa.")
-    ],
-    "paralisis_ejecutiva": [
-        ("¿Por qué me cuesta tanto empezar tareas sencillas?", "La parálisis ejecutiva en personas con TDAH no se debe a pereza, sino a una dificultad neuroquímica en la activación dopaminérgica y en la memoria de trabajo ante tareas que carecen de estimulación inmediata o tienen fricción de inicio."),
-        ("¿Qué técnica sirve para desbloquearse?", "Reducir la fricción al mínimo: definir la 'micro-acción de 2 minutos', utilizar el acompañamiento en paralelo (body doubling) y eliminar la culpa que activa la respuesta de congelamiento somático."),
-        ("¿Cómo ayuda la terapia?", "Diseñamos sistemas externos personalizados para apoyar las funciones ejecutivas respetando los ritmos de tu mente.")
-    ],
-    "terapia_online": [
-        ("¿La terapia psicológica online es igual de efectiva que la presencial?", "Sí, múltiples estudios clínicos avalan que la terapia psicológica online tiene la misma efectividad clínica que la presencial, con la ventaja adicional de atenderte en un entorno seguro y familiar, eliminando el estrés de traslados."),
-        ("¿Qué necesito para la sesión online?", "Una conexión a internet estable, audífonos y un espacio privado donde puedas hablar con tranquilidad y confidencialidad."),
-        ("¿La boleta para reembolso es la misma?", "Exactamente la misma. La boleta electrónica emitida cuenta con código de psicología clínica reconocido por la Superintendencia de Salud para reembolso en Isapres.")
-    ]
-}
-
-DEFAULT_FAQ = [
-    ("¿Cuál es el valor y modalidad de atención en Centro Paz?", "El arancel de la sesión particular de 50 minutos con la psicóloga clínica Valentina Castro Núñez es de $45.000 CLP. Ofrecemos modalidad Online para todo Chile y Presencial en Santiago (Ñuñoa)."),
-    ("¿Cómo funciona el reembolso en Isapres y Seguros?", "Emitimos boletas electrónicas de honorarios profesionales de psicología clínica válidas para Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres, Nueva Masvida y seguros complementarios, permitiendo recuperar entre el 50% y 80% del valor."),
-    ("¿Cómo puedo agendar una primera sesión?", "Puedes escribirnos directamente por WhatsApp al +56 9 6516 3893 o utilizar el orientador interactivo en www.centropaz.cl para coordinar tu horario.")
-]
-
 
 def slugify(key: str) -> str:
     return key.replace("_", "-")
 
 
-def get_faqs_for_topic(key: str) -> list[tuple[str, str]]:
-    if key in FAQ_DATA:
-        return FAQ_DATA[key]
-    for k, v in FAQ_DATA.items():
-        if k in key or key in k:
-            return v
-    return DEFAULT_FAQ
+def format_paragraphs(text: str) -> str:
+    if not text:
+        return ""
+    paragraphs = [p.strip() for p in text.strip().split("\n\n") if p.strip()]
+    return "\n".join(f"<p>{html.escape(p)}</p>" for p in paragraphs)
 
 
 def generate_article_html(topic_key: str, topic: dict) -> str:
@@ -84,14 +45,29 @@ def generate_article_html(topic_key: str, topic: dict) -> str:
     kicker = topic["kicker"]
     title = topic["title"]
     hook = topic["hook"]
-    points = topic.get("points", [])
     category = topic.get("category", "Psicología Clínica")
-    caption = topic.get("caption", "")
     image_file = f"post_{post_id:02d}_{topic_key}.png"
     image_url = f"{SITE_URL}/assets/instagram/{image_file}"
     canonical_url = f"{SITE_URL}/blog/{slug}.html"
-    faqs = get_faqs_for_topic(topic_key)
-    
+
+    # Datos clínicos ampliados
+    clinical = CLINICAL_ARTICLES.get(topic_key, {})
+    subtitle = clinical.get("subtitle", kicker)
+    lead_story = clinical.get("lead_story", hook)
+    what_is_happening = clinical.get("what_is_happening", "")
+    daily_scenarios = clinical.get("daily_scenarios", [])
+    practical_steps = clinical.get("practical_steps", [])
+    how_valentina_works = clinical.get("how_valentina_works", "")
+    whatsapp_prompt = clinical.get(
+        "whatsapp_prompt",
+        f"¿Sientes que necesitas orientación profesional respecto a este tema? Escríbele a Valentina por WhatsApp para coordinar tu atención."
+    )
+    faqs = clinical.get("faqs", [
+        ("¿Cuál es el valor y modalidad de atención?", "El arancel de la sesión de 50 minutos con Valentina Castro Núñez es de $45.000 CLP en modalidad Online o Presencial en Ñuñoa."),
+        ("¿Cómo funciona el reembolso en Isapre?", "Emitimos boletas electrónicas de honorarios con código de psicología clínica válidas para reembolso en todas las Isapres y seguros complementarios."),
+        ("¿Cómo puedo agendar?", "Escribiendo directamente por WhatsApp a Valentina al +56 9 6516 3893.")
+    ])
+
     # FAQ Schema JSON
     faq_schema = {
         "@context": "https://schema.org",
@@ -107,7 +83,8 @@ def generate_article_html(topic_key: str, topic: dict) -> str:
             } for q, a in faqs
         ]
     }
-    
+
+    # MedicalWebPage Schema JSON
     article_schema = {
         "@context": "https://schema.org",
         "@type": "MedicalWebPage",
@@ -167,13 +144,31 @@ def generate_article_html(topic_key: str, topic: dict) -> str:
         ]
     }
 
-    # Points HTML
-    points_html = ""
-    for idx, pt in enumerate(points, 1):
-        points_html += f"""
-        <div class="article-key-point">
-          <div class="point-num">{idx}</div>
-          <div class="point-text">{html.escape(pt)}</div>
+    # Situaciones cotidianas HTML
+    scenario_icons = ["🏢", "🏠", "🤝", "🧠", "🌱", "💡"]
+    scenarios_html = ""
+    for idx, (s_title, s_desc) in enumerate(daily_scenarios):
+        icon = scenario_icons[idx % len(scenario_icons)]
+        scenarios_html += f"""
+        <div class="scenario-card">
+          <div class="scenario-card-header">
+            <span class="scenario-card-icon">{icon}</span>
+            <h4 class="scenario-card-title">{html.escape(s_title)}</h4>
+          </div>
+          <p class="scenario-card-desc">{html.escape(s_desc)}</p>
+        </div>
+        """
+
+    # Herramientas prácticas HTML
+    tools_html = ""
+    for idx, (t_title, t_desc) in enumerate(practical_steps, 1):
+        tools_html += f"""
+        <div class="tool-item">
+          <div class="tool-badge">Clave {idx}</div>
+          <div class="tool-content">
+            <h4>{html.escape(t_title)}</h4>
+            <p>{html.escape(t_desc)}</p>
+          </div>
         </div>
         """
 
@@ -189,7 +184,7 @@ def generate_article_html(topic_key: str, topic: dict) -> str:
         </details>
         """
 
-    wa_msg = urllib.parse.quote(f"Hola Valentina, estuve leyendo el artículo '{title}' en Centro Paz y quisiera consultar por atención.")
+    wa_msg = urllib.parse.quote(f"Hola Valentina, estuve leyendo tu artículo '{title}' en Centro Paz y quisiera consultar por atención con boleta para Isapre.")
     wa_href = f"https://wa.me/{WA_NUMBER}?text={wa_msg}"
 
     return f"""<!DOCTYPE html>
@@ -198,7 +193,7 @@ def generate_article_html(topic_key: str, topic: dict) -> str:
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>{html.escape(title)} | Centro Paz Psicología Clínica</title>
-  <meta name="description" content="{html.escape(hook)} Guía clínica de Centro Paz en Santiago (Ñuñoa) y Online para todo Chile. Boletas reembolsables en Isapres.">
+  <meta name="description" content="{html.escape(hook)} Guía clínica por Valentina Castro Núñez, Centro Paz (Ñuñoa y Online para todo Chile). Boletas reembolsables en Isapre.">
   <link rel="canonical" href="{canonical_url}">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <meta name="theme-color" content="#7A2E3A">
@@ -273,6 +268,7 @@ def generate_article_html(topic_key: str, topic: dict) -> str:
       <header class="article-header">
         <div class="article-kicker-badge">{html.escape(kicker)}</div>
         <h1 class="article-title">{html.escape(title)}</h1>
+        <p class="article-subtitle">{html.escape(subtitle)}</p>
         
         <div class="article-meta">
           <div class="meta-author">
@@ -283,61 +279,93 @@ def generate_article_html(topic_key: str, topic: dict) -> str:
             </div>
           </div>
           <div class="meta-reading">
-            <span>⏱️ 4 min de lectura</span>
+            <span>⏱️ 6 min de lectura clínica</span>
             <span>📍 Ñuñoa & Online Chile</span>
           </div>
         </div>
       </header>
 
-      <!-- Resumen Ejecutivo para Motores de IA y Lectura Rápida -->
-      <div class="ai-summary-box">
-        <div class="summary-label">💡 Resumen de Enfoque Clínico</div>
-        <p class="summary-text">{html.escape(hook)}</p>
+      <!-- Introducción Empática / Conexión con el Lector -->
+      <div class="narrative-lead-card">
+        {format_paragraphs(lead_story)}
       </div>
 
-      <!-- Imagen Destacada -->
+      <!-- Imagen Destacada (Infografía Oficial con Nuevo Logo) -->
       <figure class="article-featured-image">
         <img src="../assets/instagram/{image_file}" alt="{html.escape(title)} - Centro Paz Psicología Clínica" loading="eager" width="1080" height="1350">
-        <figcaption>Infografía clínica original de Centro Paz · Valentina Castro Núñez</figcaption>
+        <figcaption>Infografía clínica original de Centro Paz · Psicóloga Valentina Castro Núñez</figcaption>
       </figure>
 
       <!-- Cuerpo del Artículo -->
       <section class="article-body">
-        <h2>Comprensión desde el Enfoque Neuroafirmativo e Integrativo</h2>
-        <p class="article-lead">{html.escape(caption.split(chr(10))[0] if caption else hook)}</p>
 
-        <h3>Puntos Clave y Herramientas Clínicas</h3>
-        <div class="article-points-list">
-          {points_html}
+        <!-- Profundización Neurobiológica / Psicológica -->
+        <div class="clinical-neuro-card">
+          <h3>🌿 Comprensión Neurobiológica y Psicológica</h3>
+          {format_paragraphs(what_is_happening)}
         </div>
 
-        <h3>¿Por qué este enfoque marca una diferencia real?</h3>
-        <p>En el acompañamiento psicológico tradicional, muchas veces se intenta que la persona se adapte a exigencias que violentan su ritmo biológico o cognitivo. En Centro Paz trabajamos desde un modelo respetuoso y basado en evidencia: no buscamos borrar tus características singulares, sino brindarte herramientas prácticas para regular tu sistema nervioso, reducir la culpa y vivir con mayor serenidad cotidiana y laboral.</p>
+        <!-- Situaciones Cotidianas -->
+        <section class="scenarios-section">
+          <h2>Situaciones Cotidianas: ¿Cómo se manifiesta en el día a día?</h2>
+          <p>Para muchas personas, el mayor alivio es reconocer que estas vivencias no son una falta de carácter o voluntad, sino patrones concretos de interacción entre su sistema nervioso y las exigencias del entorno:</p>
+          <div class="scenarios-grid">
+            {scenarios_html}
+          </div>
+        </section>
 
-        <!-- Caja de Conversión / Agendamiento -->
+        <!-- Herramientas Prácticas -->
+        <section class="practical-tools-section">
+          <h2>Estrategias y Herramientas Clínicas Aplicables</h2>
+          <p>En el acompañamiento clínico buscamos que te lleves recursos reales para regularte y adaptar tu rutina sin forzarte a encajar en moldes rígidos:</p>
+          <div class="tools-stack">
+            {tools_html}
+          </div>
+        </section>
+
+        <!-- Cómo Acompaña Valentina Castro Núñez -->
+        <div class="valentina-approach-card">
+          <div class="valentina-avatar-badge">🌿</div>
+          <div class="valentina-approach-content">
+            <h3>Cómo te acompaña Valentina Castro Núñez en Terapia</h3>
+            <span class="valentina-credentials">Psicóloga Clínica · Registro Superintendencia de Salud de Chile</span>
+            {format_paragraphs(how_valentina_works)}
+          </div>
+        </div>
+
+        <!-- Banner Descarga Guía Gratuita -->
+        <div class="free-guide-banner">
+          <div class="free-guide-info">
+            <h4>Guía Gratuita: 7 Claves de Regulación Emocional</h4>
+            <p>Accede a nuestro manual clínico interactivo con ejercicios somáticos y pautas neuroafirmativas para calmar el sistema nervioso.</p>
+          </div>
+          <a href="../guia_7_claves_regulacion_centro_paz.html" class="btn-guide-download">Ver Guía Gratuita →</a>
+        </div>
+
+        <!-- Caja de Conversión / Agendamiento con Valentina -->
         <aside class="cta-conversion-box">
           <div class="cta-box-badge">Atención Profesional en Santiago & Todo Chile</div>
           <h3>¿Te identificas con esta situación o necesitas orientación?</h3>
-          <p>Puedes coordinar una primera sesión de evaluación o acompañamiento con la psicóloga Valentina Castro Núñez en modalidad <strong>Online</strong> (todo Chile) o <strong>Presencial</strong> en Ñuñoa (Santiago).</p>
+          <p>{html.escape(whatsapp_prompt)}</p>
           
           <div class="cta-box-features">
-            <div>💳 <strong>Boleta 100% Reembolsable:</strong> Arancel de $45.000 CLP válido para todas las Isapres y Seguros (Copago real estimado: $12.000 a $18.000).</div>
-            <div>🌿 <strong>Espacio Neuroafirmativo:</strong> Sin juicios, sin presiones y centrado en tu bienestar.</div>
+            <div>💳 <strong>Boleta 100% Reembolsable:</strong> Arancel de $45.000 CLP válido para todas las Isapres (Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres) y Seguros Complementarios (copago real estimado: $12.000 a $18.000).</div>
+            <div>🌿 <strong>Espacio Neuroafirmativo:</strong> Sin juicios, respetando tus tiempos y orientado a tu bienestar integral.</div>
           </div>
 
           <div class="cta-box-actions">
             <a href="{wa_href}" class="btn btn-whatsapp-lg" target="_blank" rel="noopener">
-              <span>💬 Consultar a WhatsApp (+56 9 6516 3893)</span>
+              <span>💬 Escribir directamente a Valentina ({WA_DISPLAY})</span>
             </a>
             <a href="../index.html#triaje" class="btn btn-secondary-lg">
-              <span>🧭 Completar Orientador Web Gratuito</span>
+              <span>🧭 Orientador Web Gratuito</span>
             </a>
           </div>
         </aside>
 
         <!-- Preguntas Frecuentes (FAQ / Snippet Rich Result) -->
         <section class="article-faq-section">
-          <h2>Preguntas Frecuentes Relacionadas</h2>
+          <h2>Preguntas Frecuentes sobre este Tema</h2>
           <div class="faq-accordion">
             {faqs_html}
           </div>
@@ -353,6 +381,7 @@ def generate_article_html(topic_key: str, topic: dict) -> str:
           <span class="article-tag">#CentroPaz</span>
           <span class="article-tag">#PsicologíaChile</span>
           <span class="article-tag">#ReembolsoIsapre</span>
+          <span class="article-tag">#ValentinaCastro</span>
         </div>
         
         <div class="back-to-blog">
@@ -396,7 +425,7 @@ def generate_article_html(topic_key: str, topic: dict) -> str:
   </footer>
 
   <!-- Botón Flotante WhatsApp Contextual -->
-  <a href="{wa_href}" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp a Centro Paz">
+  <a href="{wa_href}" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp a Valentina Castro en Centro Paz">
     <div class="whatsapp-pulse"></div>
     <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm.01 1.67c4.54 0 8.24 3.7 8.24 8.24 0 2.2-.86 4.27-2.42 5.82-1.55 1.56-3.62 2.42-5.82 2.42-1.47 0-2.9-.39-4.16-1.13l-.3-.18-3.1.81.83-3.02-.2-.31c-.81-1.3-1.24-2.8-1.24-4.41 0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.25-1.5-1.4-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.07-.1-.23-.17-.48-.29z"/></svg>
   </a>
@@ -416,17 +445,21 @@ def generate_blog_index_html(topics: dict) -> str:
         hook = item["hook"]
         category = item.get("category", "General")
         image_file = f"post_{post_id:02d}_{key}.png"
+
+        clinical = CLINICAL_ARTICLES.get(key, {})
+        subtitle = clinical.get("subtitle", kicker)
+
         cards_html += f"""
         <article class="blog-card" data-category="{html.escape(category)}">
-          <a href="{slug}.html" class="blog-card-image-link">
-            <img src="../assets/instagram/{image_file}" alt="{html.escape(title)}" loading="lazy" width="400" height="500">
+          <a href="{slug}.html" class="blog-card-image-link" aria-label="Leer {html.escape(title)}">
+            <img src="../assets/instagram/{image_file}" alt="{html.escape(title)} - Centro Paz" loading="lazy" width="400" height="500">
           </a>
           <div class="blog-card-content">
             <div class="blog-card-category">{html.escape(category)}</div>
             <h2 class="blog-card-title"><a href="{slug}.html">{html.escape(title)}</a></h2>
             <p class="blog-card-excerpt">{html.escape(hook)}</p>
             <div class="blog-card-footer">
-              <span class="read-more">Leer artículo completo →</span>
+              <span class="read-more">Leer artículo clínico completo →</span>
             </div>
           </div>
         </article>
@@ -459,7 +492,7 @@ def generate_blog_index_html(topics: dict) -> str:
 
   <header class="navbar" id="navbar">
     <div class="nav-container">
-      <a href="../index.html" class="brand-logo">
+      <a href="../index.html" class="brand-logo" aria-label="Volver al inicio de Centro Paz">
         <span class="logo-text">Centro Paz</span>
         <span class="logo-tagline">Psicología Clínica</span>
       </a>
@@ -478,7 +511,7 @@ def generate_blog_index_html(topics: dict) -> str:
       <div class="container">
         <div class="badge-pill">Recursos Clínicos & Salud Mental</div>
         <h1>Artículos, Guías y Respuestas Clínicas</h1>
-        <p class="hero-sub">Información basada en neurociencia, enfoque neuroafirmativo e integrativo para personas adultas, familias y padres en Chile.</p>
+        <p class="hero-sub">Información basada en neurociencia, enfoque neuroafirmativo e integrativo para personas adultas, familias y padres en Chile. Supervisado por Valentina Castro Núñez.</p>
       </div>
     </section>
 
@@ -521,7 +554,7 @@ def generate_blog_index_html(topics: dict) -> str:
   </footer>
 
   <!-- Botón Flotante WhatsApp -->
-  <a href="https://wa.me/{WA_NUMBER}?text=Hola%20Centro%20Paz,%20estuve%20revisando%20el%20blog%20cl%C3%ADnico%20y%20quisiera%20consultar%20por%20atenci%C3%B3n" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp a Centro Paz">
+  <a href="https://wa.me/{WA_NUMBER}?text=Hola%20Valentina,%20estuve%20revisando%20el%20blog%20cl%C3%ADnico%20y%20quisiera%20consultar%20por%20atenci%C3%B3n" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp a Centro Paz">
     <div class="whatsapp-pulse"></div>
     <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm.01 1.67c4.54 0 8.24 3.7 8.24 8.24 0 2.2-.86 4.27-2.42 5.82-1.55 1.56-3.62 2.42-5.82 2.42-1.47 0-2.9-.39-4.16-1.13l-.3-.18-3.1.81.83-3.02-.2-.31c-.81-1.3-1.24-2.8-1.24-4.41 0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.25-1.5-1.4-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.07-.1-.23-.17-.48-.29z"/></svg>
   </a>
@@ -613,16 +646,16 @@ LLMs-Txt: https://www.centropaz.cl/llms.txt
 def update_sitemap_xml(topics: dict):
     sitemap_path = ROOT / "sitemap.xml"
     urls = [
-        ("https://www.centropaz.cl/", "2026-09-12", "weekly", "1.0"),
-        ("https://www.centropaz.cl/blog/", "2026-09-12", "daily", "0.9"),
-        ("https://www.centropaz.cl/links", "2026-09-12", "weekly", "0.85"),
+        ("https://www.centropaz.cl/", "2026-09-13", "weekly", "1.0"),
+        ("https://www.centropaz.cl/blog/", "2026-09-13", "daily", "0.9"),
+        ("https://www.centropaz.cl/links", "2026-09-13", "weekly", "0.85"),
         ("https://www.centropaz.cl/privacidad.html", "2026-08-28", "monthly", "0.4"),
         ("https://www.centropaz.cl/guia_7_claves_regulacion_centro_paz.html", "2026-08-28", "monthly", "0.7"),
     ]
 
     for key in topics.keys():
         slug = slugify(key)
-        urls.append((f"https://www.centropaz.cl/blog/{slug}.html", "2026-09-12", "weekly", "0.8"))
+        urls.append((f"https://www.centropaz.cl/blog/{slug}.html", "2026-09-13", "weekly", "0.8"))
 
     xml_lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
@@ -644,7 +677,7 @@ def update_sitemap_xml(topics: dict):
 def build_all():
     BLOG_DIR.mkdir(parents=True, exist_ok=True)
     topics = content_engine.TOPICS
-    print(f"🌿 Generando blog para {len(topics)} artículos clínicos...")
+    print(f"🌿 Generando blog clínico para {len(topics)} artículos con contenido profundo...")
 
     count = 0
     for key, topic in topics.items():
