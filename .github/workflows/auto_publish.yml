@@ -2,10 +2,22 @@ name: Publicación Automática Desatendida (Blog + Redes Sociales)
 
 on:
   schedule:
-    # 15:00 UTC = 12:00 Chile (America/Santiago UTC-3) - Hora oficial de publicación de Feed diario
+    # Slot 1 (Mediodía): 15:00 UTC = 12:00 Chile (Feed Infografía)
     - cron: '0 15 * * *'
+    # Slot 2 (Tarde/Noche): 21:30 UTC = 18:30 Chile (Video Vertical / Reel)
+    - cron: '30 21 * * *'
   workflow_dispatch:
     inputs:
+      slot:
+        description: 'Slot de publicación a ejecutar (auto, feed, reel, both)'
+        required: false
+        default: 'auto'
+        type: choice
+        options:
+          - auto
+          - feed
+          - reel
+          - both
       dry_run:
         description: 'Modo simulación (Dry Run) sin publicar en Meta'
         required: false
@@ -17,7 +29,7 @@ permissions:
 
 jobs:
   auto_publish:
-    name: Ejecutar Publicación Diaria
+    name: Ejecutar Publicación Automática Multi-Slot
     runs-on: ubuntu-latest
     steps:
       - name: Clonar Repositorio
@@ -32,16 +44,17 @@ jobs:
         run: |
           PYTHONPATH=. python3 agent/blog_generator.py
 
-      - name: Publicar Post del Día en Instagram y Facebook (Meta Graph API)
+      - name: Publicar en Redes Sociales (Meta Graph API / Multi-Slot)
         env:
           META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
           META_IG_ACCOUNT_ID: ${{ secrets.META_IG_ACCOUNT_ID }}
           META_FB_PAGE_ID: ${{ secrets.META_FB_PAGE_ID }}
         run: |
+          SLOT_ARG="${{ github.event.inputs.slot || 'auto' }}"
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
-            PYTHONPATH=. python3 -m agent.auto_publisher --auto-slot --dry-run
+            PYTHONPATH=. python3 -m agent.auto_publisher --slot "$SLOT_ARG" --dry-run
           else
-            PYTHONPATH=. python3 -m agent.auto_publisher --auto-slot
+            PYTHONPATH=. python3 -m agent.auto_publisher --slot "$SLOT_ARG"
           fi
 
       - name: Confirmar y Sincronizar Cambios de la Web si Hubo Novedades
