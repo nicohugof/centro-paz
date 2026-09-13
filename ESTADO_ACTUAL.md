@@ -17,6 +17,8 @@ Ecosistema digital y motor de captación de pacientes de Centro Paz.
 - Workflow de GitHub Actions (`.github/workflows/auto_publish.yml`) configurado con cron diario (12:00 CLT / 15:00 UTC) para publicación 100% desatendida en blog y redes sociales (Meta Graph API).
 - Pack Semana 1 en fase de cierre y Pack Semana 2 empaquetado en `marketing/pack-semana-2026-09-15/`.
 - Playbooks de captación directa añadidos: Ficha Google Maps Ñuñoa (`docs/GOOGLE_BUSINESS_PROFILE_NUNOA.md`) y Red de derivación interprofesional (`docs/RED_DERIVACION_CLINICA_LOCAL.md`).
+- Pipeline de video vertical integrado con YouTube IA: 5 videos cortos generados en resolución 9:16 (1080x1920) con voz chilena empática, música adaptativa y subtítulos sincronizados, listos para YouTube Shorts, Reels y TikTok con textos y comentarios fijados hacia WhatsApp.
+- Comando puente operativo implementado: `python3 -m agent.video_shorts_generator --render <id>` para compilar videos a demanda.
 
 ## Directrices Operativas Clave
 
@@ -26,5 +28,5 @@ Ecosistema digital y motor de captación de pacientes de Centro Paz.
 
 ## Próximo control
 
-Monitorear el flujo de pacientes que llegan al WhatsApp de Valentina y avanzar en la prueba de generación de videos cortos desde YouTube IA.
+Monitorear el flujo de pacientes que llegan al WhatsApp de Valentina y distribuir los videos cortos generados en YouTube Shorts, Reels y TikTok siguiendo los copys de [`marketing/GUIONES_VIDEO_VERTICALES.md`](file:///Users/nigoku/Proyectos/centro-paz/marketing/GUIONES_VIDEO_VERTICALES.md).
 
