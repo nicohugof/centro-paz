@@ -202,6 +202,191 @@ SHORTS_CATALOG: List[Dict[str, Any]] = [
         ],
         "hashtags": "#TDAHMujeres #TDAHAdultosChile #MujeresConTDAH #SaludMentalChile #PsicologiaChile",
         "recommended_sound": "Melodía de piano cálida y empática"
+    },
+    {
+        "id": "short_06",
+        "episode_id": "cpaz_short06_rsd",
+        "platform": ["TikTok", "YouTube Shorts", "Instagram Reels"],
+        "target": "Adultos con TDAH y sensibilidad emocional",
+        "title": "Sensibilidad al Rechazo (RSD): Por qué una crítica duele tanto",
+        "duration": "35-40 seg",
+        "visual_hook_text": "¿Por qué una crítica te arruina el día entero? Esto se llama RSD 💔",
+        "steps": [
+            {
+                "time": "0:00 - 0:04",
+                "scene": "Primer plano reflexivo y empático",
+                "audio": "¿Te pasa que un comentario neutro en el trabajo o un mensaje sin responder te genera una angustia física real en el pecho?",
+                "on_screen_text": "Dolor físico ante el rechazo percibido"
+            },
+            {
+                "time": "0:04 - 0:15",
+                "scene": "Explicación neurobiológica",
+                "audio": "No eres débil ni exagerado. En personas con TDAH existe la Disforia Sensible al Rechazo o RSD: una respuesta neurológica donde el cerebro procesa la percepción de rechazo con la misma intensidad que el dolor físico.",
+                "on_screen_text": "RSD: Respuesta neurológica real"
+            },
+            {
+                "time": "0:15 - 0:25",
+                "scene": "Patrón de conducta compensatoria",
+                "audio": "Esto suele llevarte al perfeccionismo extremo o a complacer a todos para evitar ser juzgado, dejando tu energía en cero al final del día.",
+                "on_screen_text": "Perfeccionismo y sobre-adaptación"
+            },
+            {
+                "time": "0:25 - 0:35",
+                "scene": "Cierre con acompañamiento clínico",
+                "audio": "En Centro Paz te acompañamos con terapia neuroafirmativa para desarmar la culpa y regular tu sistema nervioso. Escríbenos por WhatsApp en el enlace de la bio.",
+                "on_screen_text": "Terapia Neuroafirmativa · Sesiones Online y Ñuñoa"
+            }
+        ],
+        "hashtags": "#RSDChile #SensibilidadAlRechazo #TDAHEmocional #TDAHAdultos #SaludMentalChile",
+        "recommended_sound": "Audio introspectivo suave con cuerdas sutiles"
+    },
+    {
+        "id": "short_07",
+        "episode_id": "cpaz_short07_sobrecarga",
+        "platform": ["TikTok", "YouTube Shorts", "Instagram Reels"],
+        "target": "Adultos con hipersensibilidad sensorial, autistas y TDAH",
+        "title": "Hipersensibilidad al Ruido y Sobrecarga Sensorial",
+        "duration": "35 seg",
+        "visual_hook_text": "¿El ruido de fondo te agota y te irrita? No es mal genio, es sobrecarga 🎧",
+        "steps": [
+            {
+                "time": "0:00 - 0:04",
+                "scene": "Gesto de sobrecarga ambiental / Ruido",
+                "audio": "¿El ruido de la oficina, los centros comerciales o la masticación de alguien cerca te provocan ganas de escapar o irritabilidad repentina?",
+                "on_screen_text": "¿Te satura el ruido ambiental?"
+            },
+            {
+                "time": "0:04 - 0:15",
+                "scene": "Explicación sensorial",
+                "audio": "Esto no es mal carácter ni falta de paciencia. Tu cerebro no filtra los estímulos auditivos de fondo de forma automática, recibiendo todo el volumen al mismo tiempo.",
+                "on_screen_text": "Filtro sensorial reducido"
+            },
+            {
+                "time": "0:15 - 0:25",
+                "scene": "Validación fisiológica",
+                "audio": "Cuando el umbral se satura, tu sistema entra en respuesta de lucha o huida. Necesitas descompresión sensorial, no culparte por sentirte abrumado.",
+                "on_screen_text": "Descompresión sensorial, no culpa"
+            },
+            {
+                "time": "0:25 - 0:35",
+                "scene": "Derivación clínica",
+                "audio": "Aprende a mapear tu perfil sensorial y proteger tu energía. Sesiones online y en Ñuñoa con reembolso Isapre. Contáctanos al WhatsApp de la bio.",
+                "on_screen_text": "Reembolso Isapre · WhatsApp: +56 9 6516 3893"
+            }
+        ],
+        "hashtags": "#SobrecargaSensorial #MisofoniaChile #TEAAdultos #TDAHChile #Hipersensibilidad",
+        "recommended_sound": "Transición de ruido caótico a silencio lofi relajante"
+    },
+    {
+        "id": "short_08",
+        "episode_id": "cpaz_short08_ansiedad_somatica",
+        "platform": ["TikTok", "YouTube Shorts", "Instagram Reels"],
+        "target": "Personas con tensión muscular crónica, bruxismo o molestias digestivas por estrés",
+        "title": "Ansiedad Somática: Cuando el cuerpo habla lo que la mente calla",
+        "duration": "35 seg",
+        "visual_hook_text": "¿Opresión en el pecho o colon irritable? Así habla la ansiedad somática 🌿",
+        "steps": [
+            {
+                "time": "0:00 - 0:04",
+                "scene": "Gesto de tensión en cuello o pecho",
+                "audio": "¿Sientes que mentalmente tienes todo 'bajo control', pero tu cuerpo vive con dolor de cuello, mandíbula apretada o problemas estomacales?",
+                "on_screen_text": "Tensión crónica y bruxismo"
+            },
+            {
+                "time": "0:04 - 0:15",
+                "scene": "Explicación del sistema nervioso",
+                "audio": "La ansiedad somática ocurre cuando sobrepensamos para resolver problemas, pero el sistema nervioso autónomo se queda atrapado en modo supervivencia.",
+                "on_screen_text": "Sistema nervioso en modo supervivencia"
+            },
+            {
+                "time": "0:15 - 0:25",
+                "scene": "Regulación fisiológica",
+                "audio": "Tratarla solo desde la lógica no alcanza: necesitamos técnicas de corregulación fisiológica y respiración diafragmática para activar el nervio vago.",
+                "on_screen_text": "Activar el nervio vago y la calma"
+            },
+            {
+                "time": "0:25 - 0:35",
+                "scene": "Cierre Centro Paz",
+                "audio": "En Centro Paz integramos cuerpo y mente con enfoque humanista y evidencia clínica. Escríbenos a WhatsApp para coordinar tu primera sesión.",
+                "on_screen_text": "Sesiones Presenciales Ñuñoa y Online Chile"
+            }
+        ],
+        "hashtags": "#AnsiedadSomatica #SaludMentalChile #NervioVago #PsicologiaClinica #BruxismoChile",
+        "recommended_sound": "Música acústica calmante y frecuencias armónicas"
+    },
+    {
+        "id": "short_09",
+        "episode_id": "cpaz_short09_terapia_infantil",
+        "platform": ["TikTok", "YouTube Shorts", "Instagram Reels"],
+        "target": "Padres y madres con dudas sobre el proceso terapéutico infanto-juvenil",
+        "title": "Por qué los niños no van al psicólogo a hablar sentados",
+        "duration": "35 seg",
+        "visual_hook_text": "¿Por qué en psicología infantil jugamos en vez de solo hablar? 🧸🌱",
+        "steps": [
+            {
+                "time": "0:00 - 0:04",
+                "scene": "Pregunta frecuente de padres",
+                "audio": "Muchos papás se preguntan con honestidad: ¿si mi hijo va a terapia, de verdad le sirve ir a jugar?",
+                "on_screen_text": "¿Por qué jugar en terapia infantil?"
+            },
+            {
+                "time": "0:04 - 0:15",
+                "scene": "El lenguaje simbólico del niño",
+                "audio": "Los niños no tienen el lenguaje abstracto de un adulto para decir 'siento angustia o frustración'. Su lenguaje natural de expresión y procesamiento es el juego simbólico.",
+                "on_screen_text": "El juego es el lenguaje del niño"
+            },
+            {
+                "time": "0:15 - 0:25",
+                "scene": "Beneficio clínico",
+                "audio": "A través del juego proyectan vivencias complejas, ensayan soluciones de conflicto y regulan su mundo emocional en un entorno terapéutico seguro.",
+                "on_screen_text": "Resolución de conflictos y regulación"
+            },
+            {
+                "time": "0:25 - 0:35",
+                "scene": "Orientación a padres",
+                "audio": "Además, orientamos a los padres semana a semana con pautas prácticas para la casa. Consulta por cupos disponibles en el WhatsApp de la bio.",
+                "on_screen_text": "Orientación a Padres · WhatsApp: +56 9 6516 3893"
+            }
+        ],
+        "hashtags": "#TerapiaInfantil #PsicologiaInfantil #CrianzaRespetuosa #OrientacionAPadres #SantiagoOriente",
+        "recommended_sound": "Melodía dulce y esperanzadora de piano"
+    },
+    {
+        "id": "short_10",
+        "episode_id": "cpaz_short10_dopamina",
+        "platform": ["TikTok", "YouTube Shorts", "Instagram Reels"],
+        "target": "Adultos y jóvenes con TDAH atrapados en el uso compulsivo de pantallas",
+        "title": "El ciclo de pantallas y TDAH: Romper el bucle sin culpa",
+        "duration": "35 seg",
+        "visual_hook_text": "¿Atrapado en el teléfono sin poder soltarlo? Es tu dopamina 📱⚡",
+        "steps": [
+            {
+                "time": "0:00 - 0:04",
+                "scene": "Momento de scrolling automático",
+                "audio": "¿Te sientas a descansar cinco minutos en el celular y de pronto pasaron dos horas sintiéndote más agotado y culpable que antes?",
+                "on_screen_text": "El bucle del scrolling infinito"
+            },
+            {
+                "time": "0:04 - 0:15",
+                "scene": "Explicación neuroquímica",
+                "audio": "Las pantallas entregan microdosis continuas de dopamina. Para un cerebro neurodivergente, soltar el teléfono se siente literalmente como un abismo de subestimulación física.",
+                "on_screen_text": "Dopamina rápida vs Subestimulación"
+            },
+            {
+                "time": "0:15 - 0:25",
+                "scene": "Solución clínica sin castigo",
+                "audio": "La culpa no ayuda. La clave está en transiciones de baja fricción: sustituir la pantalla por movimiento físico, música estimulante o temporizadores visuales.",
+                "on_screen_text": "Estrategias de transición de baja fricción"
+            },
+            {
+                "time": "0:25 - 0:35",
+                "scene": "Contacto Centro Paz",
+                "audio": "Aprende a gestionar tu energía con acompañamiento profesional. Boletas reembolsables en Isapre. Escríbenos a WhatsApp en el enlace del perfil.",
+                "on_screen_text": "Sesiones Online y en Ñuñoa · Reembolso Isapre"
+            }
+        ],
+        "hashtags": "#TDAHAdultos #DopaminaTDAH #Procrastinacion #SaludMentalChile #PsicologiaSantiago",
+        "recommended_sound": "Beat lofi dinámico y motivador"
     }
 ]
 
