@@ -8,6 +8,7 @@ tráfico hacia WhatsApp (+56 9 6516 3893) y el sitio web (www.centropaz.cl).
 from __future__ import annotations
 
 import argparse
+from pathlib import Path
 from typing import List, Dict, Any
 
 SHORTS_CATALOG: List[Dict[str, Any]] = [
@@ -146,12 +147,43 @@ def display_catalog():
         print("-" * 70)
 
 
+def export_markdown() -> Path:
+    target = Path(__file__).resolve().parent.parent / "marketing" / "GUIONES_VIDEO_VERTICALES.md"
+    lines = [
+        "# 🎬 Guiones de Video Vertical (Reels · TikTok · YouTube Shorts) — Centro Paz\n",
+        "> Diseñados para grabación directa con teléfono celular por **Valentina Castro Núñez**. Duración óptima: 30 a 45 segundos. Formato vertical 9:16.\n"
+    ]
+    for s in SHORTS_CATALOG:
+        lines.append(f"## [{s['id'].upper()}] {s['title']}\n")
+        lines.append(f"- **Plataformas:** {', '.join(s['platform'])}")
+        lines.append(f"- **Audiencia:** {s['target']}")
+        lines.append(f"- **Duración estimada:** {s['duration']}")
+        lines.append(f"- **Gancho visual (texto grande al inicio):** `{s['visual_hook_text']}`")
+        lines.append(f"- **Sonido recomendado:** {s['recommended_sound']}")
+        lines.append(f"- **Hashtags:** `{s['hashtags']}`\n")
+        lines.append("### Bloques de Grabación:\n")
+        lines.append("| Tiempo | Texto en Pantalla | Lo que dice Valentina a cámara |")
+        lines.append("| :--- | :--- | :--- |")
+        for step in s["steps"]:
+            lines.append(f"| `{step['time']}` | {step['on_screen_text']} | \"{step['audio']}\" |")
+        lines.append("\n---\n")
+
+    target.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(f"✅ Guiones exportados exitosamente a {target}")
+    return target
+
+
 def main():
     parser = argparse.ArgumentParser(description="Generador de guiones para YouTube Shorts y TikTok")
     parser.add_argument("--list", "-l", action="store_true", help="Listar todos los guiones de video")
+    parser.add_argument("--export-md", action="store_true", help="Exportar catálogo a marketing/GUIONES_VIDEO_VERTICALES.md")
     args = parser.parse_args()
-    display_catalog()
+    if args.export_md:
+        export_markdown()
+    else:
+        display_catalog()
 
 
 if __name__ == "__main__":
     main()
+
