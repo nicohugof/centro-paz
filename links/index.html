@@ -6,7 +6,7 @@
   <title>Centro Paz | Enlaces Oficiales & Contacto Directo WhatsApp</title>
   <meta name="description" content="Enlaces oficiales de Centro Paz. Habla directamente con la psicóloga Valentina Castro Núñez por WhatsApp, simula tu reembolso de Isapre y accede a recursos clínicos.">
   <link rel="canonical" href="https://www.centropaz.cl/links">
-  <meta name="theme-color" content="#7A2E3A">
+  <meta name="theme-color" content="#385E28">
   <meta name="robots" content="index, follow">
 
   <!-- Open Graph / Meta / Social -->
@@ -23,20 +23,30 @@
 
   <style>
     :root {
-      --burdeo: #7A2E3A;
-      --burdeo-dark: #5C1F29;
-      --burdeo-light: #943A48;
-      --rosado: #F0D9DE;
-      --rosado-light: #FBF4F5;
-      --verde: #A9C4B8;
-      --verde-dark: #4A6E60;
-      --verde-light: #EAF2EE;
-      --crema: #FAF6F3;
+      --verde-marca: #385E28;
+      --verde-dark: #223F16;
+      --verde-light: #F0F6EC;
+      --verde-suave: #D6E8CE;
+      --dorado: #B88B22;
+      --dorado-dark: #8F6914;
+      --dorado-light: #FAF4E5;
+      --celeste: #3E7582;
+      --celeste-dark: #2A5661;
+      --celeste-light: #EEF6F8;
+      --crema: #FAF8F5;
       --crema-warm: #F4ECE6;
       --card-bg: #FFFFFF;
-      --negro: #2B2B2B;
-      --gris: #6E6660;
-      --borde: #EFE4DE;
+      --negro: #1E281A;
+      --gris: #5A6655;
+      --borde: #E3ECE0;
+
+      /* Mapeo de compatibilidad */
+      --burdeo: var(--verde-marca);
+      --burdeo-dark: var(--verde-dark);
+      --burdeo-light: var(--dorado);
+      --rosado: var(--verde-light);
+      --rosado-light: var(--crema);
+      --verde: var(--verde-marca);
     }
 
     * {
@@ -47,7 +57,7 @@
 
     body {
       font-family: 'Nunito Sans', sans-serif;
-      background: linear-gradient(180deg, #FBF4F5 0%, #FAF6F3 40%, #F4ECE6 100%);
+      background: linear-gradient(180deg, #F0F6EC 0%, #FAF8F5 45%, #EEF6F8 100%);
       color: var(--negro);
       min-height: 100vh;
       display: flex;
@@ -82,8 +92,8 @@
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid var(--card-bg);
-      box-shadow: 0 8px 24px rgba(122, 46, 58, 0.15);
-      background: var(--rosado);
+      box-shadow: 0 8px 24px rgba(56, 94, 40, 0.16);
+      background: var(--verde-light);
     }
 
     .status-dot {
@@ -101,7 +111,7 @@
       font-family: 'Lora', serif;
       font-size: 1.5rem;
       font-weight: 700;
-      color: var(--burdeo-dark);
+      color: var(--verde-dark);
       margin-bottom: 4px;
     }
 
@@ -122,7 +132,7 @@
       border-radius: 9999px;
       font-size: 0.8rem;
       font-weight: 700;
-      border: 1px solid rgba(74, 110, 96, 0.2);
+      border: 1px solid var(--verde-suave);
     }
 
     /* Links Stack */
@@ -145,14 +155,14 @@
       border-radius: 16px;
       text-decoration: none;
       color: var(--negro);
-      box-shadow: 0 4px 14px rgba(122, 46, 58, 0.05);
+      box-shadow: 0 4px 14px rgba(56, 94, 40, 0.05);
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .link-item:hover, .link-item:active {
       transform: translateY(-2px);
-      box-shadow: 0 8px 22px rgba(122, 46, 58, 0.12);
-      border-color: var(--burdeo);
+      box-shadow: 0 8px 22px rgba(56, 94, 40, 0.12);
+      border-color: var(--verde-marca);
     }
 
     .link-item.hero-cta {
@@ -298,7 +308,7 @@
       <h1 class="profile-name">Centro Paz</h1>
       <p class="profile-subtitle">Psicología Clínica · Valentina Castro Núñez</p>
       <div class="pill-badge">
-        <span>🌿</span> Sesiones Online (Chile) y Presenciales en Ñuñoa
+        <span>🌿</span> Sesiones Online (desde 12 años) y Presenciales en Ñuñoa
       </div>
     </div>
 
