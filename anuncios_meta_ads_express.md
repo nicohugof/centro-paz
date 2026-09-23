@@ -37,7 +37,7 @@ Este documento contiene la configuración exacta para lanzar una campaña de anu
   En Centro Paz te acompañamos con un enfoque clínico, cálido y neuroafirmativo:
   🌿 Comprende tu funcionamiento singular sin juicios.
   🌿 Desarrolla estrategias de regulación sensorial y dopamina.
-  🌿 Modalidad Online (todo Chile) y Presencial (Santiago).
+  🌿 Modalidad Online (todo Chile) y Presencial en Ñuñoa (Santiago Oriente).
   💳 Boletas 100% reembolsables en todas las Isapres y Seguros de Salud.
 
   👇 Escríbenos directo por WhatsApp para consultar por cupos y disponibilidad.
@@ -59,7 +59,7 @@ Este documento contiene la configuración exacta para lanzar una campaña de anu
 
   Tu copago real puede quedar tan bajo como $15.000 por sesión.
 
-  Sesiones online para todo Chile y presenciales en Santiago con Valentina Castro Núñez (Psicóloga Clínica).
+  Sesiones online para todo Chile y presenciales en Ñuñoa (Santiago) con Valentina Castro Núñez (Psicóloga Clínica).
 
   👉 Toca el botón para chatear con nosotros por WhatsApp y orientarte con tu cobertura.
   ```
@@ -116,7 +116,7 @@ Este documento contiene la configuración exacta para lanzar una campaña de anu
   No es flojera ni falta de ganas: es un bloqueo en la función ejecutiva característico del TDAH en adultos.
 
   Aprende herramientas clínicas y estrategias diseñadas para tu química cerebral.
-  📍 Online para todo Chile y Presencial en Santiago.
+  📍 Online para todo Chile y Presencial en Ñuñoa (Santiago).
   💳 Reembolso Isapres y Seguros Complementarios.
 
   👇 Haz clic para agendar tu primera sesión por WhatsApp.
