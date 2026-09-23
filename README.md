@@ -63,49 +63,53 @@ Centro Paz es un centro de psicología clínica enfocado en acompañamiento huma
 
 ```text
 /Users/nigoku/CPAZ/
-├── index.html                           # Landing page completa y responsive
+├── index.html                           # Landing page completa, responsive y optimizada para SEO
 ├── privacidad.html                      # Política de privacidad (Ley 19.628 + secreto profesional)
+├── links.html                           # Hub de enlaces para biografía móvil de redes sociales (/links)
 ├── 404.html                             # Página de error para GitHub Pages
-├── robots.txt / sitemap.xml             # SEO básico
+├── robots.txt / sitemap.xml             # Directivas de indexación para buscadores y bots de IA
+├── llms.txt                             # Resumen clínico estructurado para modelos de lenguaje (LLMs)
 ├── styles.css                           # Sistema de diseño CSS y variables de marca
 ├── app.js                               # Motor de triaje, simulador de Isapres y screener
-├── CNAME                                # Configuración de dominio www.centropaz.cl
-├── guia_7_claves_regulacion_centro_paz.html # Plantilla HTML del Lead Magnet
-├── guia_7_claves_regulacion_centro_paz.pdf  # PDF descargable para enviar por WhatsApp
-├── protocolo_captacion_whatsapp.md      # Playbook de atención y cierre de pacientes por WhatsApp
-├── estrategia_adquisicion_redes.md      # Estrategia de contenidos, reels y SEO local
-├── README.md                            # Documentación maestra del proyecto
+├── cpaz.py                              # Panel de control CLI interactivo
+├── CNAME                                # Dominio personalizado www.centropaz.cl
+├── blog/                                # 28 artículos clínicos estructurados con Schema.org
+├── docs/                                # Playbooks operativos y guías de derivación clínica
+├── marketing/                           # Packs semanales de contenido, guiones de video y copys
 ├── assets/
-│   └── instagram/
-│       ├── post_01_tdah_adultos.png     # Pieza 1: TDAH en Adultos (1080x1350)
-│       ├── post_02_reembolso_isapre.png # Pieza 2: Reembolso Isapre (1080x1350)
-│       └── post_03_crianza_regulacion.png # Pieza 3: Crianza Respetuosa (1080x1350)
+│   ├── logo/                            # Logotipo oficial (símbolo Ψ y laureles) en SVG y PNG
+│   ├── videos/                          # 10 videos verticales (9:16) con audio sintético en chileno
+│   └── instagram/                       # 28 infografías cuadradas y verticales (1080x1350 PNG)
 └── agent/
     ├── __init__.py
+    ├── auto_publisher.py                # Publicador automático multi-slot para Meta Graph API
+    ├── blog_clinical_knowledge.py       # Corpus de conocimiento clínico estructurado
+    ├── blog_generator.py                # Generador estático del blog, sitemap y llms.txt
     ├── content_engine.py                # Motor de copys, ganchos y hashtags
-    ├── marketing_agent.py               # CLI para generar calendarios y renderizar imágenes
-    └── n8n_marketing_payload.json       # Payload estructurado para bots / n8n / webhooks
+    ├── marketing_agent.py               # Herramientas de visualización y exportación de marketing
+    ├── organic_lead_scout.py            # Scout de respuestas orgánicas en comunidades
+    ├── video_shorts_generator.py        # Generador de videos y subtítulos con Azure Neural TTS
+    └── whatsapp_assistant.py            # Asistente de respuestas rápidas para Valentina
 ```
 
 ---
 
-## 🤖 Uso del Agente de Marketing Autónomo
+## 🤖 Uso del Centro de Control y Agentes
 
-El agente permite automatizar la generación de calendarios y renderizado de imágenes:
+Puedes interactuar directamente con el ecosistema a través del CLI unificado o comandos específicos:
 
 ```bash
-# 1. Ver la parrilla semanal de contenidos con copys y hashtags
-python3 -m agent.marketing_agent --calendar
+# 1. Iniciar el panel central interactivo
+python3 cpaz.py
 
-# 2. Re-renderizar todas las piezas gráficas a PNG de alta resolución (1080x1350)
-#    Usa Chrome/Chromium en Linux, macOS o Windows (o la variable CHROME_BIN)
-python3 -m agent.marketing_agent --render-posts
+# 2. Reconstruir todo el Blog Clínico, sitemap.xml y llms.txt
+python3 agent/blog_generator.py
 
-# 3. Exportar el JSON actualizado para n8n / webhooks
-python3 -m agent.marketing_agent --export-json
+# 3. Simular publicación automática en redes sociales (Dry Run)
+PYTHONPATH=. python3 -m agent.auto_publisher --slot auto --dry-run
 
-# 4. Probar conexión Meta Graph API (requiere token en agent/meta_config.json)
-python3 -m agent.auto_publisher --test-connection
+# 4. Ver el catálogo de guiones de video vertical
+python3 -m agent.video_shorts_generator --catalog
 ```
 
 ---
