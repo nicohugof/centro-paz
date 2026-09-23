@@ -27,7 +27,7 @@ Emitimos boletas electrónicas de honorarios profesionales de psicología clíni
 
 Dependiendo de tu plan, tu Isapre o seguro te reembolsa entre el 50% y el 80% del arancel, por lo que tu copago real puede quedar tan bajo como $12.000 - $18.000 aprox.
 
-¿Te gustaría coordinar tu primera sesión online o presencial en Santiago?""",
+¿Te gustaría coordinar tu primera sesión online o presencial en nuestra consulta en Ñuñoa (Santiago)?""",
 
     "horarios": """Hola [Nombre] ✨ Para tu primera sesión tengo disponibles estas 2 opciones esta semana:
 
@@ -56,7 +56,7 @@ Trabajamos desde un enfoque humanista y neuroafirmativo con personas adultas y j
 
 El objetivo del espacio no es juzgarte ni encajarte en moldes, sino ayudarte a comprender tu funcionamiento cognitivo singular, gestionar la parálisis ejecutiva/procrastinación y construir estrategias respetuosas con tu energía en tu vida cotidiana y laboral.
 
-📍 Modalidad Online (todo Chile) y Presencial (Santiago).
+📍 Modalidad Online (todo Chile) y Presencial en Ñuñoa (Santiago).
 💳 Boletas 100% reembolsables en Isapres y Seguros.
 
 ¿Te gustaría coordinar tu primera sesión con Valentina?""",
@@ -81,12 +81,12 @@ La sobrecarga mental, el sobrepensamiento constante y la ansiedad física (pecho
 
 En sesión trabajamos con herramientas integrativas y somáticas para calmar la respuesta de alarma de tu sistema nervioso y devolverte la sensación de control y bienestar.
 
-¿Prefieres atención online desde la comodidad de tu hogar o presencial en Santiago?""",
+¿Prefieres atención online desde la comodidad de tu hogar o presencial en nuestra consulta en Ñuñoa (Santiago)?""",
 
     "modalidad": """Hola [Nombre] 🌿 Atendemos en dos modalidades con la misma rigurosidad clínica:
 
 💻 Modalidad Online: Por videollamada segura, desde cualquier lugar de Chile. Ideal si buscas comodidad y evitar traslados.
-🛋️ Modalidad Presencial: En consulta clínica en Santiago en un ambiente cuidado, acogedor y confidencial.
+🛋️ Modalidad Presencial: En consulta clínica en Ñuñoa (Santiago) en un ambiente cuidado, acogedor y confidencial.
 
 Ambas modalidades reciben la misma boleta electrónica reembolsable en Isapres. ¿Cuál prefieres tú?""",
 
