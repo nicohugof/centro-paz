@@ -55,25 +55,23 @@ def print_banner() -> None:
 
 
 def display_calendar() -> None:
-    cal_w1 = content_engine.get_weekly_calendar(week=1)
-    cal_w2 = content_engine.get_weekly_calendar(week=2)
-
-    print("📅 PARRILLA DE CONTENIDO DE ALTA CONVERSIÓN (14 DÍAS):\n")
-    print("─── SEMANA 1: CONCIENCIA, OBJECIONES Y ACCESO ───")
-    for item in cal_w1:
-        print(f"📌 [Post {item['id']:02d} · {item['dia']}] — {item['tipo']}")
-        print(f"   Título: {item['titulo']}")
-        print(f"   Gancho: {item['gancho']}")
-        print(f"   Hashtags: {item['hashtags']}")
-        print("-" * 70)
-
-    print("\n─── SEMANA 2: PROFUNDIZACIÓN, PARENTALIDAD Y CONVERSIÓN ───")
-    for item in cal_w2:
-        print(f"📌 [Post {item['id']:02d} · {item['dia']}] — {item['tipo']}")
-        print(f"   Título: {item['titulo']}")
-        print(f"   Gancho: {item['gancho']}")
-        print(f"   Hashtags: {item['hashtags']}")
-        print("-" * 70)
+    print("📅 PARRILLA DE CONTENIDO DE ALTA CONVERSIÓN (28 DÍAS / 4 SEMANAS):\n")
+    titulos_semanas = {
+        1: "SEMANA 1: CONCIENCIA, OBJECIONES Y ACCESO",
+        2: "SEMANA 2: PROFUNDIZACIÓN, PARENTALIDAD Y CONVERSIÓN",
+        3: "SEMANA 3: NEURODIVERGENCIA, REGULACIÓN Y REEMBOLSOS AVANZADOS",
+        4: "SEMANA 4: PRESENCIALIDAD EN ÑUÑOA, INFANCIA Y BIENESTAR INTEGRAL"
+    }
+    for week_num in range(1, 5):
+        cal = content_engine.get_weekly_calendar(week=week_num)
+        print(f"─── {titulos_semanas[week_num]} ───")
+        for item in cal:
+            print(f"📌 [Post {item['id']:02d} · {item['dia']}] — {item['tipo']}")
+            print(f"   Título: {item['titulo']}")
+            print(f"   Gancho: {item['gancho']}")
+            print(f"   Hashtags: {item['hashtags']}")
+            print("-" * 70)
+        print()
 
 
 def display_reels() -> None:
@@ -139,7 +137,7 @@ def render_all_posts() -> None:
 def display_multiplatform() -> None:
     matrix = content_engine.get_multiplatform_matrix()
     print("🌐 MATRIZ DE CONTENIDO OMNICANAL PARA TODAS LAS REDES SOCIALES:\n")
-    print("1. 📸 INSTAGRAM & FACEBOOK (Feed + Stories): 14 publicaciones gráficas (1080x1350).")
+    print("1. 📸 INSTAGRAM & FACEBOOK (Feed + Stories): 28 publicaciones gráficas (1080x1350).")
     print("2. 🎥 TIKTOK & REELS: 7 guiones de video de 30-40s con ganchos y audio sugerido.")
     print("3. 🧵 THREADS & X (Twitter): 3 micro-hilos clínicos para debate y engagement.")
     print("4. 👥 FACEBOOK COMUNIDADES / GRUPOS: 2 publicaciones de discusión comunitaria.")
@@ -147,8 +145,6 @@ def display_multiplatform() -> None:
 
 
 def export_n8n_json() -> None:
-    cal_w1 = content_engine.get_weekly_calendar(week=1)
-    cal_w2 = content_engine.get_weekly_calendar(week=2)
     catalog = content_engine.get_all_catalog()
     reels = content_engine.get_reels_catalog()
     matrix = content_engine.get_multiplatform_matrix()
@@ -161,8 +157,10 @@ def export_n8n_json() -> None:
         "brand": content_engine.BRAND,
         "lead_magnet_pdf": "https://www.centropaz.cl/guia_7_claves_regulacion_centro_paz.pdf",
         "posts_catalog": catalog,
-        "calendar_week_1": cal_w1,
-        "calendar_week_2": cal_w2,
+        "calendar_week_1": content_engine.get_weekly_calendar(week=1),
+        "calendar_week_2": content_engine.get_weekly_calendar(week=2),
+        "calendar_week_3": content_engine.get_weekly_calendar(week=3),
+        "calendar_week_4": content_engine.get_weekly_calendar(week=4),
         "reels_scripts": reels,
         "status": "ready_for_dispatch"
     }
@@ -176,7 +174,7 @@ def export_n8n_json() -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Centro Paz Marketing Agent")
-    parser.add_argument("--calendar", action="store_true", help="Mostrar calendario de 14 días de publicaciones")
+    parser.add_argument("--calendar", action="store_true", help="Mostrar calendario de 28 días de publicaciones")
     parser.add_argument("--reels", action="store_true", help="Mostrar guiones virales de Reels y TikTok")
     parser.add_argument("--multiplatform", action="store_true", help="Mostrar resumen de distribución omnicanal")
     parser.add_argument("--render-posts", action="store_true", help="Renderizar imágenes de Instagram a PNG")
