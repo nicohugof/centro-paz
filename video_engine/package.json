@@ -1,0 +1,24 @@
+{
+  "name": "video_engine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@remotion/bundler": "^4.0.528",
+    "@remotion/cli": "^4.0.528",
+    "@remotion/renderer": "^4.0.528",
+    "@types/node": "^26.6.2",
+    "@types/react": "^19.3.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "remotion": "^4.0.528",
+    "typescript": "^7.0.2"
+  }
+}
