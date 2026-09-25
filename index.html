@@ -233,8 +233,9 @@
           <li><a href="#autodiagnostico">¿Te identificas?</a></li>
           <li><a href="#orientador">Orientador</a></li>
           <li><a href="#calculadora">Reembolso Isapre</a></li>
+          <li><a href="#biblioteca">Biblioteca Clínica</a></li>
+          <li><a href="#nunoa">Consulta Ñuñoa</a></li>
           <li><a href="#terapeuta">Sobre Valentina</a></li>
-          <li><a href="blog/">Blog Clínico</a></li>
           <li><a href="#faq">Preguntas</a></li>
           <li><a href="#orientador" class="nav-cta">Agendar Consulta</a></li>
         </ul>
@@ -538,6 +539,110 @@
             <div class="calc-steps-info">
               📄 <strong>¿Cómo se reembolsa?</strong> Valentina emite tu boleta electrónica al finalizar la sesión. La subes a la app o web de tu Isapre y te transfieren directamente a tu cuenta corriente.
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Biblioteca Clínica y Guías Especializadas 2.0 (SEO & Confianza del Paciente) -->
+  <section class="library-section" id="biblioteca">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-kicker">Biblioteca Clínica & Respuestas</div>
+        <h2>Guías y Artículos Clínicos de Especialidad</h2>
+        <p>Explora 28 artículos exhaustivos elaborados con rigor clínico, enfoque neuroafirmativo y herramientas prácticas.</p>
+      </div>
+
+      <!-- Buscador en tiempo real -->
+      <div class="library-search-bar">
+        <svg class="library-search-icon" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+        <input type="text" id="library-search-input" class="library-search-input" placeholder="Buscar por tema (ej. TDAH, Isapre, Ansiedad, Pataletas, Masking)..." aria-label="Buscar artículos clínicos">
+      </div>
+
+      <!-- Filtros por categoría -->
+      <div class="library-category-filters">
+        <button type="button" class="library-filter-btn active" data-category="all">Todos (28)</button>
+        <button type="button" class="library-filter-btn" data-category="tdah">🧠 TDAH Adultos</button>
+        <button type="button" class="library-filter-btn" data-category="isapre">💳 Reembolsos Isapre</button>
+        <button type="button" class="library-filter-btn" data-category="infantil">🌱 Crianza & Infancia</button>
+        <button type="button" class="library-filter-btn" data-category="tea">✨ Autismo (TEA)</button>
+        <button type="button" class="library-filter-btn" data-category="ansiedad">🌊 Ansiedad & Estrés</button>
+      </div>
+
+      <!-- Grilla interactiva de artículos (Renderizada dinámicamente con JS) -->
+      <div class="library-articles-grid" id="library-articles-grid">
+        <!-- Renderizado dinámicamente con app.js -->
+      </div>
+
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="blog/" class="btn btn-secondary">
+          <span>Ver Índice Completo del Blog Clínico</span>
+          <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" style="width:18px; height:18px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Ubicación Ñuñoa y Acceso Clínico (Local SEO 2.0 & Google Maps) -->
+  <section class="location-section" id="nunoa">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-kicker">Atención Presencial & Online</div>
+        <h2>Nuestra Consulta en Ñuñoa (Santiago Oriente)</h2>
+        <p>Un espacio cálido, cuidado y confidencial para tus sesiones presenciales, además de atención online para todo Chile.</p>
+      </div>
+
+      <div class="location-grid">
+        <div class="location-info-card">
+          <h3 style="font-size:1.45rem; margin-bottom:12px; color:var(--burdeo-dark);">Ubicación y Conectividad</h3>
+          <p style="margin-bottom:16px;">
+            Nuestra consulta está ubicada en el corazón de <strong>Ñuñoa</strong>, en un sector residencial tranquilo, seguro y con excelente conectividad desde comunas aledañas (Providencia, La Reina, Las Condes, Macul y Peñalolén).
+          </p>
+
+          <ul class="location-feature-list">
+            <li class="location-feature-item">
+              <div class="location-feature-icon">🚇</div>
+              <div class="location-feature-text">
+                <h4>Metro Chile España (Línea 3) y Plaza Ñuñoa</h4>
+                <p>A pasos de estaciones de Metro y principales ejes de locomoción colectiva.</p>
+              </div>
+            </li>
+            <li class="location-feature-item">
+              <div class="location-feature-icon">🕒</div>
+              <div class="location-feature-text">
+                <h4>Horarios de Atención</h4>
+                <p>Lunes a Viernes de 09:00 a 20:00 hrs · Sábados de 09:00 a 14:00 hrs (previa reserva).</p>
+              </div>
+            </li>
+            <li class="location-feature-item">
+              <div class="location-feature-icon">🧸</div>
+              <div class="location-feature-text">
+                <h4>Sala Clínica Adaptada para Infancia y Adultos</h4>
+                <p>Ambiente sensorialmente cuidado, con baja sobreestimulación y material lúdico para niños.</p>
+              </div>
+            </li>
+          </ul>
+
+          <div style="margin-top:24px;">
+            <a href="#" class="btn btn-whatsapp" data-wa-action="nunoa" style="width:100%; justify-content:center;">
+              <svg fill="currentColor" viewBox="0 0 24 24" style="width:20px; height:20px;"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm.01 1.67c4.54 0 8.24 3.7 8.24 8.24 0 2.2-.86 4.27-2.42 5.82-1.55 1.56-3.62 2.42-5.82 2.42-1.47 0-2.9-.39-4.16-1.13l-.3-.18-3.1.81.83-3.02-.2-.31c-.81-1.3-1.24-2.8-1.24-4.41 0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.25-1.5-1.4-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.07-.1-.23-.17-.48-.29z"/></svg>
+              <span>Consultar horas presenciales en Ñuñoa</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="location-map-placeholder">
+          <div class="location-map-pin">📍</div>
+          <h3 style="color:#FFFFFF; font-size:1.6rem; margin-bottom:8px;">Ñuñoa, Santiago Oriente</h3>
+          <p style="color:rgba(255, 255, 255, 0.85); font-size:1rem; max-width:380px; margin-bottom:24px;">
+            Sector Plaza Ñuñoa · Metro Chile España (L3) · Coordenadas: -33.4569, -70.5982
+          </p>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+            <span style="padding:8px 16px; border-radius:20px; background:rgba(255, 255, 255, 0.15); font-size:0.88rem; font-weight:700;">🛋️ Presencial Ñuñoa</span>
+            <span style="padding:8px 16px; border-radius:20px; background:rgba(233, 128, 110, 0.3); color:#FFD166; font-size:0.88rem; font-weight:700;">💻 Online todo Chile</span>
           </div>
         </div>
       </div>

@@ -6,3 +6,6 @@ agent/meta_config.json
 
 __pycache__/
 *.pyc
+node_modules/
+video_engine/node_modules/
+video_engine/temp/

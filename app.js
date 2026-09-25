@@ -109,6 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initCalculator();
   initChecklist();
   initStickyWhatsApp();
+  initLibrary();
 });
 
 /* ----------------------------------------------------
@@ -536,6 +537,8 @@ function initWhatsAppLinks() {
       msg = "Hola Centro Paz 🧠 Quisiera consultar por atención especializada en Neurodivergencias (TEA / TDAH) y disponibilidad.";
     } else if (action === "infantil") {
       msg = "Hola Centro Paz 🌱 Busco apoyo psicológico infanto-juvenil / orientación a padres. ¿Cómo es el proceso de ingreso?";
+    } else if (action === "nunoa") {
+      msg = "Hola Centro Paz 🛋️ Quisiera consultar por disponibilidad para sesiones presenciales en la consulta de Ñuñoa con Valentina.";
     } else if (action === "lead-magnet") {
       msg = "Hola Centro Paz ✨ Me gustaría solicitar la Guía Gratuita de Regulación Emocional y Sensorial para adultos y familias.";
     } else if (action === "hero" || action === "sticky") {
@@ -595,4 +598,104 @@ function initStickyWhatsApp() {
   } catch (e) {}
 
   dismiss.addEventListener("click", hideBar);
+}
+
+/* ----------------------------------------------------
+   BIBLIOTECA CLÍNICA Y BUSCADOR INTERACTIVO (28 ARTÍCULOS)
+---------------------------------------------------- */
+const clinicalArticlesList = [
+  { slug: "tdah_adultos", category: "tdah", tag: "TDAH Adultos", title: "¿Y si tu cansancio no es flojera, sino TDAH no diagnosticado?", desc: "Diferencias entre procrastinación, baja dopamina y parálisis ejecutiva en la adultez.", time: "6 min" },
+  { slug: "reembolso_isapre", category: "isapre", tag: "Reembolso Isapre", title: "Cuánto cuesta REALMENTE ir al psicólogo: Guía de reembolsos Isapre", desc: "Cómo recuperar entre el 50% y el 80% del arancel mediante boleta electrónica oficial.", time: "5 min" },
+  { slug: "crianza_regulacion", category: "infantil", tag: "Crianza & Infancia", title: "Pataleta vs. Colapso Sensorial: Cómo acompañar desbordes sin gritos", desc: "Herramientas de corregulación y pautas respetuosas para padres sobrepasados.", time: "7 min" },
+  { slug: "masking", category: "tdah", tag: "Neurodivergencias", title: "El precio invisible del masking: Por qué llegas agotado a las 19:00 hrs", desc: "El esfuerzo inconsciente de sobre-adaptarte para encajar en el trabajo y la vida diaria.", time: "6 min" },
+  { slug: "terapia_online", category: "general", tag: "Modalidad", title: "Terapia Online en Chile: Efectividad, privacidad y cómo prepararte", desc: "Por qué la atención por videollamada segura tiene la misma efectividad clínica que presencial.", time: "5 min" },
+  { slug: "orientacion_padres", category: "infantil", tag: "Crianza & Infancia", title: "Orientación a Padres: Criar con límites claros sin culpa ni castigos", desc: "Sesiones especializadas para madres y padres que buscan pautas de regulación en el hogar.", time: "6 min" },
+  { slug: "primera_sesion", category: "general", tag: "Proceso Clínico", title: "¿Qué pasa en tu primera sesión de psicología?", desc: "Paso a paso de un espacio de acogida sin juicios, confidencial y a tu propio ritmo.", time: "4 min" },
+  { slug: "burnout_autista", category: "tea", tag: "Autismo (TEA)", title: "Burnout Autista en Adultos: Por qué dormir el fin de semana no te recupera", desc: "Descompresión sensorial, validación de límites y prevención del colapso crónico.", time: "7 min" },
+  { slug: "paralisis_ejecutiva", category: "tdah", tag: "TDAH Adultos", title: "Parálisis ejecutiva: Cuando tu mente quiere arrancar pero tu cuerpo se bloquea", desc: "Estrategias de micro-acción y dopamina para superar la barrera del inicio.", time: "5 min" },
+  { slug: "regulacion_ansiedad", category: "ansiedad", tag: "Ansiedad & Estrés", title: "7 Claves de regulación del sistema nervioso para frenar el sobrepensamiento", desc: "Herramientas somáticas e integrativas para calmar la respuesta de alarma del cuerpo.", time: "6 min" },
+  { slug: "apoyo_neurodivergente_hijos", category: "infantil", tag: "Crianza & Infancia", title: "Mi hijo fue diagnosticado con TEA o TDAH: Primeros pasos para padres", desc: "Cómo procesar el diagnóstico, coordinar apoyos escolares y cuidar el clima familiar.", time: "8 min" },
+  { slug: "culpa_parental", category: "infantil", tag: "Crianza & Infancia", title: "Reparar después del grito: Cómo reconectar con tus hijos sin culpa", desc: "La reparación vincular como la herramienta más poderosa de la crianza respetuosa.", time: "5 min" },
+  { slug: "reembolso_matematica", category: "isapre", tag: "Reembolso Isapre", title: "La matemática de la salud mental: Cuánto pagas de tu bolsillo por sesión", desc: "Simulación de copagos reales desde $9.000 a $15.000 CLP según tu plan de salud.", time: "5 min" },
+  { slug: "tdah_mujeres", category: "tdah", tag: "TDAH Adultos", title: "TDAH en mujeres: El diagnóstico tardío y la autoexigencia silenciosa", desc: "Por qué tantas mujeres son diagnosticadas después de los 25 o 30 años.", time: "7 min" },
+  { slug: "sobrecarga_sensorial_ruido", category: "tea", tag: "Neurodivergencias", title: "Hipersensibilidad al ruido y misofonía: No es mal genio, es tu sistema nervioso", desc: "Acomodaciones auditivas y regulación en espacios laborales y domésticos.", time: "6 min" },
+  { slug: "reembolso_seguros_cobertura", category: "isapre", tag: "Reembolso Isapre", title: "Doble reembolso: Cómo combinar Isapre + Seguro Complementario", desc: "Guía para presentar la liquidación de Isapre en tu seguro colectivo de empresa.", time: "5 min" },
+  { slug: "hiperfoco_burnout", category: "tdah", tag: "TDAH Adultos", title: "El ciclo del hiperfoco y el bajón de energía: Cómo sostener tu productividad", desc: "Manejo del ritmo circadiano y descansos planificados en mentes neurodivergentes.", time: "6 min" },
+  { slug: "crianza_rutinas_flexibles", category: "infantil", tag: "Crianza & Infancia", title: "Rutinas visuales y límites amorosos sin batallas diarias", desc: "Cómo organizar las mañanas y noches con niños sin recurrir a amenazas ni premios.", time: "6 min" },
+  { slug: "comunicacion_asertiva_limites", category: "ansiedad", tag: "Autoestima", title: "Poner límites sin culpa: Cómo decir que no sin sentir que estás dañando al otro", desc: "Desactivar el complacer compulsivo y cuidar tu espacio personal.", time: "5 min" },
+  { slug: "tdah_rechazo_rsd", category: "tdah", tag: "TDAH Adultos", title: "Sensibilidad al Rechazo (RSD): Por qué una crítica duele físicamente", desc: "Comprendiendo la disforia sensible al rechazo en personas con TDAH.", time: "6 min" },
+  { slug: "primera_consulta_nunoa", category: "nunoa", tag: "Consulta Ñuñoa", title: "Cómo es tu primera consulta presencial en Ñuñoa", desc: "Ambiente cálido, cercano a Metro Chile España, sin juicios y con boleta Isapre.", time: "4 min" },
+  { slug: "terapia_infantil_juego", category: "infantil", tag: "Crianza & Infancia", title: "Terapia infantil a través del juego: Cómo sanan los niños en sesión", desc: "El juego como lenguaje natural para procesar emociones, miedos y cambios.", time: "6 min" },
+  { slug: "ansiedad_somatica_cuerpo", category: "ansiedad", tag: "Ansiedad & Estrés", title: "Ansiedad somática: Cuando el cuerpo avisa con opresión en el pecho", desc: "Escuchar las señales físicas de alarma y devolver seguridad al cuerpo.", time: "6 min" },
+  { slug: "isapre_licencia_boletas", category: "isapre", tag: "Reembolso Isapre", title: "Guía definitiva de boletas de honorarios y glosas para Isapres", desc: "Qué datos debe tener tu boleta para que el reembolso se apruebe en 48 horas.", time: "5 min" },
+  { slug: "desconexion_tecnologica_tdah", category: "tdah", tag: "TDAH Adultos", title: "El ciclo del scroll infinito y la búsqueda de dopamina en TDAH", desc: "Estrategias de fricción ambiental para desconectar pantallas sin frustración.", time: "5 min" },
+  { slug: "padres_regulacion_propia", category: "infantil", tag: "Crianza & Infancia", title: "Regularte tú antes de calmar a tu hijo: El secreto de la corregulación", desc: "Por qué un niño desregulado necesita la calma de un adulto, no dos desregulados.", time: "6 min" },
+  { slug: "autocuidado_fin_de_semana", category: "ansiedad", tag: "Bienestar", title: "Descanso sensorial de fin de semana: Desconectar sin culpa", desc: "Planificar momentos de baja estimulación para recargar tu sistema nervioso.", time: "5 min" },
+  { slug: "tdah_vs_ansiedad", category: "tdah", tag: "TDAH Adultos", title: "¿TDAH o Ansiedad Generalizada? Cómo diferenciarlos clínicamente", desc: "Identificar si la dispersión viene de una corteza prefrontal desregulada o de un estado de alerta.", time: "7 min" }
+];
+
+let currentLibraryCategory = "all";
+let currentLibraryQuery = "";
+
+function initLibrary() {
+  const grid = document.getElementById("library-articles-grid");
+  const searchInput = document.getElementById("library-search-input");
+  const filterBtns = document.querySelectorAll(".library-filter-btn");
+
+  if (!grid) return;
+
+  function renderLibrary() {
+    const filtered = clinicalArticlesList.filter(article => {
+      const matchCat = (currentLibraryCategory === "all") || (article.category === currentLibraryCategory);
+      const q = currentLibraryQuery.toLowerCase().trim();
+      const matchQuery = !q || article.title.toLowerCase().includes(q) || article.desc.toLowerCase().includes(q) || article.tag.toLowerCase().includes(q);
+      return matchCat && matchQuery;
+    });
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px; color: var(--gris);">
+          <p style="font-size: 1.1rem; margin-bottom: 8px;">No encontramos artículos para "<strong>${currentLibraryQuery}</strong>".</p>
+          <p style="font-size: 0.95rem;">Prueba buscando por <em>TDAH, Isapre, Ansiedad, Masking o Crianza</em>.</p>
+        </div>
+      `;
+      return;
+    }
+
+    grid.innerHTML = filtered.map(item => `
+      <a href="blog/${item.slug}.html" class="library-article-card">
+        <div>
+          <span class="library-card-tag">${item.tag}</span>
+          <h3 class="library-card-title">${item.title}</h3>
+          <p class="library-card-desc">${item.desc}</p>
+        </div>
+        <div class="library-card-footer">
+          <span>⏱️ ${item.time}</span>
+          <span class="library-card-link">
+            Leer guía
+            <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+    `).join("");
+  }
+
+  // Event Listeners
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      currentLibraryQuery = e.target.value;
+      renderLibrary();
+    });
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      filterBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentLibraryCategory = btn.getAttribute("data-category") || "all";
+      renderLibrary();
+    });
+  });
+
+  renderLibrary();
 }
