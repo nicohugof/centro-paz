@@ -24,8 +24,9 @@ def print_menu():
     print(" 4. 🚀  Lanzar Servidor Web Local para Prueba de Conversiones (http://localhost:8000)")
     print(" 5. 💬  Asistente Rápido de WhatsApp (Protocolo de Cierre Humano para Valentina)")
     print(" 6. 📊  Ver Playbook de Google Ads Search & Plan 100 Pacientes")
-    print(" 7. 🎨  Renderizar las 28 Infografías a PNG (1080x1350)")
-    print(" 8. 📡  Exportar Payloads para n8n")
+    print(" 7. 🎯  Tablero Clínico de Ingresos y Meta de 100 Pacientes (Seguimiento Real)")
+    print(" 8. 🎨  Renderizar las 28 Infografías a PNG (1080x1350)")
+    print(" 9. 📡  Exportar Payloads para n8n")
     print(" 0. 🚪  Salir")
     print("=" * 75 + "\n")
 
@@ -34,7 +35,7 @@ def main():
     while True:
         try:
             print_menu()
-            choice = input("👉 Selecciona una opción (0-8): ").strip()
+            choice = input("👉 Selecciona una opción (0-9): ").strip()
             if choice == "1":
                 from agent import audit_consejo
                 audit_consejo.run_comprehensive_audit()
@@ -60,14 +61,17 @@ def main():
                 print("  • Medición Conversiones:   docs/GOOGLE_ADS_CONVERSION_TRACKING.md")
                 print("  • Perfil Google Maps:      docs/GOOGLE_BUSINESS_PROFILE_NUNOA.md\n")
             elif choice == "7":
-                marketing_agent.render_all_posts()
+                from agent import patient_intake_manager
+                patient_intake_manager.interactive_intake()
             elif choice == "8":
+                marketing_agent.render_all_posts()
+            elif choice == "9":
                 marketing_agent.export_n8n_json()
             elif choice in ["0", "salir", "exit", "quit", "q"]:
                 print("\n🌿 Centro Paz en operación continua. Hasta pronto.\n")
                 break
             else:
-                print("⚠️ Opción no válida. Ingresa un número del 0 al 8.")
+                print("⚠️ Opción no válida. Ingresa un número del 0 al 9.")
         except (KeyboardInterrupt, EOFError):
             print("\n\n🌿 Sesión finalizada.")
             break
