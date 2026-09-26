@@ -98,10 +98,37 @@ const checklistData = {
   ]
 };
 
+window.dataLayer = window.dataLayer || [];
+
+/**
+ * Disparador unificado de analítica y conversiones CPAZ
+ * Empuja eventos a dataLayer (GTM / GA4) y ejecuta gtag() si está disponible.
+ */
+function trackCPAZEvent(eventName, params = {}) {
+  const eventPayload = {
+    event: eventName,
+    page_location: window.location.href,
+    page_path: window.location.pathname,
+    timestamp: new Date().toISOString(),
+    ...params
+  };
+
+  window.dataLayer.push(eventPayload);
+
+  if (typeof window.gtag === "function") {
+    window.gtag("event", eventName, params);
+  }
+
+  if (window.location.hostname === "localhost" || window.location.search.includes("debug=true")) {
+    console.log(`[CPAZ Analytics] Event: ${eventName}`, eventPayload);
+  }
+}
+
 let currentChecklistTab = "adultos";
 let selectedSymptoms = new Set();
 
 document.addEventListener("DOMContentLoaded", () => {
+  initAnalyticsTracking();
   initTriage();
   initFAQ();
   initWhatsAppLinks();
@@ -112,6 +139,28 @@ document.addEventListener("DOMContentLoaded", () => {
   initLibrary();
   initCoreWebVitals();
 });
+
+/* ----------------------------------------------------
+   MONITOREO DE EVENTOS & CAPTACIÓN DE CONVERSIONES (GA4 / ADS)
+---------------------------------------------------- */
+function initAnalyticsTracking() {
+  document.addEventListener("click", (e) => {
+    const link = e.target.closest("a");
+    if (!link) return;
+
+    const href = link.getAttribute("href") || "";
+    if (href.includes("wa.me") || href.includes("api.whatsapp.com")) {
+      const action = link.getAttribute("data-wa-action") || link.id || "general_whatsapp";
+      trackCPAZEvent("generate_lead", {
+        lead_type: "whatsapp",
+        lead_source: action,
+        element_text: link.innerText ? link.innerText.trim().slice(0, 50) : "WhatsApp CTA",
+        value: 45000,
+        currency: "CLP"
+      });
+    }
+  });
+}
 
 /* ----------------------------------------------------
    MONITOREO DE RENDIMIENTO Y CORE WEB VITALS
@@ -402,6 +451,14 @@ function buildTriageResult() {
     ctaBtn.target = "_blank";
     ctaBtn.rel = "noopener noreferrer";
   }
+
+  // Micro-conversión: Orientador completado
+  trackCPAZEvent("complete_triage", {
+    triage_target: whoLabel,
+    triage_reason: reasonLabel,
+    triage_modality: modLabel,
+    triage_schedule: timePref
+  });
 }
 
 /* ----------------------------------------------------
@@ -452,6 +509,14 @@ window.updateReimbursementCalc = function() {
   if (calcWaBtn) {
     calcWaBtn.href = `https://wa.me/${CPAZ_CONFIG.whatsappNumber}?text=${encodeURIComponent(waMessage)}`;
   }
+
+  // Micro-conversión: Cálculo de Reembolso
+  trackCPAZEvent("calculate_reimbursement", {
+    isapre: isapreText,
+    with_insurance: hasInsurance,
+    estimated_copay: estimatedCopay,
+    estimated_reimburse: estimatedReimbursed
+  });
 };
 
 /* ----------------------------------------------------
