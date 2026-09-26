@@ -110,7 +110,38 @@ document.addEventListener("DOMContentLoaded", () => {
   initChecklist();
   initStickyWhatsApp();
   initLibrary();
+  initCoreWebVitals();
 });
+
+/* ----------------------------------------------------
+   MONITOREO DE RENDIMIENTO Y CORE WEB VITALS
+---------------------------------------------------- */
+function initCoreWebVitals() {
+  if (!("PerformanceObserver" in window)) return;
+  try {
+    const poLCP = new PerformanceObserver((list) => {
+      const entries = list.getEntries();
+      const lastEntry = entries[entries.length - 1];
+      if (lastEntry && window.location.hostname === "localhost") {
+        console.log(`[CPAZ Web 2.0 CWV] LCP: ${Math.round(lastEntry.startTime)} ms`);
+      }
+    });
+    poLCP.observe({ type: "largest-contentful-paint", buffered: true });
+
+    let clsValue = 0;
+    const poCLS = new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        if (!entry.hadRecentInput) {
+          clsValue += entry.value;
+        }
+      }
+      if (window.location.hostname === "localhost") {
+        console.log(`[CPAZ Web 2.0 CWV] CLS: ${clsValue.toFixed(3)}`);
+      }
+    });
+    poCLS.observe({ type: "layout-shift", buffered: true });
+  } catch (e) {}
+}
 
 /* ----------------------------------------------------
    ORIENTADOR DE CONSULTA / TRIAJE
