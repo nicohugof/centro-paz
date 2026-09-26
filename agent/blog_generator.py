@@ -687,6 +687,9 @@ def update_sitemap_xml(topics: dict):
     sitemap_path = ROOT / "sitemap.xml"
     urls = [
         ("https://www.centropaz.cl/", "2026-09-13", "weekly", "1.0"),
+        ("https://www.centropaz.cl/psicologo-nunoa.html", "2026-09-13", "weekly", "0.95"),
+        ("https://www.centropaz.cl/tdah-adultos.html", "2026-09-13", "weekly", "0.95"),
+        ("https://www.centropaz.cl/reembolso-isapre-psicologia.html", "2026-09-13", "weekly", "0.95"),
         ("https://www.centropaz.cl/blog/", "2026-09-13", "daily", "0.9"),
         ("https://www.centropaz.cl/links", "2026-09-13", "weekly", "0.85"),
         ("https://www.centropaz.cl/privacidad.html", "2026-08-28", "monthly", "0.4"),
