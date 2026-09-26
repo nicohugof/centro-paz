@@ -187,13 +187,28 @@ def generate_article_html(topic_key: str, topic: dict) -> str:
     wa_msg = urllib.parse.quote(f"Hola Valentina, estuve leyendo tu artículo '{title}' en Centro Paz y quisiera consultar por atención con boleta para Isapre.")
     wa_href = f"https://wa.me/{WA_NUMBER}?text={wa_msg}"
 
+    # Título SEO calibrado (máx 65 caracteres)
+    seo_title = f"{title} | Centro Paz"
+    if len(seo_title) > 65:
+        seo_title = f"{title[:45]}... | Centro Paz"
+
+    # Meta Description calibrada (125 a 155 caracteres)
+    clean_hook = hook.strip().replace('"', '')
+    raw_desc = f"{clean_hook} Consulta clínica en Ñuñoa y Online con reembolso Isapre en Centro Paz."
+    if len(raw_desc) > 155:
+        seo_desc = raw_desc[:150] + "..."
+    elif len(raw_desc) < 100:
+        seo_desc = f"{raw_desc} Atención especializada con la psicóloga Valentina Castro Núñez."
+    else:
+        seo_desc = raw_desc
+
     return f"""<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>{html.escape(title)} | Centro Paz Psicología Clínica</title>
-  <meta name="description" content="{html.escape(hook)} Guía clínica por Valentina Castro Núñez, Centro Paz (Ñuñoa y Online para todo Chile). Boletas reembolsables en Isapre.">
+  <title>{html.escape(seo_title)}</title>
+  <meta name="description" content="{html.escape(seo_desc)}">
   <link rel="canonical" href="{canonical_url}">
   <link rel="icon" type="image/svg+xml" href="../assets/logo/icon.svg">
   <link rel="apple-touch-icon" href="../assets/logo/icon-profile-1024.png">
@@ -472,13 +487,29 @@ def generate_blog_index_html(topics: dict) -> str:
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Blog Clínico y Recursos de Salud Mental | Centro Paz Chile</title>
-  <meta name="description" content="Artículos clínicos y guías prácticas sobre Neurodivergencias (TDAH y TEA en adultos), crianza respetuosa, regulación emocional y reembolso de Isapres en Chile.">
+  <title>Blog Clínico y Recursos de Salud Mental | Centro Paz</title>
+  <meta name="description" content="Artículos clínicos y guías prácticas sobre TDAH, TEA en adultos, crianza respetuosa y reembolso de Isapres en Chile por Valentina Castro Núñez.">
   <link rel="canonical" href="{SITE_URL}/blog/">
   <link rel="icon" type="image/svg+xml" href="../assets/logo/icon.svg">
   <link rel="apple-touch-icon" href="../assets/logo/icon-profile-1024.png">
   <meta name="theme-color" content="#385E28">
   <meta name="robots" content="index, follow">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {{
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Blog Clínico y Recursos de Salud Mental | Centro Paz",
+    "description": "Biblioteca de artículos clínicos y guías sobre neurodivergencias, TDAH, TEA y reembolsos Isapre en Chile.",
+    "url": "{SITE_URL}/blog/",
+    "isPartOf": {{
+      "@type": "MedicalBusiness",
+      "name": "Centro Paz",
+      "url": "{SITE_URL}"
+    }}
+  }}
+  </script>
 
   <meta property="og:site_name" content="Centro Paz — Psicología Clínica">
   <meta property="og:title" content="Blog Clínico y Recursos | Centro Paz">

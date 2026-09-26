@@ -9,3 +9,4 @@ __pycache__/
 node_modules/
 video_engine/node_modules/
 video_engine/temp/
+.unlighthouse/
