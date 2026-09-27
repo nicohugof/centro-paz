@@ -53,7 +53,8 @@ def main():
                 except KeyboardInterrupt:
                     print("\n🛑 Servidor local detenido.")
             elif choice == "5":
-                whatsapp_assistant.interactive_mode()
+                from agent import fast_whatsapp_responder
+                fast_whatsapp_responder.interactive_responder()
             elif choice == "6":
                 print("\n📖 Archivos de Estrategia Publicitaria y Crecimiento:")
                 print("  • Plan 100 Pacientes:      docs/PLAN_100_PACIENTES_VALENTINA.md")
