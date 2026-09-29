@@ -18,6 +18,7 @@ URLS_TO_INDEX = [
     "https://www.centropaz.cl/",
     "https://www.centropaz.cl/psicologo-nunoa.html",
     "https://www.centropaz.cl/tdah-adultos.html",
+    "https://www.centropaz.cl/parentalidad-neurodivergente.html",
     "https://www.centropaz.cl/reembolso-isapre-psicologia.html",
     "https://www.centropaz.cl/blog/",
     "https://www.centropaz.cl/guia_7_claves_regulacion_centro_paz.html",
