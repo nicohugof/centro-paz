@@ -42,59 +42,55 @@ const triageData = {
     title: "¿Para quién buscas atención psicológica?",
     desc: "Selecciona el perfil de quien recibirá las sesiones para orientar el enfoque terapéutico.",
     options: [
-      { id: "adulto", icon: "👤", title: "Adulto (18+ años)", desc: "Online (todo Chile) o Presencial en Ñuñoa. Ansiedad, sobrecarga o TDAH/TEA." },
-      { id: "joven", icon: "🌱", title: "Joven / Adolescente (12 a 17 años)", desc: "Online (todo Chile) o Presencial en Ñuñoa. Regulación, colegio y autoestima." },
-      { id: "nino", icon: "🧸", title: "Niño/a (menor de 12 años)", desc: "Presencial en Ñuñoa (terapia lúdica) u Orientación Online a Padres." }
+      { id: "adulto", icon: "👤", title: "Adulto (18+ años)", desc: "Online (todo Chile) o Presencial en Ñuñoa. Ansiedad, depresión, personalidad o diagnóstico." },
+      { id: "joven", icon: "🌱", title: "Joven / Adolescente (12 a 17 años)", desc: "Online (todo Chile) o Presencial en Ñuñoa. Regulación del ánimo, crisis y autoconocimiento." },
+      { id: "psicodiagnostico", icon: "📋", title: "Evaluación Psicodiagnóstica / Derivación", desc: "Evaluación clínica estructurada de personalidad y estado del ánimo con informe escrito." }
     ]
   },
   reason: {
     adulto: [
-      { id: "ansiedad", icon: "🌊", title: "Ansiedad, estrés o sobrecarga", desc: "Manejo de angustia, crisis y sobreexigencia diaria." },
-      { id: "tea_tdah_adulto", icon: "🧠", title: "Neurodivergencia (TEA / TDAH)", desc: "Sospecha, diagnóstico tardío o acompañamiento." },
-      { id: "crecimiento", icon: "✨", title: "Autoestima y desarrollo personal", desc: "Reconexión con tus metas y bienestar integral." },
-      { id: "cambios", icon: "🧭", title: "Momentos de cambio y decisiones", desc: "Acompañamiento en transiciones vitales y laborales." }
+      { id: "ansiedad", icon: "🌊", title: "Ansiedad y Crisis de Angustia", desc: "Manejo de angustia, crisis de pánico, sobrepensamiento y síntomas somáticos." },
+      { id: "depresion", icon: "🌱", title: "Depresión y Trastornos del Ánimo", desc: "Desánimo, pérdida de motivación, anhedonia y fluctuaciones anímicas." },
+      { id: "personalidad", icon: "🧩", title: "Trastornos de la Personalidad / TLP", desc: "Inestabilidad emocional, desregulación afectiva y patrones vinculares." },
+      { id: "psicodiagnostico", icon: "📋", title: "Psicodiagnóstico e Informe Clínico", desc: "Evaluación diagnóstica formal para clarificación clínica o interconsulta." }
     ],
     joven: [
-      { id: "emocional_joven", icon: "🎨", title: "Regulación emocional y frustración", desc: "Manejo de crisis, desbordes o angustia en la adolescencia." },
-      { id: "tea_tdah_joven", icon: "🧠", title: "TDAH o TEA en etapa juvenil", desc: "Estrategias de estudio, funciones ejecutivas y adaptación." },
-      { id: "escolar_social", icon: "🤝", title: "Autoestima, vínculos y colegio", desc: "Presión académica, relaciones con pares e identidad." },
-      { id: "familia_joven", icon: "🌿", title: "Comunicación y clima familiar", desc: "Acompañamiento respetuoso a la dinámica familiar." }
+      { id: "ansiedad_joven", icon: "🌊", title: "Ansiedad, angustia o sobrecarga", desc: "Manejo de crisis, sobreexigencia y herramientas de autorregulación." },
+      { id: "animo_joven", icon: "🌱", title: "Desánimo, cambios anímicos o aislamiento", desc: "Acompañamiento en fluctuaciones del ánimo, autoestima y sentido vital." },
+      { id: "regulacion_joven", icon: "🧩", title: "Regulación emocional e identidad", desc: "Comprensión de emociones intensas, vínculos e impulsividad." },
+      { id: "eval_joven", icon: "📋", title: "Evaluación psicológica / Diagnóstica", desc: "Clarificación del perfil emocional y psicológico juvenil." }
     ],
-    nino: [
-      { id: "terapia_infantil_presencial", icon: "🧩", title: "Terapia Infantil Presencial (Ñuñoa)", desc: "Sesiones lúdicas directas en sala clínica adaptada para tu hijo/a." },
-      { id: "tea_tdah_nino", icon: "🧠", title: "Sospecha o apoyo TEA / TDAH", desc: "Perfil sensorial, autorregulación y adaptación escolar." },
-      { id: "orientacion_padres", icon: "🤝", title: "Orientación a Padres en Crianza", desc: "Sesiones para padres (Online o Presencial) con pautas respetuosas." },
-      { id: "desbordes_conducta", icon: "🌱", title: "Desbordes emocionales y límites", desc: "Estrategias de corregulación sin gritos ni castigos." }
+    psicodiagnostico: [
+      { id: "eval_personalidad", icon: "🧩", title: "Evaluación de Personalidad y Estructura", desc: "Evaluación clínica para diagnóstico diferencial de rasgos y funcionamiento." },
+      { id: "eval_animo", icon: "🌱", title: "Evaluación del Estado del Ánimo", desc: "Evaluación diagnóstica en cuadros afectivos y fluctuaciones del ánimo." },
+      { id: "informe_interconsulta", icon: "📄", title: "Informe para Psiquiatría o Médico", desc: "Proceso estructurado con sesión de devolución e informe clínico formal." },
+      { id: "clarificacion_dx", icon: "🧭", title: "Clarificación Diagnóstica Integral", desc: "Segunda opinión clínica basada en baterías diagnósticas validadas." }
     ]
   },
   modality_general: [
     { id: "online", icon: "💻", title: "Online (Videollamada Segura)", desc: "Disponible para todo Chile para adultos y jóvenes desde los 12 años." },
     { id: "presencial", icon: "🛋️", title: "Presencial en Ñuñoa (Santiago)", desc: "Sesión en consulta clínica en un entorno de calma y confidencialidad." },
-    { id: "indiferente", icon: "✨", title: "Cualquiera de las dos", desc: "Sujeto a disponibilidad y recomendación de Valentina." }
-  ],
-  modality_nino: [
-    { id: "presencial", icon: "🛋️", title: "Presencial en Consulta (Ñuñoa)", desc: "Terapia infantil lúdica e interactiva en sala clínica (menores de 12 años)." },
-    { id: "orientacion_online", icon: "💻", title: "Online: Orientación a Padres", desc: "Sesión remota por videollamada para madres/padres sobre crianza y pautas." }
+    { id: "indiferente", icon: "✨", title: "Cualquiera de las dos", desc: "Sujeto a disponibilidad y coordinación con Valentina." }
   ]
 };
 
 // Datos del Checklist / Screener
 const checklistData = {
-  adultos: [
-    "Sientes que vives con una sobrecarga mental o cansancio que no se quita descansando.",
-    "Sospechas que podrías tener TDAH o TEA (dificultad para concentrarte, hipersensibilidad o desregulación).",
-    "Te cuesta poner límites sanos o tiendes a sobreexigirte a costa de tu bienestar.",
-    "Experimentas angustia, ansiedad física (pecho apretado) o miedo constante al futuro.",
-    "Te cuesta regular tus niveles de estrés o desconectar de las exigencias cotidianas.",
-    "Sientes que 'enmascaras' quién eres para encajar en el trabajo o la sociedad."
+  ansiedad_animo: [
+    "Sientes una opresión constante en el pecho, taquicardia o dificultad para relajarte.",
+    "Experimentas sobrepensamiento incesante, anticipando siempre escenarios difíciles.",
+    "Has tenido crisis de angustia o ataques de pánico que te hacen sentir sin control.",
+    "Sientes una desmotivación profunda, vacío o pérdida de interés en lo que antes disfrutabas.",
+    "Te cuesta levantarte por las mañanas o experimentas fluctuaciones abruptas en tu ánimo y energía.",
+    "Sientes que el estrés diario sobrepasa tus recursos y te mantiene en alerta permanente."
   ],
-  padres: [
-    "Tu hijo/a tiene episodios de frustración intensa o desbordes emocionales difíciles de calmar.",
-    "El colegio sugiere una evaluación por sospecha de TEA, TDAH o dificultades de atención.",
-    "Notas que le afectan mucho los ruidos fuertes, texturas o cambios imprevistos de rutina.",
-    "Te sientes sobrepasada/o o con dudas constantes sobre cómo ejercer una crianza respetuosa.",
-    "Tu hijo/a o adolescente se aísla, muestra baja autoestima o dificultades para hacer amigos.",
-    "Deseas contar con pautas claras de contención y comunicación respetuosa en el hogar."
+  personalidad_diag: [
+    "Experimentas cambios emocionales muy intensos en pocas horas y te cuesta volver a la calma.",
+    "Sientes un miedo profundo al abandono o al rechazo en tus vínculos y relaciones cercanas.",
+    "Tienes dudas persistentes sobre quién eres o experimentas una sensación de vacío interno.",
+    "Reaccionas con impulsividad o frustración intensa ante situaciones de desacuerdo.",
+    "Buscas una evaluación diagnóstica estructurada para entender con certeza qué te ocurre.",
+    "Tu médico psiquiatra o equipo tratante te solicitó un informe psicodiagnóstico formal."
   ]
 };
 
@@ -251,18 +247,11 @@ window.selectTriageReason = function(id, label) {
   const step3Container = document.getElementById("step3-options");
 
   if (step3Container) {
-    const isChild = triageState.forWhom?.id === "nino";
-    const modalities = isChild ? triageData.modality_nino : triageData.modality_general;
-
     if (step3Desc) {
-      if (isChild) {
-        step3Desc.innerHTML = `<span style="display:block; background:var(--verde-light); border:1.5px solid var(--verde-suave); border-radius:var(--radius-md); padding:14px 18px; margin-bottom:18px; text-align:left; color:var(--verde-dark);">🌿 <strong>Criterio Clínico Infantil:</strong> En Centro Paz <strong>no realizamos terapia individual online a menores de 12 años</strong>; la psicoterapia infantil es presencial en nuestra consulta de Ñuñoa. Para familias a distancia o con niños pequeños, disponemos de <strong>Orientación Online para Padres</strong>.</span>`;
-      } else {
-        step3Desc.innerHTML = "Modalidad <strong>Online</strong> disponible para todo Chile para adultos y jóvenes desde los 12 años, y <strong>Presencial</strong> en Ñuñoa (Santiago).";
-      }
+      step3Desc.innerHTML = "Modalidad <strong>Online</strong> disponible para todo Chile (adultos y jóvenes desde los 12 años), y <strong>Presencial</strong> en nuestra consulta en Ñuñoa (Santiago).";
     }
 
-    step3Container.innerHTML = modalities.map(opt => `
+    step3Container.innerHTML = triageData.modality_general.map(opt => `
       <button type="button" class="option-btn" data-id="${opt.id}" onclick="selectTriageModality('${opt.id}', '${opt.title.replace(/'/g, "\\'")}')">
         <span class="option-icon">${opt.icon}</span>
         <span class="option-title">${opt.title}</span>
@@ -351,39 +340,37 @@ function buildTriageResult() {
   const modLabel = triageState.modality?.label || "Por coordinar";
   const timePref = triageState.timePreference || "Horario flexible";
 
-  let recommendedApproach = "Acompañamiento Psicológico Individual para Adultos";
-  if (triageState.forWhom?.id === "nino") {
-    if (triageState.modality?.id === "orientacion_online") {
-      recommendedApproach = "Orientación Online en Crianza para Padres y Madres";
-    } else {
-      recommendedApproach = "Terapia Infantil Presencial en Ñuñoa & Orientación a Padres";
-    }
+  let recommendedApproach = "Psicoterapia Individual con Ps. Valentina Castro Núñez";
+  if (triageState.forWhom?.id === "psicodiagnostico" || triageState.reason?.id?.includes("psicodiagnostico") || triageState.reason?.id?.includes("eval")) {
+    recommendedApproach = "Evaluación Psicodiagnóstica e Informe Clínico Formal";
+  } else if (triageState.reason?.id === "personalidad" || triageState.reason?.id === "regulacion_joven") {
+    recommendedApproach = "Abordaje Clínico en Trastornos de la Personalidad (TLP) & Regulación";
+  } else if (triageState.reason?.id === "depresion" || triageState.reason?.id === "animo_joven") {
+    recommendedApproach = "Psicoterapia para Depresión y Procesos del Ánimo";
+  } else if (triageState.reason?.id === "ansiedad" || triageState.reason?.id === "ansiedad_joven") {
+    recommendedApproach = "Tratamiento Clínico de Ansiedad, Pánico y Manejo de Crisis";
   } else if (triageState.forWhom?.id === "joven") {
-    recommendedApproach = "Acompañamiento Psicológico a Jóvenes y Adolescentes (12 a 17 años)";
-  } else if (triageState.reason?.id === "tea_tdah_adulto") {
-    recommendedApproach = "Acompañamiento en Neurodivergencias Adultas (TEA / TDAH)";
-  } else if (triageState.reason?.id === "ansiedad") {
-    recommendedApproach = "Manejo Clínico de Ansiedad y Sobrecarga";
+    recommendedApproach = "Psicoterapia para Jóvenes y Adolescentes (12 a 17 años)";
   }
 
   let relevantArticle = {
-    title: "Guía clínica: ¿Cómo saber si tengo TDAH en la adultez?",
-    url: "blog/tdah-adultos.html"
+    title: "Artículo clínico: 7 Claves de regulación del sistema nervioso ante la ansiedad",
+    url: "blog/regulacion-ansiedad.html"
   };
-  if (triageState.forWhom?.id === "nino") {
+  if (triageState.forWhom?.id === "psicodiagnostico" || triageState.reason?.id?.includes("psicodiagnostico") || triageState.reason?.id?.includes("eval")) {
     relevantArticle = {
-      title: "Artículo clínico: Acompañar a tu hijo/a sin agotarte en el intento",
-      url: "blog/apoyo-neurodivergente-hijos.html"
+      title: "Guía clínica: ¿En qué consiste una evaluación psicodiagnóstica?",
+      url: "blog/primera-sesion.html"
     };
-  } else if (triageState.forWhom?.id === "joven") {
+  } else if (triageState.reason?.id === "personalidad" || triageState.reason?.id === "regulacion_joven") {
     relevantArticle = {
-      title: "Artículo clínico: Regulación y límites sin culpa",
+      title: "Artículo clínico: Regulación emocional y límites sanos sin culpa",
       url: "blog/comunicacion-asertiva-limites.html"
     };
-  } else if (triageState.reason?.id === "ansiedad") {
+  } else if (triageState.reason?.id === "depresion" || triageState.reason?.id === "animo_joven") {
     relevantArticle = {
-      title: "Artículo clínico: 3 Técnicas somáticas para regular la ansiedad",
-      url: "blog/regulacion-ansiedad.html"
+      title: "Artículo clínico: El valor de pedir ayuda y recuperar la motivación",
+      url: "blog/autocuidado-adultos.html"
     };
   } else {
     relevantArticle = {
@@ -402,7 +389,7 @@ function buildTriageResult() {
         <div class="result-details">
           <span class="tag-pill" style="margin-bottom:8px; display:inline-block;">Enfoque sugerido</span>
           <h4>${recommendedApproach}</h4>
-          <p style="font-size:0.95rem; margin-top:4px;">Tu consulta será atendida directamente por <strong>${CPAZ_CONFIG.therapistName}</strong> en un espacio seguro, empático y libre de juicios.</p>
+          <p style="font-size:0.95rem; margin-top:4px;">Tu consulta será atendida directamente por <strong>${CPAZ_CONFIG.therapistName}</strong> en un espacio seguro, empático y con rigor clínico.</p>
           <div class="result-tags">
             <span class="tag-pill">🎯 Para: ${whoLabel}</span>
             <span class="tag-pill">🌱 Motivo: ${reasonLabel}</span>
@@ -423,7 +410,7 @@ function buildTriageResult() {
       </div>
 
       <div class="result-guarantee">
-        🛡️ <strong>Boletas 100% Reembolsables:</strong> Emitimos boleta electrónica para reembolso en tu Isapre y Seguro Complementario de Salud.
+        🛡️ <strong>Boletas 100% Reembolsables:</strong> Emitimos boleta electrónica oficial para reembolso en tu Isapre y Seguro Complementario de Salud.
       </div>
 
       <div style="margin-top:16px; padding:12px 16px; background:var(--crema-warm); border-radius:var(--radius-md); border-left:3px solid var(--verde-dark); font-size:0.9rem;">
@@ -435,12 +422,12 @@ function buildTriageResult() {
 
   // Generar mensaje personalizado de WhatsApp
   const utmSuffix = getUTMContext();
-  const rawMessage = `Hola Centro Paz 🌿 Estuve revisando su sitio web y completé el orientador de consulta.\n\n` +
+  const rawMessage = `Hola Valentina 🌿 Estuve revisando el sitio web de Centro Paz y completé el orientador de consulta.\n\n` +
     `• Paciente: ${whoLabel}\n` +
     `• Motivo: ${reasonLabel}\n` +
     `• Modalidad preferida: ${modLabel}\n` +
     `• Preferencia de horario: ${timePref}\n\n` +
-    `Me gustaría coordinar mi primera sesión con Valentina. ¿Qué opciones de fecha tienen disponibles? Muchas gracias.${utmSuffix}`;
+    `Me gustaría coordinar una primera sesión contigo. ¿Qué disponibilidad de fecha y hora tienes? Muchas gracias.${utmSuffix}`;
 
   const encodedMessage = encodeURIComponent(rawMessage);
   const whatsappUrl = `https://wa.me/${CPAZ_CONFIG.whatsappNumber}?text=${encodedMessage}`;
@@ -504,7 +491,7 @@ window.updateReimbursementCalc = function() {
 
   const isapreText = isapreSelect.options[isapreSelect.selectedIndex].text;
   const utmSuffix = getUTMContext();
-  const waMessage = `Hola Centro Paz 🌿 Estuve usando el simulador de reembolsos de su web. Tengo Isapre ${isapreText}${hasInsurance ? ' + Seguro Complementario' : ''} y quisiera consultar por aranceles y disponibilidad para agendar mi primera sesión.${utmSuffix}`;
+  const waMessage = `Hola Centro Paz 🌿 Estuve usando el simulador de reembolsos de su web. Tengo Isapre ${isapreText}${hasInsurance ? ' + Seguro Complementario' : ''} y quisiera consultar por aranceles y disponibilidad para agendar mi primera sesión con Valentina.${utmSuffix}`;
 
   if (calcWaBtn) {
     calcWaBtn.href = `https://wa.me/${CPAZ_CONFIG.whatsappNumber}?text=${encodeURIComponent(waMessage)}`;
@@ -581,14 +568,14 @@ function updateChecklistFeedback() {
       </div>
     `;
   } else {
-    const tabLabel = currentChecklistTab === "adultos" ? "Bienestar de Adultos" : "Apoyo Infanto-Juvenil y Crianza";
+    const tabLabel = currentChecklistTab === "ansiedad_animo" ? "Ansiedad y Trastornos del Ánimo" : "Personalidad (TLP) y Psicodiagnóstico";
     const utmSuffix = getUTMContext();
-    const rawWa = `Hola Valentina 🌿 Estuve revisando el checklist de ${tabLabel} en la web de Centro Paz y me identifiqué con ${count} de los puntos descritos. Me gustaría consultar por una primera sesión para trabajar en esto.${utmSuffix}`;
+    const rawWa = `Hola Valentina 🌿 Estuve revisando el checklist de ${tabLabel} en la web de Centro Paz y me identifiqué con ${count} de las vivencias descritas. Me gustaría consultar por una primera sesión para trabajar en esto.${utmSuffix}`;
 
     feedbackEl.innerHTML = `
       <div>
-        <strong style="color:var(--burdeo-dark);">Te identificas con ${count} punto${count > 1 ? 's' : ''}:</strong>
-        <p style="font-size:0.9rem; margin:2px 0 0; color:var(--gris);">No tienes que procesar todo esto en soledad. Podemos acompañarte a encontrar calma y estrategias.</p>
+        <strong style="color:var(--burdeo-dark);">Te identificas con ${count} vivencia${count > 1 ? 's' : ''}:</strong>
+        <p style="font-size:0.9rem; margin:2px 0 0; color:var(--gris);">No tienes que procesar este malestar en soledad. En Centro Paz te acompañamos a encontrar calma, claridad y herramientas clínicas.</p>
       </div>
       <a href="https://wa.me/${CPAZ_CONFIG.whatsappNumber}?text=${encodeURIComponent(rawWa)}" target="_blank" class="btn btn-whatsapp btn-sm" style="flex-shrink:0;">
         <span>Conversar con Valentina por WhatsApp</span>
@@ -625,20 +612,22 @@ function initWhatsAppLinks() {
 
   genericLinks.forEach(link => {
     const action = link.getAttribute("data-wa-action");
-    let msg = "Hola Centro Paz, me gustaría solicitar información para agendar una primera sesión psicológica.";
+    let msg = "Hola Valentina 🌿 Quisiera consultar por atención psicológica en Centro Paz y disponibilidad de horas.";
 
-    if (action === "adultos") {
-      msg = "Hola Centro Paz 🌿 Quisiera consultar por atención psicológica para adultos y disponibilidad de horas con Valentina.";
-    } else if (action === "neurodivergencia") {
-      msg = "Hola Centro Paz 🧠 Quisiera consultar por atención especializada en Neurodivergencias (TEA / TDAH) y disponibilidad.";
-    } else if (action === "infantil") {
-      msg = "Hola Centro Paz 🌱 Busco apoyo psicológico infanto-juvenil / orientación a padres. ¿Cómo es el proceso de ingreso?";
+    if (action === "ansiedad") {
+      msg = "Hola Valentina 🌊 Quisiera consultar por atención clínica para manejo de ansiedad, crisis de angustia y disponibilidad de horas.";
+    } else if (action === "depresion") {
+      msg = "Hola Valentina 🌱 Quisiera consultar por psicoterapia para depresión, estados del ánimo y disponibilidad de horas.";
+    } else if (action === "personalidad") {
+      msg = "Hola Valentina 🧩 Quisiera consultar por acompañamiento clínico en Trastorno Límite de la Personalidad (TLP) o regulación emocional.";
+    } else if (action === "psicodiagnostico") {
+      msg = "Hola Valentina 📋 Quisiera consultar por el proceso de evaluación psicodiagnóstica y emisión de informe clínico formal.";
     } else if (action === "nunoa") {
-      msg = "Hola Centro Paz 🛋️ Quisiera consultar por disponibilidad para sesiones presenciales en la consulta de Ñuñoa con Valentina.";
+      msg = "Hola Valentina 🛋️ Quisiera consultar por disponibilidad para sesiones presenciales en la consulta de Ñuñoa.";
     } else if (action === "lead-magnet") {
-      msg = "Hola Centro Paz ✨ Me gustaría solicitar la Guía Gratuita de Regulación Emocional y Sensorial para adultos y familias.";
+      msg = "Hola Valentina ✨ Me gustaría solicitar la Guía Gratuita de 7 Claves para la Regulación de la Ansiedad y Emociones.";
     } else if (action === "hero" || action === "sticky") {
-      msg = "Hola Centro Paz 🌿 Vi su sitio web y me gustaría coordinar una primera sesión con Valentina.";
+      msg = "Hola Valentina 🌿 Vi el sitio web de Centro Paz y me gustaría coordinar una primera sesión contigo.";
     }
 
     link.href = `https://wa.me/${CPAZ_CONFIG.whatsappNumber}?text=${encodeURIComponent(msg + utmSuffix)}`;
