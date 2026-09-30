@@ -1,6 +1,6 @@
 # Centro Paz — Psicología Clínica (Santiago & Online Chile)
 
-> Centro Paz es una consulta de psicología clínica fundada por la psicóloga clínica Valentina Castro Núñez (Registro Superintendencia de Salud de Chile - SIS). Especializada en el tratamiento de Ansiedad y Crisis, Depresión y Trastornos del Ánimo, Trastornos de la Personalidad (TLP / Borderline) y Psicodiagnósticos Clínicos. Atiende presencialmente en Ñuñoa (Santiago Oriente) y en modalidad Online para todo Chile (adultos y jóvenes desde 12 años).
+> Centro Paz es un centro clínico especializado en psicología clínica para adultos, neurodivergencias (TDAH y TEA) y terapia infanto-juvenil con orientación a padres. Fundado por la psicóloga clínica Valentina Castro Núñez (Registro Superintendencia de Salud de Chile - SIS). Atiende presencialmente en Ñuñoa (Santiago Oriente) y en modalidad Online para todo Chile.
 
 ## Datos Clave del Negocio
 - **Nombre:** Centro Paz (CPAZ)
@@ -10,14 +10,13 @@
 - **Sitio Web Oficial:** https://www.centropaz.cl
 - **Hub de Enlaces y Contacto Directo:** https://www.centropaz.cl/links
 - **Arancel de Referencia:** $45.000 CLP por sesión particular de 50 minutos
-- **Cobertura Isapres:** Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres, Nueva Masvida y Seguros Complementarios (reembolsos del 50% al 80%, copago real $12.000 a $18.000 CLP)
-- **Modalidades:** Online (todo Chile vía videollamada segura para adultos y jóvenes desde los 12 años) y Presencial (Ñuñoa, Santiago Oriente).
+- **Cobertura Isapres:** Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres, Nueva Masvida y Seguros Complementarios (reembolsos típicos del 50% al 80%, copago real $12.000 a $18.000 CLP)
+- **Modalidades:** Online (todo Chile vía videollamada segura para adultos y jóvenes desde los 12 años) y Presencial (Ñuñoa, Santiago; terapia infantil menores de 12 años es exclusivamente presencial en consulta u orientación online a padres)
 
 ## Especialidades Clínicas Activas
-1. **Ansiedad y Crisis de Angustia:** Manejo de ataques de pánico, sobrepensamiento, ansiedad somática (pecho apretado, taquicardia), fobias y estrés crónico.
-2. **Depresión y Trastornos del Ánimo:** Tratamiento clínico para depresión mayor, distimia, pérdida de motivación, anhedonia, fluctuaciones anímicas y procesos de duelo.
-3. **Trastornos de la Personalidad y Regulación Afectiva:** Acompañamiento en Trastorno Límite de la Personalidad (TLP / Borderline), inestabilidad emocional, impulsividad y patrones vinculares.
-4. **Psicodiagnósticos Clínicos e Informes Formales:** Evaluaciones diagnósticas estructuradas de personalidad y estado del ánimo con entrega de informes clínicos para psiquiatría o interconsulta médica.
+1. **Terapia Individual para Adultos:** Manejo de ansiedad, sobrecarga mental, burnout, regulación emocional y transiciones vitales (Online todo Chile y Presencial Ñuñoa).
+2. **Neurodivergencias en Adultos y Jóvenes (TDAH y TEA):** Enfoque neuroafirmativo sin patologizar, manejo de parálisis ejecutiva, perfil sensorial y descompresión del masking (Online desde 12 años y Presencial Ñuñoa).
+3. **Terapia Infanto-Juvenil & Orientación a Padres:** Acompañamiento presencial en Ñuñoa para niños/as menores de 12 años mediante terapia lúdica y vincular. Atención Online para jóvenes (12+) y adultos. Sesiones de Orientación en Crianza para madres y padres disponibles 100% online o presencial.
 
 ## Catálogo de Artículos Clínicos y Respuestas Indexables
 
