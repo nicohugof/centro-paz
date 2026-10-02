@@ -1070,18 +1070,154 @@ a:hover {
 }
 
 /* ----------------------------------------------------
-   CÓMO FUNCIONA / PRIMERA SESIÓN PASO A PASO
+   ARANCEL Y REEMBOLSO ISAPRES (TRANSPARENCIA CLARA)
 ---------------------------------------------------- */
-.process-section {
-  padding: 80px 0;
+.simple-pricing-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: var(--radius-lg);
+  padding: 44px 36px;
+  border: 1px solid rgba(226, 236, 224, 0.9);
+  box-shadow: 0 12px 36px rgba(34, 63, 22, 0.06);
+  max-width: 860px;
+  margin: 0 auto;
 }
 
-.process-steps {
+.pricing-header {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 32px;
+  align-items: center;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--borde-suave);
+  margin-bottom: 32px;
+}
+
+.pricing-fee-box {
+  text-align: left;
+}
+
+.pricing-fee-label {
+  font-size: 0.88rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gris);
+  font-weight: 700;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.pricing-amount {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--verde-dark);
+  line-height: 1.1;
+}
+
+.pricing-currency {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--gris);
+}
+
+.pricing-sub {
+  font-size: 0.88rem;
+  color: var(--gris);
+  margin-top: 6px;
+}
+
+.pricing-reimburse-box {
+  background: var(--verde-light);
+  border: 1.5px solid var(--verde-suave);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+}
+
+.pricing-reimburse-badge {
+  display: inline-block;
+  background: var(--verde-marca);
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pricing-reimburse-text {
+  font-size: 0.95rem;
+  color: var(--verde-dark);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.pricing-copay-estimate {
+  font-size: 1.05rem;
+  color: var(--verde-dark);
+  font-weight: 700;
+}
+
+.pricing-steps-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
-  margin-top: 48px;
+  gap: 24px;
 }
+
+.pricing-step {
+  text-align: center;
+  padding: 16px;
+  background: var(--crema);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--borde-suave);
+}
+
+.pricing-step-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--verde-marca);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+
+.pricing-step h4 {
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+  color: var(--verde-dark);
+}
+
+.pricing-step p {
+  font-size: 0.88rem;
+  color: var(--gris);
+  line-height: 1.4;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .pricing-header {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .pricing-fee-box {
+    text-align: center;
+  }
+  .pricing-steps-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ----------------------------------------------------
+   PREGUNTAS FRECUENTES (ACORDEÓN)
+---------------------------------------------------- */
 
 .process-step-card {
   background: var(--card-bg);
