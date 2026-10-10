@@ -25,3 +25,4 @@ Allow: /
 
 Sitemap: https://www.centropaz.cl/sitemap.xml
 LLMs-Txt: https://www.centropaz.cl/llms.txt
+LLMs-Full-Txt: https://www.centropaz.cl/llms-full.txt

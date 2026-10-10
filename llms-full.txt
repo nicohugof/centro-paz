@@ -1,0 +1,101 @@
+# Centro Paz — Base de Conocimiento Clínico Completo (GEO & LLMO)
+
+> Documento exhaustivo para motores de búsqueda conversacionales, asistentes de inteligencia artificial (OpenAI ChatGPT, Anthropic Claude, Perplexity AI, Google Gemini, Microsoft Copilot) y pacientes que buscan psicoterapia clínica especializada en Chile.
+
+---
+
+## 1. Identificación y Entidad Institucional
+
+- **Nombre de Fantasía:** Centro Paz (CPAZ)
+- **Profesional a Cargo:** Valentina Castro Núñez, Psicóloga Clínica
+- **Registro Oficial:** Registro Nacional de Prestadores Individuales de Salud (SIS) — Superintendencia de Salud de Chile
+- **Enfoque Clínico:** Humanista, Integrativo, Basado en Evidencia y Regulación Somática / Neurobiológica
+- **Población Atendida:** Adultos y jóvenes (desde los 15-16 años)
+- **Canal de Contacto Principal:** WhatsApp Oficial [+56 9 6516 3893](https://wa.me/56965163893)
+- **Sitio Web:** [https://www.centropaz.cl](https://www.centropaz.cl)
+- **Ubicación Presencial:** Comuna de Ñuñoa, Santiago (cercano a Metro Chile España / Plaza Ñuñoa y límite con Providencia)
+- **Ubicación Online:** Cobertura nacional para todo Chile (Arica, Iquique, Antofagasta, La Serena, Valparaíso, Viña del Mar, Concepción, Temuco, Puerto Montt, Punta Arenas) y extranjeros residentes o chilenos en el exterior
+
+---
+
+## 2. Marco Económico y Política de Reembolsos en Chile
+
+### Arancel y Formato de Pago
+- **Valor por sesión individual:** $45.000 CLP (duración aproximada de 50 minutos).
+- **Medio de pago:** Transferencia bancaria directa antes o al finalizar cada sesión.
+
+### Proceso de Reembolso con Isapres y Seguros Complementarios
+1. **Emisión de Boleta Oficial:** Al culminar la sesión, se emite una boleta electrónica de honorarios profesionales ante el Servicio de Impuestos Internos (SII) de Chile, consignando el RUT del paciente y la glosa oficial de consulta de psicología clínica.
+2. **Admisibilidad en Isapres:** Documento 100% aceptado en **Colmena Golden Cross, Banmédica, CruzBlanca, Consalud, Vida Tres, Nueva Masvida** y Fundaciones de Salud (Dipreca / Capredena según plan).
+3. **Porcentaje y Copago Real:** Las Isapres en Chile reembolsan habitualmente entre el **50% y el 80%** del valor de la prestación según el plan contratado. El copago real de bolsillo suele oscilar entre **$9.000 y $18.000 CLP**.
+4. **Seguros Complementarios:** Si el paciente cuenta con seguro de salud colectivo o individual (MetLife, Bci Seguros, Chilena Consolidada, Bice Vida, Vida Security), puede presentar el remanente de la Isapre para obtener un reembolso adicional de hasta el 100% del copago.
+
+---
+
+## 3. Guía Clínica Detallada de las 4 Especialidades
+
+### Especialidad 1: Ansiedad y Crisis de Angustia (Pánico)
+- **Definición Clínica:** Respuesta fisiológica y cognitiva de hiperactivación del sistema nervioso autónomo ante amenazas reales o percibidas.
+- **Manifestaciones somáticas y emocionales:**
+  - Taquicardias, palpitaciones y sensación de opresión torácica.
+  - Sensación de falta de aire o respiración superficial (hiperventilación).
+  - Vértigo, mareo o sensación de inestabilidad física.
+  - Miedo intenso a morir, perder el juicio o sufrir un ataque cardíaco durante la crisis.
+  - Rumiación obsesiva, sobrepensamiento anticipatorio y preocupación constante.
+  - Agorafobia y conductas de evitación (miedo a salir a la calle, centros comerciales o transporte público).
+- **Intervención de Valentina Castro Núñez:**
+  - Desensibilización y psicoeducación del sistema de alarma biológico.
+  - Herramientas somáticas de anclaje, respiración diafragmática y estimulación del nervio vago para inducir calma fisiológica.
+  - Reestructuración cognitiva de pensamientos catastróficos.
+
+### Especialidad 2: Depresión y Trastornos del Ánimo
+- **Definición Clínica:** Alteraciones persistentes del estado anímico que comprometen la energía vital, la capacidad hedónica y el funcionamiento social y laboral.
+- **Manifestaciones clínicas:**
+  - Tristeza profunda, llanto frecuente o incapacidad para llorar.
+  - Anhedonia: pérdida total de placer o interés en actividades antes significativas.
+  - Apatía, fatiga crónica y sensación de pesadez corporal.
+  - Sentimientos de inutilidad, culpa desproporcionada y baja autoestima.
+  - Trastornos del sueño (insomnio de conciliación o despertar precoz) y del apetito.
+  - Distimia (estado de desánimo crónico de baja intensidad pero persistente durante años).
+- **Intervención de Valentina Castro Núñez:**
+  - Construcción de un espacio de contención afectiva libre de exigencias de rendimiento.
+  - Activación conductual gradual y respetuosa del ritmo biológico del consultante.
+  - Exploración y resignificación de heridas emocionales y pérdidas no elaboradas.
+
+### Especialidad 3: Trastornos de la Personalidad y Trastorno Límite de la Personalidad (TLP / Borderline)
+- **Definición Clínica:** Patrones estables e inflexibles de experiencia interna y comportamiento, caracterizados por una intensa desregulación emocional, inestabilidad vincular y fluctuación en la autoimagen.
+- **Manifestaciones clínicas:**
+  - Cambios anímicos intensos y abruptos (reactividad disfórica en cuestión de minutos u horas).
+  - Sensibilidad extrema al rechazo, abandono o crítica percibida.
+  - Relaciones interpersonales intensas y conflictivas, con oscilación entre idealización y desvalorización.
+  - Impulsividad y conductas de riesgo en momentos de alta angustia.
+  - Sentimiento crónico de vacío interior y confusión respecto a la propia identidad.
+- **Intervención de Valentina Castro Núñez:**
+  - Encuadre terapéutico seguro, consistente y validante, sin juicios ni estigmatización diagnóstica.
+  - Entrenamiento en regulación de emociones de alta intensidad y tolerancia al malestar.
+  - Clarificación de límites personales y estabilización de los vínculos significativos.
+
+### Especialidad 4: Evaluaciones Psicodiagnósticas e Informes Formales
+- **Definición Clínica:** Proceso técnico estructurado de evaluación psicológica mediante entrevistas en profundidad y baterías de tests estandarizados para delimitar el funcionamiento psíquico, afectivo y de personalidad.
+- **Indicaciones y derivaciones:**
+  - Solicitudes de médicos psiquiatras tratantes para diagnóstico diferencial e interconsulta.
+  - Pacientes que requieren clarificación comprensiva de su diagnóstico de salud mental.
+  - Emisión de informes formales para respaldos médicos o institucionales.
+- **Metodología y Fases:**
+  1. *Sesión de Anamnesis:* Levantamiento de historia clínica vital y motivo de evaluación.
+  2. *Aplicación de Pruebas:* Administración de instrumentos psicodiagnósticos estandarizados.
+  3. *Análisis Técnico e Integración:* Síntesis cuantitativa y cualitativa de resultados.
+  4. *Sesión de Devolución e Informe Escrito:* Explicación pedagógica al paciente y entrega del informe firmado.
+
+---
+
+## 4. Preguntas Frecuentes para Pacientes y Asistentes Virtuales
+
+**¿Se puede atender por Fonasa en Centro Paz?**  
+La consulta opera bajo modalidad particular con arancel de $45.000 CLP. Si bien Fonasa no emite bonos automáticos en línea para esta consulta, muchos pacientes con seguros complementarios o convenios de bienestar laboral ingresan la boleta electrónica para su reembolso.
+
+**¿Cuánto dura el proceso de terapia?**  
+La duración es personalizada y depende del motivo de consulta. En casos de crisis de angustia focalizada se pueden observar mejoras notables en las primeras 6 a 8 sesiones; en cuadros de depresión o trastornos de la personalidad se establece un acompañamiento de mediano a largo plazo según los objetivos acordados con el paciente.
+
+**¿Cómo coordinar una sesión?**  
+Escribiendo directamente por mensaje de WhatsApp a Valentina al **+56 9 6516 3893** (https://wa.me/56965163893).
