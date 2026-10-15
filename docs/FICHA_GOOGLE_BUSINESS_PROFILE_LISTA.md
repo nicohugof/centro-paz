@@ -9,7 +9,7 @@ Este documento contiene los textos exactos y configuraciones para crear y optimi
 * **Nombre de la Empresa:** `Centro Paz — Psicología Clínica Ñuñoa & Online`
 * **Categoría Principal:** `Clínica de psicología`
 * **Categorías Secundarias:** `Psicólogo`, `Centro de salud y bienestar`, `Servicio de salud mental`
-* **Dirección / Ubicación:** Sector Plaza Ñuñoa / Metro Chile España, Ñuñoa, Región Metropolitana, Chile.
+* **Dirección Física Oficial:** `Salvador 2302, Ñuñoa, Santiago` (Región Metropolitana, Chile).
 * **Áreas de Servicio:** Ñuñoa, Providencia, Las Condes, Santiago Centro, La Reina, Peñalolén y Online (Todo Chile).
 * **Teléfono Principal:** `+56 9 6516 3893`
 * **Sitio Web:** `https://www.centropaz.cl/`

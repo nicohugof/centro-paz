@@ -693,6 +693,8 @@ def update_sitemap_xml(topics: dict):
         ("https://www.centropaz.cl/trastornos-personalidad-tlp.html", "2026-10-10", "weekly", "0.98"),
         ("https://www.centropaz.cl/evaluacion-psicodiagnostica-informes.html", "2026-10-10", "weekly", "0.98"),
         ("https://www.centropaz.cl/psicologo-nunoa.html", "2026-10-10", "weekly", "0.95"),
+        ("https://www.centropaz.cl/tdah-adultos.html", "2026-10-10", "weekly", "0.95"),
+        ("https://www.centropaz.cl/parentalidad-neurodivergente.html", "2026-10-10", "weekly", "0.95"),
         ("https://www.centropaz.cl/reembolso-isapre-psicologia.html", "2026-10-10", "weekly", "0.95"),
         ("https://www.centropaz.cl/blog/", "2026-10-10", "daily", "0.9"),
         ("https://www.centropaz.cl/links", "2026-10-10", "weekly", "0.85"),
