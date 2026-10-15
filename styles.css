@@ -3441,3 +3441,156 @@ footer {
   }
 }
 
+/* ----------------------------------------------------
+   ENLAZADO INTERNO Y RECOMENDACIÓN CLÍNICA (BLOG)
+---------------------------------------------------- */
+.article-related-specialty {
+  background: var(--crema-warm);
+  border: 1px solid var(--verde-suave);
+  border-left: 5px solid var(--verde-marca);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  margin: 36px 0;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--trans-fast), box-shadow var(--trans-fast);
+}
+
+.article-related-specialty:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.article-related-specialty .specialty-badge-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.article-related-specialty-content {
+  flex: 1;
+}
+
+.article-related-specialty-kicker {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--verde-marca);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.article-related-specialty h4 {
+  font-size: 1.2rem;
+  color: var(--verde-dark);
+  margin-bottom: 8px;
+}
+
+.article-related-specialty p {
+  font-size: 0.95rem;
+  color: var(--negro);
+  line-height: 1.55;
+  margin-bottom: 12px;
+}
+
+.article-related-specialty a.specialty-cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--verde-marca);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--trans-fast);
+}
+
+.article-related-specialty a.specialty-cta-link:hover {
+  color: var(--verde-dark);
+}
+
+/* Hub de Especialidades en Blog Index */
+.blog-specialties-hub {
+  padding: 30px 0 20px;
+}
+
+.blog-specialties-hub-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.blog-specialties-hub-header h2 {
+  font-size: 1.6rem;
+  color: var(--verde-dark);
+  margin-bottom: 6px;
+}
+
+.blog-specialties-hub-header p {
+  font-size: 0.95rem;
+  color: var(--gris);
+}
+
+.blog-specialties-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.blog-specialty-hub-card {
+  background: #FFFFFF;
+  border: 1px solid var(--borde-suave);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--trans-normal);
+}
+
+.blog-specialty-hub-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--verde-marca);
+}
+
+.blog-specialty-hub-card .hub-icon {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.blog-specialty-hub-card h3 {
+  font-size: 1.1rem;
+  color: var(--verde-dark);
+  margin-bottom: 6px;
+}
+
+.blog-specialty-hub-card p {
+  font-size: 0.88rem;
+  color: var(--gris);
+  line-height: 1.45;
+  margin-bottom: 12px;
+}
+
+.blog-specialty-hub-card .hub-link-text {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--verde-marca);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+@media (max-width: 600px) {
+  .article-related-specialty {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+
