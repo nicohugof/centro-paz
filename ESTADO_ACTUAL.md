@@ -30,9 +30,9 @@ Ecosistema digital centrado al 100% en la **Página Web ([www.centropaz.cl](http
 ## Siguientes Pasos Priorizados
 
 1. **Configuración de Campañas de Google Ads (Search):**
-   - Estructurar grupos de anuncios de alta intención: *TDAH Adultos Santiago*, *Reembolso Psicología Isapre*, *Psicólogo Ñuñoa*, *Terapia Infantil Crianza*.
+   - Estructurar grupos de anuncios de alta intención alineados a las 4 especialidades: *Ansiedad y Crisis de Pánico*, *Depresión y Trastornos del Ánimo*, *Trastorno Límite (TLP)* y *Psicodiagnósticos con Informe*, además de *Psicólogo Ñuñoa* y *Reembolso Isapre*.
 2. **Verificación de Google Business Profile (Ñuñoa):**
-   - Completar la ficha de Google Maps siguiendo `docs/GOOGLE_BUSINESS_PROFILE_NUNOA.md`.
+   - Completar la ficha de Google Maps siguiendo `docs/FICHA_GOOGLE_BUSINESS_PROFILE_LISTA.md`.
 3. **Monitoreo de Conversión en WhatsApp:**
-   - Medir tasa de contacto y agendamientos a través de los enlaces UTM del sitio web con Valentina.
+   - Medir tasa de contacto y agendamientos a través del protocolo rápido de Valentina (`python3 cpaz.py` opción 6).
 

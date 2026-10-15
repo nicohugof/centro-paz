@@ -1,6 +1,6 @@
 # Guía de Indexación Gratuita Inmediata en Google Search Console y Bing
 
-Este manual describe el procedimiento exacto paso a paso (100% gratuito, sin inversión publicitaria) para que Google y Bing indexen las 36 páginas de `centropaz.cl` en menos de 24 a 48 horas.
+Este manual describe el procedimiento exacto paso a paso (100% gratuito, sin inversión publicitaria) para que Google y Bing indexen las **41 URLs canónicas** de `centropaz.cl` (incluyendo las 4 landing pages de especialidades clínicas, páginas locales, simulador de reembolso y las 28 guías clínicas) en menos de 24 a 48 horas.
 
 ---
 
@@ -26,40 +26,44 @@ Google Search Console es la herramienta oficial de Google para monitorear el pos
 
 ---
 
-## 2. Envío del Sitemap XML (Indexación de 36 URLs)
+## 2. Envío del Sitemap XML (Indexación de 41 URLs Canónicas)
 
 Una vez verificada la propiedad:
 1. En el menú lateral izquierdo de Google Search Console, haz clic en **Sitemaps** (bajo la sección *Indexación*).
 2. En el campo *"Añadir un nuevo sitemap"*, escribe: `sitemap.xml`.
 3. La URL completa quedará: `https://www.centropaz.cl/sitemap.xml`.
 4. Haz clic en **Enviar**.
-5. Verás el estado en verde: **Correcto** (Google leerá las 36 páginas del sitio, incluyendo las 3 landing pages y los 28 artículos de blog).
+5. Verás el estado en verde: **Correcto** (Google leerá las 41 URLs del sitio, incluyendo las 4 landing pages de especialidades clínicas, las páginas de proximidad y reembolso, y los 28 artículos de blog).
 
 ---
 
-## 3. Solicitud de Indexación Prioritaria (Inspección de URLs)
+## 3. Solicitud de Indexación Prioritaria (Inspección de URLs de Alta Intención)
 
-Para que las páginas más importantes aparezcan en los resultados de Google hoy mismo sin esperar el ciclo regular de rastreo:
+Para que las páginas más importantes y de mayor conversión aparezcan en los resultados de Google hoy mismo sin esperar el ciclo regular de rastreo:
 
-1. En la barra superior de búsqueda de Search Console (*"Inspeccionar cualquier URL de https://www.centropaz.cl/"*), pega una por una las siguientes URLs clave:
-   * `https://www.centropaz.cl/`
-   * `https://www.centropaz.cl/psicologo-nunoa.html`
-   * `https://www.centropaz.cl/tdah-adultos.html`
-   * `https://www.centropaz.cl/reembolso-isapre-psicologia.html`
-   * `https://www.centropaz.cl/blog/`
+1. En la barra superior de búsqueda de Search Console (*"Inspeccionar cualquier URL de https://www.centropaz.cl/"*), pega una por una las siguientes URLs clave del nuevo catálogo clínico:
+   * `https://www.centropaz.cl/` (Portada institucional y triaje)
+   * `https://www.centropaz.cl/ansiedad-crisis-angustia.html` (Landing: Ansiedad y Crisis de Angustia)
+   * `https://www.centropaz.cl/depresion-trastornos-animo.html` (Landing: Depresión y Trastornos del Ánimo)
+   * `https://www.centropaz.cl/trastornos-personalidad-tlp.html` (Landing: Trastornos de la Personalidad / TLP)
+   * `https://www.centropaz.cl/evaluacion-psicodiagnostica-informes.html` (Landing: Evaluación Psicodiagnóstica e Informes)
+   * `https://www.centropaz.cl/psicologo-nunoa.html` (Landing Local: Consulta Ñuñoa)
+   * `https://www.centropaz.cl/reembolso-isapre-psicologia.html` (Simulador de Reembolso Isapre)
+   * `https://www.centropaz.cl/blog/` (Biblioteca de 28 Guías Clínicas)
 2. Presiona Enter.
 3. Haz clic en el botón blanco **Solicitar indexación**.
-4. Repite el proceso con las 5 URLs principales. Googlebot las pondrá en cola de prioridad alta.
+4. Repite el proceso con estas 8 URLs principales. Googlebot las pondrá en su cola de prioridad máxima.
 
 ---
 
-## 4. Indexación en Bing Webmaster Tools (Tráfico Orgánico Adicional)
+## 4. Indexación en Bing Webmaster Tools & Red IndexNow (Bing, Copilot, Perplexity)
 
 Microsoft Bing alimenta los motores de búsqueda de Windows y la IA de Microsoft Copilot:
 1. Ingresa a: [bing.com/webmasters](https://www.bing.com/webmasters).
 2. Haz clic en **Comenzar** e inicia sesión con Google.
 3. Selecciona **Importar desde Google Search Console** (se sincroniza en 1 clic sin configuraciones adicionales).
-4. El sitemap se importará automáticamente.
+4. El sitemap se importará automáticamente con las 41 URLs.
+5. **Automatización IndexNow en Centro Paz:** Ejecutar `python3 cpaz.py` (Opción 1) o `python3 agent/instant_search_indexer.py` para notificar en lote las 41 URLs instantáneamente a la red global de IndexNow (Bing, Yandex, Perplexity y Copilot).
 
 ---
 
@@ -71,7 +75,7 @@ Microsoft Bing alimenta los motores de búsqueda de Windows y la IA de Microsoft
 
 ### 2. Sitemap XML
 * **¿Qué es?** Un archivo estructurado en lenguaje XML (`sitemap.xml`) que lista todas las URLs indexables de un sitio web junto con la fecha de su última modificación.
-* **¿Para qué lo usamos?** Para entregarle a los robots de búsqueda un mapa directo y exhaustivo de las 36 páginas del centro, facilitando su indexación en segundos.
+* **¿Para qué lo usamos?** Para entregarle a los robots de búsqueda un mapa directo y exhaustivo de las 41 URLs canónicas del centro, facilitando su indexación en segundos.
 
 ### 3. Googlebot (Rastreador Web de Google)
 * **¿Qué es?** El robot o agente de software automatizado de Google que navega por internet descubriendo, descargando y analizando páginas web para agregarlas al índice del buscador.
