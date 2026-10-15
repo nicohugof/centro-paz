@@ -11,7 +11,7 @@ Para un centro de psicología clínica, 100 pacientes representan un flujo de al
 ```
                               ┌──────────────────────────────────────────┐
                               │     ARANCEL SESIÓN: $45.000 CLP          │
-                              │ (Copago Isapre real: $9.000 a $15.000)   │
+                              │ (Copago Isapre real: $9.000 a $18.000)   │
                               └────────────────────┬─────────────────────┘
                                                    │
           ┌────────────────────────────────────────┴────────────────────────────────────────┐
@@ -58,11 +58,13 @@ Para ingresar 100 pacientes de forma predecible en un horizonte de 60 a 90 días
 ## 3. Los 3 Motores de Adquisición Activa
 
 ### Motor 1: Google Ads Search (Captación Inmediata de Alta Intención)
-* **Público Objetivo:** Personas en Santiago (Ñuñoa, Providencia, Las Condes, Santiago Centro) que buscan activamente psicólogo hoy.
+* **Público Objetivo:** Personas en Santiago (Ñuñoa, Providencia, Las Condes, Santiago Centro) y Chile nacional que buscan activamente psicólogo hoy.
 * **Grupos de Anuncios:**
-  1. *TDAH y Neurodivergencia en Adultos* (Búsqueda de alto valor, baja competencia calificada).
-  2. *Psicólogo Presencial en Ñuñoa* (Tráfico local de máxima intención de proximidad).
-  3. *Reembolso Isapre Psicología* (Derrumba la objeción del precio al mostrar copago desde $9.000).
+  1. *Ansiedad, Pánico y Desregulación* (Búsqueda de alta urgencia somática y emocional).
+  2. *Depresión, Duelo y Desánimo* (Búsqueda de acompañamiento terapéutico y validación).
+  3. *Trastornos de la Personalidad / TLP* (Búsqueda especializada de alta necesidad clínica).
+  4. *Evaluación Psicodiagnóstica e Informes* (Alta intención médica por derivación psiquiátrica).
+  5. *Psicólogo Presencial en Ñuñoa & Reembolso Isapre* (Intención local y derribo de barrera económica con copago desde $9.000).
 * **Presupuesto Recomendado:** $150.000 a $300.000 CLP mensuales para generar entre 30 y 60 leads calificados por mes.
 
 ### Motor 2: Google Maps / Google Business Profile (Cero Costo por Clic)
@@ -70,20 +72,20 @@ Para ingresar 100 pacientes de forma predecible en un horizonte de 60 a 90 días
 * **Acción Inmediata:** Verificar la ficha de Centro Paz en Metro Chile España / Plaza Ñuñoa con fotos del box clínico, categorías médicas y enlace directo a WhatsApp.
 
 ### Motor 3: SEO Semántico & Motor de Respuestas de IA (Tráfico Orgánico Sostenido)
-* **Activo:** 28 artículos clínicos semánticos ya desplegados en `centropaz.cl/blog/` y archivo `llms.txt` optimizado para ChatGPT, Perplexity y Google Search.
+* **Activo:** 28 artículos clínicos semánticos ya desplegados en `centropaz.cl/blog/`, 4 landing pages de especialidad y archivo `llms.txt` optimizado para ChatGPT, Perplexity y Google Search.
 * **Efecto:** Posicionamiento permanente de palabras clave informativas y transaccionales sin pagar por clic.
 
 ---
 
 ## 4. Protocolo de Conversión en WhatsApp para Valentina (Zero-Bot Policy)
 
-Cuando un paciente potencial hace clic en la web, el mensaje llega precargado con sus datos de triaje. Para maximizar la tasa de agendamiento (del 20% al 40%+), Valentina debe aplicar las siguientes 3 pautas de atención humana:
+Cuando un paciente potencial hace clic en la web, el mensaje llega precargado con sus datos de triaje o desde la landing de especialidad. Para maximizar la tasa de agendamiento (del 20% al 40%+), Valentina debe aplicar las siguientes 3 pautas de atención humana:
 
 ### Pauta 1: Saludo Cálido y Validación Inmediata
-> *"Hola [Nombre] 🌿 Qué gusto saludarte. Soy Valentina Castro, psicóloga clínica de Centro Paz. Leí que buscas atención para [Adulto / TDAH / Crianza] en modalidad [Online / Presencial en Ñuñoa]. Me alegra que hayas dado este paso."*
+> *"Hola [Nombre] 🌿 Qué gusto saludarte. Soy Valentina Castro, psicóloga clínica de Centro Paz. Leí que buscas atención para [Ansiedad / Depresión / TLP / Psicodiagnóstico] en modalidad [Online / Presencial en Ñuñoa]. Me alegra que hayas dado este paso."*
 
 ### Pauta 2: Resolución Proactiva de Arancel e Isapre (Derriba la duda del costo)
-> *"Para tu tranquilidad, la sesión tiene un valor de $45.000 CLP y te entrego la boleta electrónica de honorarios al terminar para que puedas reembolsar en tu Isapre ([Colmena/CruzBlanca/Banmédica]) y Seguro Complementario. En promedio, los pacientes pagan un copago real de entre $9.000 y $15.000 según su plan."*
+> *"Para tu tranquilidad, la sesión tiene un valor de $45.000 CLP y te entrego la boleta electrónica de honorarios al terminar para que puedas reembolsar en tu Isapre ([Colmena/CruzBlanca/Banmédica/Consalud/Vida Tres]) y Seguro Complementario. En promedio, los pacientes pagan un copago real de entre $9.000 y $18.000 según su plan (promedio ~$12.000 CLP)."*
 
 ### Pauta 3: Elección de Doble Alternativa (Cierre Simple)
 > *"Tengo disponibilidad presencial en Ñuñoa (cerca de Metro Chile España) y Online. Para esta semana tengo estas dos opciones:

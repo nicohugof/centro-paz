@@ -39,6 +39,234 @@ def format_paragraphs(text: str) -> str:
     return "\n".join(f"<p>{html.escape(p)}</p>" for p in paragraphs)
 
 
+TOPIC_SPECIALTY_MAP = {
+    "tdah_adultos": {
+        "badge_icon": "📋",
+        "kicker": "Especialidad Relacionada",
+        "title": "Evaluación Psicodiagnóstica e Informes Formales",
+        "desc": "Si buscas certeza diagnóstica sobre tu perfil atencional y cognitivo para interconsulta psiquiátrica o respaldo institucional, conoce nuestro proceso estructurado.",
+        "url": "../evaluacion-psicodiagnostica-informes.html",
+        "cta": "Conocer proceso de evaluación psicodiagnóstica →"
+    },
+    "reembolso_isapre": {
+        "badge_icon": "💳",
+        "kicker": "Transparencia de Arancel",
+        "title": "Arancel Único $45.000 CLP y Cobertura Isapre",
+        "desc": "El arancel de $45.000 CLP con boleta reembolsable aplica a todas nuestras especialidades: Ansiedad, Depresión, TLP y Psicodiagnósticos clínicos.",
+        "url": "../reembolso-isapre-psicologia.html",
+        "cta": "Simular tu copago y coberturas en Isapre →"
+    },
+    "crianza_regulacion": {
+        "badge_icon": "🫀",
+        "kicker": "Regulación del Sistema Nervioso",
+        "title": "Psicoterapia para Ansiedad y Regulación del Estrés",
+        "desc": "Para acompañar y corregular a niños/as con sobrecarga sensorial, los adultos cuidadores necesitan herramientas reales de regulación somática y calma.",
+        "url": "../ansiedad-crisis-angustia.html",
+        "cta": "Conocer abordaje en regulación de ansiedad →"
+    },
+    "masking": {
+        "badge_icon": "🌊",
+        "kicker": "Especialidad Relacionada",
+        "title": "Psicoterapia para Trastornos de la Personalidad y TLP",
+        "desc": "El sobreesfuerzo crónico de enmascarar suele detonar difusión de identidad, vacío y desregulación emocional severa. Conoce nuestro espacio clínico protegido.",
+        "url": "../trastornos-personalidad-tlp.html",
+        "cta": "Conocer acompañamiento en TLP e identidad →"
+    },
+    "terapia_online": {
+        "badge_icon": "💻",
+        "kicker": "Modalidades de Atención",
+        "title": "Atención Online para todo Chile y Presencial en Ñuñoa",
+        "desc": "Psicoterapia clínica individual para adultos y jóvenes (desde 12 años) en Ansiedad, Depresión, TLP y Evaluaciones con entrega de informe formal.",
+        "url": "../ansiedad-crisis-angustia.html",
+        "cta": "Ver especialidad en Ansiedad y Crisis →"
+    },
+    "evaluacion_infantil": {
+        "badge_icon": "📋",
+        "kicker": "Clarificación Diagnóstica",
+        "title": "Evaluación Psicodiagnóstica e Informes Formales",
+        "desc": "Proceso clínico riguroso con administración de instrumentos estandarizados y entrega de informe técnico para colegios, neurólogos y psiquiatras.",
+        "url": "../evaluacion-psicodiagnostica-informes.html",
+        "cta": "Conocer etapas y requisitos del informe →"
+    },
+    "autocuidado_adultos": {
+        "badge_icon": "🌧️",
+        "kicker": "Acompañamiento Clínico",
+        "title": "Psicoterapia para Depresión y Trastornos del Ánimo",
+        "desc": "Cuando la exigencia cotidiana sobrepasa tus fuerzas y nada parece motivarte, mereces un espacio de contención sin presiones de rendimiento.",
+        "url": "../depresion-trastornos-animo.html",
+        "cta": "Conocer terapia para depresión y desánimo →"
+    },
+    "burnout_autista": {
+        "badge_icon": "🌧️",
+        "kicker": "Agotamiento Clínico",
+        "title": "Psicoterapia para Depresión y Fatiga Crónica",
+        "desc": "El colapso por sobrecarga prolongada requiere un abordaje respetuoso de tus ritmos sensoriales y afectivos, sin exigirte fingir que todo está bien.",
+        "url": "../depresion-trastornos-animo.html",
+        "cta": "Conocer terapia para el ánimo y fatiga →"
+    },
+    "paralisis_ejecutiva": {
+        "badge_icon": "🫀",
+        "kicker": "Regulación del Sistema Nervioso",
+        "title": "Psicoterapia para Ansiedad y Crisis de Angustia",
+        "desc": "La parálisis ejecutiva activa una respuesta física de alarma y angustia en el pecho. Aprende a desactivar la respuesta de amenaza y recuperar tu operatividad.",
+        "url": "../ansiedad-crisis-angustia.html",
+        "cta": "Conocer herramientas somáticas para la ansiedad →"
+    },
+    "regulacion_ansiedad": {
+        "badge_icon": "🫀",
+        "kicker": "Tratamiento Especializado",
+        "title": "Psicoterapia para Ansiedad, Crisis de Angustia y Pánico",
+        "desc": "Aprende a regular el nervio vago y recuperar el control sobre tu cuerpo. Consulta en Ñuñoa y Online todo Chile con reembolso en Isapres.",
+        "url": "../ansiedad-crisis-angustia.html",
+        "cta": "Conocer servicio especializado en ansiedad y pánico →"
+    },
+    "apoyo_neurodivergente_hijos": {
+        "badge_icon": "📋",
+        "kicker": "Evaluación e Interconsulta",
+        "title": "Evaluación Psicodiagnóstica e Informes Técnicos",
+        "desc": "Contar con un informe clínico detallado permite coordinar apoyos escolares y médicos con claridad y sin etiquetas limitantes.",
+        "url": "../evaluacion-psicodiagnostica-informes.html",
+        "cta": "Conocer el proceso de evaluación clínica →"
+    },
+    "primera_sesion": {
+        "badge_icon": "🌿",
+        "kicker": "Espacio Seguro",
+        "title": "Atención Clínica con Valentina Castro Núñez",
+        "desc": "Ya sea por crisis de angustia, desánimo profundo, desregulación emocional o psicodiagnóstico, tu primera sesión es un espacio seguro y sin juicios.",
+        "url": "../ansiedad-crisis-angustia.html",
+        "cta": "Ver cómo abordamos la ansiedad y angustia →"
+    },
+    "culpa_parental": {
+        "badge_icon": "🌧️",
+        "kicker": "Salud Emocional",
+        "title": "Psicoterapia para Trastornos del Ánimo y Depresión",
+        "desc": "La autocrítica y la culpa desgastan profundamente la vitalidad. Reconstruye tu bienestar emocional con un acompañamiento compasivo.",
+        "url": "../depresion-trastornos-animo.html",
+        "cta": "Conocer acompañamiento para el estado de ánimo →"
+    },
+    "reembolso_matematica": {
+        "badge_icon": "💳",
+        "kicker": "Educación Financiera",
+        "title": "Reembolso en Isapres para Todas las Especialidades",
+        "desc": "Recupera entre el 50% y el 80% en Psicoterapia para Ansiedad, Depresión, TLP y Evaluaciones Clínicas formales.",
+        "url": "../reembolso-isapre-psicologia.html",
+        "cta": "Revisar calculadora y tabla de coberturas →"
+    },
+    "tdah_mujeres": {
+        "badge_icon": "📋",
+        "kicker": "Diagnóstico Diferencial",
+        "title": "Evaluación Psicodiagnóstica e Informes Formales",
+        "desc": "El diagnóstico tardío en mujeres adultas requiere instrumentos sensibles que distingan el masking del estado del ánimo o la ansiedad generalizada.",
+        "url": "../evaluacion-psicodiagnostica-informes.html",
+        "cta": "Conocer evaluación diagnóstica para adultos →"
+    },
+    "sobrecarga_sensorial_ruido": {
+        "badge_icon": "🫀",
+        "kicker": "Fisiología de la Calma",
+        "title": "Psicoterapia para Ansiedad y Regulación del Sistema Nervioso",
+        "desc": "La hipersensibilidad al ruido desborda el sistema nervioso autónomo. Aprende técnicas somáticas para volver a tu ventana de tolerancia.",
+        "url": "../ansiedad-crisis-angustia.html",
+        "cta": "Ver psicoterapia para ansiedad y crisis somáticas →"
+    },
+    "reembolso_seguros_cobertura": {
+        "badge_icon": "💳",
+        "kicker": "Optimización de Cobertura",
+        "title": "Reembolso Isapre + Seguro Complementario",
+        "desc": "Aplica tu cobertura complementaria para evaluaciones psicodiagnósticas y sesiones regulares con boleta de psicología clínica.",
+        "url": "../reembolso-isapre-psicologia.html",
+        "cta": "Conocer cómo presentar tus boletas electrónicas →"
+    },
+    "hiperfoco_burnout": {
+        "badge_icon": "🌧️",
+        "kicker": "Regulación Vital",
+        "title": "Psicoterapia para Depresión y Agotamiento",
+        "desc": "Navegar las caídas anímicas tras periodos de sobreexigencia requiere construir rutinas que no dependan únicamente de la urgencia dopaminérgica.",
+        "url": "../depresion-trastornos-animo.html",
+        "cta": "Conocer terapia para depresión y fatiga →"
+    },
+    "crianza_rutinas_flexibles": {
+        "badge_icon": "🫀",
+        "kicker": "Armonía Familiar",
+        "title": "Terapia para Ansiedad y Manejo del Estrés Cotidiano",
+        "desc": "Reducir la fricción diaria alivia la reactividad del sistema nervioso tanto en padres como en hijos.",
+        "url": "../ansiedad-crisis-angustia.html",
+        "cta": "Ver herramientas de regulación de ansiedad →"
+    },
+    "comunicacion_asertiva_limites": {
+        "badge_icon": "🌊",
+        "kicker": "Efectividad Interpersonal",
+        "title": "Psicoterapia para Trastornos de la Personalidad y TLP",
+        "desc": "Aprender a establecer límites claros sin sentir culpa desgarradora ni miedo al abandono es uno de los pilares de nuestro encuadre clínico.",
+        "url": "../trastornos-personalidad-tlp.html",
+        "cta": "Conocer terapia para vínculos afectivos y TLP →"
+    },
+    "tdah_rechazo_rsd": {
+        "badge_icon": "🌊",
+        "kicker": "Regulación Emocional Aguda",
+        "title": "Psicoterapia para TLP y Sensibilidad Afectiva",
+        "desc": "El dolor físico que detona el rechazo o la crítica requiere habilidades clínicas de tolerancia al malestar y validación radical.",
+        "url": "../trastornos-personalidad-tlp.html",
+        "cta": "Conocer terapia para regulación de intensidad emocional →"
+    },
+    "primera_consulta_nunoa": {
+        "badge_icon": "📍",
+        "kicker": "Consulta Presencial",
+        "title": "Psicóloga Clínica en Ñuñoa (Plaza Ñuñoa / Metro Chile España)",
+        "desc": "Espacio protegido y acogedor en Santiago Oriente para el tratamiento de Ansiedad, Depresión, TLP y Evaluaciones Clínicas.",
+        "url": "../psicologo-nunoa.html",
+        "cta": "Ver ubicación y detalles de la consulta en Ñuñoa →"
+    },
+    "terapia_infantil_juego": {
+        "badge_icon": "📋",
+        "kicker": "Evaluación Clínica",
+        "title": "Evaluación Psicodiagnóstica e Informes Estructurados",
+        "desc": "El psicodiagnóstico clínico formal permite clarificar necesidades del desarrollo y entregar recomendaciones certeras para familia y médicos.",
+        "url": "../evaluacion-psicodiagnostica-informes.html",
+        "cta": "Conocer cómo se estructura el informe clínico →"
+    },
+    "ansiedad_somatica_cuerpo": {
+        "badge_icon": "🫀",
+        "kicker": "Tratamiento Somático",
+        "title": "Psicoterapia Especializada en Ansiedad y Crisis de Angustia",
+        "desc": "Trata taquicardias, opresión en el pecho, nudo en la garganta y crisis de pánico desde la neurobiología del sistema nervioso.",
+        "url": "../ansiedad-crisis-angustia.html",
+        "cta": "Conocer psicoterapia somática para la ansiedad →"
+    },
+    "isapre_licencia_boletas": {
+        "badge_icon": "📋",
+        "kicker": "Informes Técnicos",
+        "title": "Evaluación Psicodiagnóstica e Informes de Respaldo",
+        "desc": "Si tu médico tratante o comisión de salud requiere un informe psicodiagnóstico formal, realizamos el proceso clínico con rigor técnico.",
+        "url": "../evaluacion-psicodiagnostica-informes.html",
+        "cta": "Ver requisitos y tiempos del informe formal →"
+    },
+    "desconexion_tecnologica_tdah": {
+        "badge_icon": "🫀",
+        "kicker": "Alivio de la Hipervigilancia",
+        "title": "Psicoterapia para Ansiedad y Desregulación Atencional",
+        "desc": "El consumo compulsivo de pantallas sobrecarga la corteza prefrontal y activa estados continuos de ansiedad. Recupera la serenidad.",
+        "url": "../ansiedad-crisis-angustia.html",
+        "cta": "Conocer abordaje para calmar la mente y ansiedad →"
+    },
+    "padres_regulacion_propia": {
+        "badge_icon": "🌧️",
+        "kicker": "Salud Emocional del Cuidador",
+        "title": "Psicoterapia para Trastornos del Ánimo y Ansiedad",
+        "desc": "No puedes ofrecer una calma que no tienes. Atiende tu propio agotamiento, angustia y estado de ánimo con Valentina Castro Núñez.",
+        "url": "../depresion-trastornos-animo.html",
+        "cta": "Conocer psicoterapia para depresión y sobrecarga →"
+    },
+    "autocuidado_fin_de_semana": {
+        "badge_icon": "🌧️",
+        "kicker": "Recuperación de Vitalidad",
+        "title": "Psicoterapia para Depresión, Distimia y Desánimo",
+        "desc": "Cuando el fin de semana no basta para recuperar la energía y la tristeza se vuelve habitual, es momento de iniciar psicoterapia.",
+        "url": "../depresion-trastornos-animo.html",
+        "cta": "Conocer tratamiento para el desánimo y depresión →"
+    }
+}
+
+
 def generate_article_html(topic_key: str, topic: dict) -> str:
     slug = slugify(topic_key)
     post_id = topic["id"]
@@ -202,6 +430,28 @@ def generate_article_html(topic_key: str, topic: dict) -> str:
     else:
         seo_desc = raw_desc
 
+    # Preparación de enlace contextual de alta intención
+    spec = TOPIC_SPECIALTY_MAP.get(topic_key, {
+        "badge_icon": "🌿",
+        "kicker": "Especialidad Relacionada",
+        "title": "Psicoterapia Integral en Centro Paz",
+        "desc": "Conoce nuestras especialidades en Ansiedad, Depresión, TLP y Evaluaciones Clínicas con la psicóloga Valentina Castro Núñez.",
+        "url": "../ansiedad-crisis-angustia.html",
+        "cta": "Conocer especialidades clínicas →"
+    })
+    related_specialty_html = f"""
+        <!-- Especialidad Clínica Relacionada (Enlazado Interno de Alta Intención) -->
+        <div class="article-related-specialty">
+          <div class="specialty-badge-icon">{spec['badge_icon']}</div>
+          <div class="article-related-specialty-content">
+            <div class="article-related-specialty-kicker">{html.escape(spec['kicker'])}</div>
+            <h4>{html.escape(spec['title'])}</h4>
+            <p>{html.escape(spec['desc'])}</p>
+            <a href="{spec['url']}" class="specialty-cta-link">{html.escape(spec['cta'])}</a>
+          </div>
+        </div>
+    """
+
     return f"""<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -260,7 +510,8 @@ def generate_article_html(topic_key: str, topic: dict) -> str:
       <nav class="nav-menu">
         <a href="../index.html" class="nav-link">Inicio</a>
         <a href="../index.html#especialidades" class="nav-link">Especialidades</a>
-        <a href="../index.html#isapres" class="nav-link">Reembolsos</a>
+        <a href="../index.html#arancel" class="nav-link">Reembolsos</a>
+        <a href="../psicologo-nunoa.html" class="nav-link">Ñuñoa</a>
         <a href="index.html" class="nav-link active">Blog Clínico</a>
         <a href="https://wa.me/{WA_NUMBER}" class="btn btn-nav" target="_blank" rel="noopener">WhatsApp Directo</a>
       </nav>
@@ -340,6 +591,8 @@ def generate_article_html(topic_key: str, topic: dict) -> str:
           </div>
         </section>
 
+        {related_specialty_html}
+
         <!-- Cómo Acompaña Valentina Castro Núñez -->
         <div class="valentina-approach-card">
           <div class="valentina-avatar-badge">🌿</div>
@@ -418,12 +671,14 @@ def generate_article_html(topic_key: str, topic: dict) -> str:
         <p><strong>WhatsApp:</strong> <a href="https://wa.me/{WA_NUMBER}">{WA_DISPLAY}</a></p>
       </div>
       <div class="footer-col">
-        <h4>Especialidades</h4>
+        <h4>Especialidades Clínicas</h4>
         <ul>
-          <li><a href="../index.html#adultos">Terapia para Adultos</a></li>
-          <li><a href="../index.html#neurodivergencias">Neurodivergencias (TEA y TDAH)</a></li>
-          <li><a href="../index.html#infantil">Infanto-Juvenil & Crianza</a></li>
-          <li><a href="index.html">Blog Clínico para IA y Google</a></li>
+          <li><a href="../ansiedad-crisis-angustia.html">Ansiedad y Crisis de Angustia</a></li>
+          <li><a href="../depresion-trastornos-animo.html">Depresión y Trastornos del Ánimo</a></li>
+          <li><a href="../trastornos-personalidad-tlp.html">Trastornos de la Personalidad (TLP)</a></li>
+          <li><a href="../evaluacion-psicodiagnostica-informes.html">Psicodiagnósticos e Informes</a></li>
+          <li><a href="../psicologo-nunoa.html">Consulta en Ñuñoa (Presencial)</a></li>
+          <li><a href="../reembolso-isapre-psicologia.html">Reembolso Isapre y Aranceles</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -536,7 +791,8 @@ def generate_blog_index_html(topics: dict) -> str:
       <nav class="nav-menu">
         <a href="../index.html" class="nav-link">Inicio</a>
         <a href="../index.html#especialidades" class="nav-link">Especialidades</a>
-        <a href="../index.html#isapres" class="nav-link">Reembolsos</a>
+        <a href="../index.html#arancel" class="nav-link">Reembolsos</a>
+        <a href="../psicologo-nunoa.html" class="nav-link">Ñuñoa</a>
         <a href="index.html" class="nav-link active">Blog Clínico</a>
         <a href="https://wa.me/{WA_NUMBER}" class="btn btn-nav" target="_blank" rel="noopener">WhatsApp Directo</a>
       </nav>
@@ -549,6 +805,50 @@ def generate_blog_index_html(topics: dict) -> str:
         <div class="badge-pill">Recursos Clínicos & Salud Mental</div>
         <h1>Artículos, Guías y Respuestas Clínicas</h1>
         <p class="hero-sub">Información basada en neurociencia, enfoque neuroafirmativo e integrativo para personas adultas, familias y padres en Chile. Supervisado por Valentina Castro Núñez.</p>
+      </div>
+    </section>
+
+    <!-- Hub de Especialidades Clínicas (Enlazado Interno de Alta Intención) -->
+    <section class="blog-specialties-hub">
+      <div class="container">
+        <div class="blog-specialties-hub-header">
+          <h2>Especialidades de Atención en Centro Paz</h2>
+          <p>Conoce los 4 ámbitos clínicos de atención con la psicóloga Valentina Castro Núñez (Arancel $45.000 · Reembolso Isapre):</p>
+        </div>
+        <div class="blog-specialties-hub-grid">
+          <a href="../ansiedad-crisis-angustia.html" class="blog-specialty-hub-card">
+            <div>
+              <div class="hub-icon">🫀</div>
+              <h3>Ansiedad y Crisis de Angustia</h3>
+              <p>Manejo de ataques de pánico, palpitaciones, sobrepensamiento y regulación somática del sistema nervioso.</p>
+            </div>
+            <span class="hub-link-text">Ver especialidad →</span>
+          </a>
+          <a href="../depresion-trastornos-animo.html" class="blog-specialty-hub-card">
+            <div>
+              <div class="hub-icon">🌧️</div>
+              <h3>Depresión y Trastornos del Ánimo</h3>
+              <p>Acompañamiento en tristeza profunda, fatiga crónica, distimia y recuperación de la vitalidad.</p>
+            </div>
+            <span class="hub-link-text">Ver especialidad →</span>
+          </a>
+          <a href="../trastornos-personalidad-tlp.html" class="blog-specialty-hub-card">
+            <div>
+              <div class="hub-icon">🌊</div>
+              <h3>Trastornos de la Personalidad (TLP)</h3>
+              <p>Regulación de emociones intensas, tolerancia al malestar y estabilidad en vínculos de apego.</p>
+            </div>
+            <span class="hub-link-text">Ver especialidad →</span>
+          </a>
+          <a href="../evaluacion-psicodiagnostica-informes.html" class="blog-specialty-hub-card">
+            <div>
+              <div class="hub-icon">📋</div>
+              <h3>Evaluación Psicodiagnóstica e Informes</h3>
+              <p>Proceso estructurado con entrega de informe formal para psiquiatras, colegios e interconsultas.</p>
+            </div>
+            <span class="hub-link-text">Ver especialidad →</span>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -569,11 +869,14 @@ def generate_blog_index_html(topics: dict) -> str:
         <p>WhatsApp: <a href="https://wa.me/{WA_NUMBER}">{WA_DISPLAY}</a></p>
       </div>
       <div class="footer-col">
-        <h4>Especialidades</h4>
+        <h4>Especialidades Clínicas</h4>
         <ul>
-          <li><a href="../index.html#adultos">Adultos</a></li>
-          <li><a href="../index.html#neurodivergencias">TDAH y TEA</a></li>
-          <li><a href="../index.html#infantil">Infanto-Juvenil</a></li>
+          <li><a href="../ansiedad-crisis-angustia.html">Ansiedad y Crisis de Angustia</a></li>
+          <li><a href="../depresion-trastornos-animo.html">Depresión y Trastornos del Ánimo</a></li>
+          <li><a href="../trastornos-personalidad-tlp.html">Trastornos de la Personalidad (TLP)</a></li>
+          <li><a href="../evaluacion-psicodiagnostica-informes.html">Psicodiagnósticos e Informes</a></li>
+          <li><a href="../psicologo-nunoa.html">Consulta en Ñuñoa (Presencial)</a></li>
+          <li><a href="../reembolso-isapre-psicologia.html">Reembolso Isapre y Aranceles</a></li>
         </ul>
       </div>
       <div class="footer-col">

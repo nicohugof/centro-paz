@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centro Paz · Registro de Valentina en Directorios Médicos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,300..900;1,6..12,300..900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --verde-marca: #385E28;
+      --verde-dark: #223F16;
+      --verde-light: #F0F6EC;
+      --verde-suave: #D6E8CE;
+      --dorado: #B88B22;
+      --dorado-dark: #8F6914;
+      --dorado-light: #FAF4E5;
+      --dorado-deep: #E5CA7E;
+      --celeste: #3E7582;
+      --celeste-dark: #2A5661;
+      --celeste-light: #EEF6F8;
+      --crema: #FAF8F5;
+      --card-bg: #FFFFFF;
+      --negro: #1F261D;
+      --gris: #556052;
+      --gris-muted: #7E8C7A;
+      --borde-suave: #E2ECE0;
+      --shadow-sm: 0 2px 8px rgba(34, 63, 22, 0.06);
+      --shadow-md: 0 8px 24px rgba(34, 63, 22, 0.08);
+      --shadow-lg: 0 16px 40px rgba(34, 63, 22, 0.12);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      --font-heading: 'Lora', Georgia, serif;
+      --font-body: 'Nunito Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--crema);
+      color: var(--negro);
+      line-height: 1.6;
+      padding: 24px 16px 80px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    /* Top bar & Header */
+    header {
+      background: linear-gradient(135deg, #FFFFFF 0%, var(--verde-light) 100%);
+      border: 1px solid var(--verde-suave);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, rgba(184, 139, 34, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--dorado-light);
+      color: var(--dorado-dark);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--dorado-deep);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-family: var(--font-heading);
+      color: var(--verde-dark);
+      font-size: 1.9rem;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .header-subtitle {
+      color: var(--gris);
+      font-size: 1rem;
+      max-width: 720px;
+    }
+
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--verde-suave);
+      font-size: 0.88rem;
+      color: var(--gris-muted);
+    }
+
+    .header-meta span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Action bar with external links */
+    .action-banner {
+      background: #FFFFFF;
+      border: 1px solid var(--borde-suave);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .action-banner-text h3 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      color: var(--verde-dark);
+      margin-bottom: 4px;
+    }
+
+    .action-banner-text p {
+      font-size: 0.9rem;
+      color: var(--gris);
+    }
+
+    .action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn-portal {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.92rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-doctoralia {
+      background: #00B39B;
+      color: #FFFFFF;
+    }
+
+    .btn-doctoralia:hover {
+      background: #009682;
+      transform: translateY(-1px);
+    }
+
+    .btn-encuadrado {
+      background: #4F46E5;
+      color: #FFFFFF;
+    }
+
+    .btn-encuadrado:hover {
+      background: #4338CA;
+      transform: translateY(-1px);
+    }
+
+    .btn-all-copy {
+      background: var(--verde-marca);
+      color: #FFFFFF;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-all-copy:hover {
+      background: var(--verde-dark);
+      transform: translateY(-1px);
+    }
+
+    /* Grid Layout */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .card-full {
+        grid-column: span 2;
+      }
+    }
+
+    /* Individual Card */
+    .field-card {
+      background: var(--card-bg);
+      border: 1px solid var(--borde-suave);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+
+    .field-card:hover {
+      border-color: var(--verde-suave);
+      box-shadow: var(--shadow-md);
+    }
+
+    .field-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      gap: 8px;
+    }
+
+    .field-title-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .field-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--verde-light);
+      color: var(--verde-marca);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .field-title {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--verde-dark);
+    }
+
+    .field-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      background: var(--verde-light);
+      color: var(--verde-marca);
+      border: 1px solid var(--verde-suave);
+    }
+
+    .field-content {
+      background: var(--crema);
+      border: 1px solid var(--borde-suave);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      font-size: 0.95rem;
+      color: var(--negro);
+      margin-bottom: 16px;
+      word-break: break-word;
+      position: relative;
+    }
+
+    .field-content.bio-text {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      max-height: 220px;
+      overflow-y: auto;
+    }
+
+    .field-content.tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      background: transparent;
+      border: none;
+      padding: 4px 0 12px;
+    }
+
+    .tag-chip {
+      background: #FFFFFF;
+      border: 1px solid var(--verde-suave);
+      color: var(--verde-dark);
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .tag-chip:hover {
+      background: var(--verde-light);
+      border-color: var(--verde-marca);
+      transform: translateY(-1px);
+    }
+
+    .tag-chip .chip-copy-icon {
+      font-size: 0.75rem;
+      opacity: 0.6;
+    }
+
+    .field-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* Copy Button */
+    .btn-copy {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--verde-light);
+      color: var(--verde-marca);
+      border: 1px solid var(--verde-suave);
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      flex: 1;
+      text-align: center;
+    }
+
+    .btn-copy:hover {
+      background: var(--verde-marca);
+      color: #FFFFFF;
+      border-color: var(--verde-marca);
+    }
+
+    .btn-copy.copied {
+      background: #059669 !important;
+      color: #FFFFFF !important;
+      border-color: #059669 !important;
+    }
+
+    .btn-copy-secondary {
+      background: #FFFFFF;
+      color: var(--gris);
+      border: 1px solid var(--borde-suave);
+      font-weight: 600;
+      flex: 0 0 auto;
+    }
+
+    .btn-copy-secondary:hover {
+      background: var(--crema);
+      color: var(--negro);
+    }
+
+    /* Checklist & Guide Box */
+    .guide-box {
+      background: #FFFFFF;
+      border: 1px solid var(--borde-suave);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-top: 32px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .guide-box h3 {
+      font-family: var(--font-heading);
+      color: var(--verde-dark);
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .checklist {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    @media (min-width: 600px) {
+      .checklist {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--crema);
+      border: 1px solid var(--borde-suave);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s;
+    }
+
+    .checklist-item:hover {
+      background: var(--verde-light);
+    }
+
+    .checklist-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--verde-marca);
+      cursor: pointer;
+    }
+
+    .checklist-item.checked {
+      text-decoration: line-through;
+      color: var(--gris-muted);
+      background: #F8F9FA;
+    }
+
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    .toast {
+      background: #1F261D;
+      color: #FFFFFF;
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      max-width: 400px;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .toast-icon {
+      color: #34D399;
+      font-size: 1.1rem;
+    }
+
+    /* Helper Notes */
+    .note-text {
+      font-size: 0.8rem;
+      color: var(--gris-muted);
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Encabezado Principal -->
+    <header>
+      <div class="header-badge">Centro Paz (CPAZ) · Herramienta de Publicación</div>
+      <h1>Ficha Maestra de Publicación en Directorios</h1>
+      <p class="header-subtitle">
+        Diseñado para <strong>Valentina Castro</strong> y <strong>Nico</strong>. Haz clic en cualquier botón o etiqueta para copiar el dato exacto con 1 solo toque y pegarlo en los formularios de registro de Doctoralia y Encuadrado.
+      </p>
+
+      <div class="header-meta">
+        <span>📍 Presencial: Salvador 2302, Ñuñoa</span>
+        <span>🌐 Online: Todo Chile</span>
+        <span>📋 Registro SIS: Acreditada Superintendencia de Salud</span>
+        <span>🔒 Sesión segura y boletas Isapre</span>
+      </div>
+    </header>
+
+    <!-- Barra de Acciones y Enlaces Directos a Portales -->
+    <div class="action-banner">
+      <div class="action-banner-text">
+        <h3>Directorios Médicos Oficiales</h3>
+        <p>Abre el registro en una pestaña nueva y completa los datos copiándolos desde esta pantalla.</p>
+      </div>
+
+      <div class="action-buttons">
+        <a href="https://pro.doctoralia.cl/" target="_blank" rel="noopener noreferrer" class="btn-portal btn-doctoralia" title="Abrir registro gratuito en Doctoralia Chile">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          Doctoralia Chile (Pro/Registro)
+        </a>
+
+        <a href="https://encuadrado.com/" target="_blank" rel="noopener noreferrer" class="btn-portal btn-encuadrado" title="Abrir registro en Encuadrado.cl">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          Encuadrado.cl (Registro)
+        </a>
+
+        <button class="btn-portal btn-all-copy" onclick="copiarFichaCompleta(this)">
+          📋 Copiar Ficha Completa
+        </button>
+      </div>
+    </div>
+
+    <!-- Grilla de Campos de Registro -->
+    <div class="cards-grid">
+
+      <!-- 1. Título y Nombre Oficial -->
+      <div class="field-card">
+        <div>
+          <div class="field-header">
+            <div class="field-title-group">
+              <div class="field-icon">👤</div>
+              <div class="field-title">Nombre y Título Oficial</div>
+            </div>
+            <span class="field-badge">Obligatorio</span>
+          </div>
+          <div class="field-content" id="campo-titulo">Valentina Castro Núñez - Psicóloga Clínica</div>
+          <p class="note-text">Ideal para el campo "Nombre comercial", "Título profesional" o encabezado del perfil.</p>
+        </div>
+        <div class="field-actions" style="margin-top: 12px;">
+          <button class="btn-copy" onclick="copiarTexto('Valentina Castro Núñez - Psicóloga Clínica', this)">
+            📋 Copiar Título Completo
+          </button>
+          <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('Valentina Castro Núñez', this)" title="Copiar únicamente el nombre">
+            Solo Nombre
+          </button>
+          <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('Psicóloga Clínica', this)" title="Copiar únicamente el título">
+            Solo Especialidad
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. Arancel y Sesión -->
+      <div class="field-card">
+        <div>
+          <div class="field-header">
+            <div class="field-title-group">
+              <div class="field-icon">💳</div>
+              <div class="field-title">Arancel por Sesión</div>
+            </div>
+            <span class="field-badge">Transparente</span>
+          </div>
+          <div class="field-content" id="campo-arancel">$45.000 CLP (Sesión individual de 50 minutos)</div>
+          <p class="note-text">Permite emitir boleta oficial de psicología clínica para reembolso en Isapres.</p>
+        </div>
+        <div class="field-actions" style="margin-top: 12px;">
+          <button class="btn-copy" onclick="copiarTexto('$45.000 CLP', this)">
+            📋 Copiar "$45.000 CLP"
+          </button>
+          <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('45000', this)" title="Copiar solo el número para inputs numéricos">
+            Solo "45000"
+          </button>
+        </div>
+      </div>
+
+      <!-- 3. Dirección y Ubicación -->
+      <div class="field-card">
+        <div>
+          <div class="field-header">
+            <div class="field-title-group">
+              <div class="field-icon">📍</div>
+              <div class="field-title">Dirección de Consulta</div>
+            </div>
+            <span class="field-badge">Ñuñoa</span>
+          </div>
+          <div class="field-content" id="campo-direccion">Salvador 2302, Ñuñoa</div>
+          <p class="note-text">Ubicación física en Santiago. Modalidad mixta: Presencial y Telemedicina.</p>
+        </div>
+        <div class="field-actions" style="margin-top: 12px;">
+          <button class="btn-copy" onclick="copiarTexto('Salvador 2302, Ñuñoa', this)">
+            📋 Copiar Dirección
+          </button>
+          <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('Salvador 2302, Ñuñoa, Región Metropolitana', this)">
+            Con Región
+          </button>
+          <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('Ñuñoa', this)">
+            Solo Comuna
+          </button>
+        </div>
+      </div>
+
+      <!-- 4. Teléfono y WhatsApp -->
+      <div class="field-card">
+        <div>
+          <div class="field-header">
+            <div class="field-title-group">
+              <div class="field-icon">📱</div>
+              <div class="field-title">Teléfono / WhatsApp</div>
+            </div>
+            <span class="field-badge">Contacto Directo</span>
+          </div>
+          <div class="field-content" id="campo-telefono">+56 9 6516 3893</div>
+          <p class="note-text">Línea directa para coordinación de pacientes y recordatorios.</p>
+        </div>
+        <div class="field-actions" style="margin-top: 12px;">
+          <button class="btn-copy" onclick="copiarTexto('+56 9 6516 3893', this)">
+            📋 Copiar con formato (+56 9 ...)
+          </button>
+          <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('+56965163893', this)">
+            Sin Espacios
+          </button>
+          <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('965163893', this)">
+            Solo 9 dígitos
+          </button>
+        </div>
+      </div>
+
+      <!-- 5. Cuatro Especialidades Clave -->
+      <div class="field-card card-full">
+        <div>
+          <div class="field-header">
+            <div class="field-title-group">
+              <div class="field-icon">🎯</div>
+              <div class="field-title">Especialidades Clínicas (4 Áreas Clave)</div>
+            </div>
+            <span class="field-badge">Enfoque Clínico</span>
+          </div>
+          <p class="note-text" style="margin-bottom: 8px;">Haz clic en cualquier especialidad individual para copiarla de inmediato, o usa el botón para copiar todas juntas:</p>
+          
+          <div class="field-content tags-container">
+            <button class="tag-chip" onclick="copiarTexto('Ansiedad', this)">
+              <span>⚡ Ansiedad y Crisis de Angustia</span>
+              <span class="chip-copy-icon">📋</span>
+            </button>
+            <button class="tag-chip" onclick="copiarTexto('Depresión', this)">
+              <span>🌱 Depresión y Trastornos del Ánimo</span>
+              <span class="chip-copy-icon">📋</span>
+            </button>
+            <button class="tag-chip" onclick="copiarTexto('Trastorno Límite de la Personalidad (TLP)', this)">
+              <span>🧩 Trastorno Límite de la Personalidad (TLP)</span>
+              <span class="chip-copy-icon">📋</span>
+            </button>
+            <button class="tag-chip" onclick="copiarTexto('Evaluación Psicodiagnóstica e Informes Clínicos', this)">
+              <span>📋 Psicodiagnósticos Clínicos</span>
+              <span class="chip-copy-icon">📋</span>
+            </button>
+          </div>
+        </div>
+        <div class="field-actions">
+          <button class="btn-copy" onclick="copiarTexto('Ansiedad, Depresión, Trastorno Límite de la Personalidad (TLP), Psicodiagnósticos Clínicos', this)">
+            📋 Copiar Todas las Especialidades (Separadas por comas)
+          </button>
+        </div>
+      </div>
+
+      <!-- 6. Isapres Aceptadas para Reembolso -->
+      <div class="field-card card-full">
+        <div>
+          <div class="field-header">
+            <div class="field-title-group">
+              <div class="field-icon">🏥</div>
+              <div class="field-title">Isapres (Reembolso de Boletas)</div>
+            </div>
+            <span class="field-badge">Reembolso 100%</span>
+          </div>
+          <p class="note-text" style="margin-bottom: 8px;">Haz clic en cada Isapre si el directorio pide agregarlas una a una en casillas o selectores:</p>
+          
+          <div class="field-content tags-container">
+            <button class="tag-chip" onclick="copiarTexto('Colmena', this)">
+              <span>Colmena</span>
+              <span class="chip-copy-icon">📋</span>
+            </button>
+            <button class="tag-chip" onclick="copiarTexto('Banmédica', this)">
+              <span>Banmédica</span>
+              <span class="chip-copy-icon">📋</span>
+            </button>
+            <button class="tag-chip" onclick="copiarTexto('CruzBlanca', this)">
+              <span>CruzBlanca</span>
+              <span class="chip-copy-icon">📋</span>
+            </button>
+            <button class="tag-chip" onclick="copiarTexto('Consalud', this)">
+              <span>Consalud</span>
+              <span class="chip-copy-icon">📋</span>
+            </button>
+            <button class="tag-chip" onclick="copiarTexto('Vida Tres', this)">
+              <span>Vida Tres</span>
+              <span class="chip-copy-icon">📋</span>
+            </button>
+          </div>
+        </div>
+        <div class="field-actions">
+          <button class="btn-copy" onclick="copiarTexto('Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres', this)">
+            📋 Copiar Lista de Isapres (Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres)
+          </button>
+          <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('Atención particular con emisión de boleta electrónica reembolsable en todas las Isapres (Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres) y seguros complementarios.', this)">
+            Copiar Párrafo Descriptivo
+          </button>
+        </div>
+      </div>
+
+      <!-- 7. Biografía Humana y Sin Juicios (Principal) -->
+      <div class="field-card card-full">
+        <div>
+          <div class="field-header">
+            <div class="field-title-group">
+              <div class="field-icon">📖</div>
+              <div class="field-title">Biografía Humana y Sin Juicios (Texto de Presentación)</div>
+            </div>
+            <span class="field-badge">Empatía y Rigor</span>
+          </div>
+          
+          <div class="field-content bio-text" id="campo-bio">Psicóloga Clínica con enfoque humanista e integrativo, titulada y con registro oficial en la Superintendencia de Salud (SIS). Acompaño a personas adultas y jóvenes en un espacio seguro, confidencial y libre de juicios, respetando los tiempos y ritmos de cada paciente. Mi trabajo clínico se centra en el alivio de la ansiedad y crisis de pánico, acompañamiento en cuadros del ánimo y depresión, regulación emocional en trastorno límite de la personalidad (TLP) y evaluaciones psicodiagnósticas integrales con informe clínico. Modalidad presencial en Ñuñoa (Santiago) y atención online para todo Chile. Boleta de honorarios reembolsable en todas las Isapres y seguros complementarios.</div>
+          
+          <p class="note-text">Tono cálido, validante y profesional, enfocado en reducir la fricción del paciente al pedir ayuda.</p>
+        </div>
+        <div class="field-actions" style="margin-top: 14px;">
+          <button class="btn-copy" onclick="copiarBioCompleta(this)">
+            📋 Copiar Biografía Completa
+          </button>
+          <button class="btn-copy btn-copy-secondary" onclick="copiarBioCorta(this)">
+            Copiar Versión Corta (Extracto para perfiles breves)
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Guía y Checklist de Progreso -->
+    <div class="guide-box">
+      <h3>
+        <span>✅</span> Checklist de Publicación en Portales
+      </h3>
+      <p style="font-size:0.92rem; color:var(--gris);">
+        Marca los pasos conforme avances para tener certeza del estado de publicación:
+      </p>
+
+      <ul class="checklist">
+        <li class="checklist-item" onclick="toggleCheck(this)">
+          <input type="checkbox">
+          <span>Abrir perfil en Doctoralia Chile</span>
+        </li>
+        <li class="checklist-item" onclick="toggleCheck(this)">
+          <input type="checkbox">
+          <span>Pegar Nombre y Título (Psicóloga Clínica)</span>
+        </li>
+        <li class="checklist-item" onclick="toggleCheck(this)">
+          <input type="checkbox">
+          <span>Pegar Biografía Humana en Doctoralia</span>
+        </li>
+        <li class="checklist-item" onclick="toggleCheck(this)">
+          <input type="checkbox">
+          <span>Configurar Dirección (Salvador 2302, Ñuñoa)</span>
+        </li>
+        <li class="checklist-item" onclick="toggleCheck(this)">
+          <input type="checkbox">
+          <span>Seleccionar Isapres para Reembolso</span>
+        </li>
+        <li class="checklist-item" onclick="toggleCheck(this)">
+          <input type="checkbox">
+          <span>Ingresar Arancel ($45.000 CLP)</span>
+        </li>
+        <li class="checklist-item" onclick="toggleCheck(this)">
+          <input type="checkbox">
+          <span>Crear cuenta y Vitrina en Encuadrado.cl</span>
+        </li>
+        <li class="checklist-item" onclick="toggleCheck(this)">
+          <input type="checkbox">
+          <span>Vincular WhatsApp (+56 9 6516 3893)</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Toast de Notificación -->
+  <div class="toast-container">
+    <div class="toast" id="toast">
+      <span class="toast-icon">✓</span>
+      <span id="toast-message">Copiado al portapapeles</span>
+    </div>
+  </div>
+
+  <script>
+    // Función robusta para copiar al portapapeles con fallback
+    function copiarTexto(texto, btnElement) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(texto).then(() => {
+          mostrarExito(btnElement, texto);
+        }).catch(() => {
+          fallbackCopiar(texto, btnElement);
+        });
+      } else {
+        fallbackCopiar(texto, btnElement);
+      }
+    }
+
+    function fallbackCopiar(texto, btnElement) {
+      const textArea = document.createElement("textarea");
+      textArea.value = texto;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-999999px";
+      textArea.style.top = "-999999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        mostrarExito(btnElement, texto);
+      } catch (err) {
+        console.error('Error al copiar', err);
+        mostrarToast('Error al copiar automáticamente. Por favor copia manualmente.', false);
+      }
+      document.body.removeChild(textArea);
+    }
+
+    function mostrarExito(btnElement, textoCopiado) {
+      if (btnElement) {
+        const textoOriginal = btnElement.getAttribute('data-original-text') || btnElement.innerHTML;
+        if (!btnElement.getAttribute('data-original-text')) {
+          btnElement.setAttribute('data-original-text', textoOriginal);
+        }
+        
+        btnElement.classList.add('copied');
+        btnElement.innerHTML = '<span>✓ ¡Copiado!</span>';
+
+        setTimeout(() => {
+          btnElement.classList.remove('copied');
+          btnElement.innerHTML = textoOriginal;
+        }, 1800);
+      }
+
+      // Previsualizar texto corto en toast
+      let preview = textoCopiado.length > 55 ? textoCopiado.substring(0, 55) + '...' : textoCopiado;
+      mostrarToast('Copiado: "' + preview + '"', true);
+    }
+
+    function mostrarToast(mensaje, esExito) {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toast-message');
+      
+      toastMessage.textContent = mensaje;
+      toast.classList.add('show');
+
+      if (window.toastTimeout) {
+        clearTimeout(window.toastTimeout);
+      }
+
+      window.toastTimeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    function copiarBioCompleta(btn) {
+      const bio = document.getElementById('campo-bio').innerText.trim();
+      copiarTexto(bio, btn);
+    }
+
+    function copiarBioCorta(btn) {
+      const bioCorta = "Psicóloga Clínica titulada (Registro SIS). Atención presencial en Ñuñoa y online para todo Chile. Espacio cálido, respetuoso y sin juicios para el tratamiento de ansiedad, depresión, regulación emocional (TLP) y psicodiagnósticos. Boleta reembolsable en Isapres.";
+      copiarTexto(bioCorta, btn);
+    }
+
+    function copiarFichaCompleta(btn) {
+      const ficha = `FICHA OFICIAL VALENTINA CASTRO NÚÑEZ (CENTRO PAZ)
+===================================================
+• Nombre y Título: Valentina Castro Núñez - Psicóloga Clínica
+• Registro SIS: Superintendencia de Salud de Chile
+• Teléfono / WhatsApp: +56 9 6516 3893
+• Dirección: Salvador 2302, Ñuñoa, Región Metropolitana
+• Modalidad: Presencial en Ñuñoa y Online para todo Chile
+• Arancel por Sesión: $45.000 CLP (Sesión individual 50 min)
+• Isapres para Reembolso: Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres
+
+ESPECIALIDADES PRINCIPALES:
+1. Ansiedad y Crisis de Angustia
+2. Depresión y Trastornos del Ánimo
+3. Trastorno Límite de la Personalidad (TLP) y Regulación Emocional
+4. Evaluaciones Psicodiagnósticas e Informes Clínicos
+
+BIOGRAFÍA DE PRESENTACIÓN:
+Psicóloga Clínica con enfoque humanista e integrativo, titulada y con registro oficial en la Superintendencia de Salud (SIS). Acompaño a personas adultas y jóvenes en un espacio seguro, confidencial y libre de juicios, respetando los tiempos y ritmos de cada paciente. Mi trabajo clínico se centra en el alivio de la ansiedad y crisis de pánico, acompañamiento en cuadros del ánimo y depresión, regulación emocional en trastorno límite de la personalidad (TLP) y evaluaciones psicodiagnósticas integrales con informe clínico. Modalidad presencial en Ñuñoa (Santiago) y atención online para todo Chile. Boleta de honorarios reembolsable en todas las Isapres y seguros complementarios.`;
+
+      copiarTexto(ficha, btn);
+    }
+
+    function toggleCheck(liElement) {
+      const chk = liElement.querySelector('input[type="checkbox"]');
+      if (event.target !== chk) {
+        chk.checked = !chk.checked;
+      }
+      if (chk.checked) {
+        liElement.classList.add('checked');
+      } else {
+        liElement.classList.remove('checked');
+      }
+    }
+  </script>
+</body>
+</html>

@@ -106,12 +106,19 @@ def interactive_intake():
                 continue
             
             print("\nEspecialidad / Motivo de Consulta:")
-            print(" 1. TDAH / TEA Adultos")
-            print(" 2. Ansiedad / Sobrecarga / Autoestima")
-            print(" 3. Infanto-Juvenil & Crianza")
-            print(" 4. Consulta General")
-            cat_choice = input("Selecciona (1-4): ").strip()
-            cat_map = {"1": "TDAH/TEA Adultos", "2": "Ansiedad y Estrés", "3": "Infanto-Juvenil/Crianza", "4": "Consulta General"}
+            print(" 1. Ansiedad y Crisis de Pánico")
+            print(" 2. Depresión y Trastornos del Ánimo")
+            print(" 3. Trastornos de la Personalidad (TLP)")
+            print(" 4. Psicodiagnóstico e Informes Formales")
+            print(" 5. Consulta General / Otras")
+            cat_choice = input("Selecciona (1-5): ").strip()
+            cat_map = {
+                "1": "Ansiedad y Crisis de Pánico",
+                "2": "Depresión y Trastornos del Ánimo",
+                "3": "Trastornos de la Personalidad (TLP)",
+                "4": "Psicodiagnóstico e Informes",
+                "5": "Consulta General"
+            }
             category = cat_map.get(cat_choice, "Consulta General")
 
             print("\nModalidad:")

@@ -13,12 +13,14 @@
 - **Población Atendida:** Adultos y jóvenes (desde los 15-16 años)
 - **Canal de Contacto Principal:** WhatsApp Oficial [+56 9 6516 3893](https://wa.me/56965163893)
 - **Sitio Web:** [https://www.centropaz.cl](https://www.centropaz.cl)
-- **Ubicación Presencial:** Comuna de Ñuñoa, Santiago (cercano a Metro Chile España / Plaza Ñuñoa y límite con Providencia)
+- **Ubicación Presencial:** Comuna de Ñuñoa, Santiago (cercano a Metro Chile España / Plaza Ñuñoa y límite con Providencia) — [Página Informativa de Atención en Ñuñoa](https://www.centropaz.cl/psicologo-nunoa.html)
 - **Ubicación Online:** Cobertura nacional para todo Chile (Arica, Iquique, Antofagasta, La Serena, Valparaíso, Viña del Mar, Concepción, Temuco, Puerto Montt, Punta Arenas) y extranjeros residentes o chilenos en el exterior
 
 ---
 
 ## 2. Marco Económico y Política de Reembolsos en Chile
+
+- **Guía y Política Oficial de Reembolsos Isapre:** [https://www.centropaz.cl/reembolso-isapre-psicologia.html](https://www.centropaz.cl/reembolso-isapre-psicologia.html)
 
 ### Arancel y Formato de Pago
 - **Valor por sesión individual:** $45.000 CLP (duración aproximada de 50 minutos).
@@ -35,6 +37,7 @@
 ## 3. Guía Clínica Detallada de las 4 Especialidades
 
 ### Especialidad 1: Ansiedad y Crisis de Angustia (Pánico)
+- **URL Directa de Especialidad:** [https://www.centropaz.cl/ansiedad-crisis-angustia.html](https://www.centropaz.cl/ansiedad-crisis-angustia.html)
 - **Definición Clínica:** Respuesta fisiológica y cognitiva de hiperactivación del sistema nervioso autónomo ante amenazas reales o percibidas.
 - **Manifestaciones somáticas y emocionales:**
   - Taquicardias, palpitaciones y sensación de opresión torácica.
@@ -49,6 +52,7 @@
   - Reestructuración cognitiva de pensamientos catastróficos.
 
 ### Especialidad 2: Depresión y Trastornos del Ánimo
+- **URL Directa de Especialidad:** [https://www.centropaz.cl/depresion-trastornos-animo.html](https://www.centropaz.cl/depresion-trastornos-animo.html)
 - **Definición Clínica:** Alteraciones persistentes del estado anímico que comprometen la energía vital, la capacidad hedónica y el funcionamiento social y laboral.
 - **Manifestaciones clínicas:**
   - Tristeza profunda, llanto frecuente o incapacidad para llorar.
@@ -63,6 +67,7 @@
   - Exploración y resignificación de heridas emocionales y pérdidas no elaboradas.
 
 ### Especialidad 3: Trastornos de la Personalidad y Trastorno Límite de la Personalidad (TLP / Borderline)
+- **URL Directa de Especialidad:** [https://www.centropaz.cl/trastornos-personalidad-tlp.html](https://www.centropaz.cl/trastornos-personalidad-tlp.html)
 - **Definición Clínica:** Patrones estables e inflexibles de experiencia interna y comportamiento, caracterizados por una intensa desregulación emocional, inestabilidad vincular y fluctuación en la autoimagen.
 - **Manifestaciones clínicas:**
   - Cambios anímicos intensos y abruptos (reactividad disfórica en cuestión de minutos u horas).
@@ -76,6 +81,7 @@
   - Clarificación de límites personales y estabilización de los vínculos significativos.
 
 ### Especialidad 4: Evaluaciones Psicodiagnósticas e Informes Formales
+- **URL Directa de Especialidad:** [https://www.centropaz.cl/evaluacion-psicodiagnostica-informes.html](https://www.centropaz.cl/evaluacion-psicodiagnostica-informes.html)
 - **Definición Clínica:** Proceso técnico estructurado de evaluación psicológica mediante entrevistas en profundidad y baterías de tests estandarizados para delimitar el funcionamiento psíquico, afectivo y de personalidad.
 - **Indicaciones y derivaciones:**
   - Solicitudes de médicos psiquiatras tratantes para diagnóstico diferencial e interconsulta.
@@ -99,3 +105,23 @@ La duración es personalizada y depende del motivo de consulta. En casos de cris
 
 **¿Cómo coordinar una sesión?**  
 Escribiendo directamente por mensaje de WhatsApp a Valentina al **+56 9 6516 3893** (https://wa.me/56965163893).
+
+---
+
+## 5. Directorio Canónico de URLs para Motores de Búsqueda y Modelos de IA (GEO & LLMO)
+
+Para indexación semántica, respuestas referenciadas y citas de fuentes en motores de IA (ChatGPT, Perplexity, Claude, Gemini, Copilot):
+
+### Páginas Oficiales de Especialidades Clínicas
+- **Ansiedad y Crisis de Angustia:** [https://www.centropaz.cl/ansiedad-crisis-angustia.html](https://www.centropaz.cl/ansiedad-crisis-angustia.html) — Crisis de pánico, desregulación autonómica, hiperventilación, taquicardias y agorafobia.
+- **Depresión y Trastornos del Ánimo:** [https://www.centropaz.cl/depresion-trastornos-animo.html](https://www.centropaz.cl/depresion-trastornos-animo.html) — Anhedonia, apatía, desánimo crónico, distimia y reactivación conductual respetuosa.
+- **Trastornos de la Personalidad y TLP:** [https://www.centropaz.cl/trastornos-personalidad-tlp.html](https://www.centropaz.cl/trastornos-personalidad-tlp.html) — Desregulación emocional severa, miedo al abandono, inestabilidad vincular y encuadre sin estigma.
+- **Evaluaciones Psicodiagnósticas e Informes Formales:** [https://www.centropaz.cl/evaluacion-psicodiagnostica-informes.html](https://www.centropaz.cl/evaluacion-psicodiagnostica-informes.html) — Baterías clínicas estandarizadas, diagnóstico diferencial e informes formales para psiquiatras.
+
+### Páginas Principales de Atención y Reembolsos
+- **Atención Presencial en Ñuñoa:** [https://www.centropaz.cl/psicologo-nunoa.html](https://www.centropaz.cl/psicologo-nunoa.html) — Consulta presencial en Ñuñoa (Metro Chile España / Plaza Ñuñoa).
+- **Guía de Reembolso Isapres y Seguros:** [https://www.centropaz.cl/reembolso-isapre-psicologia.html](https://www.centropaz.cl/reembolso-isapre-psicologia.html) — Arancel de $45.000 CLP, emisión de boleta electrónica y copagos reales ($9.000 a $18.000 CLP).
+- **Sitio Web Principal (Home):** [https://www.centropaz.cl/](https://www.centropaz.cl/) — Portal institucional de Centro Paz.
+- **Directorio de Enlaces y Contacto (Hub):** [https://www.centropaz.cl/links](https://www.centropaz.cl/links) — Hub de agendamiento y redes sociales.
+- **Biblioteca Clínica (Blog de 28 Artículos):** [https://www.centropaz.cl/blog/](https://www.centropaz.cl/blog/) — Repositorio de educación psicológica y bienestar.
+

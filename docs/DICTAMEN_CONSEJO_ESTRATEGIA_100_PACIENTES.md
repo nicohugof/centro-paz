@@ -47,17 +47,22 @@ Google Search Activo      Ficha Google Maps            Encuadrado / Doctoralia  
 ---
 
 ### MOTOR 1 (Máximo Retorno): Google Search Transaccional
-* **¿Por qué es el #1?** Porque captura a la persona en el segundo exacto en que busca *"psicologo tdah adultos santiago"*, *"psicologa en ñuñoa"* o *"psicologo reembolso colmena"*. El usuario ya tiene dolor, ya decidió pagar y tiene Isapre.
+* **¿Por qué es el #1?** Porque captura a la persona en el segundo exacto en que busca *"crisis de panico angustia psicologo"*, *"terapia depresion santiago"*, *"psicologo tlp borderline nunoa"*, *"evaluacion psicodiagnostica informe psiquiatra"*, *"psicologa en ñuñoa"* o *"reembolso isapre psicologia"*. El usuario ya tiene dolor agudo, ya decidió consultar y cuenta con Isapre/seguro.
 * **Acción Inmediata Dictaminada:**
-  1. Activar las 3 landing pages de alta conversión ya creadas ([`psicologo-nunoa.html`](../psicologo-nunoa.html), [`tdah-adultos.html`](../tdah-adultos.html), [`reembolso-isapre-psicologia.html`](../reembolso-isapre-psicologia.html)).
-  2. Enviar el `sitemap.xml` a Google Search Console para indexar gratis las 36 URLs.
+  1. Activar y enlazar las **4 landing pages clínicas especializadas de alta conversión**:
+     * [`ansiedad-crisis-angustia.html`](../ansiedad-crisis-angustia.html) (Ansiedad y Crisis de Angustia)
+     * [`depresion-trastornos-animo.html`](../depresion-trastornos-animo.html) (Depresión y Trastornos del Ánimo)
+     * [`trastornos-personalidad-tlp.html`](../trastornos-personalidad-tlp.html) (Trastornos de la Personalidad / TLP)
+     * [`evaluacion-psicodiagnostica-informes.html`](../evaluacion-psicodiagnostica-informes.html) (Evaluación Psicodiagnóstica e Informes Formales)
+     Junto con los portales de proximidad y reembolso ([`psicologo-nunoa.html`](../psicologo-nunoa.html), [`reembolso-isapre-psicologia.html`](../reembolso-isapre-psicologia.html)).
+  2. Enviar el `sitemap.xml` a Google Search Console y sincronizar vía IndexNow para indexar gratis las **41 URLs canónicas**.
 
 ---
 
 ### MOTOR 2 (Costo $0 · Alto Tráfico Local): Google Business Profile (Google Maps)
 * **¿Por qué es letal en Ñuñoa?** Porque el 65% de los pacientes que buscan terapia presencial seleccionan a un profesional que esté a menos de 15 minutos de su casa o trabajo (Metro Chile España / Plaza Ñuñoa).
 * **Acción Inmediata Dictaminada:**
-  1. Reclamar/Verificar la ficha en Google Maps utilizando los textos ya preparados en [`docs/FICHA_GOOGLE_BUSINESS_PROFILE_LISTA.md`](FICHA_GOOGLE_BUSINESS_PROFILE_LISTA.md).
+  1. Reclamar/Verificar la ficha en Google Maps utilizando los textos ya preparados en [`docs/FICHA_GOOGLE_BUSINESS_PROFILE_LISTA.md`](FICHA_GOOGLE_BUSINESS_PROFILE_LISTA.md) alineados con las 4 especialidades de Valentina.
   2. Conseguir 5 reseñas de 5 estrellas con pacientes antiguos o colegas para ingresar al *Local 3-Pack* (las 3 primeras posiciones en el mapa).
 
 ---
@@ -65,7 +70,7 @@ Google Search Activo      Ficha Google Maps            Encuadrado / Doctoralia  
 ### MOTOR 3 (Efectividad Comprobada en Chile): Marketplace Médico Especializado
 * **¿Por qué funciona?** Plataformas como **Encuadrado** o **Doctoralia** ya invierten millones en posicionamiento y tienen miles de pacientes buscando psicólogos en Ñuñoa todos los días.
 * **Acción Inmediata Dictaminada:**
-  1. Crear el perfil profesional de Valentina en Encuadrado.cl enlazándolo con `www.centropaz.cl`.
+  1. Crear el perfil profesional de Valentina en Encuadrado.cl enlazándolo con `www.centropaz.cl` y destacando sus 4 áreas clínicas.
   2. Sincronizar la disponibilidad horaria y el arancel de $45.000 con boleta Isapre.
 
 ---
@@ -73,8 +78,8 @@ Google Search Activo      Ficha Google Maps            Encuadrado / Doctoralia  
 ### MOTOR 4 (Donde se Ganan o Pierden los Pacientes): Protocolo de Respuesta en WhatsApp en Menos de 15 Minutos
 * **La Estadística Clínica:** Si una consulta de WhatsApp se responde en **menos de 15 minutos**, la tasa de agendamiento es del **42%**. Si se responde después de 2 horas, la tasa cae al **8%** (porque el paciente ya le escribió a otro terapeuta).
 * **Acción Inmediata Dictaminada:**
-  1. Valentina debe tener configuradas las respuestas rápidas en su WhatsApp personal/profesional.
-  2. Aplicar el guion de cierre con alternativa doble: validar el motivo, explicar que el copago Isapre es de ~$12.000 y ofrecer 2 opciones concretas de horario (*"¿Te acomoda este jueves a las 17:00 o el sábado a las 11:00?"*).
+  1. Valentina debe tener configuradas las respuestas rápidas en su WhatsApp profesional para cada una de las 4 especialidades (Ansiedad, Depresión, TLP, Psicodiagnóstico).
+  2. Aplicar el guion de cierre con alternativa doble: validar el motivo, explicar que el copago Isapre es de entre $9.000 y $18.000 CLP (~$12.000) y ofrecer 2 opciones concretas de horario (*"¿Te acomoda este jueves a las 17:00 o el sábado a las 11:00?"*).
 
 ---
 
@@ -82,6 +87,6 @@ Google Search Activo      Ficha Google Maps            Encuadrado / Doctoralia  
 
 El Consejo dictamina ejecutar sin dilaciones las 3 acciones que mueven la aguja:
 
-1. **Paso A (Hoy):** Envío y verificación del `sitemap.xml` en Google Search Console para activar la indexación orgánica de las 36 páginas.
+1. **Paso A (Hoy):** Envío y verificación del `sitemap.xml` en Google Search Console y red IndexNow para activar la indexación orgánica de las **41 URLs canónicas**.
 2. **Paso B (Hoy):** Creación/Verificación de la Ficha en Google Maps (Google Business Profile) con ubicación en Plaza Ñuñoa.
 3. **Paso C (Esta semana):** Configuración de las respuestas rápidas de WhatsApp en el teléfono de Valentina para garantizar tiempos de respuesta menores a 15 minutos.

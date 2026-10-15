@@ -217,7 +217,7 @@ Bajo el marco de ingeniería de desarrollo y optimización digital de Centro Paz
 
 ### 3. Backlink de Alta Autoridad (High-Domain Authority Link)
 * **¿Qué es?** Un hipervínculo entrante que apunta desde un dominio web consolidado y confiable (como `doctoralia.cl` o `encuadrado.cl`, con Domain Authority > 50) hacia el dominio `https://www.centropaz.cl`.
-* **¿Para qué lo usamos?** Para transferir relevancia algorítmica ("link equity" o "PageRank") a nuestro sitio web, lo que acelera la indexación de los 28 artículos de blog y las 3 landing pages de Centro Paz en Google Search.
+* **¿Para qué lo usamos?** Para transferir relevancia algorítmica ("link equity" o "PageRank") a nuestro sitio web, lo que acelera la indexación de los 28 artículos de blog y las landing pages de las 4 especialidades clínicas de Centro Paz en Google Search.
 
 ### 4. Modalidad Libre Elección (Sistema de Salud Chileno)
 * **¿Qué es?** La modalidad contractual de las Isapres (instituciones de salud previsional) que faculta al afiliado a atenderse con cualquier profesional de salud fuera de la red cerrada de la aseguradora, reembolsando posteriormente un porcentaje del valor pagado.
