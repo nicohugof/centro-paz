@@ -20,14 +20,15 @@ Este documento contiene los textos exactos y configuraciones para crear y optimi
 ## 2. Descripción Oficial del Perfil (Optimizado para Búsquedas Locales)
 
 ```text
-Centro de Psicología Clínica en Ñuñoa (Santiago) y atención Online para todo Chile, dirigido por la psicóloga clínica Valentina Castro Núñez (Registro Superintendencia de Salud).
+Centro de Psicología Clínica en Ñuñoa (Santiago) y atención Online para todo Chile, dirigido por la psicóloga clínica Valentina Castro Núñez (Registro SIS Superintendencia de Salud).
 
-Especialistas en:
-• Psicoterapia para Adultos: Manejo de ansiedad, estrés laboral, sobrecarga y autoestima.
-• Neurodivergencias (TDAH y TEA): Enfoque neuroafirmativo, sospecha o diagnóstico tardío y funciones ejecutivas.
-• Infanto-Juvenil & Crianza: Psicoterapia infantil presencial y orientación online a padres.
+Especialidades de atención:
+• Ansiedad y Crisis de Angustia: Ataques de pánico, taquicardias y desregulación del sistema nervioso.
+• Depresión y Trastornos del Ánimo: Tristeza profunda, anhedonia, fatiga y duelos.
+• Trastornos de la Personalidad (TLP / Borderline): Inestabilidad afectiva y regulación vincular sin juicios.
+• Psicodiagnósticos e Informes Formales: Evaluaciones estructuradas para interconsultas psiquiátricas.
 
-Atención en espacio cálido, empático y libre de juicios. Emitimos boleta electrónica de honorarios por $45.000 CLP válida para reembolso en todas las Isapres (Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres) y Seguros Complementarios (copago real estimado: $9.000 a $15.000 CLP).
+Atención en espacio cálido, empático y confidencial. Arancel: $45.000 CLP por sesión con boleta electrónica válida para reembolso en todas las Isapres (Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres) y Seguros Complementarios (copago real estimado: $9.000 a $18.000 CLP).
 
 Consulta presencial cercana a Metro Chile España y Plaza Ñuñoa. Agendamiento directo y humano vía WhatsApp: +56 9 6516 3893.
 ```
@@ -36,18 +37,18 @@ Consulta presencial cercana a Metro Chile España y Plaza Ñuñoa. Agendamiento 
 
 ## 3. Catálogo de Servicios para Añadir en la Ficha
 
-1. **Psicoterapia Individual para Adultos**
+1. **Psicoterapia para Ansiedad y Crisis de Pánico**
    * *Precio:* $45.000 CLP
-   * *Descripción:* Sesión de 50 minutos presencial en Ñuñoa u Online. Enfoque humanista e integrativo. Boleta para Isapre.
-2. **Acompañamiento en TDAH y TEA (Adultos y Jóvenes)**
+   * *Descripción:* Regulación somática y cognitiva para calmar opresión en el pecho, taquicardia y sobrepensamiento. Boleta reembolsable en Isapre.
+2. **Psicoterapia para Depresión y Trastornos del Ánimo**
    * *Precio:* $45.000 CLP
-   * *Descripción:* Estrategias neuroafirmativas para parálisis ejecutiva, regulación sensorial y burnout.
-3. **Psicoterapia Infantil Presencial (Ñuñoa)**
+   * *Descripción:* Acompañamiento cálido para procesar el desánimo profundo, pérdida de energía y reconstruir el sentido vital.
+3. **Acompañamiento en Trastornos de la Personalidad (TLP)**
    * *Precio:* $45.000 CLP
-   * *Descripción:* Sesiones lúdicas en sala clínica adaptada en Ñuñoa para menores de 12 años con orientación a padres.
-4. **Orientación Online en Crianza para Madres y Padres**
+   * *Descripción:* Espacio seguro y estructurado para aprender a regular emociones de alta intensidad y estabilizar vínculos.
+4. **Evaluación Psicodiagnóstica e Informes Formales**
    * *Precio:* $45.000 CLP
-   * *Descripción:* Sesiones por videollamada para pautas de corregulación, límites respetuosos y comunicación familiar.
+   * *Descripción:* Proceso estructurado de evaluación con aplicación de baterías clínicas y entrega de informe formal para psiquiatras.
 
 ---
 

@@ -26,13 +26,14 @@ Este documento contiene los textos, configuraciones y respuestas frecuentes list
 Creo profundamente en una psicoterapia cercana, humana y libre de juicios, donde puedas bajar la guardia y sentirte comprendida/o. Mi objetivo es acompañarte a reconectar con tus fortalezas personales y construir herramientas prácticas y sostenibles para tu bienestar emocional y cotidiano.
 
 Mis áreas principales de atención son:
-• Adultos: Manejo de ansiedad, sobrecarga laboral/vital, límites personales y autoestima.
-• Neurodivergencias (TDAH y TEA en adultos y jóvenes): Enfoque neuroafirmativo, sospecha o diagnóstico tardío, parálisis ejecutiva, burnout y regulación de la sobrecarga sensorial.
-• Infanto-Juvenil & Crianza: Psicoterapia infantil presencial a través del juego en sala clínica (Ñuñoa) y orientación continua a madres y padres.
+• Ansiedad y Crisis de Angustia: Ataques de pánico, taquicardia, opresión en el pecho, sobrepensamiento y regulación del sistema nervioso.
+• Depresión y Trastornos del Ánimo: Tristeza profunda, falta de motivación, anhedonia, fatiga crónica y procesos de duelo.
+• Trastornos de la Personalidad (TLP / Borderline): Inestabilidad emocional, hipersensibilidad al rechazo y regulación afectiva.
+• Evaluaciones Psicodiagnósticas e Informes Formales: Aplicación estructurada de baterías clínicas para psiquiatría e interconsultas.
 
 Condiciones de Atención y Reembolso:
 • Arancel por sesión individual (50 minutos): $45.000 CLP.
-• Boleta Electrónica de Honorarios: Emitida con código oficial de psicología clínica, válida para reembolso en todas las Isapres (Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres) y Seguros Complementarios (copago real estimado: $9.000 a $15.000 CLP).
+• Boleta Electrónica de Honorarios: Emitida con código oficial de psicología clínica, válida para reembolso en todas las Isapres (Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres) y Seguros Complementarios (copago real estimado: $9.000 a $18.000 CLP).
 • Modalidades: Presencial en Ñuñoa (cercana a Metro Chile España) y Online para todo Chile.
 
 Te espero en un espacio de escucha genuina, calidez y confidencialidad.
@@ -42,22 +43,25 @@ Te espero en un espacio de escucha genuina, calidez y confidencialidad.
 
 ## 3. Servicios y Aranceles a Configurar en Plataforma
 
-### Servicio 1: Psicoterapia Individual Adultos (Online o Presencial)
+### Servicio 1: Psicoterapia para Ansiedad y Crisis de Pánico
 * **Duración:** 50 minutos
 * **Arancel:** $45.000 CLP
-* **Descripción:** Espacio confidencial para trabajar en ansiedad, sobrecarga, autoconocimiento o momentos de transición. Boleta reembolsable en Isapre.
+* **Descripción:** Espacio confidencial con herramientas somáticas y cognitivas para desactivar la alarma biológica de la angustia y recuperar la tranquilidad. Boleta reembolsable en Isapre.
 
-### Servicio 2: Acompañamiento en TDAH / TEA (Neurodivergencias)
+### Servicio 2: Psicoterapia para Depresión y Trastornos del Ánimo
 * **Duración:** 50 minutos
 * **Arancel:** $45.000 CLP
-* **Descripción:** Acompañamiento neuroafirmativo enfocado en funciones ejecutivas, autorregulación y comprensión del propio sistema nervioso.
+* **Descripción:** Acompañamiento respetuoso y gradual para comprender el desánimo, recuperar la energía y reconectar con proyectos significativos.
 
-### Servicio 3: Psicoterapia Infantil Presencial (Consulta Ñuñoa)
+### Servicio 3: Acompañamiento en Trastornos de la Personalidad (TLP)
 * **Duración:** 50 minutos
 * **Arancel:** $45.000 CLP
-* **Descripción:** Sesiones lúdicas presenciales para niños/as menores de 12 años orientadas a la expresión emocional, regulación y desarrollo, con sesiones continuas de orientación a padres.
+* **Descripción:** Encuadre clínico cálido y sin juicios para desarrollar tolerancia al malestar, autorregulación emocional y estabilización vincular.
 
-### Servicio 4: Orientación a Padres y Pautas de Crianza (Online / Presencial)
+### Servicio 4: Evaluación Psicodiagnóstica e Informe Formal
+* **Duración:** 50 minutos por sesión (batería clínica)
+* **Arancel:** $45.000 CLP
+* **Descripción:** Proceso técnico estructurado de evaluación clínica con entrega de informe formal para psiquiatras o respaldo médico.
 * **Duración:** 50 minutos
 * **Arancel:** $45.000 CLP
 * **Descripción:** Sesión de orientación parental para abordar desbordes emocionales, límites respetuosos y comunicación familiar.
