@@ -622,12 +622,28 @@ function initWhatsAppLinks() {
       msg = "Hola Valentina 🧩 Quisiera consultar por acompañamiento clínico en Trastorno Límite de la Personalidad (TLP) o regulación emocional.";
     } else if (action === "psicodiagnostico") {
       msg = "Hola Valentina 📋 Quisiera consultar por el proceso de evaluación psicodiagnóstica y emisión de informe clínico formal.";
+    } else if (action === "transpersonal") {
+      msg = "Hola Valentina 🌌 Quisiera consultar por sesiones de Psicología Transpersonal e Integral y disponibilidad de horas.";
+    } else if (action === "mindfulness") {
+      msg = "Hola Valentina 🌿 Quisiera consultar por las sesiones y prácticas de Mindfulness y atención plena.";
+    } else if (action === "hipnosis") {
+      msg = "Hola Valentina ✨ Quisiera consultar por el abordaje con Hipnosis Terapéutica complementaria y cómo se coordina.";
+    } else if (action === "corporal") {
+      msg = "Hola Valentina 🕊️ Quisiera consultar por psicoterapia corporal y el trabajo de integración cuerpo-emociones.";
+    } else if (action === "arteterapia") {
+      msg = "Hola Valentina 🎨 Quisiera consultar por las sesiones de Arteterapia y expresión creativa en Centro Paz.";
+    } else if (action === "producto-joya") {
+      const prodName = link.getAttribute("data-product-name") || "una pieza del catálogo";
+      const prodCode = link.getAttribute("data-product-code") || "";
+      msg = `Hola Valentina 💎 Quisiera consultar por la disponibilidad de la pieza "${prodName}"${prodCode ? ' (Ref: ' + prodCode + ')' : ''} de la tienda de artesanías y joyas de Centro Paz.`;
+    } else if (action === "tienda-general") {
+      msg = "Hola Valentina 💎 Quisiera consultar sobre el catálogo de artesanías y joyas curativas de Centro Paz.";
     } else if (action === "nunoa") {
       msg = "Hola Valentina 🛋️ Quisiera consultar por disponibilidad para sesiones presenciales en la consulta de Ñuñoa.";
     } else if (action === "lead-magnet") {
       msg = "Hola Valentina ✨ Me gustaría solicitar la Guía Gratuita de 7 Claves para la Regulación de la Ansiedad y Emociones.";
-    } else if (action === "hero" || action === "sticky") {
-      msg = "Hola Valentina 🌿 Vi el sitio web de Centro Paz y me gustaría coordinar una primera sesión contigo.";
+    } else if (action === "hero" || action === "sticky" || action === "reserva") {
+      msg = "Hola Valentina 🌿 Vi el sitio web de Centro Paz y me gustaría coordinar una primera sesión o consulta contigo.";
     }
 
     link.href = `https://wa.me/${CPAZ_CONFIG.whatsappNumber}?text=${encodeURIComponent(msg + utmSuffix)}`;
