@@ -134,6 +134,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initStickyWhatsApp();
   initLibrary();
   initCoreWebVitals();
+  initBreatheWidget();
+  initEmpathyFinder();
 });
 
 /* ----------------------------------------------------
@@ -799,4 +801,181 @@ function initLibrary() {
   });
 
   renderLibrary();
+}
+
+/* ----------------------------------------------------
+   WIDGET INTERACTIVO DE RESPIRACIÓN Y PRIMER ALIVIO SOMÁTICO
+   ---------------------------------------------------- */
+function initBreatheWidget() {
+  const circle = document.getElementById("breathe-core-circle");
+  const phaseText = document.getElementById("breathe-phase-text");
+  const phaseSub = document.getElementById("breathe-phase-sub");
+  const toggleBtn = document.getElementById("breathe-toggle-btn");
+
+  if (!circle || !phaseText || !phaseSub) return;
+
+  const phases = [
+    { name: "Inhala", sub: "Llena suavemente tu abdomen por la nariz...", cls: "inhale", duration: 4000 },
+    { name: "Sostén", sub: "Siente tu apoyo y tu presencia aquí...", cls: "hold", duration: 4000 },
+    { name: "Exhala", sub: "Suelta el peso, la tensión y el aire...", cls: "exhale", duration: 4000 },
+    { name: "Pausa", sub: "Descansa... Estás a salvo en este instante.", cls: "rest", duration: 2500 }
+  ];
+
+  let currentPhaseIdx = 0;
+  let breatheTimer = null;
+  let isRunning = true;
+
+  function runNextPhase() {
+    if (!isRunning) return;
+    const phase = phases[currentPhaseIdx];
+
+    circle.className = "breathe-core-circle " + phase.cls;
+    phaseText.textContent = phase.name;
+    phaseSub.textContent = phase.sub;
+
+    currentPhaseIdx = (currentPhaseIdx + 1) % phases.length;
+    breatheTimer = setTimeout(runNextPhase, phase.duration);
+  }
+
+  // Iniciar ciclo de calma suave
+  runNextPhase();
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", () => {
+      isRunning = !isRunning;
+      if (isRunning) {
+        toggleBtn.textContent = "Pausar guía";
+        runNextPhase();
+      } else {
+        clearTimeout(breatheTimer);
+        toggleBtn.textContent = "Reanudar respiración";
+        phaseText.textContent = "Pausa";
+        phaseSub.textContent = "Tómate tu tiempo. Respira a tu propio ritmo.";
+        circle.className = "breathe-core-circle";
+      }
+    });
+  }
+}
+
+/* ----------------------------------------------------
+   SELECTOR EMPÁTICO: "¿QUÉ ESTÁS SINTIENDO HOY?"
+   ---------------------------------------------------- */
+const empathyFeelingsData = {
+  angustia: {
+    icon: "🌊",
+    title: "Siento angustia, opresión en el pecho o no puedo dejar de sobrepensar",
+    validation: "Lo que sientes no es una debilidad ni significa que estés 'perdiendo el control'. Tu sistema nervioso está sobrecargado y activó su alarma biológica. Es una respuesta involuntaria ante el estrés acumulado.",
+    howWeHelp: [
+      { bold: "Regulación somática inmediata:", text: "Aprenderás técnicas físicas y de respiración para calmar el ritmo cardíaco y desactivar la alarma del cuerpo." },
+      { bold: "Desactivación del sobrepensamiento:", text: "Trabajamos para frenar la espiral de anticipar el peor escenario y recuperar la calma mental." },
+      { bold: "En la comodidad de tu hogar:", text: "Sesiones online por videollamada confidencial para que no tengas que exponerte a traslados estresantes." }
+    ],
+    waMsg: "Hola Valentina 🌊 Estoy pasando por momentos de mucha angustia y ansiedad. Me gustaría consultar confidencialmente cómo podemos trabajarlo juntas."
+  },
+  desanimo: {
+    icon: "🌱",
+    title: "Siento una tristeza profunda, vacío o me cuesta encontrar motivación",
+    validation: "No tienes que 'echarle ganas' ni fingir una sonrisa que hoy no sientes. Cuando el alma y el cuerpo están agotados, el desánimo es una señal de que necesitas un espacio seguro donde ser escuchado/a sin exigencias.",
+    howWeHelp: [
+      { bold: "Espacio libre de juicios:", text: "Poder nombrar lo que duele sin temor a que minimicen tus sentimientos o te den consejos superficiales." },
+      { bold: "Reencuentro gradual con tu energía:", text: "Avanzamos a tu propio ritmo, paso a paso, redescubriendo lo que te devuelve el sentido vital." },
+      { bold: "Atención cálida y humana:", text: "Acompañamiento cercano por Valentina Castro Núñez, desde la calidez de tu propio espacio." }
+    ],
+    waMsg: "Hola Valentina 🌱 Siento un desánimo profundo y falta de energía. Quisiera consultar por un espacio terapéutico confidencial contigo."
+  },
+  desborde: {
+    icon: "🧩",
+    title: "Mis emociones me desbordan y me cuesta encontrar estabilidad en mis relaciones",
+    validation: "Sentir con tanta intensidad puede ser agotador y solitario, especialmente cuando el miedo al abandono o al conflicto se hace presente. Tus emociones intensas tienen una historia y una razón de ser; aprenderemos a regularlas con compasión.",
+    howWeHelp: [
+      { bold: "Regulación emocional sin estigma:", text: "Herramientas de enfoque dialéctico y humanista para volver al centro cuando la emoción parece una ola gigante." },
+      { bold: "Vínculos más seguros y sanos:", text: "Comprensión de los patrones relacionales para comunicarte sin miedo a romper la conexión." },
+      { bold: "100% Confidencialidad y respeto:", text: "Un entorno protegido bajo estricto secreto profesional donde ser auténticamente tú." }
+    ],
+    waMsg: "Hola Valentina 🧩 Siento mucha inestabilidad emocional y me cuesta gestionar lo que siento en mis relaciones. Quisiera coordinar una sesión."
+  },
+  cuerpo: {
+    icon: "🕊️",
+    title: "Siento mi cuerpo en tensión permanente y necesito reconectar conmigo",
+    validation: "El cuerpo acumula lo que las palabras muchas veces callan: hombros apretados, mandíbula rígida, digestión pesada y respiración corta. Es momento de bajar la guardia y permitirte soltar la armadura.",
+    howWeHelp: [
+      { bold: "Psicoterapia Corporal e Integración Somática:", text: "Trabajamos escuchando las memorias y tensiones retenidas en la coraza muscular." },
+      { bold: "Mindfulness y Conciencia Plena:", text: "Prácticas sencillas para habitar tu cuerpo sintiéndote seguro/a y en paz en tu propio hogar." },
+      { bold: "Ambiente protegido y cuidado:", text: "Sesiones guiadas con delicadeza y respeto absoluto a tus límites personales." }
+    ],
+    waMsg: "Hola Valentina 🕊️ Siento mucha sobrecarga corporal y estrés acumulado. Quisiera consultar por el enfoque somático y psicoterapia corporal."
+  },
+  sentido: {
+    icon: "🌌",
+    title: "Estoy en una crisis vital o de cambio y busco autoconocimiento profundo",
+    validation: "Las crisis no son un error en el camino, son la puerta a una transformación más coherente con tu verdad interior. Cuando lo que antes funcionaba ya no tiene sentido, necesitas una guía reflexiva y trascendente.",
+    howWeHelp: [
+      { bold: "Psicología Transpersonal e Integral:", text: "Exploración de tu propósito vital, biografía y dimensiones profundas del ser." },
+      { bold: "Arteterapia y Expresión Creativa:", text: "Uso de lenguajes visuales y simbólicos para desbloquear lo que la mente analítica no logra resolver." },
+      { bold: "Consulta humana y personalizada:", text: "Atención individual para adultos con Valentina Castro Núñez en Ñuñoa u Online todo Chile." }
+    ],
+    waMsg: "Hola Valentina 🌌 Estoy atravesando una etapa de cambio y crisis vital. Me gustaría consultar por Psicología Transpersonal y de autoconocimiento."
+  }
+};
+
+function initEmpathyFinder() {
+  const pills = document.querySelectorAll(".empathy-pill-btn");
+  const container = document.getElementById("empathy-card-container");
+  if (!pills.length || !container) return;
+
+  function renderEmpathyCard(feelingKey) {
+    const data = empathyFeelingsData[feelingKey] || empathyFeelingsData.angustia;
+    const utmSuffix = getUTMContext();
+    const waUrl = `https://wa.me/${CPAZ_CONFIG.whatsappNumber}?text=${encodeURIComponent(data.waMsg + utmSuffix)}`;
+
+    container.innerHTML = `
+      <div class="empathy-response-card">
+        <div class="empathy-response-header">
+          <div class="empathy-response-icon">${data.icon}</div>
+          <h3 class="empathy-response-title">${data.title}</h3>
+        </div>
+
+        <div class="empathy-validation-box">
+          ${data.validation}
+        </div>
+
+        <div class="empathy-how-we-help">
+          <h4>
+            <span style="color:var(--verde-marca);">🌿</span>
+            Cómo te acompañamos en Centro Paz
+          </h4>
+          <ul>
+            ${data.howWeHelp.map(item => `
+              <li>
+                <span style="color:var(--verde-marca); font-weight:bold;">✓</span>
+                <span><strong>${item.bold}</strong> ${item.text}</span>
+              </li>
+            `).join("")}
+          </ul>
+        </div>
+
+        <div class="empathy-actions-footer">
+          <div class="empathy-action-note">
+            <span>🛋️ En la comodidad de tu hogar (Online) o Presencial en Ñuñoa · 100% Confidencial</span>
+          </div>
+          <a href="${waUrl}" class="empathy-cta-btn" target="_blank" rel="noopener noreferrer" data-wa-action="empathy-${feelingKey}">
+            <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm.01 1.67c4.54 0 8.24 3.7 8.24 8.24 0 2.2-.86 4.27-2.42 5.82-1.55 1.56-3.62 2.42-5.82 2.42-1.47 0-2.9-.39-4.16-1.13l-.3-.18-3.1.81.83-3.02-.2-.31c-.81-1.3-1.24-2.8-1.24-4.41 0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.25-1.5-1.4-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.07-.1-.23-.17-.48-.29z"/></svg>
+            <span>Conversar con Valentina sobre esto</span>
+          </a>
+        </div>
+      </div>
+    `;
+  }
+
+  pills.forEach(pill => {
+    pill.addEventListener("click", () => {
+      pills.forEach(p => p.classList.remove("active"));
+      pill.classList.add("active");
+      const feeling = pill.getAttribute("data-feeling") || "angustia";
+      renderEmpathyCard(feeling);
+    });
+  });
+
+  // Render inicial
+  renderEmpathyCard("angustia");
 }

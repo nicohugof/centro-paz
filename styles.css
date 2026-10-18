@@ -3803,3 +3803,434 @@ footer {
   margin-top: 50px;
   border: 1px solid var(--borde-suave);
 }
+
+/* ==========================================================================
+   VANGUARDIA VISUAL, PRIMER ALIVIO EMOCIONAL & SELECTOR EMPÁTICO
+   ========================================================================== */
+
+/* Tarjeta y Widget de Respiración Consciente (Primer Alivio en Pantalla) */
+.breathe-hero-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.breathe-widget-card {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  border: 1px solid rgba(214, 232, 206, 0.9);
+  box-shadow: 0 20px 48px -12px rgba(34, 63, 22, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.95);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  transition: transform var(--trans-normal), box-shadow var(--trans-normal);
+}
+
+.breathe-widget-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(238, 246, 248, 0.7) 0%, rgba(240, 246, 236, 0.4) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.breathe-widget-content {
+  position: relative;
+  z-index: 1;
+}
+
+.breathe-widget-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--verde-light);
+  color: var(--verde-dark);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+  margin-bottom: 12px;
+  border: 1px solid var(--verde-suave);
+}
+
+.breathe-widget-title {
+  font-family: 'Lora', serif;
+  font-size: 1.45rem;
+  color: var(--verde-dark);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.breathe-widget-subtitle {
+  font-size: 0.92rem;
+  color: var(--gris);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+/* Círculo Interactivo de Respiración */
+.breathe-circle-wrapper {
+  position: relative;
+  width: 170px;
+  height: 170px;
+  margin: 0 auto 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.breathe-outer-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px dashed rgba(56, 94, 40, 0.25);
+  animation: rotate-slow 28s linear infinite;
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.breathe-core-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #D6E8CE 0%, #A2C49C 70%, var(--verde-marca) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 35px rgba(56, 94, 40, 0.28);
+  color: #FFFFFF;
+  text-align: center;
+  padding: 12px;
+  transform: scale(0.9);
+  transition: all 4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+}
+
+/* Clases dinámicas aplicadas por JavaScript */
+.breathe-core-circle.inhale {
+  transform: scale(1.3);
+  box-shadow: 0 0 50px rgba(56, 94, 40, 0.45);
+  background: radial-gradient(circle, #E5F3DF 0%, #B2D8AC 70%, #2E5320 100%);
+}
+
+.breathe-core-circle.hold {
+  transform: scale(1.3);
+  box-shadow: 0 0 45px rgba(184, 139, 34, 0.35);
+  background: radial-gradient(circle, #FAF4E5 0%, #E5CA7E 70%, var(--dorado-dark) 100%);
+}
+
+.breathe-core-circle.exhale {
+  transform: scale(0.85);
+  box-shadow: 0 0 20px rgba(62, 117, 130, 0.25);
+  background: radial-gradient(circle, #CFE3E8 0%, #76A9B5 70%, var(--celeste-dark) 100%);
+}
+
+.breathe-phase-text {
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.breathe-phase-sub {
+  font-size: 0.72rem;
+  opacity: 0.92;
+  margin-top: 2px;
+  font-weight: 600;
+}
+
+.breathe-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.btn-breathe-toggle {
+  background: var(--verde-light);
+  border: 1px solid var(--verde-suave);
+  color: var(--verde-dark);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--trans-fast);
+}
+
+.btn-breathe-toggle:hover {
+  background: var(--verde-marca);
+  color: #FFFFFF;
+}
+
+/* Micro-promesa de Confidencialidad y Hogar */
+.hero-comfort-banner {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--borde-suave);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.hero-comfort-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--verde-dark);
+  flex: 1;
+}
+
+.hero-comfort-item span.icon {
+  font-size: 1.25rem;
+}
+
+/* ==========================================================================
+   SECTOR EMPÁTICO: "¿QUÉ ESTÁS SINTIENDO EN ESTE MOMENTO?"
+   ========================================================================== */
+.empathy-finder-section {
+  padding: 72px 0 84px;
+  background: linear-gradient(180deg, var(--crema) 0%, #FFFFFF 50%, var(--crema-warm) 100%);
+  position: relative;
+  border-top: 1px solid var(--borde-suave);
+}
+
+.empathy-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 40px auto;
+}
+
+.empathy-header .section-kicker {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--dorado-dark);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.empathy-header h2 {
+  font-family: 'Lora', serif;
+  font-size: 2.4rem;
+  color: var(--verde-dark);
+  margin-bottom: 14px;
+  line-height: 1.25;
+}
+
+.empathy-header p {
+  font-size: 1.1rem;
+  color: var(--gris);
+  line-height: 1.6;
+}
+
+/* Píldoras de Selección Rápida de Emoción */
+.empathy-pills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 36px;
+}
+
+.empathy-pill-btn {
+  background: #FFFFFF;
+  border: 1.5px solid var(--verde-suave);
+  color: var(--negro);
+  padding: 12px 22px;
+  border-radius: var(--radius-full);
+  font-size: 0.98rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--trans-normal);
+}
+
+.empathy-pill-btn:hover {
+  border-color: var(--verde-marca);
+  background: var(--verde-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.empathy-pill-btn.active {
+  background: var(--verde-dark);
+  color: #FFFFFF;
+  border-color: var(--verde-dark);
+  box-shadow: 0 8px 24px rgba(34, 63, 22, 0.25);
+  transform: translateY(-2px);
+}
+
+.empathy-pill-btn.active span.pill-icon {
+  transform: scale(1.15);
+}
+
+/* Tarjeta Dinámica de Contención y Respuesta */
+.empathy-card-container {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.empathy-response-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--verde-suave);
+  padding: 40px 36px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+  animation: cardFadeIn 0.35s ease-out;
+}
+
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.empathy-response-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--dorado) 0%, var(--verde-marca) 100%);
+}
+
+.empathy-response-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.empathy-response-icon {
+  font-size: 2.4rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--verde-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(56, 94, 40, 0.1);
+}
+
+.empathy-response-title {
+  font-family: 'Lora', serif;
+  font-size: 1.6rem;
+  color: var(--verde-dark);
+  line-height: 1.3;
+}
+
+.empathy-validation-box {
+  background: var(--crema);
+  border-radius: var(--radius-sm);
+  padding: 18px 20px;
+  margin-bottom: 24px;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--negro);
+  border-left: 3px solid var(--dorado);
+}
+
+.empathy-how-we-help {
+  margin-bottom: 28px;
+}
+
+.empathy-how-we-help h4 {
+  font-size: 1.05rem;
+  color: var(--verde-dark);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.empathy-how-we-help ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.empathy-how-we-help li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.96rem;
+  color: var(--gris);
+  line-height: 1.55;
+}
+
+.empathy-how-we-help li strong {
+  color: var(--negro);
+}
+
+.empathy-actions-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  border-top: 1px solid var(--borde-suave);
+}
+
+.empathy-action-note {
+  font-size: 0.88rem;
+  color: var(--gris);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.empathy-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #FFFFFF !important;
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 14px 26px;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+  transition: all var(--trans-normal);
+}
+
+.empathy-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(37, 211, 102, 0.45);
+}
+
+.empathy-cta-btn svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
