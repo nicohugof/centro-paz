@@ -4234,3 +4234,413 @@ footer {
   height: 22px;
   fill: currentColor;
 }
+
+/* ==========================================================================
+   CAMINOS DE NAVEGACIÓN SEGÚN SÍNTOMAS & OPTIMIZACIÓN MÓVIL EXTREMA
+   ========================================================================== */
+
+/* Bloque de Caminos según Búsqueda y Síntomas */
+.symptom-paths-section {
+  padding: 60px 0 72px;
+  background: var(--crema);
+  border-top: 1px solid var(--borde-suave);
+  border-bottom: 1px solid var(--borde-suave);
+}
+
+.symptom-paths-header {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 36px auto;
+}
+
+.symptom-paths-header h2 {
+  font-family: 'Lora', serif;
+  font-size: 2.2rem;
+  color: var(--verde-dark);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.symptom-paths-header p {
+  font-size: 1.05rem;
+  color: var(--gris);
+  line-height: 1.6;
+}
+
+.symptom-paths-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.symptom-path-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--verde-suave);
+  padding: 24px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--trans-normal), box-shadow var(--trans-normal), border-color var(--trans-normal);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+}
+
+.symptom-path-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--verde-marca);
+}
+
+.symptom-path-card.featured {
+  background: linear-gradient(180deg, #FFFFFF 0%, var(--verde-light) 100%);
+  border-color: var(--verde-marca);
+}
+
+.symptom-path-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.symptom-path-icon {
+  font-size: 2rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--verde-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.symptom-path-tag {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  background: var(--verde-suave);
+  color: var(--verde-dark);
+}
+
+.symptom-path-card h3 {
+  font-family: 'Lora', serif;
+  font-size: 1.3rem;
+  color: var(--verde-dark);
+  margin-bottom: 8px;
+  line-height: 1.35;
+}
+
+.symptom-path-desc {
+  font-size: 0.92rem;
+  color: var(--gris);
+  line-height: 1.55;
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+
+.symptom-path-cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--verde-marca);
+  font-weight: 800;
+  font-size: 0.92rem;
+  margin-top: auto;
+}
+
+.symptom-path-cta-link span.arrow {
+  transition: transform var(--trans-fast);
+}
+
+.symptom-path-card:hover .symptom-path-cta-link span.arrow {
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   OPTIMIZACIÓN RESPONSIVE AVANZADA PARA DISPOSITIVOS MÓVILES
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Reducción de espaciados verticales para evitar scroll infinito */
+  .hero {
+    padding: 32px 0 40px;
+  }
+
+  .hero h1 {
+    font-size: 1.95rem;
+    line-height: 1.25;
+    margin-bottom: 14px;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    line-height: 1.55;
+    margin-bottom: 20px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Micro-promesas en columna compacta */
+  .hero-comfort-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 16px;
+    margin-top: 16px;
+  }
+
+  .hero-comfort-item {
+    font-size: 0.85rem;
+  }
+
+  .hero-trust-badges {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding-top: 16px;
+  }
+
+  .trust-item {
+    font-size: 0.82rem;
+  }
+
+  /* Círculo de respiración compacto para que no empuje la pantalla */
+  .breathe-widget-card {
+    padding: 22px 18px;
+    border-radius: var(--radius-md);
+  }
+
+  .breathe-widget-title {
+    font-size: 1.25rem;
+  }
+
+  .breathe-widget-subtitle {
+    font-size: 0.88rem;
+    margin-bottom: 16px;
+  }
+
+  .breathe-circle-wrapper {
+    width: 135px;
+    height: 135px;
+    margin: 0 auto 16px auto;
+  }
+
+  .breathe-core-circle {
+    width: 95px;
+    height: 95px;
+    padding: 8px;
+  }
+
+  .breathe-phase-text {
+    font-size: 0.88rem;
+  }
+
+  .breathe-phase-sub {
+    font-size: 0.65rem;
+  }
+
+  .breathe-core-circle.inhale,
+  .breathe-core-circle.hold {
+    transform: scale(1.18);
+  }
+
+  /* Píldoras empáticas deslizables o compactas */
+  .empathy-finder-section {
+    padding: 44px 0 52px;
+  }
+
+  .empathy-header h2 {
+    font-size: 1.8rem;
+    line-height: 1.3;
+  }
+
+  .empathy-header p {
+    font-size: 0.98rem;
+  }
+
+  .empathy-pills-grid {
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .empathy-pill-btn {
+    padding: 10px 16px;
+    font-size: 0.88rem;
+  }
+
+  .empathy-response-card {
+    padding: 24px 20px;
+    border-radius: var(--radius-md);
+  }
+
+  .empathy-response-header {
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .empathy-response-icon {
+    width: 46px;
+    height: 46px;
+    font-size: 1.8rem;
+  }
+
+  .empathy-response-title {
+    font-size: 1.25rem;
+  }
+
+  .empathy-validation-box {
+    padding: 14px 16px;
+    font-size: 0.95rem;
+    margin-bottom: 18px;
+  }
+
+  .empathy-actions-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .empathy-cta-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 20px;
+  }
+
+  /* Sección de caminos en móvil */
+  .symptom-paths-section {
+    padding: 44px 0 48px;
+  }
+
+  .symptom-paths-header h2 {
+    font-size: 1.75rem;
+  }
+
+  .symptom-paths-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .symptom-path-card {
+    padding: 20px 18px;
+  }
+
+  .shop-teaser-card {
+    padding: 28px 20px;
+  }
+
+  .shop-teaser-card h2 {
+    font-size: 1.6rem;
+  }
+
+  .shop-teaser-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .shop-teaser-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.75rem;
+  }
+  .breathe-widget-card {
+    padding: 18px 14px;
+  }
+  .empathy-header h2 {
+    font-size: 1.6rem;
+  }
+}
+
+/* ----------------------------------------------------
+   SHOP TEASER CARD (HOME COMPACTA)
+---------------------------------------------------- */
+.shop-teaser-card {
+  background: #FFFFFF;
+  border: 1px solid var(--borde-suave);
+  border-radius: var(--radius-lg);
+  padding: 44px 40px;
+  box-shadow: var(--sombra-suave);
+  text-align: center;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.shop-teaser-badge {
+  display: inline-block;
+  background: var(--dorado-light);
+  color: var(--dorado-dark);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.shop-teaser-card h2 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 2.1rem;
+  color: var(--verde-dark);
+  margin-bottom: 16px;
+  line-height: 1.25;
+}
+
+.shop-teaser-desc {
+  font-size: 1.05rem;
+  color: var(--gris);
+  line-height: 1.65;
+  max-width: 700px;
+  margin: 0 auto 24px auto;
+}
+
+.shop-teaser-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.shop-tag {
+  background: var(--crema-warm);
+  border: 1px solid var(--borde-suave);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.88rem;
+  color: var(--texto-suave);
+  font-weight: 600;
+}
+
+.shop-teaser-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.shop-ethics-note {
+  color: var(--gris-light);
+  font-size: 0.82rem;
+  margin-top: 14px;
+}
