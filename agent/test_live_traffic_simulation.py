@@ -77,5 +77,7 @@ def simulate_patient_journeys():
     print(" 🎉 CONCLUSIÓN: ECOSISTEMA SERENO, EMPÁTICO Y 100% OPERATIVO")
     print("=" * 80)
 
+simulate_funnel = simulate_patient_journeys
+
 if __name__ == "__main__":
     simulate_patient_journeys()
