@@ -26,9 +26,16 @@ HOST = "www.centropaz.cl"
 INDEXNOW_KEY = "centropaz2026indexnowkey"
 KEY_LOCATION = f"https://{HOST}/indexnow.txt"
 
-# 1. URLs Principales y Landings de Alta Intención (13 URLs)
+# 1. URLs Principales y Landings de Alta Intención (20 URLs)
 CORE_LANDING_URLS: List[str] = [
     "https://www.centropaz.cl/",
+    "https://www.centropaz.cl/terapias.html",
+    "https://www.centropaz.cl/psicologia-transpersonal-integral.html",
+    "https://www.centropaz.cl/mindfulness.html",
+    "https://www.centropaz.cl/hipnosis-terapeutica.html",
+    "https://www.centropaz.cl/psicoterapia-corporal.html",
+    "https://www.centropaz.cl/arteterapia.html",
+    "https://www.centropaz.cl/artesanias-joyas.html",
     "https://www.centropaz.cl/ansiedad-crisis-angustia.html",
     "https://www.centropaz.cl/depresion-trastornos-animo.html",
     "https://www.centropaz.cl/trastornos-personalidad-tlp.html",
@@ -289,6 +296,10 @@ def run_instant_index_flow():
     else:
         print(f" ⚠️ PROCESO COMPLETADO: {healthy_count}/{len(URLS_TO_INDEX)} URLs activas.")
     print("=" * 80)
+
+
+def ping_search_engines():
+    return run_instant_index_flow()
 
 
 if __name__ == "__main__":
