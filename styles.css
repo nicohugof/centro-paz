@@ -3781,6 +3781,7 @@ footer {
   font-weight: 700;
   text-decoration: none;
   transition: background var(--trans-fast), transform var(--trans-fast);
+  justify-content: center;
 }
 
 .product-cta-btn:hover {
@@ -3793,6 +3794,168 @@ footer {
   width: 18px;
   height: 18px;
   fill: currentColor;
+}
+
+/* Imagen real de producto con hover sutil */
+.product-card-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+.product-card:hover .product-card-img {
+  transform: scale(1.05);
+}
+
+/* Botonera de Compra Dual (Directa en Web vía WhatsApp + Respaldo MercadoLibre) */
+.product-actions-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin-top: 14px;
+}
+
+.product-ml-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #FFF9E6;
+  color: #7A5700;
+  border: 1px solid #FFE082;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all var(--trans-fast);
+}
+
+.product-ml-btn:hover {
+  background: #FFE885;
+  color: #4D3700;
+  border-color: #FFD54F;
+  transform: translateY(-1px);
+}
+
+.product-ml-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+/* Barra Social San Arte (Instagram + Facebook + MercadoLibre + Entregas) */
+.sanarte-brand-hero {
+  background: linear-gradient(135deg, #FBF8F3 0%, #F4EFE6 50%, #EDE6D8 100%);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  margin: 20px 0 36px 0;
+  border: 1px solid rgba(199, 155, 60, 0.25);
+  box-shadow: 0 8px 24px -6px rgba(56, 94, 40, 0.08);
+}
+
+.sanarte-social-links-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.sanarte-social-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFFFFF;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--verde-dark);
+  border: 1px solid var(--borde-suave);
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--trans-fast);
+}
+
+.sanarte-social-chip:hover {
+  border-color: var(--dorado-dark);
+  color: var(--dorado-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.sanarte-social-chip.instagram {
+  color: #C13584;
+}
+.sanarte-social-chip.instagram:hover {
+  background: linear-gradient(45deg, #FDF4F8, #FFFFFF);
+  border-color: #E1306C;
+}
+
+.sanarte-social-chip.facebook {
+  color: #1877F2;
+}
+.sanarte-social-chip.facebook:hover {
+  background: #F0F6FF;
+  border-color: #1877F2;
+}
+
+.sanarte-social-chip.mercadolibre {
+  color: #6A4B00;
+  background: #FFFDE7;
+  border-color: #FFE082;
+}
+.sanarte-social-chip.mercadolibre:hover {
+  background: #FFF9C4;
+  border-color: #FFD54F;
+}
+
+.sanarte-delivery-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--verde-light);
+  color: var(--verde-dark);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 700;
+  border: 1px solid var(--verde-suave);
+}
+
+/* Filtros de la tienda */
+.shop-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+  justify-content: center;
+}
+
+.shop-filter-btn {
+  background: #FFFFFF;
+  border: 1px solid var(--borde-suave);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--verde-dark);
+  cursor: pointer;
+  transition: all var(--trans-fast);
+}
+
+.shop-filter-btn.active, .shop-filter-btn:hover {
+  background: var(--verde-dark);
+  color: #FFFFFF;
+  border-color: var(--verde-dark);
 }
 
 /* Sección de Preguntas Frecuentes de la Tienda */
