@@ -19,7 +19,7 @@ def print_menu():
     print(" 📲 WhatsApp Oficial: +56 9 6516 3893 | Web: www.centropaz.cl")
     print("=" * 75)
     print(" 1. ⚡  Ejecutar Rutina Operativa Diaria (Tablero + Embudos + Ping IndexNow)")
-    print(" 2. 🛡️  Ejecutar Auditoría Integral del Consejo (37 páginas + Schemas + Links)")
+    print(" 2. 🛡️  Ejecutar Auditoría Integral del Consejo (42 páginas + Schemas + Links)")
     print(" 3. 🔍  Ejecutar Auditoría Técnica SEO & GEO para Motores de IA")
     print(" 4. 🌐  Regenerar Biblioteca Clínica (28 guías, llms.txt, robots.txt, sitemap)")
     print(" 5. 🚀  Lanzar Servidor Web Local para Prueba de Conversiones (http://localhost:8000)")

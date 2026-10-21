@@ -3,7 +3,7 @@
 Centro Paz (CPAZ) — Rutina Operativa Diaria de la Consulta Clínica (100 Pacientes).
 
 Ejecuta el control diario de:
-1. Estado del ecosistema web (37 páginas, 0 enlaces rotos).
+1. Estado del ecosistema web (42 páginas, 41 URLs canónicas, 0 enlaces rotos).
 2. Estado del Tablero de Pacientes e Ingresos (Meta 100 Pacientes).
 3. Ping de indexación a motores de búsqueda (Googlebot & Bing IndexNow).
 4. Asistente rápido de WhatsApp disponible.

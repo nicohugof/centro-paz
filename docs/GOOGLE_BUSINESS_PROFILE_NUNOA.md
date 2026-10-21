@@ -29,10 +29,10 @@ Centro Paz es una consulta de psicología clínica ubicada en Ñuñoa (Santiago 
 Ofrecemos atención presencial en Ñuñoa y atención en modalidad Online para todo Chile (adultos y jóvenes desde los 12 años en adelante; para niños menores de 12 años, la atención se realiza de forma presencial en consulta o mediante orientación online para padres).
 
 Especialidades clínicas:
-• Terapia Individual Adultos: Ansiedad, sobrecarga mental, autoconocimiento, límites y bienestar emocional desde un enfoque humanista e integrativo.
-• Neurodivergencias (TDAH y TEA en adultos y jóvenes): Enfoque neuroafirmativo, sospecha tardía, regulación sensorial, descompresión del masking y estrategias prácticas para funciones ejecutivas.
-• Psicoterapia Infantil (Presencial en Ñuñoa): Acompañamiento a través del juego proyectivo para desbordes emocionales, tolerancia a la frustración y dificultades de adaptación.
-• Orientación a Padres & Crianza Respetuosa (Online y Presencial): Pautas claras y aplicables para mamás y papás sin recurrir a gritos ni castigos.
+• Ansiedad y Crisis de Angustia: Ataques de pánico, taquicardias, desregulación somática y sobrepensamiento.
+• Depresión y Trastornos del Ánimo: Tristeza profunda, anhedonia, fatiga crónica, desánimo y procesos de duelo.
+• Trastornos de la Personalidad (TLP / Borderline): Inestabilidad afectiva, hipersensibilidad al rechazo y regulación vincular sin juicios.
+• Evaluaciones Psicodiagnósticas e Informes Formales: Evaluaciones estructuradas con baterías clínicas para psiquiatría e interconsultas.
 
 Boletas de honorarios profesionales 100% reembolsables en todas las Isapres (Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres) y Seguros Complementarios de Salud (arancel de referencia $45.000 CLP, copago real estimado entre $9.000 y $18.000 según tu plan).
 
@@ -43,25 +43,25 @@ Atención 100% humana, cálida y confidencial. Agenda directamente por WhatsApp 
 
 ## 🛠️ 3. Catálogo de Servicios en la Ficha de Google
 
-### Servicio 1: Psicoterapia Adultos (Humanista e Integrativa)
+### Servicio 1: Psicoterapia para Ansiedad y Crisis de Pánico
 * **Precio:** `$45.000 CLP`
 * **Modalidad:** Online (todo Chile) y Presencial (Ñuñoa).
-* **Descripción:** *Sesión clínica de 50 minutos. Manejo de ansiedad, estrés laboral (burnout) y desarrollo personal. Boletas electrónicas reembolsables en Isapres y Seguros.*
+* **Descripción:** *Regulación somática y cognitiva para calmar opresión en el pecho, taquicardia y sobrepensamiento. Boleta reembolsable en Isapre.*
 
-### Servicio 2: Acompañamiento Neuroafirmativo (TDAH y TEA Adultos / Jóvenes 12+)
+### Servicio 2: Psicoterapia para Depresión y Trastornos del Ánimo
 * **Precio:** `$45.000 CLP`
 * **Modalidad:** Online (todo Chile) y Presencial (Ñuñoa).
-* **Descripción:** *Comprensión del neurotipo, manejo de parálisis ejecutiva, reducción del masking y diseño de adaptaciones ambientales sin juicios.*
+* **Descripción:** *Acompañamiento cálido para procesar el desánimo profundo, pérdida de energía y reconstruir el sentido vital.*
 
-### Servicio 3: Psicoterapia Infantil (Menores de 12 años)
-* **Precio:** `$45.000 CLP`
-* **Modalidad:** Exclusivamente Presencial en Ñuñoa.
-* **Descripción:** *Acompañamiento clínico mediante juego proyectivo y contención sensorial. No se realiza online a niños por motivos de encuadre psicoterapéutico.*
-
-### Servicio 4: Orientación Online a Padres & Crianza Respetuosa
+### Servicio 3: Acompañamiento en Trastornos de la Personalidad (TLP)
 * **Precio:** `$45.000 CLP`
 * **Modalidad:** Online (todo Chile) y Presencial (Ñuñoa).
-* **Descripción:** *Sesiones de asesoría y herramientas prácticas para padres de niños con neurodivergencias, desbordes emocionales y desafíos escolares.*
+* **Descripción:** *Espacio seguro y estructurado para aprender a regular emociones de alta intensidad y estabilizar vínculos.*
+
+### Servicio 4: Evaluación Psicodiagnóstica e Informes Formales
+* **Precio:** `$45.000 CLP`
+* **Modalidad:** Presencial en Ñuñoa u Online (según batería).
+* **Descripción:** *Proceso estructurado de evaluación con aplicación de baterías clínicas y entrega de informe formal para psiquiatras.*
 
 ---
 
