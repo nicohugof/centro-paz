@@ -389,9 +389,14 @@ __SCHEMA_JSON__
     </section>
 
     <!-- Catálogo de Productos San_Arte -->
-    <section style="padding: 10px 0 60px 0;">
-      <div class="container">
-        
+        <!-- Buscador en Tiempo Real & Contador -->
+        <div class="shop-search-wrapper" style="max-width:560px; margin:0 auto 24px auto; text-align:center;">
+          <input type="search" id="shopSearchInput" class="shop-search-input" placeholder="🔍 Buscar por mineral o tipo (ej: selenita, cuarzo, 7 chakras, aros, atrapasueño)..." aria-label="Buscar piezas en la tienda">
+          <div id="shopCountNotice" style="margin-top:8px; font-size:0.88rem; color:var(--verde-dark); font-weight:700;">
+            Mostrando <span id="shopVisibleCount">__TOTAL_PRODS__</span> de __TOTAL_PRODS__ piezas
+          </div>
+        </div>
+
         <!-- Filtros Rápidos -->
         <div class="shop-filter-bar">
           <button type="button" class="shop-filter-btn active" data-filter="all">Todos los Productos (__TOTAL_PRODS__)</button>
@@ -513,22 +518,48 @@ __CARDS__
 
   <script src="app.js?v=20261021.1"></script>
   <script>
-    // Filtro interactivo de productos
-    document.querySelectorAll('.shop-filter-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('.shop-filter-btn').forEach(function(b) { b.classList.remove('active'); });
-        this.classList.add('active');
-        var filter = this.getAttribute('data-filter');
-        var cards = document.querySelectorAll('#productGrid .product-card');
+    // Filtro interactivo y buscador en vivo de piezas San_Arte
+    (function() {
+      var currentCategory = 'all';
+      var currentSearch = '';
+      var searchInput = document.getElementById('shopSearchInput');
+      var countNotice = document.getElementById('shopVisibleCount');
+      var filterButtons = document.querySelectorAll('.shop-filter-btn');
+      var cards = document.querySelectorAll('#productGrid .product-card');
+
+      function updateShopFilter() {
+        var visible = 0;
         cards.forEach(function(card) {
-          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+          var cat = card.getAttribute('data-category');
+          var text = (card.innerText || card.textContent).toLowerCase();
+          var matchesCat = (currentCategory === 'all' || cat === currentCategory);
+          var matchesSearch = (!currentSearch || text.indexOf(currentSearch) !== -1);
+          if (matchesCat && matchesSearch) {
             card.style.display = '';
+            visible++;
           } else {
             card.style.display = 'none';
           }
         });
+        if (countNotice) countNotice.textContent = visible;
+      }
+
+      filterButtons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          filterButtons.forEach(function(b) { b.classList.remove('active'); });
+          this.classList.add('active');
+          currentCategory = this.getAttribute('data-filter');
+          updateShopFilter();
+        });
       });
-    });
+
+      if (searchInput) {
+        searchInput.addEventListener('input', function() {
+          currentSearch = this.value.trim().toLowerCase();
+          updateShopFilter();
+        });
+      }
+    })();
   </script>
 </body>
 </html>"""

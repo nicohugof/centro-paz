@@ -3931,6 +3931,37 @@ footer {
   border: 1px solid var(--verde-suave);
 }
 
+/* Buscador en Vivo de la Tienda San_Arte */
+.shop-search-wrapper {
+  margin: 0 auto 24px auto;
+  max-width: 560px;
+}
+
+.shop-search-input {
+  width: 100%;
+  padding: 14px 22px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--borde-suave);
+  background: #FFFFFF;
+  font-size: 0.95rem;
+  color: var(--verde-dark);
+  box-shadow: 0 4px 14px -3px rgba(56, 94, 40, 0.08);
+  transition: all var(--trans-fast);
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.shop-search-input:focus {
+  outline: none;
+  border-color: var(--verde-dark);
+  box-shadow: 0 0 0 3px rgba(56, 94, 40, 0.15), 0 6px 18px -4px rgba(56, 94, 40, 0.12);
+}
+
+.shop-search-input::placeholder {
+  color: var(--gris-muted);
+  font-size: 0.9rem;
+}
+
 /* Filtros de la tienda */
 .shop-filter-bar {
   display: flex;
