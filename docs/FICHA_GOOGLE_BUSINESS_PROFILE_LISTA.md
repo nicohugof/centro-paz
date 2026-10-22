@@ -14,13 +14,15 @@ Este documento contiene los textos exactos y configuraciones para crear y optimi
 * **Teléfono Principal:** `+56 9 6516 3893`
 * **Sitio Web:** `https://www.centropaz.cl/`
 * **Enlace de Cita / Agendamiento:** `https://wa.me/56965163893`
+* **Registro Profesional:** Valentina Castro Núñez — Registro SIS Nº 667344 (Superintendencia de Salud de Chile)
+* **Arancel por Sesión:** $45.000 CLP (Reembolsable en Isapres y Seguros Complementarios)
 
 ---
 
 ## 2. Descripción Oficial del Perfil (Optimizado para Búsquedas Locales)
 
 ```text
-Centro de Psicología Clínica en Ñuñoa (Santiago) y atención Online para todo Chile, dirigido por la psicóloga clínica Valentina Castro Núñez (Registro SIS Superintendencia de Salud).
+Centro de Psicología Clínica en Ñuñoa (Salvador 2302, Santiago) y atención Online para todo Chile, dirigido por la psicóloga clínica Valentina Castro Núñez (Registro SIS Nº 667344 - Superintendencia de Salud).
 
 Especialidades de atención:
 • Ansiedad y Crisis de Angustia: Ataques de pánico, taquicardias y desregulación del sistema nervioso.
@@ -30,7 +32,7 @@ Especialidades de atención:
 
 Atención en espacio cálido, empático y confidencial. Arancel: $45.000 CLP por sesión con boleta electrónica válida para reembolso en todas las Isapres (Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres) y Seguros Complementarios (copago real estimado: $9.000 a $18.000 CLP).
 
-Consulta presencial cercana a Metro Chile España y Plaza Ñuñoa. Agendamiento directo y humano vía WhatsApp: +56 9 6516 3893.
+Consulta presencial en Salvador 2302, Ñuñoa (cercana a Metro Chile España / Monseñor Eyzaguirre). Agendamiento directo y humano vía WhatsApp: +56 9 6516 3893.
 ```
 
 ---
