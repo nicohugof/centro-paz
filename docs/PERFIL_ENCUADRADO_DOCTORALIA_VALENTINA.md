@@ -12,7 +12,7 @@ En posicionamiento orgánico local (Local SEO), la **coherencia NAP** es el fact
 Los siguientes datos deben ingresarse de forma **exacta e invariable** en las 3 plataformas:
 
 * **Nombre Oficial (Name):** `Centro Paz — Valentina Castro Núñez`
-* **Profesión / Especialidad:** Psicóloga Clínica (Registro Superintendencia de Salud)
+* **Profesión / Especialidad:** Psicóloga Clínica (Registro Oficial SIS Nº 667344, Superintendencia de Salud de Chile)
 * **Dirección Física (Address):** `Salvador 2302, Ñuñoa, Santiago`
 * **Comuna / Ciudad / País:** Ñuñoa, Región Metropolitana, Chile
 * **Teléfono / WhatsApp Oficial (Phone):** `+56 9 6516 3893`
@@ -47,7 +47,7 @@ Doctoralia es el directorio médico con mayor autoridad de búsqueda en Chile pa
 
 ### Biografía Oficial para el Perfil de Doctoralia
 ```text
-¡Hola! Soy Valentina Castro Núñez, psicóloga clínica y directora de Centro Paz en Ñuñoa.
+¡Hola! Soy Valentina Castro Núñez, psicóloga clínica (Registro Oficial SIS Nº 667344) y directora de Centro Paz en Ñuñoa.
 
 Concibo la psicoterapia como un espacio confidencial, cálido y riguroso, libre de juicios y enfocado en tus necesidades reales. Mi labor clínica se orienta a ayudarte a comprender los síntomas que hoy generan malestar, desactivar patrones de agotamiento o sobrepensamiento, y construir herramientas concretas y sostenibles para recuperar tu equilibrio emocional.
 
@@ -75,7 +75,7 @@ Encuadrado es la plataforma chilena especializada en gestión de profesionales i
 
 ### Configuración del Perfil y Agenda
 * **Nombre Público:** Valentina Castro Núñez — Centro Paz
-* **Titularidad:** Psicóloga Clínica | Registro Superintendencia de Salud
+* **Titularidad:** Psicóloga Clínica | Registro Oficial SIS Nº 667344 (Superintendencia de Salud de Chile)
 * **Dirección de Atención Presencial:** Salvador 2302, Ñuñoa, Santiago
 * **Link Web Oficial:** `https://www.centropaz.cl`
 * **Teléfono de Soporte:** `+56 9 6516 3893`
@@ -121,7 +121,7 @@ SaludVitale y la red de directorios de prestadores de salud de Chile indexan fic
 * **Convenios / Cobertura:** Modalidad Libre Elección con emisión de boleta de honorarios para reembolso en Isapres (Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres) y Seguros Complementarios.
 * **Modalidad de Cita:** Presencial y Telemedicina (Online).
 * **Descripción Institucional:**
-  > Centro de atención psicológica especializado en adultos, crisis de ansiedad, trastornos del ánimo y evaluación diagnóstica. Ubicado en Salvador 2302, Ñuñoa. Atención personalizada a cargo de la psicóloga clínica Valentina Castro Núñez, inscrita en el Registro Nacional de Prestadores de la Superintendencia de Salud. Arancel: $45.000 CLP reembolsable.
+  > Centro de atención psicológica especializado en adultos, crisis de ansiedad, trastornos del ánimo y evaluación diagnóstica. Ubicado en Salvador 2302, Ñuñoa. Atención personalizada a cargo de la psicóloga clínica Valentina Castro Núñez, inscrita en el Registro Nacional de Prestadores de la Superintendencia de Salud (Registro Oficial SIS Nº 667344). Arancel: $45.000 CLP reembolsable.
 
 ---
 
@@ -224,8 +224,8 @@ Bajo el marco de ingeniería de desarrollo y optimización digital de Centro Paz
 * **¿Para qué lo usamos?** Para permitir que los pacientes de Centro Paz fijen su terapia con Valentina Castro Núñez manteniendo la libertad de reembolsar entre el 60% y el 80% de su arancel ($45.000 CLP), pagando un copago real muy accesible sin necesidad de convenios burocráticos directos.
 
 ### 5. Registro Nacional de Prestadores Individuales de Salud (SIS)
-* **¿Qué es?** La base de datos pública y oficial gestionada por la Superintendencia de Salud de Chile que certifica que un profesional cuenta con su título legalmente habilitado para ejercer actos de salud en el territorio nacional.
-* **¿Para qué lo usamos?** Para dar respaldo legal inobjetable a las boletas electrónicas emitidas por Valentina Castro Núñez, garantizando que ninguna Isapre pueda rechazar o cuestionar el reembolso de las sesiones de los pacientes.
+* **¿Qué es?** La base de datos pública y oficial gestionada por la Superintendencia de Salud de Chile que certifica que un profesional cuenta con su título legalmente habilitado para ejercer actos de salud en el territorio nacional (Registro Oficial SIS Nº 667344 de Valentina Castro Núñez).
+* **¿Para qué lo usamos?** Para dar respaldo legal inobjetable a las boletas electrónicas emitidas por Valentina Castro Núñez (Registro SIS Nº 667344), garantizando que ninguna Isapre pueda rechazar o cuestionar el reembolso de las sesiones de los pacientes.
 
 ### 6. Boleta Electrónica de Honorarios SII para Salud Mental
 * **¿Qué es?** El documento tributario digital emitido a través del portal del Servicio de Impuestos Internos de Chile que certifica la prestación de un servicio profesional independiente exento o gravado de IVA según la normativa sanitaria.
