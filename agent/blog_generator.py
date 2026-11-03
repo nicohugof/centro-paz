@@ -598,7 +598,7 @@ def generate_article_html(topic_key: str, topic: dict) -> str:
           <div class="valentina-avatar-badge">🌿</div>
           <div class="valentina-approach-content">
             <h3>Cómo te acompaña Valentina Castro Núñez en Terapia</h3>
-            <span class="valentina-credentials">Psicóloga Clínica · Registro Superintendencia de Salud de Chile</span>
+            <span class="valentina-credentials">Psicóloga Clínica · Registro Oficial SIS Nº 667344 · Superintendencia de Salud de Chile</span>
             {format_paragraphs(how_valentina_works)}
           </div>
         </div>
@@ -684,6 +684,7 @@ def generate_article_html(topic_key: str, topic: dict) -> str:
       <div class="footer-col">
         <h4>Información</h4>
         <ul>
+          <li><a href="../sanarte.html">San_Arte Artesanías & Joyas</a></li>
           <li><a href="../privacidad.html">Privacidad y Ley 19.628</a></li>
           <li><a href="../guia_7_claves_regulacion_centro_paz.html">Guía Gratuita de Regulación</a></li>
           <li><a href="../llms.txt">Directorio llms.txt (IA)</a></li>
@@ -692,7 +693,7 @@ def generate_article_html(topic_key: str, topic: dict) -> str:
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Centro Paz · Valentina Castro Núñez. Registro Superintendencia de Salud de Chile.</p>
+      <p>© 2026 Centro Paz · Valentina Castro Núñez. Registro Oficial SIS Nº 667344 · Superintendencia de Salud de Chile.</p>
     </div>
   </footer>
 
@@ -882,6 +883,7 @@ def generate_blog_index_html(topics: dict) -> str:
       <div class="footer-col">
         <h4>Accesos</h4>
         <ul>
+          <li><a href="../sanarte.html">San_Arte Artesanías & Joyas</a></li>
           <li><a href="../llms.txt">Archivo llms.txt para IAs</a></li>
           <li><a href="../sitemap.xml">Mapa del Sitio</a></li>
           <li><a href="../privacidad.html">Privacidad</a></li>
@@ -889,7 +891,7 @@ def generate_blog_index_html(topics: dict) -> str:
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Centro Paz · Valentina Castro Núñez. Registro SIS.</p>
+      <p>© 2026 Centro Paz · Valentina Castro Núñez. Registro Oficial SIS Nº 667344 · Superintendencia de Salud de Chile.</p>
     </div>
   </footer>
 
