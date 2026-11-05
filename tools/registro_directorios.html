@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Centro Paz · Registro de Valentina en Directorios Médicos</title>
+  <title>Centro Paz · Registro de Valentina en Directorios Médicos & Google Maps</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,300..900;1,6..12,300..900&display=swap" rel="stylesheet">
@@ -20,6 +20,8 @@
       --celeste: #3E7582;
       --celeste-dark: #2A5661;
       --celeste-light: #EEF6F8;
+      --google-blue: #1A73E8;
+      --google-blue-hover: #1557B0;
       --crema: #FAF8F5;
       --card-bg: #FFFFFF;
       --negro: #1F261D;
@@ -53,7 +55,7 @@
     }
 
     .container {
-      max-width: 980px;
+      max-width: 1040px;
       margin: 0 auto;
     }
 
@@ -108,7 +110,7 @@
     .header-subtitle {
       color: var(--gris);
       font-size: 1rem;
-      max-width: 720px;
+      max-width: 760px;
     }
 
     .header-meta {
@@ -119,7 +121,7 @@
       padding-top: 16px;
       border-top: 1px solid var(--verde-suave);
       font-size: 0.88rem;
-      color: var(--gris-muted);
+      color: var(--gris);
     }
 
     .header-meta span {
@@ -134,7 +136,7 @@
       border: 1px solid var(--borde-suave);
       border-radius: var(--radius-md);
       padding: 20px;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       box-shadow: var(--shadow-sm);
       display: flex;
       flex-wrap: wrap;
@@ -158,27 +160,28 @@
     .action-buttons {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 10px;
     }
 
     .btn-portal {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 10px 18px;
+      padding: 9px 16px;
       border-radius: var(--radius-sm);
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       font-weight: 700;
       text-decoration: none;
       transition: all 0.2s ease;
       box-shadow: var(--shadow-sm);
+      border: none;
+      cursor: pointer;
     }
 
     .btn-doctoralia {
       background: #00B39B;
       color: #FFFFFF;
     }
-
     .btn-doctoralia:hover {
       background: #009682;
       transform: translateY(-1px);
@@ -188,22 +191,100 @@
       background: #4F46E5;
       color: #FFFFFF;
     }
-
     .btn-encuadrado:hover {
       background: #4338CA;
+      transform: translateY(-1px);
+    }
+
+    .btn-saludvitale {
+      background: #0D9488;
+      color: #FFFFFF;
+    }
+    .btn-saludvitale:hover {
+      background: #0F766E;
+      transform: translateY(-1px);
+    }
+
+    .btn-google {
+      background: var(--google-blue);
+      color: #FFFFFF;
+    }
+    .btn-google:hover {
+      background: var(--google-blue-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-maps-assistant {
+      background: #E8F0FE;
+      color: var(--google-blue);
+      border: 1px solid #C2E7FF;
+    }
+    .btn-maps-assistant:hover {
+      background: #D2E3FC;
       transform: translateY(-1px);
     }
 
     .btn-all-copy {
       background: var(--verde-marca);
       color: #FFFFFF;
-      border: none;
-      cursor: pointer;
     }
-
     .btn-all-copy:hover {
       background: var(--verde-dark);
       transform: translateY(-1px);
+    }
+
+    /* Google Access Hero Card */
+    .google-hero-card {
+      background: linear-gradient(135deg, #FFFFFF 0%, #F1F6FD 100%);
+      border: 2px solid #C2E7FF;
+      border-radius: var(--radius-md);
+      padding: 22px 24px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .google-hero-content {
+      flex: 1 1 540px;
+    }
+
+    .google-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #E8F0FE;
+      color: var(--google-blue);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      margin-bottom: 8px;
+    }
+
+    .google-hero-title {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      color: #1A73E8;
+      margin-bottom: 6px;
+    }
+
+    .google-hero-desc {
+      font-size: 0.92rem;
+      color: var(--gris);
+      line-height: 1.5;
+    }
+
+    .google-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
     }
 
     /* Grid Layout */
@@ -220,6 +301,17 @@
       .card-full {
         grid-column: span 2;
       }
+    }
+
+    /* Section Subheadings */
+    .section-title {
+      font-family: var(--font-heading);
+      color: var(--verde-dark);
+      font-size: 1.35rem;
+      margin: 32px 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     /* Individual Card */
@@ -268,6 +360,21 @@
       flex-shrink: 0;
     }
 
+    .field-icon.gold {
+      background: var(--dorado-light);
+      color: var(--dorado-dark);
+    }
+
+    .field-icon.blue {
+      background: #E8F0FE;
+      color: var(--google-blue);
+    }
+
+    .field-icon.teal {
+      background: #CCFBF1;
+      color: #0F766E;
+    }
+
     .field-title {
       font-family: var(--font-heading);
       font-size: 1.05rem;
@@ -283,6 +390,18 @@
       background: var(--verde-light);
       color: var(--verde-marca);
       border: 1px solid var(--verde-suave);
+    }
+
+    .field-badge.gold {
+      background: var(--dorado-light);
+      color: var(--dorado-dark);
+      border-color: var(--dorado-deep);
+    }
+
+    .field-badge.blue {
+      background: #E8F0FE;
+      color: var(--google-blue);
+      border-color: #C2E7FF;
     }
 
     .field-content {
@@ -389,6 +508,53 @@
       color: var(--negro);
     }
 
+    /* Directory Tabs & Cards */
+    .directory-channel-card {
+      background: #FFFFFF;
+      border: 1px solid var(--borde-suave);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .directory-channel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      gap: 10px;
+    }
+
+    .directory-channel-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--verde-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .directory-channel-desc {
+      font-size: 0.9rem;
+      color: var(--gris);
+      margin-bottom: 14px;
+    }
+
+    .directory-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+    }
+
     /* Checklist & Guide Box */
     .guide-box {
       background: #FFFFFF;
@@ -476,7 +642,7 @@
       opacity: 0;
       transform: translateY(20px);
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      max-width: 400px;
+      max-width: 420px;
     }
 
     .toast.show {
@@ -491,7 +657,7 @@
 
     /* Helper Notes */
     .note-text {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--gris-muted);
       margin-top: 6px;
     }
@@ -503,36 +669,64 @@
     
     <!-- Encabezado Principal -->
     <header>
-      <div class="header-badge">Centro Paz (CPAZ) · Herramienta de Publicación</div>
-      <h1>Ficha Maestra de Publicación en Directorios</h1>
+      <div class="header-badge">Centro Paz (CPAZ) · Publicación & Triangulación de Entidad</div>
+      <h1>Ficha Maestra de Publicación en Directorios & Google Maps</h1>
       <p class="header-subtitle">
-        Diseñado para <strong>Valentina Castro</strong> y <strong>Nico</strong>. Haz clic en cualquier botón o etiqueta para copiar el dato exacto con 1 solo toque y pegarlo en los formularios de registro de Doctoralia y Encuadrado.
+        Diseñado para <strong>Valentina Castro</strong> y <strong>Nico</strong>. Haz clic en cualquier botón o etiqueta para copiar el dato exacto con 1 solo toque y pegarlo en los formularios de registro de Doctoralia, Encuadrado, SaludVitale / RedSalud y Google Business Profile con consistencia NAP certificada.
       </p>
 
       <div class="header-meta">
-        <span>📍 Presencial: Salvador 2302, Ñuñoa</span>
+        <span>📍 Dirección NAP: Salvador 2302, Ñuñoa, Santiago</span>
         <span>🌐 Online: Todo Chile</span>
-        <span>📋 Registro SIS: Acreditada Superintendencia de Salud</span>
-        <span>🔒 Sesión segura y boletas Isapre</span>
+        <span>📋 Registro Oficial SIS: Nº 667344 (Superintendencia de Salud)</span>
+        <span>📱 WhatsApp: +56 9 6516 3893</span>
+        <span>💳 Arancel Unificado: $45.000 CLP</span>
       </div>
     </header>
+
+    <!-- Tarjeta de Acceso Destacada a Google Business Profile -->
+    <div class="google-hero-card">
+      <div class="google-hero-content">
+        <div class="google-hero-badge">Google Business Profile · Local SEO Ñuñoa</div>
+        <h2 class="google-hero-title">Ficha Oficial de Google Maps (Local Pack Top 3)</h2>
+        <p class="google-hero-desc">
+          Accede directamente a la consola oficial de Google Business Profile o abre el asistente especializado local para copiar descripciones, servicios arancelados a $45.000 CLP y guiones de reseñas de 5 estrellas.
+        </p>
+      </div>
+
+      <div class="google-hero-actions">
+        <a href="asistente_google_maps.html" class="btn-portal btn-maps-assistant" title="Abrir Asistente Interactivo de Google Maps">
+          🛠️ Abrir Asistente Google Maps
+        </a>
+        <a href="https://business.google.com/" target="_blank" rel="noopener noreferrer" class="btn-portal btn-google" title="Abrir Consola Oficial de Google Business Profile">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Google Business Profile
+        </a>
+      </div>
+    </div>
 
     <!-- Barra de Acciones y Enlaces Directos a Portales -->
     <div class="action-banner">
       <div class="action-banner-text">
-        <h3>Directorios Médicos Oficiales</h3>
+        <h3>Directorios Médicos & Plataformas Oficiales</h3>
         <p>Abre el registro en una pestaña nueva y completa los datos copiándolos desde esta pantalla.</p>
       </div>
 
       <div class="action-buttons">
         <a href="https://pro.doctoralia.cl/" target="_blank" rel="noopener noreferrer" class="btn-portal btn-doctoralia" title="Abrir registro gratuito en Doctoralia Chile">
-          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-          Doctoralia Chile (Pro/Registro)
+          Doctoralia Chile
         </a>
 
         <a href="https://encuadrado.com/" target="_blank" rel="noopener noreferrer" class="btn-portal btn-encuadrado" title="Abrir registro en Encuadrado.cl">
-          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-          Encuadrado.cl (Registro)
+          Encuadrado.cl
+        </a>
+
+        <a href="https://www.saludvitale.com/" target="_blank" rel="noopener noreferrer" class="btn-portal btn-saludvitale" title="Abrir directorio SaludVitale / RedSalud">
+          SaludVitale / RedSalud
+        </a>
+
+        <a href="asistente_google_maps.html" class="btn-portal btn-maps-assistant" title="Asistente Google Maps">
+          Google Maps
         </a>
 
         <button class="btn-portal btn-all-copy" onclick="copiarFichaCompleta(this)">
@@ -541,7 +735,11 @@
       </div>
     </div>
 
-    <!-- Grilla de Campos de Registro -->
+    <!-- Grilla de Campos de Registro Maestro -->
+    <h2 class="section-title">
+      <span>📌</span> Campos Principales de Registro (Coherencia NAP y Arancel)
+    </h2>
+
     <div class="cards-grid">
 
       <!-- 1. Título y Nombre Oficial -->
@@ -570,7 +768,33 @@
         </div>
       </div>
 
-      <!-- 2. Arancel y Sesión -->
+      <!-- 2. Registro Oficial SIS Nº 667344 -->
+      <div class="field-card">
+        <div>
+          <div class="field-header">
+            <div class="field-title-group">
+              <div class="field-icon gold">🛡️</div>
+              <div class="field-title">Registro Oficial SIS (Superintendencia)</div>
+            </div>
+            <span class="field-badge gold">Nº 667344</span>
+          </div>
+          <div class="field-content" id="campo-sis">Registro Oficial SIS Nº 667344 — Superintendencia de Salud de Chile</div>
+          <p class="note-text">Número oficial de prestador individual de salud. Respaldo indispensable para reembolso de Isapres.</p>
+        </div>
+        <div class="field-actions" style="margin-top: 12px;">
+          <button class="btn-copy" onclick="copiarTexto('Registro Oficial SIS Nº 667344', this)">
+            📋 Copiar "Registro Oficial SIS Nº 667344"
+          </button>
+          <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('667344', this)" title="Copiar solo los dígitos">
+            Solo "667344"
+          </button>
+          <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('Superintendencia de Salud de Chile - Registro SIS Nº 667344', this)">
+            Con Institución
+          </button>
+        </div>
+      </div>
+
+      <!-- 3. Arancel y Sesión -->
       <div class="field-card">
         <div>
           <div class="field-header">
@@ -578,10 +802,10 @@
               <div class="field-icon">💳</div>
               <div class="field-title">Arancel por Sesión</div>
             </div>
-            <span class="field-badge">Transparente</span>
+            <span class="field-badge">Unificado $45.000</span>
           </div>
           <div class="field-content" id="campo-arancel">$45.000 CLP (Sesión individual de 50 minutos)</div>
-          <p class="note-text">Permite emitir boleta oficial de psicología clínica para reembolso en Isapres.</p>
+          <p class="note-text">Permite emitir boleta electrónica del SII válida para reembolso en todas las Isapres.</p>
         </div>
         <div class="field-actions" style="margin-top: 12px;">
           <button class="btn-copy" onclick="copiarTexto('$45.000 CLP', this)">
@@ -590,28 +814,34 @@
           <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('45000', this)" title="Copiar solo el número para inputs numéricos">
             Solo "45000"
           </button>
+          <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('$45.000 CLP (Sesión individual de 50 minutos)', this)">
+            Con Duración
+          </button>
         </div>
       </div>
 
-      <!-- 3. Dirección y Ubicación -->
+      <!-- 4. Dirección Física NAP -->
       <div class="field-card">
         <div>
           <div class="field-header">
             <div class="field-title-group">
               <div class="field-icon">📍</div>
-              <div class="field-title">Dirección de Consulta</div>
+              <div class="field-title">Dirección de Consulta (NAP)</div>
             </div>
-            <span class="field-badge">Ñuñoa</span>
+            <span class="field-badge">Salvador 2302</span>
           </div>
-          <div class="field-content" id="campo-direccion">Salvador 2302, Ñuñoa</div>
-          <p class="note-text">Ubicación física en Santiago. Modalidad mixta: Presencial y Telemedicina.</p>
+          <div class="field-content" id="campo-direccion">Salvador 2302, Ñuñoa, Santiago</div>
+          <p class="note-text">Ubicación física en Santiago Oriente. Coherencia 100% con Google Maps y directorios.</p>
         </div>
         <div class="field-actions" style="margin-top: 12px;">
-          <button class="btn-copy" onclick="copiarTexto('Salvador 2302, Ñuñoa', this)">
+          <button class="btn-copy" onclick="copiarTexto('Salvador 2302, Ñuñoa, Santiago', this)">
             📋 Copiar Dirección
           </button>
           <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('Salvador 2302, Ñuñoa, Región Metropolitana', this)">
             Con Región
+          </button>
+          <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('Salvador 2302', this)">
+            Calle y Nº
           </button>
           <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('Ñuñoa', this)">
             Solo Comuna
@@ -619,18 +849,18 @@
         </div>
       </div>
 
-      <!-- 4. Teléfono y WhatsApp -->
+      <!-- 5. Teléfono y WhatsApp -->
       <div class="field-card">
         <div>
           <div class="field-header">
             <div class="field-title-group">
               <div class="field-icon">📱</div>
-              <div class="field-title">Teléfono / WhatsApp</div>
+              <div class="field-title">Teléfono / WhatsApp Oficial</div>
             </div>
-            <span class="field-badge">Contacto Directo</span>
+            <span class="field-badge">56965163893</span>
           </div>
           <div class="field-content" id="campo-telefono">+56 9 6516 3893</div>
-          <p class="note-text">Línea directa para coordinación de pacientes y recordatorios.</p>
+          <p class="note-text">Línea directa para coordinación de pacientes y recordatorios clínicos.</p>
         </div>
         <div class="field-actions" style="margin-top: 12px;">
           <button class="btn-copy" onclick="copiarTexto('+56 9 6516 3893', this)">
@@ -639,13 +869,36 @@
           <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('+56965163893', this)">
             Sin Espacios
           </button>
-          <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('965163893', this)">
-            Solo 9 dígitos
+          <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('56965163893', this)">
+            Solo Dígitos
           </button>
         </div>
       </div>
 
-      <!-- 5. Cuatro Especialidades Clave -->
+      <!-- 6. Sitio Web y Enlace Cita -->
+      <div class="field-card">
+        <div>
+          <div class="field-header">
+            <div class="field-title-group">
+              <div class="field-icon">🌐</div>
+              <div class="field-title">Sitio Web & Agendamiento</div>
+            </div>
+            <span class="field-badge">centropaz.cl</span>
+          </div>
+          <div class="field-content" id="campo-web">https://www.centropaz.cl (Cita: https://wa.me/56965163893)</div>
+          <p class="note-text">Canales oficiales de destino para pacientes que naveguen las fichas.</p>
+        </div>
+        <div class="field-actions" style="margin-top: 12px;">
+          <button class="btn-copy" onclick="copiarTexto('https://www.centropaz.cl', this)">
+            📋 Copiar Sitio Web Oficial
+          </button>
+          <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('https://wa.me/56965163893', this)">
+            Enlace WhatsApp
+          </button>
+        </div>
+      </div>
+
+      <!-- 7. Cuatro Especialidades Clave -->
       <div class="field-card card-full">
         <div>
           <div class="field-header">
@@ -658,11 +911,11 @@
           <p class="note-text" style="margin-bottom: 8px;">Haz clic en cualquier especialidad individual para copiarla de inmediato, o usa el botón para copiar todas juntas:</p>
           
           <div class="field-content tags-container">
-            <button class="tag-chip" onclick="copiarTexto('Ansiedad', this)">
+            <button class="tag-chip" onclick="copiarTexto('Ansiedad y Crisis de Angustia', this)">
               <span>⚡ Ansiedad y Crisis de Angustia</span>
               <span class="chip-copy-icon">📋</span>
             </button>
-            <button class="tag-chip" onclick="copiarTexto('Depresión', this)">
+            <button class="tag-chip" onclick="copiarTexto('Depresión y Trastornos del Ánimo', this)">
               <span>🌱 Depresión y Trastornos del Ánimo</span>
               <span class="chip-copy-icon">📋</span>
             </button>
@@ -683,7 +936,7 @@
         </div>
       </div>
 
-      <!-- 6. Isapres Aceptadas para Reembolso -->
+      <!-- 8. Isapres Aceptadas para Reembolso -->
       <div class="field-card card-full">
         <div>
           <div class="field-header">
@@ -728,7 +981,7 @@
         </div>
       </div>
 
-      <!-- 7. Biografía Humana y Sin Juicios (Principal) -->
+      <!-- 9. Biografía Humana y Sin Juicios (Principal) -->
       <div class="field-card card-full">
         <div>
           <div class="field-header">
@@ -736,12 +989,12 @@
               <div class="field-icon">📖</div>
               <div class="field-title">Biografía Humana y Sin Juicios (Texto de Presentación)</div>
             </div>
-            <span class="field-badge">Empatía y Rigor</span>
+            <span class="field-badge">Registro SIS Nº 667344</span>
           </div>
           
-          <div class="field-content bio-text" id="campo-bio">Psicóloga Clínica con enfoque humanista e integrativo, titulada y con registro oficial en la Superintendencia de Salud (SIS). Acompaño a personas adultas y jóvenes en un espacio seguro, confidencial y libre de juicios, respetando los tiempos y ritmos de cada paciente. Mi trabajo clínico se centra en el alivio de la ansiedad y crisis de pánico, acompañamiento en cuadros del ánimo y depresión, regulación emocional en trastorno límite de la personalidad (TLP) y evaluaciones psicodiagnósticas integrales con informe clínico. Modalidad presencial en Ñuñoa (Santiago) y atención online para todo Chile. Boleta de honorarios reembolsable en todas las Isapres y seguros complementarios.</div>
+          <div class="field-content bio-text" id="campo-bio">Psicóloga Clínica con enfoque humanista e integrativo, titulada y con Registro Oficial SIS Nº 667344 en la Superintendencia de Salud de Chile. Acompaño a personas adultas y jóvenes en un espacio seguro, confidencial y libre de juicios, respetando los tiempos y ritmos de cada paciente. Mi trabajo clínico se centra en el alivio de la ansiedad y crisis de pánico, acompañamiento en cuadros del ánimo y depresión, regulación emocional en trastorno límite de la personalidad (TLP) y evaluaciones psicodiagnósticas integrales con informe clínico. Modalidad presencial en Salvador 2302, Ñuñoa (Santiago) y atención online para todo Chile. Arancel unificado de $45.000 CLP con boleta electrónica de honorarios reembolsable en todas las Isapres (Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres) y seguros complementarios. Teléfono / WhatsApp: +56 9 6516 3893.</div>
           
-          <p class="note-text">Tono cálido, validante y profesional, enfocado en reducir la fricción del paciente al pedir ayuda.</p>
+          <p class="note-text">Tono cálido, validante y riguroso. Incluye Registro SIS Nº 667344, Arancel $45.000 CLP y dirección física para máxima indexación.</p>
         </div>
         <div class="field-actions" style="margin-top: 14px;">
           <button class="btn-copy" onclick="copiarBioCompleta(this)">
@@ -755,13 +1008,129 @@
 
     </div>
 
+    <!-- SECCIÓN ESPECÍFICA PARA LOS 4 DIRECTORIOS Y CANALES -->
+    <h2 class="section-title">
+      <span>🌐</span> Módulos Específicos por Directorio (Doctoralia, Encuadrado, SaludVitale y Google Maps)
+    </h2>
+
+    <div class="cards-grid">
+
+      <!-- Canal 1: Doctoralia Chile -->
+      <div class="directory-channel-card">
+        <div>
+          <div class="directory-channel-header">
+            <span class="directory-channel-title">🩺 Doctoralia Chile</span>
+            <a href="https://pro.doctoralia.cl/" target="_blank" rel="noopener noreferrer" class="directory-link-btn btn-doctoralia">
+              Abrir Portal ↗
+            </a>
+          </div>
+          <p class="directory-channel-desc">
+            Mayor autoridad orgánica en Google para "psicólogo en Ñuñoa". Permite ficha gratuita completa, selección de patologías y recepción de opiniones de pacientes.
+          </p>
+          <div class="field-content" style="font-size: 0.88rem;">
+            <strong>Nombre:</strong> Valentina Castro Núñez<br>
+            <strong>Lugar:</strong> Centro Paz (Salvador 2302, Ñuñoa)<br>
+            <strong>Registro SIS:</strong> Nº 667344<br>
+            <strong>Arancel:</strong> $45.000 CLP
+          </div>
+        </div>
+        <div class="field-actions">
+          <button class="btn-copy" onclick="copiarSnippetDoctoralia(this)">
+            📋 Copiar Datos para Doctoralia
+          </button>
+        </div>
+      </div>
+
+      <!-- Canal 2: Encuadrado.cl -->
+      <div class="directory-channel-card">
+        <div>
+          <div class="directory-channel-header">
+            <span class="directory-channel-title">📅 Encuadrado.cl</span>
+            <a href="https://encuadrado.com/" target="_blank" rel="noopener noreferrer" class="directory-link-btn btn-encuadrado">
+              Abrir Portal ↗
+            </a>
+          </div>
+          <p class="directory-channel-desc">
+            Plataforma integral chilena para agendamiento, pago online y emisión automática de boletas electrónicas del SII bajo glosa médica con Registro SIS Nº 667344.
+          </p>
+          <div class="field-content" style="font-size: 0.88rem;">
+            <strong>Titularidad:</strong> Valentina Castro Núñez — Centro Paz<br>
+            <strong>Acreditación:</strong> Registro Oficial SIS Nº 667344<br>
+            <strong>Arancel Servicios:</strong> $45.000 CLP por sesión de 50 min<br>
+            <strong>Ubicación:</strong> Salvador 2302, Ñuñoa y Online Todo Chile
+          </div>
+        </div>
+        <div class="field-actions">
+          <button class="btn-copy" onclick="copiarSnippetEncuadrado(this)">
+            📋 Copiar Datos para Encuadrado
+          </button>
+        </div>
+      </div>
+
+      <!-- Canal 3: SaludVitale / RedSalud Prestadores -->
+      <div class="directory-channel-card">
+        <div>
+          <div class="directory-channel-header">
+            <span class="directory-channel-title">🏥 SaludVitale / RedSalud</span>
+            <a href="https://www.saludvitale.com/" target="_blank" rel="noopener noreferrer" class="directory-link-btn btn-saludvitale">
+              Abrir Portal ↗
+            </a>
+          </div>
+          <p class="directory-channel-desc">
+            Red de prestadores médicos y de salud privada en Chile. Indexa consultas de psicología bajo modalidad Libre Elección con reembolso en Isapres.
+          </p>
+          <div class="field-content" style="font-size: 0.88rem;">
+            <strong>Establecimiento:</strong> Centro Paz — Valentina Castro Núñez<br>
+            <strong>Dirección:</strong> Salvador 2302, Ñuñoa, Santiago<br>
+            <strong>Registro SIS:</strong> Nº 667344 (Superintendencia de Salud)<br>
+            <strong>Arancel:</strong> $45.000 CLP reembolsable
+          </div>
+        </div>
+        <div class="field-actions">
+          <button class="btn-copy" onclick="copiarSnippetSaludVitale(this)">
+            📋 Copiar Datos para SaludVitale
+          </button>
+        </div>
+      </div>
+
+      <!-- Canal 4: Google Business Profile (Google Maps) -->
+      <div class="directory-channel-card">
+        <div>
+          <div class="directory-channel-header">
+            <span class="directory-channel-title">🗺️ Google Business Profile</span>
+            <a href="https://business.google.com/" target="_blank" rel="noopener noreferrer" class="directory-link-btn btn-google">
+              Abrir Consola ↗
+            </a>
+          </div>
+          <p class="directory-channel-desc">
+            Ficha oficial de Google Maps para el "Local 3-Pack" en Ñuñoa y Santiago Oriente. Maximiza llamadas y clics directos al WhatsApp +56 9 6516 3893.
+          </p>
+          <div class="field-content" style="font-size: 0.88rem;">
+            <strong>Nombre Perfil:</strong> Centro Paz — Psicología Clínica Ñuñoa & Online<br>
+            <strong>Dirección NAP:</strong> Salvador 2302, Ñuñoa, Santiago<br>
+            <strong>Categoría:</strong> Clínica de psicología<br>
+            <strong>Herramienta:</strong> <a href="asistente_google_maps.html" style="color:var(--google-blue); font-weight:700;">asistente_google_maps.html</a>
+          </div>
+        </div>
+        <div class="field-actions">
+          <button class="btn-copy" onclick="copiarSnippetGoogle(this)">
+            📋 Copiar Ficha Google Maps
+          </button>
+          <a href="asistente_google_maps.html" class="btn-copy btn-copy-secondary">
+            Ver Asistente Completo ↗
+          </a>
+        </div>
+      </div>
+
+    </div>
+
     <!-- Guía y Checklist de Progreso -->
     <div class="guide-box">
       <h3>
-        <span>✅</span> Checklist de Publicación en Portales
+        <span>✅</span> Checklist de Verificación y Triangulación (100% Consistencia NAP)
       </h3>
       <p style="font-size:0.92rem; color:var(--gris);">
-        Marca los pasos conforme avances para tener certeza del estado de publicación:
+        Marca los pasos conforme avances para garantizar que los 4 canales queden sincronizados sin discrepancias de arancel o dirección:
       </p>
 
       <ul class="checklist">
@@ -775,19 +1144,19 @@
         </li>
         <li class="checklist-item" onclick="toggleCheck(this)">
           <input type="checkbox">
-          <span>Pegar Biografía Humana en Doctoralia</span>
+          <span>Verificar Registro Oficial SIS Nº 667344 en perfil</span>
         </li>
         <li class="checklist-item" onclick="toggleCheck(this)">
           <input type="checkbox">
-          <span>Configurar Dirección (Salvador 2302, Ñuñoa)</span>
+          <span>Configurar Dirección NAP (Salvador 2302, Ñuñoa)</span>
         </li>
         <li class="checklist-item" onclick="toggleCheck(this)">
           <input type="checkbox">
-          <span>Seleccionar Isapres para Reembolso</span>
+          <span>Ingresar Arancel Unificado ($45.000 CLP)</span>
         </li>
         <li class="checklist-item" onclick="toggleCheck(this)">
           <input type="checkbox">
-          <span>Ingresar Arancel ($45.000 CLP)</span>
+          <span>Seleccionar Isapres para Reembolso (Colmena, Banmédica, etc.)</span>
         </li>
         <li class="checklist-item" onclick="toggleCheck(this)">
           <input type="checkbox">
@@ -795,7 +1164,23 @@
         </li>
         <li class="checklist-item" onclick="toggleCheck(this)">
           <input type="checkbox">
-          <span>Vincular WhatsApp (+56 9 6516 3893)</span>
+          <span>Activar boletas automáticas SII en Encuadrado</span>
+        </li>
+        <li class="checklist-item" onclick="toggleCheck(this)">
+          <input type="checkbox">
+          <span>Cargar perfil en SaludVitale / RedSalud Prestadores</span>
+        </li>
+        <li class="checklist-item" onclick="toggleCheck(this)">
+          <input type="checkbox">
+          <span>Crear / Verificar Ficha en Google Business Profile</span>
+        </li>
+        <li class="checklist-item" onclick="toggleCheck(this)">
+          <input type="checkbox">
+          <span>Cargar 4 servicios arancelados a $45.000 en Google Maps</span>
+        </li>
+        <li class="checklist-item" onclick="toggleCheck(this)">
+          <input type="checkbox">
+          <span>Vincular WhatsApp Oficial (+56 9 6516 3893)</span>
         </li>
       </ul>
     </div>
@@ -859,7 +1244,6 @@
         }, 1800);
       }
 
-      // Previsualizar texto corto en toast
       let preview = textoCopiado.length > 55 ? textoCopiado.substring(0, 55) + '...' : textoCopiado;
       mostrarToast('Copiado: "' + preview + '"', true);
     }
@@ -886,19 +1270,21 @@
     }
 
     function copiarBioCorta(btn) {
-      const bioCorta = "Psicóloga Clínica titulada (Registro SIS). Atención presencial en Ñuñoa y online para todo Chile. Espacio cálido, respetuoso y sin juicios para el tratamiento de ansiedad, depresión, regulación emocional (TLP) y psicodiagnósticos. Boleta reembolsable en Isapres.";
+      const bioCorta = "Psicóloga Clínica titulada (Registro Oficial SIS Nº 667344). Atención presencial en Salvador 2302, Ñuñoa y online para todo Chile. Espacio cálido, respetuoso y sin juicios para el tratamiento de ansiedad, depresión, regulación emocional (TLP) y psicodiagnósticos. Arancel $45.000 CLP con boleta reembolsable en Isapres.";
       copiarTexto(bioCorta, btn);
     }
 
     function copiarFichaCompleta(btn) {
-      const ficha = `FICHA OFICIAL VALENTINA CASTRO NÚÑEZ (CENTRO PAZ)
+      const ficha = `FICHA MAESTRA VALENTINA CASTRO NÚÑEZ — CENTRO PAZ
 ===================================================
 • Nombre y Título: Valentina Castro Núñez - Psicóloga Clínica
-• Registro SIS: Superintendencia de Salud de Chile
-• Teléfono / WhatsApp: +56 9 6516 3893
-• Dirección: Salvador 2302, Ñuñoa, Región Metropolitana
+• Nombre Comercial: Centro Paz — Psicología Clínica Ñuñoa & Online
+• Registro Oficial SIS: Nº 667344 (Superintendencia de Salud de Chile)
+• Teléfono / WhatsApp Oficial: +56 9 6516 3893
+• Dirección Física (NAP): Salvador 2302, Ñuñoa, Santiago (Región Metropolitana)
 • Modalidad: Presencial en Ñuñoa y Online para todo Chile
 • Arancel por Sesión: $45.000 CLP (Sesión individual 50 min)
+• Sitio Web Oficial: https://www.centropaz.cl/
 • Isapres para Reembolso: Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres
 
 ESPECIALIDADES PRINCIPALES:
@@ -908,9 +1294,60 @@ ESPECIALIDADES PRINCIPALES:
 4. Evaluaciones Psicodiagnósticas e Informes Clínicos
 
 BIOGRAFÍA DE PRESENTACIÓN:
-Psicóloga Clínica con enfoque humanista e integrativo, titulada y con registro oficial en la Superintendencia de Salud (SIS). Acompaño a personas adultas y jóvenes en un espacio seguro, confidencial y libre de juicios, respetando los tiempos y ritmos de cada paciente. Mi trabajo clínico se centra en el alivio de la ansiedad y crisis de pánico, acompañamiento en cuadros del ánimo y depresión, regulación emocional en trastorno límite de la personalidad (TLP) y evaluaciones psicodiagnósticas integrales con informe clínico. Modalidad presencial en Ñuñoa (Santiago) y atención online para todo Chile. Boleta de honorarios reembolsable en todas las Isapres y seguros complementarios.`;
+Psicóloga Clínica con enfoque humanista e integrativo, titulada y con Registro Oficial SIS Nº 667344 en la Superintendencia de Salud de Chile. Acompaño a personas adultas y jóvenes en un espacio seguro, confidencial y libre de juicios, respetando los tiempos y ritmos de cada paciente. Mi trabajo clínico se centra en el alivio de la ansiedad y crisis de pánico, acompañamiento en cuadros del ánimo y depresión, regulación emocional en trastorno límite de la personalidad (TLP) y evaluaciones psicodiagnósticas integrales con informe clínico. Modalidad presencial en Salvador 2302, Ñuñoa (Santiago) y atención online para todo Chile. Arancel unificado de $45.000 CLP con boleta electrónica de honorarios reembolsable en todas las Isapres (Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres) y seguros complementarios.`;
 
       copiarTexto(ficha, btn);
+    }
+
+    function copiarSnippetDoctoralia(btn) {
+      const snippet = `DOCTORALIA CHILE — FICHA VALENTINA CASTRO NÚÑEZ
+• Nombre: Valentina Castro Núñez
+• Título: Psicóloga Clínica (Registro Oficial SIS Nº 667344)
+• Centro: Centro Paz (Salvador 2302, Ñuñoa, Santiago)
+• Arancel: $45.000 CLP
+• Teléfono: +56 9 6516 3893
+• Isapres: Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres
+• Web: https://www.centropaz.cl/`;
+      copiarTexto(snippet, btn);
+    }
+
+    function copiarSnippetEncuadrado(btn) {
+      const snippet = `ENCUADRADO.CL — CONFIGURACIÓN PERFIL Y SERVICIOS
+• Titular: Valentina Castro Núñez — Centro Paz
+• Título: Psicóloga Clínica | Registro Oficial SIS Nº 667344
+• Ubicación: Salvador 2302, Ñuñoa, Santiago
+• Teléfono: +56 9 6516 3893
+• Arancel Unificado: $45.000 CLP (Sesiones 50 min)
+• Servicios:
+  1. Psicoterapia Presencial — Ansiedad y Depresión ($45.000 CLP)
+  2. Psicoterapia Online — Todo Chile ($45.000 CLP)
+  3. Acompañamiento TDAH y Neurodivergencias ($45.000 CLP)
+  4. Evaluación Psicodiagnóstica e Informe ($45.000 CLP)`;
+      copiarTexto(snippet, btn);
+    }
+
+    function copiarSnippetSaludVitale(btn) {
+      const snippet = `SALUDVITALE / REDSALUD PRESTADORES — FICHA CLÍNICA
+• Razón Social: Centro Paz — Valentina Castro Núñez
+• Especialidad: Psicología Clínica (Registro Oficial SIS Nº 667344)
+• Dirección: Salvador 2302, Ñuñoa, Santiago
+• Teléfono: +56 9 6516 3893
+• Modalidad: Libre Elección (Reembolso Isapres y Seguros)
+• Arancel: $45.000 CLP`;
+      copiarTexto(snippet, btn);
+    }
+
+    function copiarSnippetGoogle(btn) {
+      const snippet = `GOOGLE BUSINESS PROFILE — FICHA GOOGLE MAPS
+• Nombre del Negocio: Centro Paz — Psicología Clínica Ñuñoa & Online
+• Categoría Principal: Clínica de psicología
+• Dirección Física: Salvador 2302, Ñuñoa, Santiago
+• Teléfono: +56 9 6516 3893
+• Web: https://www.centropaz.cl/
+• Cita: https://wa.me/56965163893
+• Registro Oficial: Valentina Castro Núñez (Registro SIS Nº 667344)
+• Arancel: $45.000 CLP`;
+      copiarTexto(snippet, btn);
     }
 
     function toggleCheck(liElement) {

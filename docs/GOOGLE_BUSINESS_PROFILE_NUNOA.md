@@ -10,33 +10,33 @@ Aparecer en los primeros 3 resultados de **Google Maps ("Local Pack")** cuando a
 
 | Campo | Valor Exacto Recomendado |
 | :--- | :--- |
-| **Nombre del Perfil** | `Centro Paz — Psicología Clínica & Neurodivergencias Ñuñoa` |
-| **Categoría Principal** | `Clínica de salud mental` (o `Psicólogo`) |
-| **Categorías Secundarias** | `Psicólogo infantil`, `Servicio de salud mental`, `Orientador familiar` |
-| **Dirección Física** | Sector Plaza Ñuñoa / Simón Bolívar / Plaza Egaña, Ñuñoa, Santiago |
+| **Nombre del Perfil** | `Centro Paz — Psicología Clínica Ñuñoa & Online` |
+| **Categoría Principal** | `Clínica de psicología` |
+| **Categorías Secundarias** | `Psicólogo`, `Centro de salud y bienestar`, `Servicio de salud mental` |
+| **Dirección Física** | `Salvador 2302, Ñuñoa, Santiago` (Región Metropolitana) |
 | **Áreas de servicio añadidas** | Ñuñoa, Providencia, La Reina, Las Condes, Peñalolén, Santiago Centro y Todo Chile (Atención Online 12+ años) |
 | **Teléfono Oficial** | `+56 9 6516 3893` (Atención personal de Valentina Castro Núñez) |
-| **Sitio Web** | `https://www.centropaz.cl` |
+| **Sitio Web** | `https://www.centropaz.cl/` |
 | **Enlace para Citas** | `https://wa.me/56965163893?text=Hola%20Valentina%2C%20vi%20la%20ficha%20en%20Google%20Maps%20y%20quisiera%20consultar%20por%20atenci%C3%B3n%20psicol%C3%B3gica.` |
+| **Registro Profesional** | Valentina Castro Núñez — Registro SIS Nº 667344 (Superintendencia de Salud de Chile) |
+| **Arancel por Sesión** | $45.000 CLP (Reembolsable en Isapres y Seguros Complementarios) |
 
 ---
 
 ## 📝 2. Descripción del Negocio (Optimizada para SEO Local y Motores de IA)
 
 ```text
-Centro Paz es una consulta de psicología clínica ubicada en Ñuñoa (Santiago Oriente), liderada por la psicóloga clínica Valentina Castro Núñez (acreditada por la Superintendencia de Salud de Chile - SIS). 
+Centro de Psicología Clínica en Ñuñoa (Salvador 2302, Santiago) y atención Online para todo Chile, dirigido por la psicóloga clínica Valentina Castro Núñez (Registro SIS Nº 667344 - Superintendencia de Salud).
 
-Ofrecemos atención presencial en Ñuñoa y atención en modalidad Online para todo Chile (adultos y jóvenes desde los 12 años en adelante; para niños menores de 12 años, la atención se realiza de forma presencial en consulta o mediante orientación online para padres).
+Especialidades de atención:
+• Ansiedad y Crisis de Angustia: Ataques de pánico, taquicardias y desregulación del sistema nervioso.
+• Depresión y Trastornos del Ánimo: Tristeza profunda, anhedonia, fatiga y duelos.
+• Trastornos de la Personalidad (TLP / Borderline): Inestabilidad afectiva y regulación vincular sin juicios.
+• Psicodiagnósticos e Informes Formales: Evaluaciones estructuradas para interconsultas psiquiátricas.
 
-Especialidades clínicas:
-• Ansiedad y Crisis de Angustia: Ataques de pánico, taquicardias, desregulación somática y sobrepensamiento.
-• Depresión y Trastornos del Ánimo: Tristeza profunda, anhedonia, fatiga crónica, desánimo y procesos de duelo.
-• Trastornos de la Personalidad (TLP / Borderline): Inestabilidad afectiva, hipersensibilidad al rechazo y regulación vincular sin juicios.
-• Evaluaciones Psicodiagnósticas e Informes Formales: Evaluaciones estructuradas con baterías clínicas para psiquiatría e interconsultas.
+Atención en espacio cálido, empático y confidencial. Arancel: $45.000 CLP por sesión con boleta electrónica válida para reembolso en todas las Isapres (Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres) y Seguros Complementarios (copago real estimado: $9.000 a $18.000 CLP).
 
-Boletas de honorarios profesionales 100% reembolsables en todas las Isapres (Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres) y Seguros Complementarios de Salud (arancel de referencia $45.000 CLP, copago real estimado entre $9.000 y $18.000 según tu plan).
-
-Atención 100% humana, cálida y confidencial. Agenda directamente por WhatsApp al +56 9 6516 3893 o visita www.centropaz.cl.
+Consulta presencial en Salvador 2302, Ñuñoa (cercana a Metro Chile España / Monseñor Eyzaguirre). Agendamiento directo y humano vía WhatsApp: +56 9 6516 3893 o visita www.centropaz.cl.
 ```
 
 ---

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centro Paz · Asistente Google Business Profile & Google Maps</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,300..900;1,6..12,300..900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --verde-marca: #385E28;
+      --verde-dark: #223F16;
+      --verde-light: #F0F6EC;
+      --verde-suave: #D6E8CE;
+      --dorado: #B88B22;
+      --dorado-dark: #8F6914;
+      --dorado-light: #FAF4E5;
+      --dorado-deep: #E5CA7E;
+      --celeste: #3E7582;
+      --celeste-dark: #2A5661;
+      --google-blue: #1A73E8;
+      --google-blue-hover: #1557B0;
+      --crema: #FAF8F5;
+      --card-bg: #FFFFFF;
+      --negro: #1F261D;
+      --gris: #556052;
+      --gris-muted: #7E8C7A;
+      --borde-suave: #E2ECE0;
+      --shadow-sm: 0 2px 8px rgba(34, 63, 22, 0.06);
+      --shadow-md: 0 8px 24px rgba(34, 63, 22, 0.08);
+      --shadow-lg: 0 16px 40px rgba(34, 63, 22, 0.12);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      --font-heading: 'Lora', Georgia, serif;
+      --font-body: 'Nunito Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      background-color: var(--crema);
+      color: var(--negro);
+      line-height: 1.6;
+      padding: 24px 16px 80px;
+      min-height: 100vh;
+    }
+    .container { max-width: 980px; margin: 0 auto; }
+
+    header {
+      background: linear-gradient(135deg, #FFFFFF 0%, #E8F0FE 100%);
+      border: 1px solid #D2E3FC;
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, rgba(26, 115, 232, 0.18) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #E8F0FE;
+      color: var(--google-blue);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      border: 1px solid #C2E7FF;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-family: var(--font-heading);
+      color: #1967D2;
+      font-size: 1.9rem;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+    .header-subtitle { color: var(--gris); font-size: 1rem; max-width: 760px; }
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #D2E3FC;
+      font-size: 0.88rem;
+      color: var(--gris);
+    }
+    .header-meta span { display: flex; align-items: center; gap: 6px; }
+
+    .action-banner {
+      background: #FFFFFF;
+      border: 1px solid var(--borde-suave);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .action-banner-text h3 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      color: var(--verde-dark);
+      margin-bottom: 4px;
+    }
+    .action-banner-text p { font-size: 0.9rem; color: var(--gris); }
+    .action-buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .btn-portal {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.92rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      border: none;
+    }
+    .btn-google { background: var(--google-blue); color: #FFFFFF; }
+    .btn-google:hover { background: var(--google-blue-hover); transform: translateY(-1px); }
+    .btn-directorios { background: #FFFFFF; color: var(--verde-dark); border: 1px solid var(--verde-suave); }
+    .btn-directorios:hover { background: var(--verde-light); }
+    .btn-copy-all { background: var(--verde-marca); color: #FFFFFF; }
+    .btn-copy-all:hover { background: var(--verde-dark); }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    @media (min-width: 768px) {
+      .cards-grid { grid-template-columns: repeat(2, 1fr); }
+      .card-full { grid-column: span 2; }
+    }
+
+    .field-card {
+      background: var(--card-bg);
+      border: 1px solid var(--borde-suave);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .field-card:hover { border-color: var(--verde-suave); box-shadow: var(--shadow-md); }
+    .field-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      gap: 8px;
+    }
+    .field-title-group { display: flex; align-items: center; gap: 8px; }
+    .field-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--verde-light);
+      color: var(--verde-marca);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .field-icon.blue { background: #E8F0FE; color: var(--google-blue); }
+    .field-title {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--verde-dark);
+    }
+    .field-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      background: var(--verde-light);
+      color: var(--verde-marca);
+      border: 1px solid var(--verde-suave);
+    }
+    .field-content {
+      background: var(--crema);
+      border: 1px solid var(--borde-suave);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      font-size: 0.95rem;
+      color: var(--negro);
+      margin-bottom: 16px;
+      word-break: break-word;
+    }
+    .field-content.bio-text { font-size: 0.92rem; line-height: 1.65; max-height: 220px; overflow-y: auto; }
+    .note-text { font-size: 0.82rem; color: var(--gris-muted); margin-top: 6px; }
+
+    .field-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .btn-copy {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--verde-light);
+      color: var(--verde-marca);
+      border: 1px solid var(--verde-suave);
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      flex: 1;
+      text-align: center;
+    }
+    .btn-copy:hover { background: var(--verde-marca); color: #FFFFFF; }
+    .btn-copy.copied { background: #059669 !important; color: #FFFFFF !important; }
+    .btn-copy-secondary {
+      background: #FFFFFF;
+      color: var(--gris);
+      border: 1px solid var(--borde-suave);
+      font-weight: 600;
+      flex: 0 0 auto;
+    }
+    .btn-copy-secondary:hover { background: var(--crema); color: var(--negro); }
+
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1000;
+      pointer-events: none;
+    }
+    .toast {
+      background: #1F261D;
+      color: #FFFFFF;
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      max-width: 420px;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast-icon { color: #34D399; font-size: 1.1rem; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Encabezado Principal -->
+    <header>
+      <div class="header-badge">Google Business Profile · Google Maps Ñuñoa</div>
+      <h1>Asistente Maestro para Google Business Profile</h1>
+      <p class="header-subtitle">
+        Herramienta de publicación rápida para posicionar a <strong>Centro Paz</strong> en el <strong>Top 3 de Google Maps ("Local Pack")</strong> en Ñuñoa y Santiago Oriente. Copia con 1 clic cada campo exacto e ingrésalo en la consola de Google.
+      </p>
+
+      <div class="header-meta">
+        <span>📍 Dirección NAP: Salvador 2302, Ñuñoa, Santiago</span>
+        <span>📋 Registro SIS: Nº 667344</span>
+        <span>📱 Teléfono Oficial: +56 9 6516 3893</span>
+        <span>💳 Arancel Unificado: $45.000 CLP</span>
+      </div>
+    </header>
+
+    <!-- Barra de Acciones y Enlaces Directos -->
+    <div class="action-banner">
+      <div class="action-banner-text">
+        <h3>Acceso Directo a Google Business Profile</h3>
+        <p>Abre la consola oficial de Google en una pestaña paralela y completa la ficha con estos datos.</p>
+      </div>
+
+      <div class="action-buttons">
+        <a href="https://business.google.com/" target="_blank" rel="noopener noreferrer" class="btn-portal btn-google" title="Abrir Google Business Profile">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Abrir Google Business Profile
+        </a>
+
+        <a href="registro_directorios.html" class="btn-portal btn-directorios" title="Volver al Registro en Directorios Médicos">
+          📋 Ir a Directorios Médicos
+        </a>
+
+        <button class="btn-portal btn-copy-all" onclick="copiarPerfilGoogleCompleto(this)">
+          ✨ Copiar Ficha Google Completa
+        </button>
+      </div>
+    </div>
+
+    <!-- Grilla de Campos Google Maps -->
+    <div class="cards-grid">
+
+      <!-- 1. Nombre del Perfil en Google Maps -->
+      <div class="field-card">
+        <div>
+          <div class="field-header">
+            <div class="field-title-group">
+              <div class="field-icon blue">📍</div>
+              <div class="field-title">Nombre Comercial en Google Maps</div>
+            </div>
+            <span class="field-badge">Local SEO</span>
+          </div>
+          <div class="field-content" id="campo-nombre-google">Centro Paz — Psicología Clínica Ñuñoa & Online</div>
+          <p class="note-text">Nombre con ancla local recomendada por las directrices de Google Maps.</p>
+        </div>
+        <div class="field-actions">
+          <button class="btn-copy" onclick="copiarTexto('Centro Paz — Psicología Clínica Ñuñoa & Online', this)">
+            📋 Copiar Nombre Recomendado
+          </button>
+          <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('Centro Paz', this)">
+            Solo "Centro Paz"
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. Categorías de Negocio -->
+      <div class="field-card">
+        <div>
+          <div class="field-header">
+            <div class="field-title-group">
+              <div class="field-icon blue">🏷️</div>
+              <div class="field-title">Categorías de Google Maps</div>
+            </div>
+            <span class="field-badge">Algoritmo</span>
+          </div>
+          <div class="field-content">
+            <strong>Principal:</strong> Clínica de psicología<br>
+            <strong>Secundarias:</strong> Psicólogo, Centro de salud y bienestar, Servicio de salud mental
+          </div>
+          <p class="note-text">Define los términos de búsqueda médica en los que aparecerá el negocio.</p>
+        </div>
+        <div class="field-actions">
+          <button class="btn-copy" onclick="copiarTexto('Clínica de psicología', this)">
+            📋 Copiar Principal ("Clínica de psicología")
+          </button>
+          <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('Psicólogo', this)">
+            "Psicólogo"
+          </button>
+        </div>
+      </div>
+
+      <!-- 3. Dirección Física NAP -->
+      <div class="field-card">
+        <div>
+          <div class="field-header">
+            <div class="field-title-group">
+              <div class="field-icon blue">🏢</div>
+              <div class="field-title">Dirección Física Exacta (NAP)</div>
+            </div>
+            <span class="field-badge">Coherencia 100%</span>
+          </div>
+          <div class="field-content">Salvador 2302, Ñuñoa, Santiago (Región Metropolitana)</div>
+          <p class="note-text">Coincide 100% con Doctoralia, Encuadrado, SaludVitale y el sitio web.</p>
+        </div>
+        <div class="field-actions">
+          <button class="btn-copy" onclick="copiarTexto('Salvador 2302, Ñuñoa, Santiago', this)">
+            📋 Copiar Dirección Completa
+          </button>
+          <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('Salvador 2302', this)">
+            Solo Calle y Nº
+          </button>
+          <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('Ñuñoa', this)">
+            Comuna
+          </button>
+        </div>
+      </div>
+
+      <!-- 4. Teléfono y Enlace de Citas -->
+      <div class="field-card">
+        <div>
+          <div class="field-header">
+            <div class="field-title-group">
+              <div class="field-icon blue">📞</div>
+              <div class="field-title">Teléfono y Enlace de Cita</div>
+            </div>
+            <span class="field-badge">WhatsApp Directo</span>
+          </div>
+          <div class="field-content">
+            <strong>Teléfono:</strong> +56 9 6516 3893<br>
+            <strong>Enlace Citas:</strong> https://wa.me/56965163893
+          </div>
+          <p class="note-text">Contacto directo sin intermediarios hacia Valentina.</p>
+        </div>
+        <div class="field-actions">
+          <button class="btn-copy" onclick="copiarTexto('+56 9 6516 3893', this)">
+            📋 Copiar Teléfono
+          </button>
+          <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('https://wa.me/56965163893', this)">
+            Copiar Enlace Cita
+          </button>
+        </div>
+      </div>
+
+      <!-- 5. Acreditación SIS y Arancel -->
+      <div class="field-card card-full">
+        <div>
+          <div class="field-header">
+            <div class="field-title-group">
+              <div class="field-icon blue">🛡️</div>
+              <div class="field-title">Acreditación Oficial SIS y Arancel Unificado</div>
+            </div>
+            <span class="field-badge">Certificación Oficial</span>
+          </div>
+          <div class="field-content">
+            <strong>Registro Oficial SIS:</strong> Nº 667344 — Superintendencia de Salud de Chile<br>
+            <strong>Terapeuta Principal:</strong> Valentina Castro Núñez (Psicóloga Clínica)<br>
+            <strong>Arancel Unificado:</strong> $45.000 CLP (Sesión individual de 50 minutos con boleta electrónica para reembolso en Isapres y seguros)
+          </div>
+          <p class="note-text">Respaldo legal que valida las boletas para reembolso en Colmena, Banmédica, CruzBlanca, Consalud y Vida Tres.</p>
+        </div>
+        <div class="field-actions">
+          <button class="btn-copy" onclick="copiarTexto('Valentina Castro Núñez — Registro Oficial SIS Nº 667344', this)">
+            📋 Copiar Valentina + Registro SIS Nº 667344
+          </button>
+          <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('667344', this)">
+            Solo Nº 667344
+          </button>
+          <button class="btn-copy btn-copy-secondary" onclick="copiarTexto('$45.000 CLP', this)">
+            Copiar $45.000 CLP
+          </button>
+        </div>
+      </div>
+
+      <!-- 6. Descripción Oficial del Perfil Google Maps -->
+      <div class="field-card card-full">
+        <div>
+          <div class="field-header">
+            <div class="field-title-group">
+              <div class="field-icon blue">📝</div>
+              <div class="field-title">Descripción Oficial para Google Maps (750 caracteres)</div>
+            </div>
+            <span class="field-badge">Alta Conversión</span>
+          </div>
+          <div class="field-content bio-text" id="campo-descripcion-google">Centro de Psicología Clínica en Ñuñoa (Salvador 2302, Santiago) y atención Online para todo Chile, dirigido por la psicóloga clínica Valentina Castro Núñez (Registro SIS Nº 667344 - Superintendencia de Salud).
+
+Especialidades de atención:
+• Ansiedad y Crisis de Angustia: Ataques de pánico, taquicardias y desregulación del sistema nervioso.
+• Depresión y Trastornos del Ánimo: Tristeza profunda, anhedonia, fatiga y duelos.
+• Trastornos de la Personalidad (TLP / Borderline): Inestabilidad afectiva y regulación vincular sin juicios.
+• Psicodiagnósticos e Informes Formales: Evaluaciones estructuradas para interconsultas psiquiátricas.
+
+Atención en espacio cálido, empático y confidencial. Arancel: $45.000 CLP por sesión con boleta electrónica válida para reembolso en todas las Isapres (Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres) y Seguros Complementarios (copago real estimado: $9.000 a $18.000 CLP).
+
+Consulta presencial en Salvador 2302, Ñuñoa (cercana a Metro Chile España / Monseñor Eyzaguirre). Agendamiento directo y humano vía WhatsApp: +56 9 6516 3893.</div>
+          <p class="note-text">Texto perfectamente ajustado para el límite de 750 caracteres de Google Business Profile.</p>
+        </div>
+        <div class="field-actions">
+          <button class="btn-copy" onclick="copiarTexto(document.getElementById('campo-descripcion-google').innerText.trim(), this)">
+            📋 Copiar Descripción Completa para Google Maps
+          </button>
+        </div>
+      </div>
+
+      <!-- 7. Catálogo de Servicios con Precios para Google Maps -->
+      <div class="field-card card-full">
+        <div>
+          <div class="field-header">
+            <div class="field-title-group">
+              <div class="field-icon blue">💼</div>
+              <div class="field-title">Catálogo de 4 Servicios para Google Maps ($45.000 CLP)</div>
+            </div>
+            <span class="field-badge">Servicios</span>
+          </div>
+          <div class="field-content">
+            1. <strong>Psicoterapia para Ansiedad y Crisis de Pánico:</strong> $45.000 CLP. Regulación somática y cognitiva para calmar opresión en el pecho, taquicardia y sobrepensamiento. Boleta reembolsable en Isapre.<br><br>
+            2. <strong>Psicoterapia para Depresión y Trastornos del Ánimo:</strong> $45.000 CLP. Acompañamiento cálido para procesar el desánimo profundo, pérdida de energía y reconstruir el sentido vital.<br><br>
+            3. <strong>Acompañamiento en Trastornos de la Personalidad (TLP):</strong> $45.000 CLP. Espacio seguro y estructurado para aprender a regular emociones de alta intensidad y estabilizar vínculos.<br><br>
+            4. <strong>Evaluación Psicodiagnóstica e Informes Formales:</strong> $45.000 CLP. Proceso estructurado de evaluación con aplicación de baterías clínicas y entrega de informe formal para psiquiatras.
+          </div>
+        </div>
+        <div class="field-actions">
+          <button class="btn-copy" onclick="copiarTexto('1. Psicoterapia para Ansiedad y Crisis de Pánico ($45.000 CLP)\n2. Psicoterapia para Depresión y Trastornos del Ánimo ($45.000 CLP)\n3. Acompañamiento en Trastornos de la Personalidad (TLP) ($45.000 CLP)\n4. Evaluación Psicodiagnóstica e Informes Formales ($45.000 CLP)', this)">
+            📋 Copiar Lista de 4 Servicios ($45.000 CLP)
+          </button>
+        </div>
+      </div>
+
+      <!-- 8. Plantilla para Pedir Reseñas de 5 Estrellas en WhatsApp -->
+      <div class="field-card card-full">
+        <div>
+          <div class="field-header">
+            <div class="field-title-group">
+              <div class="field-icon blue">⭐</div>
+              <div class="field-title">Plantilla de WhatsApp para Solicitar Reseñas de 5 Estrellas</div>
+            </div>
+            <span class="field-badge">Reputación Orgánica</span>
+          </div>
+          <div class="field-content bio-text" id="campo-guion-resenas">Hola [Nombre] 🌿 Espero que estés teniendo una muy buena semana.
+
+Te escribo porque estamos formalizando la presencia de Centro Paz en Google Maps para que más personas que buscan apoyo psicológico en Ñuñoa puedan encontrarnos con confianza.
+
+¿Te animarías a dejarnos una breve reseña de 5 estrellas sobre tu experiencia o la calidad del espacio de atención? Solo te tomará 1 minuto y nos ayudaría muchísimo:
+
+⭐ [ENLACE CORTO DE TU FICHA DE GOOGLE MAPS]
+
+¡Muchísimas gracias por tu apoyo y cariño de siempre! ✨</div>
+          <p class="note-text">Envía este mensaje a pacientes de alta o personas de confianza para alcanzar rápidamente las primeras 5 a 10 reseñas.</p>
+        </div>
+        <div class="field-actions">
+          <button class="btn-copy" onclick="copiarTexto(document.getElementById('campo-guion-resenas').innerText.trim(), this)">
+            📋 Copiar Plantilla de Mensaje WhatsApp
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="toast-container">
+    <div class="toast" id="toast">
+      <span class="toast-icon">✓</span>
+      <span id="toast-message">Copiado al portapapeles</span>
+    </div>
+  </div>
+
+  <script>
+    function copiarTexto(texto, btnElement) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(texto).then(() => {
+          mostrarExito(btnElement, texto);
+        }).catch(() => {
+          fallbackCopiar(texto, btnElement);
+        });
+      } else {
+        fallbackCopiar(texto, btnElement);
+      }
+    }
+
+    function fallbackCopiar(texto, btnElement) {
+      const textArea = document.createElement("textarea");
+      textArea.value = texto;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-999999px";
+      textArea.style.top = "-999999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        mostrarExito(btnElement, texto);
+      } catch (err) {
+        console.error('Error al copiar', err);
+      }
+      document.body.removeChild(textArea);
+    }
+
+    function mostrarExito(btnElement, textoCopiado) {
+      if (btnElement) {
+        const textoOriginal = btnElement.getAttribute('data-original-text') || btnElement.innerHTML;
+        if (!btnElement.getAttribute('data-original-text')) {
+          btnElement.setAttribute('data-original-text', textoOriginal);
+        }
+        btnElement.classList.add('copied');
+        btnElement.innerHTML = '<span>✓ ¡Copiado!</span>';
+        setTimeout(() => {
+          btnElement.classList.remove('copied');
+          btnElement.innerHTML = textoOriginal;
+        }, 1800);
+      }
+      let preview = textoCopiado.length > 55 ? textoCopiado.substring(0, 55) + '...' : textoCopiado;
+      mostrarToast('Copiado: "' + preview + '"');
+    }
+
+    function mostrarToast(mensaje) {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toast-message');
+      toastMessage.textContent = mensaje;
+      toast.classList.add('show');
+      if (window.toastTimeout) clearTimeout(window.toastTimeout);
+      window.toastTimeout = setTimeout(() => { toast.classList.remove('show'); }, 2500);
+    }
+
+    function copiarPerfilGoogleCompleto(btn) {
+      const perfil = `CENTRO PAZ — FICHA OFICIAL GOOGLE BUSINESS PROFILE
+===================================================
+• Nombre: Centro Paz — Psicología Clínica Ñuñoa & Online
+• Categoría Principal: Clínica de psicología
+• Categorías Secundarias: Psicólogo, Centro de salud y bienestar, Servicio de salud mental
+• Dirección Física (NAP): Salvador 2302, Ñuñoa, Santiago (Región Metropolitana)
+• Teléfono: +56 9 6516 3893
+• Sitio Web: https://www.centropaz.cl/
+• Enlace Cita: https://wa.me/56965163893
+• Registro Oficial SIS: Nº 667344 (Superintendencia de Salud de Chile)
+• Terapeuta: Valentina Castro Núñez (Psicóloga Clínica)
+• Arancel por Sesión: $45.000 CLP (Reembolsable Isapre)
+
+DESCRIPCIÓN GOOGLE MAPS:
+Centro de Psicología Clínica en Ñuñoa (Salvador 2302, Santiago) y atención Online para todo Chile, dirigido por la psicóloga clínica Valentina Castro Núñez (Registro SIS Nº 667344 - Superintendencia de Salud).
+
+Especialidades de atención:
+• Ansiedad y Crisis de Angustia: Ataques de pánico, taquicardias y desregulación del sistema nervioso.
+• Depresión y Trastornos del Ánimo: Tristeza profunda, anhedonia, fatiga y duelos.
+• Trastornos de la Personalidad (TLP / Borderline): Inestabilidad afectiva y regulación vincular sin juicios.
+• Psicodiagnósticos e Informes Formales: Evaluaciones estructuradas para interconsultas psiquiátricas.
+
+Atención en espacio cálido, empático y confidencial. Arancel: $45.000 CLP por sesión con boleta electrónica válida para reembolso en todas las Isapres (Colmena, Banmédica, CruzBlanca, Consalud, Vida Tres) y Seguros Complementarios (copago real estimado: $9.000 a $18.000 CLP).
+
+Consulta presencial en Salvador 2302, Ñuñoa (cercana a Metro Chile España / Monseñor Eyzaguirre). Agendamiento directo y humano vía WhatsApp: +56 9 6516 3893.`;
+
+      copiarTexto(perfil, btn);
+    }
+  </script>
+</body>
+</html>
