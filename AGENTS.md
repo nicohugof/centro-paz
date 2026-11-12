@@ -30,3 +30,18 @@ No inventes datos faltantes ni elimines, archives o muevas carpetas sin autoriza
 3. En el Mac: `codex` o `claude`, `gh` con sesión iniciada y git configurado.
 4. Corregir que el puente diga "terminó bien" aunque falle `gh pr create`.
 5. Cambiar el token de admin del servidor de voz por uno fine-grained mínimo.
+
+---
+
+## Regla permanente de ingeniería y límites de CPAZ Media OS (2026-11-11)
+
+En concordancia con la fuente de verdad de Nicola OS (`../nicolas-os/AGENTS.md` §3 y `~/.agents` / `/Users/nigoku/AGENTS.md`):
+
+> **`INVESTIGAR ANTES DE CONSTRUIR. INTEGRAR ANTES DE DUPLICAR. MEDIR ANTES DE AFIRMAR. OPTIMIZAR ANTES DE ESCALAR.`**
+
+Todo desarrollo en `centro-paz` (incluyendo **CPAZ Media OS** en [`docs/MEDIA_OS_ARQUITECTURA_Y_COMPARATIVA.md`](docs/MEDIA_OS_ARQUITECTURA_Y_COMPARATIVA.md)) sigue el protocolo obligatorio de 8 pasos: investigar OSS existente, auditar licencias (`AGPL`/`GPL`/`MIT`/mantenimiento), comparar con capacidades ya presentes en el repo, seleccionar la combinación mínima superior, integrar por interfaces desacopladas, desarrollar solo la capa diferenciadora CPAZ, ejecutar pruebas E2E reales y documentar decisiones.
+
+**Restricciones inviolables de seguridad y clínica:**
+- **Publicación y cuentas:** prohibido publicar contenido o conectar cuentas/APIs pagadas sin `AUTORIZO` explícito (`PUBLICAR <ID>`).
+- **Aislamiento clínico (Ley 19.628):** `media_os/` jamás accede ni expone `data/patient_intakes.json`, RUTs, diagnósticos o teléfonos personales de pacientes; marketing, atribución anónima y fichas clínicas viven separados.
+- **Activos preservados:** no modificar ni sobrescribir `video_engine/public/`, páginas HTML validadas ni trabajo previo.

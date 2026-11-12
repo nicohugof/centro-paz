@@ -27,6 +27,7 @@ def print_menu():
     print(" 7. 🎯  Tablero Clínico de Ingresos y Meta de 100 Pacientes (Seguimiento Real)")
     print(" 8. 📊  Ver Playbooks de Crecimiento (Google Ads, Encuadrado, Mapas, Alianzas)")
     print(" 9. 🎨  Renderizar las 28 Infografías a PNG (1080x1350)")
+    print(" M. 🧠  CPAZ Media OS (Auditoría OSS, Aprobaciones y Dashboard Ejecutivo Local)")
     print(" 0. 🚪  Salir")
     print("=" * 75 + "\n")
 
@@ -35,7 +36,7 @@ def main():
     while True:
         try:
             print_menu()
-            choice = input("👉 Selecciona una opción (0-9): ").strip()
+            choice = input("👉 Selecciona una opción (0-9 o M): ").strip()
             if choice == "1":
                 from agent import daily_clinic_routine
                 daily_clinic_routine.run_daily_routine()
@@ -72,6 +73,9 @@ def main():
                 print("  • Directorio Alianzas:     docs/DIRECTORIO_MAESTRO_ALIANZAS_NUNOA.md\n")
             elif choice == "9":
                 marketing_agent.render_all_posts()
+            elif choice.upper() == "M":
+                from media_os import cli as media_os_cli
+                media_os_cli.main(["dashboard"])
             elif choice in ["0", "salir", "exit", "quit", "q"]:
                 print("\n🌿 Centro Paz en operación continua. Hasta pronto.\n")
                 break

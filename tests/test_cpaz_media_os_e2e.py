@@ -1,0 +1,287 @@
+"""
+Suite E2E Real de CPAZ Media OS (Centro Paz).
+
+Valida con ejecutores y artefactos reales:
+1. Firewall de privacidad clínica (Ley N° 19.628) y aislamiento absoluto de `data/patient_intakes.json`.
+2. Reutilización de `content_engine` + `blog_clinical_knowledge`, QA clínico y adaptador `Ollama` (MIT).
+3. Estudio audiovisual con `ffprobe` + `ffmpeg` CLI reales y protección de `video_engine/public/`.
+4. Calendario editorial, máquina de estados y gate obligatorio `PUBLICAR <ID>` / `AUTORIZO`.
+5. Puente de automatización `n8n` (aprobado-only) y publicadores desacoplados dry-run.
+6. Atribución UTM compatible con `app.js`, analítica anónima y Dashboard Ejecutivo HTML.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+from pathlib import Path
+
+import pytest
+
+from media_os.attribution import AttributionEngine, build_utm_links
+from media_os.automation import export_n8n_approved_schedule
+from media_os.calendar import ApprovalRequiredError, EditorialCalendar
+from media_os.cli import run_demo_e2e
+from media_os.dashboard import (
+    _is_allowed_client_ip,
+    build_executive_snapshot,
+    create_dashboard_server,
+    render_dashboard_html,
+)
+from media_os.intelligence import OllamaAdapter, StrategicIntelligenceEngine, run_clinical_qa
+from media_os.privacy import PrivacyViolationError, assert_no_pii, assert_path_not_clinical
+from media_os.publishers import (
+    DryRunLocalPublisher,
+    ExternalOSSPublisherContract,
+    MetaGraphPublisherAdapter,
+)
+from media_os.studio import ComfyUIAdapter, MediaStudio, ROOT, UnsafeOutputPathError
+
+
+def test_privacy_firewall_and_clinical_isolation():
+    # Bloquea RUT, teléfono ajeno y claves clínicas
+    with pytest.raises(PrivacyViolationError):
+        assert_no_pii({"texto": "Paciente RUT 12.345.678-K consulta"})
+    with pytest.raises(PrivacyViolationError):
+        assert_no_pii({"phone": "+56 9 8765 4321"})
+    with pytest.raises(PrivacyViolationError):
+        assert_no_pii({"ficha_clinica": "reservada"})
+    with pytest.raises(PrivacyViolationError):
+        assert_path_not_clinical(ROOT / "data" / "patient_intakes.json")
+
+    # Permite explícitamente canales públicos oficiales de Centro Paz
+    assert_no_pii(
+        {
+            "cta": "WhatsApp oficial +56 9 6516 3893 o contacto.centropaz@gmail.com",
+            "web": "https://wa.me/56965163893",
+        }
+    )
+
+    # Garantía estática: ningún módulo en media_os/ lee patient_intakes ni patient_intake_manager
+    media_os_files = [
+        p for p in (ROOT / "media_os").glob("*.py") if p.name != "privacy.py"
+    ]
+    for py_file in media_os_files:
+        src = py_file.read_text(encoding="utf-8")
+        assert "patient_intake" not in src, f"{py_file.name} no debe referenciar datos clínicos"
+
+
+def test_intelligence_qa_and_ollama_adapter(tmp_path):
+    db_file = tmp_path / "intel.db"
+    engine = StrategicIntelligenceEngine(db_path=db_file)
+
+    audit = engine.audit_existing_knowledge()
+    assert audit["topics_count"] >= 28
+    assert audit["clinical_articles_count"] >= 28
+    assert audit["reels_scripts_count"] >= 7
+    assert audit["brand_fee_clp"] == 45000
+
+    # QA Clínico bloquea promesas prohibidas o aranceles obsoletos
+    bad_qa = run_clinical_qa(
+        title="Cura definitiva en 1 sesión",
+        caption="Valor $40.000 con diagnóstico definitivo en reel.",
+        require_cta=True,
+    )
+    assert not bad_qa.passed
+    assert any("prohibida" in issue.lower() for issue in bad_qa.issues)
+    assert any("arancel" in issue.lower() for issue in bad_qa.issues)
+
+    # Verifica fallback determinista limpio si endpoint Ollama no responde
+    offline_adapter = OllamaAdapter(base_url="http://127.0.0.1:59999", timeout_sec=0.3)
+    offline_engine = StrategicIntelligenceEngine(db_path=db_file, generator=offline_adapter)
+    brief = offline_engine.generate_strategic_brief("tdah_adultos", use_llm=True)
+    assert brief["topic_key"] == "tdah_adultos"
+    assert brief["source_engine"] == "cpaz-kb-deterministic"
+    assert brief["qa"]["passed"] is True
+    assert brief["clinical_foundation_present"] is True
+
+    # Si Ollama local corre activamente en el Mac, prueba inferencia real local ($0/mes)
+    live_ollama = OllamaAdapter(timeout_sec=15.0)
+    if live_ollama.is_available():
+        live_engine = StrategicIntelligenceEngine(db_path=db_file, generator=live_ollama)
+        live_brief = live_engine.generate_strategic_brief("reembolso_isapre", use_llm=True)
+        assert live_brief["source_engine"] in ("ollama-local", "cpaz-kb-deterministic")
+        assert live_brief["strategic_summary"]
+
+
+def test_audiovisual_studio_real_ffmpeg_and_public_protection(tmp_path):
+    studio = MediaStudio(exports_dir=tmp_path)
+    caps = studio.capabilities()
+    assert caps["ffmpeg_bin"], "ffmpeg debe estar disponible en PATH"
+    assert caps["ffprobe_bin"], "ffprobe debe estar disponible en PATH"
+
+    inv = studio.inventory_existing_assets()
+    assert inv["instagram_png_count"] >= 28
+    assert inv["videos_mp4_count"] >= 10
+    assert "voice_short01.mp3" in inv["protected_video_engine_public"]
+
+    public_voice = ROOT / "video_engine" / "public" / "voice_short01.mp3"
+    before_sha = hashlib.sha256(public_voice.read_bytes()).hexdigest()
+
+    # Protección estricta contra escritura en video_engine/public/
+    sample_mp4 = ROOT / "assets" / "videos" / "cpaz_short01_tdah.mp4"
+    with pytest.raises(UnsafeOutputPathError):
+        studio.extract_thumbnail(sample_mp4, output_image=ROOT / "video_engine" / "public" / "forbidden.jpg")
+
+    # FFprobe real sobre el video existente
+    probe = studio.probe_video(sample_mp4)
+    assert probe["duration_sec"] > 5.0
+    assert probe["width"] > 0 and probe["height"] > 0
+    assert probe["is_vertical_short"] is True
+
+    # FFmpeg CLI real: miniatura + recorte breve en tmp_path
+    thumb = studio.extract_thumbnail(sample_mp4, output_image=tmp_path / "thumb.jpg", at_sec=1.0)
+    assert Path(thumb["thumbnail_path"]).exists() and thumb["size_bytes"] > 1000
+
+    clip = studio.create_preview_clip(
+        sample_mp4, output_mp4=tmp_path / "clip.mp4", start_sec=0.0, duration_sec=1.2
+    )
+    assert Path(clip["clip_path"]).exists()
+    assert 0.8 <= clip["duration_sec"] <= 2.2
+
+    # ComfyUI deshabilitado por política
+    comfy = ComfyUIAdapter().generate_image({"prompt": "ilustración calma"})
+    assert comfy["executed"] is False and comfy["status"] == "disabled_by_policy"
+
+    # Confirmar archivo público sin cambios
+    after_sha = hashlib.sha256(public_voice.read_bytes()).hexdigest()
+    assert before_sha == after_sha
+
+
+def test_editorial_approval_gate_publishers_and_n8n_bridge(tmp_path):
+    db_file = tmp_path / "editorial.db"
+    cal = EditorialCalendar(db_path=db_file)
+    seeded = cal.seed_from_weekly_plan(week=1, channel="instagram")
+    assert len(seeded) == 7
+
+    target = seeded[0]
+    pending = seeded[1]
+
+    # Prohibido programar, publicar o aprobar sin pasar QA + token exacto
+    with pytest.raises(ApprovalRequiredError):
+        cal.schedule_item(target["item_id"], scheduled_for="2026-11-12T12:00:00-03:00")
+    with pytest.raises(ApprovalRequiredError):
+        DryRunLocalPublisher(calendar=cal).publish(target)
+    with pytest.raises(ApprovalRequiredError):
+        cal.approve_item(target["item_id"], approval_token=f"NO AUTORIZO {target['item_id']}")
+
+    # Flujo válido: QA -> PUBLICAR <ID> -> Schedule
+    cal.run_qa(target["item_id"])
+    approved = cal.approve_item(
+        target["item_id"],
+        approval_token=f"PUBLICAR {target['item_id']}",
+        reviewer="Nicolas",
+    )
+    assert approved["status"] == "APPROVED"
+    scheduled = cal.schedule_item(approved["item_id"], scheduled_for="2026-11-12T12:00:00-03:00")
+    assert scheduled["status"] == "SCHEDULED"
+
+    # Exportador n8n incluye solo los aprobados y excluye los 6 borradores restantes
+    export_file = tmp_path / "n8n_schedule.json"
+    export_res = export_n8n_approved_schedule(cal, output_file=export_file)
+    assert export_res["approved_count"] == 1
+    assert export_res["excluded_unapproved_count"] == 6
+    exported_ids = {item["item_id"] for item in json.loads(export_file.read_text())["items"]}
+    assert exported_ids == {scheduled["item_id"]}
+    assert pending["item_id"] not in exported_ids
+
+    # Contrato AGPL documentado para Postiz sin habilitar
+    postiz_contract = ExternalOSSPublisherContract(target_platform="postiz").build_dispatch_contract(scheduled)
+    assert postiz_contract["enabled"] is False
+    assert postiz_contract["license"] == "AGPL-3.0"
+
+    # Publicador Meta envuelto falla cerrado si allow_live=True y simula si allow_live=False
+    with pytest.raises(PermissionError):
+        MetaGraphPublisherAdapter(calendar=cal, allow_live=True).publish(scheduled)
+
+    meta_dry = MetaGraphPublisherAdapter(calendar=cal, allow_live=False).publish(scheduled)
+    assert meta_dry["ok"] is True
+    assert meta_dry["receipt"]["network_call_executed"] is False
+    assert meta_dry["item"]["status"] == "PUBLISHED_DRYRUN"
+
+
+def test_utm_attribution_full_e2e_and_dashboard(tmp_path):
+    db_file = tmp_path / "e2e_full.db"
+    utm = build_utm_links(
+        topic_key="tdah_adultos",
+        utm_source="instagram",
+        utm_medium="organic",
+        utm_campaign="sem1_tdah",
+        utm_content="post_01",
+    )
+    assert "utm_source=instagram" in utm["landing_url"]
+    assert "wa.me/56965163893" in utm["whatsapp_url"]
+
+    attr = AttributionEngine(db_path=db_file)
+    # Importador externo rechaza fila con PII
+    with pytest.raises(PrivacyViolationError):
+        attr.import_external_aggregates(
+            [{"topic_key": "tdah_adultos", "patient_name": "Juan", "impressions": 100, "clicks": 10}]
+        )
+
+    imported = attr.import_external_aggregates(
+        [{"topic_key": "tdah_adultos", "channel": "web", "utm_campaign": "sem1_tdah", "impressions": 800, "clicks": 40}],
+        source_system="umami",
+    )
+    assert imported == 1
+
+    # Flujo completo E2E sobre la misma DB aislada
+    res = run_demo_e2e(
+        db_path=db_file,
+        use_llm=False,
+        n8n_output_file=tmp_path / "demo_n8n.json",
+        dashboard_output_path=tmp_path / "demo_dashboard.html",
+    )
+    assert res["published_dryrun_status"] == "PUBLISHED_DRYRUN"
+    assert res["n8n_approved_count"] == 1
+    assert res["attribution_totals"]["bookings"] >= 1
+    assert res["attribution_totals"]["estimated_value_clp"] >= 45000
+
+    # Render dashboard en tmp_path y validar ausencia de PII + métricas reales
+    snap = build_executive_snapshot(db_path=db_file, probe_videos=True)
+    dash_path = render_dashboard_html(snap, output_path=tmp_path / "dashboard.html")
+    html_text = dash_path.read_text(encoding="utf-8")
+    assert "CPAZ Media OS" in html_text
+    assert "667344" in html_text
+    assert "AGPL-3.0" in html_text
+    assert "+56 9 6516 3893" in html_text
+    assert "fichas clínicas y datos de pacientes aislados" in html_text
+
+
+def test_dashboard_server_tailscale_and_client_guard(tmp_path):
+    import threading
+    import urllib.request
+
+    # Rechaza 0.0.0.0, IPs públicas y Tailscale sin opt-in explícito
+    with pytest.raises(ValueError):
+        create_dashboard_server(host="0.0.0.0", port=0)
+    with pytest.raises(ValueError):
+        create_dashboard_server(host="8.8.8.8", port=0, allow_tailscale=True)
+    with pytest.raises(ValueError):
+        create_dashboard_server(host="100.109.254.61", port=0, allow_tailscale=False)
+
+    assert _is_allowed_client_ip("100.89.124.62") is True
+    assert _is_allowed_client_ip("127.0.0.1") is True
+    assert _is_allowed_client_ip("8.8.8.8") is False
+
+    srv = create_dashboard_server(
+        db_path=tmp_path / "srv.db",
+        host="127.0.0.1",
+        port=0,
+        output_path=tmp_path / "served.html",
+    )
+    port = srv.server_address[1]
+    t = threading.Thread(target=srv.serve_forever, daemon=True)
+    t.start()
+    try:
+        with urllib.request.urlopen(f"http://127.0.0.1:{port}/", timeout=5) as resp:
+            assert resp.status == 200
+            body = resp.read().decode("utf-8")
+            assert "CPAZ Media OS" in body
+        with urllib.request.urlopen(f"http://127.0.0.1:{port}/api/snapshot", timeout=5) as resp:
+            assert resp.status == 200
+            snap = json.loads(resp.read().decode("utf-8"))
+            assert snap["identity"]["sis_registration"] == "667344"
+    finally:
+        srv.shutdown()
+        srv.server_close()

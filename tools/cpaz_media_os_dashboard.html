@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CPAZ Media OS — Dashboard Ejecutivo</title>
+  <style>
+    :root {
+      --bg: #f6f8f6;
+      --card: #ffffff;
+      --ink: #1b2420;
+      --muted: #5a6a61;
+      --accent: #2c6e58;
+      --accent-soft: #e7f3ee;
+      --border: #dde5df;
+      --warn-bg: #fff5e1;
+      --warn-ink: #8a5600;
+      --ok-bg: #e3f5ec;
+      --ok-ink: #155c3e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.45;
+      padding: 24px;
+    }
+    .wrap { max-width: 1180px; margin: 0 auto; }
+    header {
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start;
+      gap: 16px; background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 20px 24px; margin-bottom: 20px;
+    }
+    h1 { margin: 0 0 6px 0; font-size: 1.55rem; color: var(--accent); }
+    .sub { margin: 0; color: var(--muted); font-size: 0.92rem; }
+    .guard-banner {
+      background: var(--accent-soft); border: 1px solid #b9dacb; color: #164837;
+      border-radius: 12px; padding: 10px 14px; font-size: 0.86rem; font-weight: 600;
+    }
+    .grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px; margin-bottom: 20px;
+    }
+    .kpi {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+      padding: 16px 18px;
+    }
+    .kpi-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+    .kpi-val { font-size: 1.65rem; font-weight: 700; margin: 6px 0 4px 0; color: var(--ink); }
+    .kpi-sub { font-size: 0.82rem; color: var(--muted); }
+    .panel {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 18px 22px; margin-bottom: 18px; overflow-x: auto;
+    }
+    .panel h2 { margin: 0 0 12px 0; font-size: 1.1rem; color: var(--accent); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; }
+    .badge {
+      display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 0.75rem; font-weight: 700;
+    }
+    .badge.ok { background: var(--ok-bg); color: var(--ok-ink); }
+    .badge.warn { background: var(--warn-bg); color: var(--warn-ink); }
+    .badge.muted { background: #eef1ef; color: #47544d; }
+    footer { text-align: center; color: var(--muted); font-size: 0.82rem; margin-top: 24px; }
+    code { background: #f1f4f2; padding: 2px 5px; border-radius: 5px; font-size: 0.82em; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>CPAZ Media OS — Dashboard Ejecutivo</h1>
+        <p class="sub">
+          Centro Paz · Valentina Castro Núñez (SIS Nº 667344) · Salvador 2302, Ñuñoa &amp; Online Chile ·
+          WhatsApp +56 9 6516 3893 · Arancel $45.000 CLP · www.centropaz.cl
+        </p>
+        <p class="sub">Actualizado: <code>2026-11-12T16:56:42+00:00</code></p>
+      </div>
+      <div class="guard-banner">
+        Gate Activo: Sin publicación en vivo ni cuentas conectadas sin AUTORIZO · Aislamiento Clínico Ley 19.628 (0 PII)
+      </div>
+    </header>
+
+    <section class="grid">
+      <div class="kpi">
+        <div class="kpi-label">Activos Reutilizados</div>
+        <div class="kpi-val">28 / 11</div>
+        <div class="kpi-sub">28 PNGs + 7 guiones Reels + 28 artículos</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Aprobados / Calendario</div>
+        <div class="kpi-val">0 / 0</div>
+        <div class="kpi-sub">Dry-run: 0 · QA pend: 0 · Drafts: 0</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Consultas Comerciales UTM</div>
+        <div class="kpi-val">0</div>
+        <div class="kpi-sub">CTR 0.0% · Reservas est. 0 · Proy. $0 CLP</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Runtime Local ($0/mes)</div>
+        <div class="kpi-val">Ollama ON</div>
+        <div class="kpi-sub">FFmpeg: OK · n8n JSON: OK · ComfyUI: OFF</div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>1. Calendario Editorial y Puerta de Aprobación Humana (PUBLICAR &lt;ID&gt;)</h2>
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Título</th><th>Canal / Formato</th><th>Estado</th><th>QA Clínico</th><th>Comando Autorización</th></tr>
+        </thead>
+        <tbody><tr><td colspan='6'>Sin piezas cargadas aún en calendario local.</td></tr></tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>2. Atribución Comercial por Tópico (Estrictamente Sin PII)</h2>
+      <table>
+        <thead>
+          <tr><th>Tópico</th><th>Consultas UTM</th><th>Reservas Estimadas</th><th>Valor Referencial ($45.000 CLP)</th></tr>
+        </thead>
+        <tbody><tr><td colspan='4'>Sin consultas atribuidas registradas aún.</td></tr></tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>3. Matriz de Integración OSS y Auditoría de Licencias</h2>
+      <table>
+        <thead>
+          <tr><th>Componente</th><th>Licencia</th><th>Decisión</th><th>Justificación Arquitectónica</th></tr>
+        </thead>
+        <tbody><tr><td><strong>CPAZ Engine + KB</strong></td><td><code>Propio CPAZ</code></td><td>REUTILIZADO</td><td>28 tópicos, artículos clínicos, 28 PNGs, 11 MP4s</td></tr><tr><td><strong>Ollama (127.0.0.1)</strong></td><td><code>MIT</code></td><td>INTEGRADO</td><td>Adaptador local $0/mes con fallback determinista</td></tr><tr><td><strong>FFmpeg / FFprobe CLI</strong></td><td><code>GPL-3.0 (CLI)</code></td><td>INTEGRADO</td><td>Subproceso aislado; 0 MB RAM en reposo</td></tr><tr><td><strong>Remotion</strong></td><td><code>Source-available (&lt;=3 emp. gratis)</code></td><td>REUTILIZADO</td><td>Shorts 1080x1920 con Edge-TTS + Whisper</td></tr><tr><td><strong>n8n (Oracle VPS)</strong></td><td><code>Sustainable Use</code></td><td>REUTILIZADO</td><td>Puente exportador filtrado a APPROVED</td></tr><tr><td><strong>Postiz</strong></td><td><code>AGPL-3.0</code></td><td>DESCARTADO (2-8 GB)</td><td>Solo contrato externo futuro deshabilitado</td></tr><tr><td><strong>BrightBean Studio</strong></td><td><code>AGPL-3.0</code></td><td>REFERENCIA / NO DUP</td><td>Evita duplicar Django+Postgres sobre SQLite</td></tr><tr><td><strong>OpenPost</strong></td><td><code>AGPL-3.0</code></td><td>CONTRATO FUTURO</td><td>MCP/HTTP deshabilitado por AGPL y RAM</td></tr><tr><td><strong>Activepieces</strong></td><td><code>MIT + EE prop.</code></td><td>DESCARTADO (2-4 GB)</td><td>Evita duplicar n8n activo en Oracle</td></tr><tr><td><strong>ComfyUI</strong></td><td><code>GPL-3.0</code></td><td>DESHABILITADO (16-32 GB)</td><td>Inviable en Mac 8 GB; HTML-&gt;Chrome PNG es determinista</td></tr></tbody>
+      </table>
+    </section>
+
+    <footer>
+      CPAZ Media OS · Principio Rector: Investigar antes de construir · Integrar antes de duplicar · Medir antes de afirmar · Optimizar antes de escalar.
+    </footer>
+  </div>
+  <script id="cpaz-media-os-snapshot" type="application/json">{"generated_at": "2026-11-12T16:56:42+00:00", "identity": {"center": "Centro Paz", "therapist": "Valentina Castro Núñez", "sis_registration": "667344", "official_whatsapp": "+56 9 6516 3893", "fee_clp": 45000, "domain": "www.centropaz.cl", "privacy_isolation": "Ley 19.628 — fichas clínicas y datos de pacientes aislados"}, "runtime": {"ollama_available": true, "ollama_model": "qwen2.5-coder:1.5b", "ffmpeg_ready": true, "ffprobe_ready": true, "remotion_ready": true, "n8n_workflow_present": true, "comfyui_enabled": false, "live_social_publishing_enabled": false}, "knowledge_audit": {"topics_count": 28, "clinical_articles_count": 28, "reels_scripts_count": 7, "threads_count": 3, "community_posts_count": 2, "topics_missing_article": [], "topics_qa_issues": {}, "brand_fee_clp": 45000, "brand_sis": "667344", "brand_phone": "+56 9 6516 3893"}, "assets_inventory": {"instagram_png_count": 28, "instagram_html_count": 28, "videos_mp4_count": 11, "protected_video_engine_public": ["voice_short01.mp3"], "probed_videos_sample": []}, "calendar_summary": {"DRAFT": 0, "CLINICAL_QA": 0, "APPROVED": 0, "SCHEDULED": 0, "PUBLISHED_DRYRUN": 0, "REJECTED": 0, "TOTAL": 0}, "editorial_items": [], "recent_briefs": [], "attribution": {"totals": {"impressions": 0, "clicks": 0, "saves": 0, "shares": 0, "ctr_pct": 0.0, "inquiries": 0, "bookings": 0, "inquiry_per_click_pct": 0.0, "estimated_value_clp": 0}, "by_topic": [], "by_channel": [], "privacy_guarantee": "zero_pii_clinical_isolated"}, "oss_matrix": [{"tool": "CPAZ Engine + KB", "license": "Propio CPAZ", "decision": "REUTILIZADO", "note": "28 tópicos, artículos clínicos, 28 PNGs, 11 MP4s"}, {"tool": "Ollama (127.0.0.1)", "license": "MIT", "decision": "INTEGRADO", "note": "Adaptador local $0/mes con fallback determinista"}, {"tool": "FFmpeg / FFprobe CLI", "license": "GPL-3.0 (CLI)", "decision": "INTEGRADO", "note": "Subproceso aislado; 0 MB RAM en reposo"}, {"tool": "Remotion", "license": "Source-available (<=3 emp. gratis)", "decision": "REUTILIZADO", "note": "Shorts 1080x1920 con Edge-TTS + Whisper"}, {"tool": "n8n (Oracle VPS)", "license": "Sustainable Use", "decision": "REUTILIZADO", "note": "Puente exportador filtrado a APPROVED"}, {"tool": "Postiz", "license": "AGPL-3.0", "decision": "DESCARTADO (2-8 GB)", "note": "Solo contrato externo futuro deshabilitado"}, {"tool": "BrightBean Studio", "license": "AGPL-3.0", "decision": "REFERENCIA / NO DUP", "note": "Evita duplicar Django+Postgres sobre SQLite"}, {"tool": "OpenPost", "license": "AGPL-3.0", "decision": "CONTRATO FUTURO", "note": "MCP/HTTP deshabilitado por AGPL y RAM"}, {"tool": "Activepieces", "license": "MIT + EE prop.", "decision": "DESCARTADO (2-4 GB)", "note": "Evita duplicar n8n activo en Oracle"}, {"tool": "ComfyUI", "license": "GPL-3.0", "decision": "DESHABILITADO (16-32 GB)", "note": "Inviable en Mac 8 GB; HTML->Chrome PNG es determinista"}]}</script>
+</body>
+</html>
