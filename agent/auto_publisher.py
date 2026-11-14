@@ -71,7 +71,7 @@ La procrastinación y la fatiga mental en personas con TDAH tienen una raíz fis
         "title": "La matemática secreta del reembolso de Isapre en psicología",
         "caption": """La matemática real del reembolso en salud mental 💡💳
 
-¿Sabías que una consulta de .000 puede quedarte en un copago real de entre .000 y .000 CLP según tu plan de Isapre? Emitimos boletas electrónicas oficiales para tramitar el reembolso digital en minutos.
+¿Sabías que una consulta de $45.000 puede quedarte en un copago real de entre $9.000 y $18.000 CLP según tu plan de Isapre? Emitimos boletas electrónicas oficiales para tramitar el reembolso digital en minutos.
 
 👉 Simula tu reembolso en www.centropaz.cl o escríbenos a WhatsApp al +56 9 6516 3893.
 

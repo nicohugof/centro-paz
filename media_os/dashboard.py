@@ -128,22 +128,29 @@ def render_dashboard_html(
     inv = snapshot["assets_inventory"]
 
     pending_rows = []
-    for item in snapshot["editorial_items"][:12]:
+    items = snapshot.get("editorial_items", [])
+    for item in items:
         badge_cls = "ok" if item["status"] in ("APPROVED", "SCHEDULED", "PUBLISHED_DRYRUN") else (
             "warn" if item["status"] == "CLINICAL_QA" else "muted"
         )
+        token_cmd = item.get("approval_token") or f"PUBLICAR {item['item_id']}"
         pending_rows.append(
-            f"<tr>"
+            f"<tr data-status='{html.escape(item['status'])}' data-search='{html.escape((item['item_id'] + ' ' + item['title'] + ' ' + item['channel'] + ' ' + item['status']).lower())}'>"
             f"<td><code>{html.escape(item['item_id'])}</code></td>"
-            f"<td>{html.escape(item['title'][:58])}</td>"
+            f"<td><strong>{html.escape(item['title'][:58])}</strong></td>"
             f"<td>{html.escape(item['channel'])} / {html.escape(item['format_type'])}</td>"
             f"<td><span class='badge {badge_cls}'>{html.escape(item['status'])}</span></td>"
-            f"<td>{'SI' if item['qa_passed'] else 'PEND'}</td>"
-            f"<td><code>{html.escape(item['approval_token'] or 'PUBLICAR ' + item['item_id'])}</code></td>"
+            f"<td>{'✅ SI' if item['qa_passed'] else '⚠️ PEND'}</td>"
+            f"<td>"
+            f"<div class='action-cell'>"
+            f"<button type='button' class='btn-copy' onclick='copyCmd(\"{html.escape(token_cmd)}\")' title='Copiar comando al portapapeles'>📋 Copiar</button>"
+            f"<code>{html.escape(token_cmd)}</code>"
+            f"</div>"
+            f"</td>"
             f"</tr>"
         )
     if not pending_rows:
-        pending_rows.append("<tr><td colspan='6'>Sin piezas cargadas aún en calendario local.</td></tr>")
+        pending_rows.append("<tr class='empty-row'><td colspan='6'>Sin piezas cargadas aún en calendario local. Haz clic en <strong>\"Poblar 28 Temas\"</strong> para inicializar.</td></tr>")
 
     topic_rows = []
     for t in snapshot["attribution"]["by_topic"][:8]:
@@ -237,6 +244,48 @@ def render_dashboard_html(
     .badge.ok {{ background: var(--ok-bg); color: var(--ok-ink); }}
     .badge.warn {{ background: var(--warn-bg); color: var(--warn-ink); }}
     .badge.muted {{ background: #eef1ef; color: #47544d; }}
+    .table-toolbar {{
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: 12px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--border);
+    }}
+    .search-box {{ flex: 1; min-width: 220px; }}
+    .search-input {{
+      width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px;
+      font-size: 0.88rem; outline: none; transition: border-color 0.2s; box-sizing: border-box;
+    }}
+    .search-input:focus {{ border-color: var(--accent); }}
+    .filter-pills {{ display: flex; flex-wrap: wrap; gap: 6px; }}
+    .pill {{
+      background: #eef1ef; border: 1px solid var(--border); border-radius: 999px;
+      padding: 4px 10px; font-size: 0.78rem; font-weight: 600; cursor: pointer; color: var(--ink);
+      transition: all 0.15s ease;
+    }}
+    .pill:hover {{ background: #e0e8e3; }}
+    .pill.active {{ background: var(--accent); color: #fff; border-color: var(--accent); }}
+    .ops-actions {{ display: flex; flex-wrap: wrap; gap: 8px; }}
+    .btn-ops {{
+      background: var(--accent); color: #ffffff; border: none; border-radius: 8px;
+      padding: 6px 12px; font-size: 0.8rem; font-weight: 600; cursor: pointer;
+      transition: opacity 0.15s ease;
+    }}
+    .btn-ops:hover {{ opacity: 0.9; }}
+    .btn-ops.secondary {{ background: #eef1ef; color: var(--ink); border: 1px solid var(--border); }}
+    .btn-ops.secondary:hover {{ background: #e0e8e3; }}
+    .action-cell {{ display: flex; align-items: center; gap: 6px; }}
+    .btn-copy {{
+      background: #f0f4f1; border: 1px solid var(--border); border-radius: 6px;
+      padding: 3px 8px; font-size: 0.75rem; font-weight: 600; cursor: pointer; color: var(--accent);
+      white-space: nowrap; transition: background 0.15s;
+    }}
+    .btn-copy:hover {{ background: var(--accent-soft); }}
+    .toast {{
+      visibility: hidden; min-width: 250px; background-color: #1b2420; color: #fff;
+      text-align: center; border-radius: 8px; padding: 12px 18px; position: fixed;
+      z-index: 1000; left: 50%; bottom: 30px; transform: translateX(-50%); font-size: 0.88rem;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.2); opacity: 0; transition: opacity 0.3s, visibility 0.3s;
+    }}
+    .toast.show {{ visibility: visible; opacity: 1; }}
+    .toast.error {{ background-color: #b02a37; }}
     footer {{ text-align: center; color: var(--muted); font-size: 0.82rem; margin-top: 24px; }}
     code {{ background: #f1f4f2; padding: 2px 5px; border-radius: 5px; font-size: 0.82em; }}
   </style>
@@ -282,7 +331,25 @@ def render_dashboard_html(
 
     <section class="panel">
       <h2>1. Calendario Editorial y Puerta de Aprobación Humana (PUBLICAR &lt;ID&gt;)</h2>
-      <table>
+      <div class="table-toolbar">
+        <div class="search-box">
+          <input type="text" id="searchInput" class="search-input" placeholder="🔍 Filtrar por tema, ID, canal o estado..." oninput="filterTable()" />
+        </div>
+        <div class="filter-pills">
+          <button type="button" class="pill active" onclick="setFilter('ALL', this)">Todos ({len(items)})</button>
+          <button type="button" class="pill" onclick="setFilter('DRAFT', this)">Borradores ({cal.get('DRAFT', 0)})</button>
+          <button type="button" class="pill" onclick="setFilter('CLINICAL_QA', this)">QA ({cal.get('CLINICAL_QA', 0)})</button>
+          <button type="button" class="pill" onclick="setFilter('APPROVED', this)">Aprobados ({cal.get('APPROVED', 0)})</button>
+          <button type="button" class="pill" onclick="setFilter('PUBLISHED_DRYRUN', this)">Dry-Run ({cal.get('PUBLISHED_DRYRUN', 0)})</button>
+        </div>
+        <div class="ops-actions">
+          <button type="button" class="btn-ops" onclick="runApi('/api/seed', 'Poblando 28 tópicos...')">📥 Poblar 28 Temas</button>
+          <button type="button" class="btn-ops" onclick="runApi('/api/qa-all', 'Auditando QA clínico...')">🩺 Auditar QA</button>
+          <button type="button" class="btn-ops" onclick="runApi('/api/export-n8n', 'Exportando n8n...')">🚀 Exportar n8n</button>
+          <button type="button" class="btn-ops secondary" onclick="location.reload()">🔄 Refrescar</button>
+        </div>
+      </div>
+      <table id="editorialTable">
         <thead>
           <tr><th>ID</th><th>Título</th><th>Canal / Formato</th><th>Estado</th><th>QA Clínico</th><th>Comando Autorización</th></tr>
         </thead>
@@ -314,7 +381,78 @@ def render_dashboard_html(
       CPAZ Media OS · Principio Rector: Investigar antes de construir · Integrar antes de duplicar · Medir antes de afirmar · Optimizar antes de escalar.
     </footer>
   </div>
+  <div id="toast" class="toast"></div>
   <script id="cpaz-media-os-snapshot" type="application/json">{safe_json}</script>
+  <script>
+    let currentStatusFilter = 'ALL';
+    function showToast(msg, isError = false) {{
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className = 'toast show' + (isError ? ' error' : '');
+      setTimeout(() => {{ t.className = 'toast'; }}, 3200);
+    }}
+
+    function copyCmd(cmd) {{
+      if (navigator.clipboard && navigator.clipboard.writeText) {{
+        navigator.clipboard.writeText(cmd).then(() => {{
+          showToast('Copiado al portapapeles: ' + cmd);
+        }}).catch(() => {{
+          fallbackCopy(cmd);
+        }});
+      }} else {{
+        fallbackCopy(cmd);
+      }}
+    }}
+
+    function fallbackCopy(text) {{
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('Copiado al portapapeles: ' + text);
+    }}
+
+    function setFilter(status, btn) {{
+      currentStatusFilter = status;
+      document.querySelectorAll('.filter-pills .pill').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      filterTable();
+    }}
+
+    function filterTable() {{
+      const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+      const rows = document.querySelectorAll('#editorialTable tbody tr:not(.empty-row)');
+      rows.forEach(tr => {{
+        const text = tr.getAttribute('data-search') || '';
+        const status = tr.getAttribute('data-status') || '';
+        const matchesQuery = !query || text.includes(query);
+        const matchesFilter = currentStatusFilter === 'ALL' || status === currentStatusFilter;
+        tr.style.display = (matchesQuery && matchesFilter) ? '' : 'none';
+      }});
+    }}
+
+    async function runApi(endpoint, loadingMsg) {{
+      if (window.location.protocol === 'file:') {{
+        alert('El dashboard está abierto como archivo estático (file://).\\nPara ejecutar acciones interactivas en vivo, inicia el servidor con:\\npython3 cpaz.py (opción M) o python3 -m media_os.cli serve');
+        return;
+      }}
+      showToast(loadingMsg);
+      try {{
+        const res = await fetch(endpoint, {{ method: 'POST', headers: {{ 'Content-Type': 'application/json' }} }});
+        const data = await res.json();
+        if (data.ok) {{
+          showToast('Operación exitosa');
+          setTimeout(() => location.reload(), 900);
+        }} else {{
+          showToast('Error: ' + (data.error || 'Fallo desconocido'), true);
+        }}
+      }} catch (err) {{
+        showToast('Error de red al conectar con el servidor local: ' + err.message, true);
+      }}
+    }}
+  </script>
 </body>
 </html>
 """
@@ -391,6 +529,81 @@ def create_dashboard_server(
             self.send_header("Content-Length", str(len(body)))
             self.end_headers()
             self.wfile.write(body)
+
+        def do_POST(self) -> None:  # noqa: N802
+            client_ip = self.client_address[0] if self.client_address else ""
+            if not _is_allowed_client_ip(client_ip):
+                self.send_error(403, "Solo acceso privado loopback o Tailscale.")
+                return
+
+            length = int(self.headers.get("Content-Length", 0))
+            raw_body = self.rfile.read(length) if length > 0 else b"{}"
+            try:
+                payload = json.loads(raw_body.decode("utf-8")) if raw_body else {}
+            except Exception:
+                payload = {}
+
+            from media_os.calendar import EditorialCalendar, ApprovalRequiredError
+            from media_os.publishers import DryRunLocalPublisher
+            from media_os.automation import export_n8n_approved_schedule
+
+            cal_inst = EditorialCalendar(db_path=db_path)
+
+            try:
+                if self.path.startswith("/api/seed"):
+                    created = cal_inst.seed_all_topics()
+                    resp = {"ok": True, "action": "seed", "count": len(created), "items": created}
+                elif self.path.startswith("/api/qa-all"):
+                    results = cal_inst.run_qa_all()
+                    resp = {"ok": True, "action": "qa-all", "results": results}
+                elif self.path.startswith("/api/approve"):
+                    item_id = str(payload.get("item_id", "")).strip()
+                    token = str(payload.get("approval_token", "")).strip()
+                    reviewer = str(payload.get("reviewer", "Nicolas")).strip()
+                    reason = str(payload.get("reason", "Aprobación desde Dashboard CPAZ")).strip()
+                    item = cal_inst.approve_item(item_id, approval_token=token, reviewer=reviewer, reason=reason)
+                    resp = {"ok": True, "action": "approve", "item": item}
+                elif self.path.startswith("/api/publish-dryrun"):
+                    item_id = str(payload.get("item_id", "")).strip()
+                    item = cal_inst.get_item(item_id)
+                    if not item:
+                        raise KeyError(f"Pieza no encontrada: {item_id}")
+                    pub = DryRunLocalPublisher(calendar=cal_inst)
+                    res = pub.publish(item)
+                    resp = {"ok": True, "action": "publish-dryrun", "result": res}
+                elif self.path.startswith("/api/export-n8n"):
+                    res = export_n8n_approved_schedule(cal_inst)
+                    resp = {"ok": True, "action": "export-n8n", "result": res}
+                else:
+                    self.send_error(404, f"Endpoint no encontrado: {self.path}")
+                    return
+
+                assert_no_pii(resp, field_path="api_post_response")
+                out_bytes = json.dumps(resp, ensure_ascii=False).encode("utf-8")
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header("Cache-Control", "no-store")
+                self.send_header("Content-Length", str(len(out_bytes)))
+                self.end_headers()
+                self.wfile.write(out_bytes)
+            except (ApprovalRequiredError, KeyError, ValueError) as err:
+                err_resp = {"ok": False, "error": str(err)}
+                out_bytes = json.dumps(err_resp, ensure_ascii=False).encode("utf-8")
+                self.send_response(400)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header("Cache-Control", "no-store")
+                self.send_header("Content-Length", str(len(out_bytes)))
+                self.end_headers()
+                self.wfile.write(out_bytes)
+            except Exception as exc:
+                err_resp = {"ok": False, "error": f"Error interno: {exc}"}
+                out_bytes = json.dumps(err_resp, ensure_ascii=False).encode("utf-8")
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header("Cache-Control", "no-store")
+                self.send_header("Content-Length", str(len(out_bytes)))
+                self.end_headers()
+                self.wfile.write(out_bytes)
 
         def log_message(self, format: str, *args: Any) -> None:  # noqa: A002
             return

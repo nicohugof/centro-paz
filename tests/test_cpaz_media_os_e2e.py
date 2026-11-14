@@ -285,3 +285,116 @@ def test_dashboard_server_tailscale_and_client_guard(tmp_path):
     finally:
         srv.shutdown()
         srv.server_close()
+
+
+def test_dashboard_server_post_endpoints_and_batch_calendar(tmp_path):
+    import threading
+    import urllib.error
+    import urllib.request
+    from media_os import cli as media_os_cli
+
+    db_file = tmp_path / "post_test.db"
+    srv = create_dashboard_server(
+        db_path=db_file,
+        host="127.0.0.1",
+        port=0,
+        output_path=tmp_path / "served_post.html",
+    )
+    port = srv.server_address[1]
+    t = threading.Thread(target=srv.serve_forever, daemon=True)
+    t.start()
+    try:
+        # 1. POST /api/seed
+        req_seed = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/seed",
+            data=b"{}",
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req_seed, timeout=5) as resp:
+            assert resp.status == 200
+            data = json.loads(resp.read().decode("utf-8"))
+            assert data["ok"] is True
+            assert data["count"] == 28
+
+        # 2. POST /api/qa-all
+        req_qa = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/qa-all",
+            data=b"{}",
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req_qa, timeout=5) as resp:
+            assert resp.status == 200
+            data = json.loads(resp.read().decode("utf-8"))
+            assert data["ok"] is True
+            assert data["results"]["passed"] == 28
+
+        first_item_id = data["results"]["items"][0]["item_id"]
+
+        # 3. POST /api/approve rechaza token inválido (HTTP 400)
+        req_bad_approve = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/approve",
+            data=json.dumps({"item_id": first_item_id, "approval_token": "NO AUTORIZO"}).encode("utf-8"),
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with pytest.raises(urllib.error.HTTPError) as exc_info:
+            urllib.request.urlopen(req_bad_approve, timeout=5)
+        assert exc_info.value.code == 400
+
+        # 4. POST /api/approve con token válido
+        req_good_approve = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/approve",
+            data=json.dumps({
+                "item_id": first_item_id,
+                "approval_token": f"PUBLICAR {first_item_id}",
+                "reviewer": "Nicolas",
+            }).encode("utf-8"),
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req_good_approve, timeout=5) as resp:
+            assert resp.status == 200
+            data = json.loads(resp.read().decode("utf-8"))
+            assert data["ok"] is True
+            assert data["item"]["status"] == "APPROVED"
+
+        # 5. POST /api/export-n8n (la pieza aprobada debe estar en la cola)
+        req_export = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/export-n8n",
+            data=b"{}",
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req_export, timeout=5) as resp:
+            assert resp.status == 200
+            data = json.loads(resp.read().decode("utf-8"))
+            assert data["ok"] is True
+            assert data["result"]["approved_count"] == 1
+
+        # 6. POST /api/publish-dryrun sobre pieza aprobada
+        req_pub = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/publish-dryrun",
+            data=json.dumps({"item_id": first_item_id}).encode("utf-8"),
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req_pub, timeout=5) as resp:
+            assert resp.status == 200
+            data = json.loads(resp.read().decode("utf-8"))
+            assert data["ok"] is True
+            assert data["result"]["item"]["status"] == "PUBLISHED_DRYRUN"
+
+    finally:
+        srv.shutdown()
+        srv.server_close()
+
+    # 7. Validar CLI seed y qa-all sobre una DB temporal
+    cli_db = tmp_path / "cli_test.db"
+    cal = EditorialCalendar(db_path=cli_db)
+    seeded = cal.seed_all_topics()
+    assert len(seeded) == 28
+    qa_res = cal.run_qa_all()
+    assert qa_res["total"] == 28 and qa_res["passed"] == 28
+

@@ -113,6 +113,26 @@ class EditorialCalendar:
             created.append(item)
         return created
 
+    def seed_all_topics(self, *, channel: str = "instagram", weeks: tuple[int, ...] = (1, 2, 3, 4)) -> List[Dict[str, Any]]:
+        """Importa las 4 semanas de contenido clínico (28 tópicos) como borradores `DRAFT`."""
+        all_created: List[Dict[str, Any]] = []
+        for w in weeks:
+            all_created.extend(self.seed_from_weekly_plan(week=w, channel=channel))
+        return all_created
+
+    def run_qa_all(self, *, status_filter: Optional[str] = None) -> Dict[str, Any]:
+        """Ejecuta QA clínico sobre todas las piezas (o las filtradas por estado)."""
+        items = self.list_items(status=status_filter, limit=500)
+        results = {"total": len(items), "passed": 0, "failed": 0, "items": []}
+        for it in items:
+            res = self.run_qa(it["item_id"])
+            if res.get("qa_passed"):
+                results["passed"] += 1
+            else:
+                results["failed"] += 1
+            results["items"].append(res)
+        return results
+
     def run_qa(self, item_id: str) -> Dict[str, Any]:
         item = self.get_item(item_id)
         if not item:

@@ -2,6 +2,14 @@
 
 Lee `ROADMAP.md`, `ESTADO_ACTUAL.md`, `README.md` y documentación clínica. Conserva `video_engine/public/`: no borrar, reemplazar ni incluir accidentalmente. Usa dry-run hasta autorización. Todo contenido público exige QA clínico/marca y `PUBLICAR <ID>`; no automatizar WhatsApp clínico ni documentar datos de pacientes.
 
+**Estado Actual de CPAZ Media OS (`feat/cpaz-media-os`):**
+- Módulo funcional completo con 28 temas clínicos sembrados y auditados (28/28 PASS).
+- Submenú interactivo en `python3 cpaz.py` (opción `M`).
+- Dashboard interactivo en `tools/cpaz_media_os_dashboard.html` y servidor local `python3 -m media_os.cli serve`.
+- 100% pruebas unitarias y E2E superadas (`pytest tests/test_cpaz_media_os_e2e.py`).
+- Cero PII, cero publicaciones en vivo sin autorización explícita.
+
+
 
 ---
 

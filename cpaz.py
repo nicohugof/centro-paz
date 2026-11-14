@@ -75,7 +75,7 @@ def main():
                 marketing_agent.render_all_posts()
             elif choice.upper() == "M":
                 from media_os import cli as media_os_cli
-                media_os_cli.main(["dashboard"])
+                media_os_cli.interactive_menu()
             elif choice in ["0", "salir", "exit", "quit", "q"]:
                 print("\n🌿 Centro Paz en operación continua. Hasta pronto.\n")
                 break

@@ -10,6 +10,12 @@ Ecosistema digital centrado al 100% en la **Página Web ([www.centropaz.cl](http
 
 - **Arquitectura mínima verificada ([`docs/MEDIA_OS_ARQUITECTURA_Y_COMPARATIVA.md`](docs/MEDIA_OS_ARQUITECTURA_Y_COMPARATIVA.md)):** Auditoría comparativa de OpenPost (`AGPL-3.0`), BrightBean Studio (`AGPL-3.0`), Postiz (`AGPL-3.0`, descartado por 2-8 GB RAM), Activepieces (descartado para no duplicar `n8n`), Ollama (`MIT`, integrado local), ComfyUI (`GPL-3.0`, deshabilitado en Mac 8 GB), FFmpeg (`CLI` subprocess), Remotion (`video_engine/` reutilizado), Mixpost Lite, Umami y Shlink.
 - **Módulos locales implementados (`media_os/`):** firewall PII Ley 19.628 ([`media_os/privacy.py`](media_os/privacy.py)), SQLite WAL ([`media_os/storage.py`](media_os/storage.py)), inteligencia & QA clínico ([`media_os/intelligence.py`](media_os/intelligence.py)), estudio A/V `ffprobe`/`ffmpeg` ([`media_os/studio.py`](media_os/studio.py)), calendario editorial + gate `PUBLICAR <ID>` ([`media_os/calendar.py`](media_os/calendar.py)), publicadores dry-run/desacoplados ([`media_os/publishers.py`](media_os/publishers.py)), puente n8n aprobado-only ([`media_os/automation.py`](media_os/automation.py)), atribución UTM sin PII ([`media_os/attribution.py`](media_os/attribution.py)) y Dashboard Ejecutivo ([`tools/cpaz_media_os_dashboard.html`](tools/cpaz_media_os_dashboard.html)).
+- **Capacidades Operativas e Interactivas Validadas:**
+  - Calendario Editorial poblado con los **28 tópicos clínicos** oficiales.
+  - Auditoría de **QA Clínico 28/28 PASS** (verificación de arancel $45.000 CLP, Registro SIS Nº 667344 y ausencia de afirmaciones prohibidas).
+  - **Submenú interactivo en terminal** (`cpaz.py` opción `M` o `python3 -m media_os.cli`) para gestión en 1 paso: ver snapshot, poblar temas, auditar QA, aprobar (`PUBLICAR <ID>`), simular dry-run, exportar a n8n y abrir dashboard.
+  - **Dashboard Ejecutivo Web Interactivo** con botones de copiado rápido (`📋 Copiar "PUBLICAR <ID>"`), buscador y filtros de estado, y endpoints `POST` locales (`/api/seed`, `/api/qa-all`, `/api/approve`, `/api/publish-dryrun`, `/api/export-n8n`) con protección de acceso privado (loopback o Tailscale).
+  - **Suite de Pruebas Automatizadas:** `pytest tests/test_cpaz_media_os_e2e.py`: **7/7 PASS** en 5.16s.
 - **Resguardo clínico e integridad:** `video_engine/public/`, `data/patient_intakes.json`, las 54 páginas HTML y cuentas externas permanecen intactos y sin publicación en vivo.
 
 ## Evidencia actual del sistema y Cierre de PR #14
