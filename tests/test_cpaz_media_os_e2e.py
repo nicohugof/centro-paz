@@ -398,3 +398,84 @@ def test_dashboard_server_post_endpoints_and_batch_calendar(tmp_path):
     qa_res = cal.run_qa_all()
     assert qa_res["total"] == 28 and qa_res["passed"] == 28
 
+
+def test_dashboard_server_security_protections(tmp_path):
+    import threading
+    import urllib.error
+    import urllib.request
+
+    db_file = tmp_path / "sec_test.db"
+    srv = create_dashboard_server(
+        db_path=db_file,
+        host="127.0.0.1",
+        port=0,
+        output_path=tmp_path / "served_sec.html",
+    )
+    port = srv.server_address[1]
+    t = threading.Thread(target=srv.serve_forever, daemon=True)
+    t.start()
+    try:
+        # 1. Cabeceras de seguridad en GET
+        with urllib.request.urlopen(f"http://127.0.0.1:{port}/", timeout=5) as resp:
+            assert resp.headers.get("X-Content-Type-Options") == "nosniff"
+            assert resp.headers.get("X-Frame-Options") == "DENY"
+            assert "Content-Security-Policy" in resp.headers
+
+        # 2. Protección contra DNS Rebinding (Host no autorizado) -> HTTP 403
+        req_rebinding = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/snapshot",
+            headers={"Host": "attacker-rebinding.com:8765"},
+        )
+        with pytest.raises(urllib.error.HTTPError) as exc_info:
+            urllib.request.urlopen(req_rebinding, timeout=5)
+        assert exc_info.value.code == 403
+
+        # 3. Protección contra llamadas cross-site (Sec-Fetch-Site: cross-site) -> HTTP 403
+        req_cross_site = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/seed",
+            data=b"{}",
+            headers={"Content-Type": "application/json", "Sec-Fetch-Site": "cross-site"},
+            method="POST",
+        )
+        with pytest.raises(urllib.error.HTTPError) as exc_info:
+            urllib.request.urlopen(req_cross_site, timeout=5)
+        assert exc_info.value.code == 403
+
+        # 4. Protección contra CSRF (Origin malicioso) -> HTTP 403
+        req_bad_origin = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/seed",
+            data=b"{}",
+            headers={"Content-Type": "application/json", "Origin": "https://malicious-website.com"},
+            method="POST",
+        )
+        with pytest.raises(urllib.error.HTTPError) as exc_info:
+            urllib.request.urlopen(req_bad_origin, timeout=5)
+        assert exc_info.value.code == 403
+
+        # 5. Protección contra Payload excesivo (> 64 KB) -> HTTP 413
+        req_oversized = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/seed",
+            data=b"x" * 70000,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with pytest.raises(urllib.error.HTTPError) as exc_info:
+            urllib.request.urlopen(req_oversized, timeout=5)
+        assert exc_info.value.code == 413
+
+        # 6. Sanitización y validación estricta de item_id en /api/approve -> HTTP 400
+        req_malformed_item = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/approve",
+            data=json.dumps({"item_id": "' OR 1=1;--", "approval_token": "PUBLICAR test"}).encode("utf-8"),
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with pytest.raises(urllib.error.HTTPError) as exc_info:
+            urllib.request.urlopen(req_malformed_item, timeout=5)
+        assert exc_info.value.code == 400
+
+    finally:
+        srv.shutdown()
+        srv.server_close()
+
+

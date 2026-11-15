@@ -16,9 +16,11 @@ from __future__ import annotations
 import html
 import ipaddress
 import json
+import re
 from http.server import BaseHTTPRequestHandler, HTTPServer, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+from urllib.parse import urlparse
 
 _TAILSCALE_NET = ipaddress.ip_network("100.64.0.0/10")
 _LOOPBACK_NET = ipaddress.ip_network("127.0.0.0/8")
@@ -440,7 +442,14 @@ def render_dashboard_html(
       }}
       showToast(loadingMsg);
       try {{
-        const res = await fetch(endpoint, {{ method: 'POST', headers: {{ 'Content-Type': 'application/json' }} }});
+        const res = await fetch(endpoint, {{
+          method: 'POST',
+          headers: {{
+            'Content-Type': 'application/json',
+            'X-CPAZ-Action': 'media-os-dashboard'
+          }},
+          body: JSON.stringify({{}})
+        }});
         const data = await res.json();
         if (data.ok) {{
           showToast('Operación exitosa');
@@ -458,6 +467,9 @@ def render_dashboard_html(
 """
     dest.write_text(html_doc, encoding="utf-8")
     return dest
+
+
+MAX_BODY_BYTES = 64 * 1024  # 64 KB límite estricto para mitigar ataques de denegación de servicio
 
 
 def _is_loopback_host(host: str) -> bool:
@@ -486,6 +498,27 @@ def _is_allowed_client_ip(client_ip: str) -> bool:
         return False
 
 
+def _is_allowed_origin(origin: Optional[str]) -> bool:
+    if not origin:
+        return True
+    parsed = urlparse(origin)
+    host = (parsed.hostname or "").lower()
+    if host in ("127.0.0.1", "localhost", "::1"):
+        return True
+    return _is_tailscale_host(host)
+
+
+def _validate_host_header(host_header: Optional[str], *, allow_tailscale: bool) -> bool:
+    if not host_header:
+        return True
+    bare_host = host_header.split(":")[0].strip().lower()
+    if bare_host in ("127.0.0.1", "localhost", "::1"):
+        return True
+    if allow_tailscale and _is_tailscale_host(bare_host):
+        return True
+    return False
+
+
 def create_dashboard_server(
     *,
     db_path: Optional[Path | str] = None,
@@ -504,16 +537,30 @@ def create_dashboard_server(
         )
 
     class _Handler(BaseHTTPRequestHandler):
+        def _send_security_headers(self) -> None:
+            self.send_header("X-Content-Type-Options", "nosniff")
+            self.send_header("X-Frame-Options", "DENY")
+            self.send_header(
+                "Content-Security-Policy",
+                "default-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'",
+            )
+            self.send_header("Referrer-Policy", "strict-origin-when-cross-origin")
+
         def do_GET(self) -> None:  # noqa: N802
             client_ip = self.client_address[0] if self.client_address else ""
             if not _is_allowed_client_ip(client_ip):
                 self.send_error(403, "Solo acceso privado loopback o Tailscale.")
                 return
 
+            if not _validate_host_header(self.headers.get("Host"), allow_tailscale=allow_tailscale):
+                self.send_error(403, "Host no autorizado (protección anti DNS rebinding activa).")
+                return
+
             snap = build_executive_snapshot(db_path=db_path, probe_videos=False)
             if self.path.startswith("/api/snapshot"):
                 body = json.dumps(snap, ensure_ascii=False, indent=2).encode("utf-8")
                 self.send_response(200)
+                self._send_security_headers()
                 self.send_header("Content-Type", "application/json; charset=utf-8")
                 self.send_header("Cache-Control", "no-store")
                 self.send_header("Content-Length", str(len(body)))
@@ -524,6 +571,7 @@ def create_dashboard_server(
             html_path = render_dashboard_html(snap, output_path=output_path)
             body = html_path.read_bytes()
             self.send_response(200)
+            self._send_security_headers()
             self.send_header("Content-Type", "text/html; charset=utf-8")
             self.send_header("Cache-Control", "no-store")
             self.send_header("Content-Length", str(len(body)))
@@ -536,7 +584,36 @@ def create_dashboard_server(
                 self.send_error(403, "Solo acceso privado loopback o Tailscale.")
                 return
 
-            length = int(self.headers.get("Content-Length", 0))
+            if not _validate_host_header(self.headers.get("Host"), allow_tailscale=allow_tailscale):
+                self.send_error(403, "Host no autorizado (protección anti DNS rebinding activa).")
+                return
+
+            # Mitigación CSRF y Cross-Origin: rechazar explícitamente orígenes ajenos y Sec-Fetch-Site cross-site
+            if self.headers.get("Sec-Fetch-Site") == "cross-site":
+                self.send_error(403, "Petición cross-site bloqueada por política CSRF.")
+                return
+
+            origin = self.headers.get("Origin")
+            if origin and not _is_allowed_origin(origin):
+                self.send_error(403, "Origen HTTP no autorizado (protección anti-CSRF activa).")
+                return
+
+            content_length_str = self.headers.get("Content-Length")
+            if content_length_str is not None:
+                try:
+                    length = int(content_length_str)
+                    if length < 0:
+                        self.send_error(400, "Content-Length inválido.")
+                        return
+                    if length > MAX_BODY_BYTES:
+                        self.send_error(413, "Cuerpo de solicitud excede el límite permitido (64 KB).")
+                        return
+                except ValueError:
+                    self.send_error(400, "Content-Length inválido.")
+                    return
+            else:
+                length = 0
+
             raw_body = self.rfile.read(length) if length > 0 else b"{}"
             try:
                 payload = json.loads(raw_body.decode("utf-8")) if raw_body else {}
@@ -558,13 +635,17 @@ def create_dashboard_server(
                     resp = {"ok": True, "action": "qa-all", "results": results}
                 elif self.path.startswith("/api/approve"):
                     item_id = str(payload.get("item_id", "")).strip()
-                    token = str(payload.get("approval_token", "")).strip()
-                    reviewer = str(payload.get("reviewer", "Nicolas")).strip()
-                    reason = str(payload.get("reason", "Aprobación desde Dashboard CPAZ")).strip()
+                    if not re.match(r"^[a-zA-Z0-9_-]{3,64}$", item_id):
+                        raise ValueError(f"Identificador de ítem inválido: '{item_id}'.")
+                    token = str(payload.get("approval_token", ""))[:128].strip()
+                    reviewer = str(payload.get("reviewer", "Nicolas"))[:64].strip()
+                    reason = str(payload.get("reason", "Aprobación desde Dashboard CPAZ"))[:256].strip()
                     item = cal_inst.approve_item(item_id, approval_token=token, reviewer=reviewer, reason=reason)
                     resp = {"ok": True, "action": "approve", "item": item}
                 elif self.path.startswith("/api/publish-dryrun"):
                     item_id = str(payload.get("item_id", "")).strip()
+                    if not re.match(r"^[a-zA-Z0-9_-]{3,64}$", item_id):
+                        raise ValueError(f"Identificador de ítem inválido: '{item_id}'.")
                     item = cal_inst.get_item(item_id)
                     if not item:
                         raise KeyError(f"Pieza no encontrada: {item_id}")
@@ -581,6 +662,7 @@ def create_dashboard_server(
                 assert_no_pii(resp, field_path="api_post_response")
                 out_bytes = json.dumps(resp, ensure_ascii=False).encode("utf-8")
                 self.send_response(200)
+                self._send_security_headers()
                 self.send_header("Content-Type", "application/json; charset=utf-8")
                 self.send_header("Cache-Control", "no-store")
                 self.send_header("Content-Length", str(len(out_bytes)))
@@ -590,15 +672,17 @@ def create_dashboard_server(
                 err_resp = {"ok": False, "error": str(err)}
                 out_bytes = json.dumps(err_resp, ensure_ascii=False).encode("utf-8")
                 self.send_response(400)
+                self._send_security_headers()
                 self.send_header("Content-Type", "application/json; charset=utf-8")
                 self.send_header("Cache-Control", "no-store")
                 self.send_header("Content-Length", str(len(out_bytes)))
                 self.end_headers()
                 self.wfile.write(out_bytes)
-            except Exception as exc:
-                err_resp = {"ok": False, "error": f"Error interno: {exc}"}
+            except Exception:
+                err_resp = {"ok": False, "error": "Error interno del servidor."}
                 out_bytes = json.dumps(err_resp, ensure_ascii=False).encode("utf-8")
                 self.send_response(500)
+                self._send_security_headers()
                 self.send_header("Content-Type", "application/json; charset=utf-8")
                 self.send_header("Cache-Control", "no-store")
                 self.send_header("Content-Length", str(len(out_bytes)))

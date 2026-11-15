@@ -14,8 +14,8 @@ Ecosistema digital centrado al 100% en la **Página Web ([www.centropaz.cl](http
   - Calendario Editorial poblado con los **28 tópicos clínicos** oficiales.
   - Auditoría de **QA Clínico 28/28 PASS** (verificación de arancel $45.000 CLP, Registro SIS Nº 667344 y ausencia de afirmaciones prohibidas).
   - **Submenú interactivo en terminal** (`cpaz.py` opción `M` o `python3 -m media_os.cli`) para gestión en 1 paso: ver snapshot, poblar temas, auditar QA, aprobar (`PUBLICAR <ID>`), simular dry-run, exportar a n8n y abrir dashboard.
-  - **Dashboard Ejecutivo Web Interactivo** con botones de copiado rápido (`📋 Copiar "PUBLICAR <ID>"`), buscador y filtros de estado, y endpoints `POST` locales (`/api/seed`, `/api/qa-all`, `/api/approve`, `/api/publish-dryrun`, `/api/export-n8n`) con protección de acceso privado (loopback o Tailscale).
-  - **Suite de Pruebas Automatizadas:** `pytest tests/test_cpaz_media_os_e2e.py`: **7/7 PASS** en 5.16s.
+  - **Dashboard Ejecutivo Web Interactivo** con botones de copiado rápido (`📋 Copiar "PUBLICAR <ID>"`), buscador y filtros de estado, endpoints `POST` locales (`/api/seed`, `/api/qa-all`, `/api/approve`, `/api/publish-dryrun`, `/api/export-n8n`) con blindaje de seguridad verificado (anti-CSRF, anti-DNS Rebinding, límite de 64 KB en payload y cabeceras de protección CSP/X-Frame-Options/X-Content-Type-Options).
+  - **Suite de Pruebas Automatizadas:** `pytest tests/test_cpaz_media_os_e2e.py`: **8/8 PASS** (100% éxito en E2E y seguridad de endpoints).
 - **Resguardo clínico e integridad:** `video_engine/public/`, `data/patient_intakes.json`, las 54 páginas HTML y cuentas externas permanecen intactos y sin publicación en vivo.
 
 ## Evidencia actual del sistema y Cierre de PR #14
