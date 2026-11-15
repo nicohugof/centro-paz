@@ -5,7 +5,12 @@ Lee `ROADMAP.md`, `ESTADO_ACTUAL.md`, `README.md` y documentación clínica. Con
 **Estado Actual de CPAZ Media OS (`feat/cpaz-media-os`):**
 - Módulo funcional completo con 28 contenidos clínicos sembrados y auditados (28/28 PASS, 28 infografías PNG verificadas en `assets/instagram/`).
 - Submenú interactivo en `python3 cpaz.py` (opción `M`).
-- Dashboard interactivo en `tools/cpaz_media_os_dashboard.html` y servidor local `python3 -m media_os.cli serve` con autenticación por token de sesión criptográfico (`secrets.token_hex(24)`), login seguro sin tokens en URLs (`/api/login`), cookie de sesión `HttpOnly; SameSite=Strict`, y `/api/snapshot` protegido (`401 Unauthorized` ante peticiones anónimas).
+- Dashboard interactivo en `tools/cpaz_media_os_dashboard.html` y servidor local `python3 -m media_os.cli serve` con arquitectura de seguridad de nivel bancario:
+  * Sesión de navegador autenticada **exclusivamente mediante cookie `HttpOnly; SameSite=Strict`** en memoria con TTL de expiración (8h) e invalidación (`POST /api/logout`).
+  * **Cero exposición de secretos de sesión en el DOM o JavaScript**: la metaetiqueta anterior fue eliminada por completo; mutaciones desde navegador exigen token CSRF independiente (`X-CSRF-Token`).
+  * Clientes programáticos y CLI conservan compatibilidad vía cabecera `Authorization: Bearer <master_token>`.
+  * Política de Seguridad de Contenido (CSP) con **nonce criptográfico dinámico (`'nonce-{nonce}'`)**, eliminando `'unsafe-inline'` para neutralizar vectores XSS.
+  * `/api/snapshot` estrictamente protegido (`401 Unauthorized` ante peticiones anónimas).
 - Blindaje de seguridad HTTP multicapa verificado: anti-DNS rebinding, anti-CSRF (`Sec-Fetch-Site`, `Origin`, `Referer`), rechazo de preflight CORS `OPTIONS` (405), límite de 64 KB, descarte de tokens en query strings (`?token=`), y permisos restrictivos `0600` en cola de publicación.
 - 100% pruebas unitarias, de seguridad y E2E superadas (`pytest tests/test_cpaz_media_os_e2e.py` 8/8 PASS; 79 pruebas únicas en el repositorio).
 - Todos los 28 contenidos en estado `CLINICAL_QA`: Cero PII, cero publicaciones en vivo sin aprobación explícita humana (`PUBLICAR <ID>`).

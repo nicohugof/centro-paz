@@ -20,9 +20,10 @@ import json
 import os
 import re
 import secrets
+import time
 from http.server import BaseHTTPRequestHandler, HTTPServer, ThreadingHTTPServer
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 from urllib.parse import parse_qs, urlparse
 
 _TAILSCALE_NET = ipaddress.ip_network("100.64.0.0/10")
@@ -50,6 +51,44 @@ OSS_MATRIX_SUMMARY: List[Dict[str, str]] = [
     {"tool": "Activepieces", "license": "MIT + EE prop.", "decision": "DESCARTADO (2-4 GB)", "note": "Evita duplicar n8n activo en Oracle"},
     {"tool": "ComfyUI", "license": "GPL-3.0", "decision": "DESHABILITADO (16-32 GB)", "note": "Inviable en Mac 8 GB; HTML->Chrome PNG es determinista"},
 ]
+
+
+SESSION_TTL_SECONDS = 8 * 3600  # 8 horas de validez de sesión local
+
+
+class SessionManager:
+    """Administra sesiones de usuario en memoria con TTL y tokens CSRF independientes."""
+
+    def __init__(self, master_token: str, ttl_seconds: int = SESSION_TTL_SECONDS) -> None:
+        self.master_token = master_token
+        self.ttl_seconds = ttl_seconds
+        self._sessions: Dict[str, Dict[str, Any]] = {}
+
+    def create_session(self) -> Tuple[str, str]:
+        session_id = secrets.token_hex(24)
+        csrf_token = secrets.token_hex(16)
+        self._sessions[session_id] = {
+            "created_at": time.time(),
+            "csrf_token": csrf_token,
+        }
+        return session_id, csrf_token
+
+    def validate_session(self, session_id: str) -> Optional[Dict[str, Any]]:
+        if not session_id or not isinstance(session_id, str):
+            return None
+        sess = self._sessions.get(session_id)
+        if not sess:
+            return None
+        if time.time() - sess["created_at"] > self.ttl_seconds:
+            self._sessions.pop(session_id, None)
+            return None
+        return sess
+
+    def invalidate_session(self, session_id: str) -> bool:
+        if session_id in self._sessions:
+            del self._sessions[session_id]
+            return True
+        return False
 
 
 def build_executive_snapshot(
@@ -121,7 +160,8 @@ def build_executive_snapshot(
 def build_dashboard_html(
     snapshot: Dict[str, Any],
     *,
-    session_token: str = "",
+    csrf_token: str = "",
+    nonce: str = "",
 ) -> str:
     tot = snapshot["attribution"]["totals"]
     cal = snapshot["calendar_summary"]
@@ -145,7 +185,7 @@ def build_dashboard_html(
             f"<td>{'✅ SI' if item['qa_passed'] else '⚠️ PEND'}</td>"
             f"<td>"
             f"<div class='action-cell'>"
-            f"<button type='button' class='btn-copy' onclick='copyCmd(\"{html.escape(token_cmd)}\")' title='Copiar comando al portapapeles'>📋 Copiar</button>"
+            f"<button type='button' class='btn-copy' data-copy='{html.escape(token_cmd)}' title='Copiar comando al portapapeles'>📋 Copiar</button>"
             f"<code>{html.escape(token_cmd)}</code>"
             f"</div>"
             f"</td>"
@@ -185,7 +225,7 @@ def build_dashboard_html(
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="cpaz-session-token" content="{html.escape(session_token)}" />
+  <meta name="cpaz-csrf-token" content="{html.escape(csrf_token)}" />
   <title>CPAZ Media OS — Dashboard Ejecutivo</title>
   <style>
     :root {{
@@ -336,20 +376,21 @@ def build_dashboard_html(
       <h2>1. Calendario Editorial y Puerta de Aprobación Humana (PUBLICAR &lt;ID&gt;)</h2>
       <div class="table-toolbar">
         <div class="search-box">
-          <input type="text" id="searchInput" class="search-input" placeholder="🔍 Filtrar por tema, ID, canal o estado..." oninput="filterTable()" />
+          <input type="text" id="searchInput" class="search-input" placeholder="🔍 Filtrar por tema, ID, canal o estado..." />
         </div>
         <div class="filter-pills">
-          <button type="button" class="pill active" onclick="setFilter('ALL', this)">Todos ({len(items)})</button>
-          <button type="button" class="pill" onclick="setFilter('DRAFT', this)">Borradores ({cal.get('DRAFT', 0)})</button>
-          <button type="button" class="pill" onclick="setFilter('CLINICAL_QA', this)">QA ({cal.get('CLINICAL_QA', 0)})</button>
-          <button type="button" class="pill" onclick="setFilter('APPROVED', this)">Aprobados ({cal.get('APPROVED', 0)})</button>
-          <button type="button" class="pill" onclick="setFilter('PUBLISHED_DRYRUN', this)">Dry-Run ({cal.get('PUBLISHED_DRYRUN', 0)})</button>
+          <button type="button" class="pill active" data-filter="ALL">Todos ({len(items)})</button>
+          <button type="button" class="pill" data-filter="DRAFT">Borradores ({cal.get('DRAFT', 0)})</button>
+          <button type="button" class="pill" data-filter="CLINICAL_QA">QA ({cal.get('CLINICAL_QA', 0)})</button>
+          <button type="button" class="pill" data-filter="APPROVED">Aprobados ({cal.get('APPROVED', 0)})</button>
+          <button type="button" class="pill" data-filter="PUBLISHED_DRYRUN">Dry-Run ({cal.get('PUBLISHED_DRYRUN', 0)})</button>
         </div>
         <div class="ops-actions">
-          <button type="button" class="btn-ops" onclick="runApi('/api/seed', 'Poblando 28 tópicos...')">📥 Poblar 28 Temas</button>
-          <button type="button" class="btn-ops" onclick="runApi('/api/qa-all', 'Auditando QA clínico...')">🩺 Auditar QA</button>
-          <button type="button" class="btn-ops" onclick="runApi('/api/export-n8n', 'Exportando n8n...')">🚀 Exportar n8n</button>
-          <button type="button" class="btn-ops secondary" onclick="location.reload()">🔄 Refrescar</button>
+          <button type="button" class="btn-ops" data-action="/api/seed" data-msg="Poblando 28 tópicos...">📥 Poblar 28 Temas</button>
+          <button type="button" class="btn-ops" data-action="/api/qa-all" data-msg="Auditando QA clínico...">🩺 Auditar QA</button>
+          <button type="button" class="btn-ops" data-action="/api/export-n8n" data-msg="Exportando n8n...">🚀 Exportar n8n</button>
+          <button type="button" class="btn-ops secondary" id="btnRefresh">🔄 Refrescar</button>
+          <button type="button" class="btn-ops secondary" id="btnLogout" title="Cerrar sesión activa">🚪 Salir</button>
         </div>
       </div>
       <table id="editorialTable">
@@ -386,10 +427,11 @@ def build_dashboard_html(
   </div>
   <div id="toast" class="toast"></div>
   <script id="cpaz-media-os-snapshot" type="application/json">{safe_json}</script>
-  <script>
+  <script nonce="{nonce}">
     let currentStatusFilter = 'ALL';
     function showToast(msg, isError = false) {{
       const t = document.getElementById('toast');
+      if (!t) return;
       t.textContent = msg;
       t.className = 'toast show' + (isError ? ' error' : '');
       setTimeout(() => {{ t.className = 'toast'; }}, 3200);
@@ -425,7 +467,8 @@ def build_dashboard_html(
     }}
 
     function filterTable() {{
-      const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+      const input = document.getElementById('searchInput');
+      const query = (input ? input.value : '').toLowerCase().trim();
       const rows = document.querySelectorAll('#editorialTable tbody tr:not(.empty-row)');
       rows.forEach(tr => {{
         const text = tr.getAttribute('data-search') || '';
@@ -442,16 +485,15 @@ def build_dashboard_html(
         return;
       }}
       showToast(loadingMsg);
-      const metaToken = document.querySelector('meta[name="cpaz-session-token"]');
-      const sessionToken = metaToken ? (metaToken.getAttribute('content') || '') : '';
+      const csrfMeta = document.querySelector('meta[name="cpaz-csrf-token"]');
+      const csrfToken = csrfMeta ? (csrfMeta.getAttribute('content') || '') : '';
       try {{
         const res = await fetch(endpoint, {{
           method: 'POST',
           headers: {{
             'Content-Type': 'application/json',
             'X-CPAZ-Action': 'media-os-dashboard',
-            'X-CPAZ-Session-Token': sessionToken,
-            'Authorization': 'Bearer ' + sessionToken
+            'X-CSRF-Token': csrfToken
           }},
           body: JSON.stringify({{}})
         }});
@@ -466,6 +508,58 @@ def build_dashboard_html(
         showToast('Error de red al conectar con el servidor local: ' + err.message, true);
       }}
     }}
+
+    async function logout() {{
+      const csrfMeta = document.querySelector('meta[name="cpaz-csrf-token"]');
+      const csrfToken = csrfMeta ? (csrfMeta.getAttribute('content') || '') : '';
+      try {{
+        await fetch('/api/logout', {{
+          method: 'POST',
+          headers: {{
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': csrfToken
+          }},
+          body: JSON.stringify({{}})
+        }});
+      }} finally {{
+        location.reload();
+      }}
+    }}
+
+    document.addEventListener('DOMContentLoaded', () => {{
+      const search = document.getElementById('searchInput');
+      if (search) {{
+        search.addEventListener('input', filterTable);
+      }}
+
+      document.querySelectorAll('.filter-pills .pill').forEach(btn => {{
+        btn.addEventListener('click', () => {{
+          setFilter(btn.getAttribute('data-filter') || 'ALL', btn);
+        }});
+      }});
+
+      document.querySelectorAll('.ops-actions [data-action]').forEach(btn => {{
+        btn.addEventListener('click', () => {{
+          runApi(btn.getAttribute('data-action'), btn.getAttribute('data-msg') || 'Procesando...');
+        }});
+      }});
+
+      const btnRef = document.getElementById('btnRefresh');
+      if (btnRef) {{
+        btnRef.addEventListener('click', () => location.reload());
+      }}
+
+      const btnOut = document.getElementById('btnLogout');
+      if (btnOut) {{
+        btnOut.addEventListener('click', logout);
+      }}
+
+      document.querySelectorAll('.btn-copy[data-copy]').forEach(btn => {{
+        btn.addEventListener('click', () => {{
+          copyCmd(btn.getAttribute('data-copy'));
+        }});
+      }});
+    }});
   </script>
 </body>
 </html>
@@ -477,29 +571,30 @@ def render_dashboard_html(
     snapshot: Dict[str, Any],
     *,
     output_path: Optional[Path | str] = None,
-    session_token: str = "",
+    csrf_token: str = "",
+    nonce: str = "",
 ) -> Path:
     dest = Path(output_path) if output_path else DEFAULT_DASHBOARD_HTML
     dest.parent.mkdir(parents=True, exist_ok=True)
-    html_doc = build_dashboard_html(snapshot, session_token=session_token)
+    html_doc = build_dashboard_html(snapshot, csrf_token=csrf_token, nonce=nonce)
     dest.write_text(html_doc, encoding="utf-8")
     return dest
 
 
-def build_dashboard_login_html() -> str:
+def build_dashboard_login_html(*, nonce: str = "") -> str:
     """Genera la interfaz HTML minimalista de bloqueo para el Dashboard de CPAZ Media OS.
     
     No expone ningún dato confidencial, métrica de facturación ni token en claro.
     """
-    return """<!DOCTYPE html>
+    return f"""<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="cpaz-session-token" content="" />
+  <meta name="cpaz-csrf-token" content="" />
   <title>CPAZ Media OS — Acceso Protegido</title>
   <style>
-    :root {
+    :root {{
       --bg: #f6f8f6;
       --card: #ffffff;
       --ink: #1b2420;
@@ -508,9 +603,9 @@ def build_dashboard_login_html() -> str:
       --accent-soft: #e7f3ee;
       --border: #dde5df;
       --err: #b00020;
-    }
-    * { box-sizing: border-box; }
-    body {
+    }}
+    * {{ box-sizing: border-box; }}
+    body {{
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: var(--bg);
@@ -520,8 +615,8 @@ def build_dashboard_login_html() -> str:
       align-items: center;
       min-height: 100vh;
       padding: 20px;
-    }
-    .login-card {
+    }}
+    .login-card {{
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 16px;
@@ -529,41 +624,41 @@ def build_dashboard_login_html() -> str:
       max-width: 440px;
       width: 100%;
       box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-    }
-    h1 {
+    }}
+    h1 {{
       margin: 0 0 8px 0;
       font-size: 1.4rem;
       color: var(--accent);
-    }
-    p {
+    }}
+    p {{
       margin: 0 0 20px 0;
       font-size: 0.9rem;
       color: var(--muted);
       line-height: 1.4;
-    }
-    .form-group {
+    }}
+    .form-group {{
       margin-bottom: 16px;
-    }
-    label {
+    }}
+    label {{
       display: block;
       font-size: 0.8rem;
       text-transform: uppercase;
       font-weight: 600;
       color: var(--muted);
       margin-bottom: 6px;
-    }
-    input[type="password"] {
+    }}
+    input[type="password"] {{
       width: 100%;
       padding: 10px 12px;
       border: 1px solid var(--border);
       border-radius: 8px;
       font-size: 0.95rem;
-    }
-    input[type="password"]:focus {
+    }}
+    input[type="password"]:focus {{
       outline: none;
       border-color: var(--accent);
-    }
-    button {
+    }}
+    button {{
       width: 100%;
       padding: 11px;
       background: var(--accent);
@@ -573,16 +668,16 @@ def build_dashboard_login_html() -> str:
       font-weight: 600;
       font-size: 0.95rem;
       cursor: pointer;
-    }
-    button:hover {
+    }}
+    button:hover {{
       background: #235846;
-    }
-    .err-msg {
+    }}
+    .err-msg {{
       color: var(--err);
       font-size: 0.85rem;
       margin-top: 10px;
       display: none;
-    }
+    }}
   </style>
 </head>
 <body>
@@ -593,69 +688,95 @@ def build_dashboard_login_html() -> str:
       <label for="tokenInput">Token de Sesión</label>
       <input type="password" id="tokenInput" placeholder="Token efímero de 48 caracteres..." autocomplete="off" />
     </div>
-    <button type="button" onclick="login()">Desbloquear Dashboard</button>
+    <button type="button" id="btnLogin">Desbloquear Dashboard</button>
     <div id="errMsg" class="err-msg"></div>
   </div>
-  <script>
-    async function login() {
-      const token = document.getElementById('tokenInput').value.trim();
+  <script nonce="{nonce}">
+    async function doLogin() {{
+      const tokenInput = document.getElementById('tokenInput');
+      const token = tokenInput ? tokenInput.value.trim() : '';
       const errDiv = document.getElementById('errMsg');
-      errDiv.style.display = 'none';
-      if (!token) {
-        errDiv.textContent = 'Por favor ingrese el token de sesión.';
-        errDiv.style.display = 'block';
-        return;
-      }
-      try {
-        const res = await fetch('/api/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ token })
-        });
-        const data = await res.json();
-        if (data.ok) {
-          location.reload();
-        } else {
-          errDiv.textContent = data.error || 'Token inválido.';
+      if (errDiv) errDiv.style.display = 'none';
+      if (!token) {{
+        if (errDiv) {{
+          errDiv.textContent = 'Por favor ingrese el token de sesión.';
           errDiv.style.display = 'block';
-        }
-      } catch (err) {
-        errDiv.textContent = 'Error de conexión: ' + err.message;
-        errDiv.style.display = 'block';
-      }
-    }
-    document.getElementById('tokenInput').addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') login();
-    });
+        }}
+        return;
+      }}
+      try {{
+        const res = await fetch('/api/login', {{
+          method: 'POST',
+          headers: {{ 'Content-Type': 'application/json' }},
+          body: JSON.stringify({{ token }})
+        }});
+        const data = await res.json();
+        if (data.ok) {{
+          location.reload();
+        }} else {{
+          if (errDiv) {{
+            errDiv.textContent = data.error || 'Token inválido.';
+            errDiv.style.display = 'block';
+          }}
+        }}
+      }} catch (err) {{
+        if (errDiv) {{
+          errDiv.textContent = 'Error de conexión: ' + err.message;
+          errDiv.style.display = 'block';
+        }}
+      }}
+    }}
+    document.addEventListener('DOMContentLoaded', () => {{
+      const btn = document.getElementById('btnLogin');
+      if (btn) btn.addEventListener('click', doLogin);
+      const inp = document.getElementById('tokenInput');
+      if (inp) inp.addEventListener('keydown', (e) => {{
+        if (e.key === 'Enter') doLogin();
+      }});
+    }});
   </script>
 </body>
 </html>
 """
 
 
-def _extract_token_from_request(headers: Any) -> str:
-    """Extrae el token de autenticación desde cabeceras HTTP o cookies de sesión.
+def _authenticate_request(
+    headers: Any,
+    session_mgr: SessionManager,
+    master_token: str,
+) -> Tuple[bool, str, Optional[Dict[str, Any]]]:
+    """Determina si la petición HTTP está autenticada y mediante qué mecanismo.
     
-    Descarta expresamente parámetros en URLs (?token=) para mitigar fugas en historial y referer.
+    Retorna:
+        (is_authenticated, auth_type, session_data)
+        auth_type: "bearer" (API/CLI programática con token maestro),
+                   "cookie" (sesión de navegador con HttpOnly cookie),
+                   o "" (no autenticado).
     """
     auth_header = headers.get("Authorization") or ""
     if auth_header.startswith("Bearer "):
         token = auth_header[7:].strip()
-        if token:
-            return token
+        if token and secrets.compare_digest(token, master_token):
+            return True, "bearer", None
+
     custom_header = headers.get("X-CPAZ-Session-Token") or ""
-    if custom_header.strip():
-        return custom_header.strip()
+    if custom_header.strip() and secrets.compare_digest(custom_header.strip(), master_token):
+        return True, "bearer", None
+
     cookie_header = headers.get("Cookie") or ""
     if cookie_header:
         try:
             simple_cookie = http.cookies.SimpleCookie()
             simple_cookie.load(cookie_header)
             if "cpaz_session" in simple_cookie:
-                return simple_cookie["cpaz_session"].value.strip()
+                sid = simple_cookie["cpaz_session"].value.strip()
+                sess = session_mgr.validate_session(sid)
+                if sess:
+                    return True, "cookie", sess
         except Exception:
             pass
-    return ""
+
+    return False, "", None
 
 
 MAX_BODY_BYTES = 64 * 1024  # 64 KB límite estricto para mitigar ataques de denegación de servicio
@@ -727,15 +848,37 @@ def create_dashboard_server(
         )
 
     active_token = session_token or os.getenv("CPAZ_MEDIA_OS_SESSION_TOKEN") or secrets.token_hex(24)
+    session_mgr = SessionManager(master_token=active_token)
 
     class _Handler(BaseHTTPRequestHandler):
-        def _send_security_headers(self) -> None:
+        def _send_security_headers(self, nonce: str = "") -> None:
             self.send_header("X-Content-Type-Options", "nosniff")
             self.send_header("X-Frame-Options", "DENY")
-            self.send_header(
-                "Content-Security-Policy",
-                "default-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'",
-            )
+            if nonce:
+                csp = (
+                    f"default-src 'self'; "
+                    f"script-src 'self' 'nonce-{nonce}'; "
+                    f"style-src 'self' 'unsafe-inline'; "
+                    f"img-src 'self' data:; "
+                    f"connect-src 'self'; "
+                    f"frame-ancestors 'none'; "
+                    f"object-src 'none'; "
+                    f"base-uri 'self'; "
+                    f"form-action 'self'"
+                )
+            else:
+                csp = (
+                    "default-src 'self'; "
+                    "script-src 'self'; "
+                    "style-src 'self' 'unsafe-inline'; "
+                    "img-src 'self' data:; "
+                    "connect-src 'self'; "
+                    "frame-ancestors 'none'; "
+                    "object-src 'none'; "
+                    "base-uri 'self'; "
+                    "form-action 'self'"
+                )
+            self.send_header("Content-Security-Policy", csp)
             self.send_header("Referrer-Policy", "strict-origin-when-cross-origin")
 
         def do_OPTIONS(self) -> None:  # noqa: N802
@@ -754,8 +897,7 @@ def create_dashboard_server(
                 self.send_error(403, "Host no autorizado (protección anti DNS rebinding activa).")
                 return
 
-            token = _extract_token_from_request(self.headers)
-            is_authenticated = bool(token and secrets.compare_digest(token, active_token))
+            is_authenticated, auth_type, sess = _authenticate_request(self.headers, session_mgr, active_token)
 
             clean_path = self.path.split("?")[0].rstrip("/") or "/"
             if clean_path == "/api/snapshot":
@@ -774,18 +916,16 @@ def create_dashboard_server(
                 return
 
             if clean_path in ("/", "/index.html"):
+                nonce = secrets.token_hex(16)
                 if is_authenticated:
                     snap = build_executive_snapshot(db_path=db_path, probe_videos=False)
-                    if output_path:
-                        html_path = render_dashboard_html(snap, output_path=output_path, session_token=active_token)
-                        body = html_path.read_bytes()
-                    else:
-                        body = build_dashboard_html(snap, session_token=active_token).encode("utf-8")
+                    csrf_tok = sess["csrf_token"] if (sess and "csrf_token" in sess) else ""
+                    body = build_dashboard_html(snap, csrf_token=csrf_tok, nonce=nonce).encode("utf-8")
                 else:
-                    body = build_dashboard_login_html().encode("utf-8")
+                    body = build_dashboard_login_html(nonce=nonce).encode("utf-8")
 
                 self.send_response(200)
-                self._send_security_headers()
+                self._send_security_headers(nonce=nonce)
                 self.send_header("Content-Type", "text/html; charset=utf-8")
                 self.send_header("Cache-Control", "no-store")
                 self.send_header("Content-Length", str(len(body)))
@@ -853,12 +993,17 @@ def create_dashboard_server(
             if clean_path == "/api/login":
                 presented = payload.get("token", "").strip() if isinstance(payload, dict) else ""
                 if secrets.compare_digest(presented, active_token):
-                    resp = {"ok": True, "message": "Sesión autenticada correctamente."}
+                    session_id, csrf_tok = session_mgr.create_session()
+                    resp = {
+                        "ok": True,
+                        "csrf_token": csrf_tok,
+                        "message": "Sesión autenticada correctamente.",
+                    }
                     out_bytes = json.dumps(resp).encode("utf-8")
                     self.send_response(200)
                     self._send_security_headers()
                     self.send_header("Content-Type", "application/json; charset=utf-8")
-                    self.send_header("Set-Cookie", f"cpaz_session={active_token}; Path=/; SameSite=Strict; HttpOnly")
+                    self.send_header("Set-Cookie", f"cpaz_session={session_id}; Path=/; SameSite=Strict; HttpOnly")
                     self.send_header("Cache-Control", "no-store")
                     self.send_header("Content-Length", str(len(out_bytes)))
                     self.end_headers()
@@ -867,6 +1012,32 @@ def create_dashboard_server(
                 else:
                     self.send_error(401, "Token de sesión inválido.")
                     return
+
+            # Endpoint de cierre de sesión (/api/logout) para invalidar cookie y sesión
+            if clean_path == "/api/logout":
+                cookie_header = self.headers.get("Cookie") or ""
+                if cookie_header:
+                    try:
+                        sc = http.cookies.SimpleCookie()
+                        sc.load(cookie_header)
+                        if "cpaz_session" in sc:
+                            session_mgr.invalidate_session(sc["cpaz_session"].value.strip())
+                    except Exception:
+                        pass
+                resp = {"ok": True, "message": "Sesión cerrada correctamente."}
+                out_bytes = json.dumps(resp).encode("utf-8")
+                self.send_response(200)
+                self._send_security_headers()
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header(
+                    "Set-Cookie",
+                    "cpaz_session=; Path=/; Max-Age=0; SameSite=Strict; HttpOnly",
+                )
+                self.send_header("Cache-Control", "no-store")
+                self.send_header("Content-Length", str(len(out_bytes)))
+                self.end_headers()
+                self.wfile.write(out_bytes)
+                return
 
             valid_endpoints = (
                 "/api/seed",
@@ -880,10 +1051,18 @@ def create_dashboard_server(
                 return
 
             # Autenticación obligatoria en todos los endpoints operativos
-            presented_token = _extract_token_from_request(self.headers)
-            if not secrets.compare_digest(presented_token, active_token):
+            is_authenticated, auth_type, sess = _authenticate_request(self.headers, session_mgr, active_token)
+            if not is_authenticated:
                 self.send_error(401, "Autenticación requerida: token de sesión inválido o ausente.")
                 return
+
+            # Validación de CSRF Token cuando se usa sesión basada en Cookie
+            if auth_type == "cookie":
+                csrf_header = self.headers.get("X-CSRF-Token") or ""
+                expected_csrf = sess.get("csrf_token", "") if sess else ""
+                if not expected_csrf or not secrets.compare_digest(csrf_header, expected_csrf):
+                    self.send_error(403, "Token CSRF inválido o ausente en petición de navegador.")
+                    return
 
             from media_os.calendar import EditorialCalendar, ApprovalRequiredError
             from media_os.publishers import DryRunLocalPublisher
@@ -959,6 +1138,7 @@ def create_dashboard_server(
 
     srv = ThreadingHTTPServer((host, port), _Handler)
     srv.session_token = active_token  # type: ignore[attr-defined]
+    srv.session_mgr = session_mgr  # type: ignore[attr-defined]
     return srv
 
 

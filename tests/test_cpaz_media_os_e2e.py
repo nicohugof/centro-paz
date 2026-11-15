@@ -579,32 +579,105 @@ def test_dashboard_server_security_protections(tmp_path):
         )
         with urllib.request.urlopen(req_good_login, timeout=5) as resp:
             assert resp.status == 200
+            login_data = json.loads(resp.read().decode("utf-8"))
+            assert login_data["ok"] is True
+            csrf_token = login_data["csrf_token"]
+            assert csrf_token and len(csrf_token) >= 16
+            assert srv.session_token not in login_data.values()
+
             cookie_header = resp.headers.get("Set-Cookie") or ""
             assert "cpaz_session=" in cookie_header
             assert "SameSite=Strict" in cookie_header
             assert "HttpOnly" in cookie_header
+            assert srv.session_token not in cookie_header
+
+            # Extraer cookie de sesión
+            session_cookie = cookie_header.split(";")[0].strip()
 
         # 16. Acceso Autenticado vía Cookie: GET / con Cookie válida sirve el dashboard autenticado
         req_auth_cookie = urllib.request.Request(
             f"http://127.0.0.1:{port}/",
-            headers={"Cookie": f"cpaz_session={srv.session_token}"},
+            headers={"Cookie": session_cookie},
         )
         with urllib.request.urlopen(req_auth_cookie, timeout=5) as resp:
             assert resp.status == 200
             dash_body = resp.read().decode("utf-8")
-            assert "28 Tópicos" in dash_body or "CPAZ Media OS" in dash_body
+            assert "28 Temas" in dash_body or "CPAZ Media OS" in dash_body
+            assert f'meta name="cpaz-csrf-token" content="{csrf_token}"' in dash_body
+            assert "cpaz-session-token" not in dash_body
+            assert srv.session_token not in dash_body
 
-        # 17. GET sin autenticación no filtra el token en la metaetiqueta
+            # CSP con nonce dinámico y sin 'unsafe-inline' en script-src
+            csp_val = resp.headers.get("Content-Security-Policy") or ""
+            assert "script-src 'self' 'nonce-" in csp_val
+            script_csp_part = csp_val.split("script-src")[1].split(";")[0]
+            assert "'unsafe-inline'" not in script_csp_part
+
+        # 17. GET sin autenticación no expone tokens en metaetiqueta
         with urllib.request.urlopen(f"http://127.0.0.1:{port}/", timeout=5) as resp:
             login_body = resp.read().decode("utf-8")
-            assert 'meta name="cpaz-session-token" content=""' in login_body
+            assert 'meta name="cpaz-csrf-token" content=""' in login_body
+            assert "cpaz-session-token" not in login_body
             assert srv.session_token not in login_body
+
+        # 18. Mutaciones con sesión Cookie requieren validación de X-CSRF-Token
+        # A) Sin cabecera X-CSRF-Token -> HTTP 403
+        req_no_csrf = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/seed",
+            data=b"{}",
+            headers={"Content-Type": "application/json", "Cookie": session_cookie},
+            method="POST",
+        )
+        with pytest.raises(urllib.error.HTTPError) as exc_info:
+            urllib.request.urlopen(req_no_csrf, timeout=5)
+        assert exc_info.value.code == 403
+
+        # B) Con cabecera X-CSRF-Token válida -> HTTP 200
+        req_with_csrf = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/seed",
+            data=b"{}",
+            headers={
+                "Content-Type": "application/json",
+                "Cookie": session_cookie,
+                "X-CSRF-Token": csrf_token,
+            },
+            method="POST",
+        )
+        with urllib.request.urlopen(req_with_csrf, timeout=5) as resp:
+            assert resp.status == 200
+            seed_data = json.loads(resp.read().decode("utf-8"))
+            assert seed_data["ok"] is True
+
+        # 19. Cierre de sesión seguro: POST /api/logout invalida la cookie y sesión
+        req_logout = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/logout",
+            data=b"{}",
+            headers={
+                "Content-Type": "application/json",
+                "Cookie": session_cookie,
+                "X-CSRF-Token": csrf_token,
+            },
+            method="POST",
+        )
+        with urllib.request.urlopen(req_logout, timeout=5) as resp:
+            assert resp.status == 200
+            logout_cookie = resp.headers.get("Set-Cookie") or ""
+            assert "Max-Age=0" in logout_cookie
+
+        # Posterior intento de acceso con sesión cerrada a /api/snapshot -> HTTP 401
+        req_post_logout = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/snapshot",
+            headers={"Cookie": session_cookie},
+        )
+        with pytest.raises(urllib.error.HTTPError) as exc_info:
+            urllib.request.urlopen(req_post_logout, timeout=5)
+        assert exc_info.value.code == 401
 
     finally:
         srv.shutdown()
         srv.server_close()
 
-    # 18. Verificaciones de seguridad a nivel de librerías y transiciones de estado
+    # 20. Verificaciones de seguridad a nivel de librerías y transiciones de estado
     from media_os.calendar import _validate_approval_token
     assert _validate_approval_token("", "PUBLICAR test") is False
     assert _validate_approval_token(None, "PUBLICAR test") is False
@@ -620,15 +693,15 @@ def test_dashboard_server_security_protections(tmp_path):
     with pytest.raises(ApprovalRequiredError):
         pub.publish({})
 
-    # 19. Verificación de aislamiento en disco: build_dashboard_html en memoria no altera el archivo estático
+    # 21. Verificación de aislamiento en disco: build_dashboard_html en memoria no altera el archivo estático
     from media_os.dashboard import build_dashboard_html, DEFAULT_DASHBOARD_HTML
     static_before = DEFAULT_DASHBOARD_HTML.read_text(encoding="utf-8") if DEFAULT_DASHBOARD_HTML.exists() else ""
     snap = build_executive_snapshot(db_path=db_file, probe_videos=False)
-    mem_html = build_dashboard_html(snap, session_token="test_secret_in_memory_12345")
-    assert "test_secret_in_memory_12345" in mem_html
+    mem_html = build_dashboard_html(snap, csrf_token="test_csrf_token_in_memory_12345")
+    assert "test_csrf_token_in_memory_12345" in mem_html
     if DEFAULT_DASHBOARD_HTML.exists():
         static_after = DEFAULT_DASHBOARD_HTML.read_text(encoding="utf-8")
-        assert "test_secret_in_memory_12345" not in static_after
+        assert "test_csrf_token_in_memory_12345" not in static_after
         assert static_after == static_before
 
 
