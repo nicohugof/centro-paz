@@ -14,6 +14,7 @@ donde auditar estado, piezas aprobadas vs pendientes y retorno atribuido sin abr
 from __future__ import annotations
 
 import html
+import http.cookies
 import ipaddress
 import json
 import os
@@ -485,6 +486,178 @@ def render_dashboard_html(
     return dest
 
 
+def build_dashboard_login_html() -> str:
+    """Genera la interfaz HTML minimalista de bloqueo para el Dashboard de CPAZ Media OS.
+    
+    No expone ningún dato confidencial, métrica de facturación ni token en claro.
+    """
+    return """<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="cpaz-session-token" content="" />
+  <title>CPAZ Media OS — Acceso Protegido</title>
+  <style>
+    :root {
+      --bg: #f6f8f6;
+      --card: #ffffff;
+      --ink: #1b2420;
+      --muted: #5a6a61;
+      --accent: #2c6e58;
+      --accent-soft: #e7f3ee;
+      --border: #dde5df;
+      --err: #b00020;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .login-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 440px;
+      width: 100%;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    h1 {
+      margin: 0 0 8px 0;
+      font-size: 1.4rem;
+      color: var(--accent);
+    }
+    p {
+      margin: 0 0 20px 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    label {
+      display: block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    input[type="password"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+    input[type="password"]:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    button {
+      width: 100%;
+      padding: 11px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #235846;
+    }
+    .err-msg {
+      color: var(--err);
+      font-size: 0.85rem;
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <h1>🔒 CPAZ Media OS</h1>
+    <p>Acceso Protegido. Ingrese el token de sesión generado en la terminal para desbloquear el Dashboard.</p>
+    <div class="form-group">
+      <label for="tokenInput">Token de Sesión</label>
+      <input type="password" id="tokenInput" placeholder="Token efímero de 48 caracteres..." autocomplete="off" />
+    </div>
+    <button type="button" onclick="login()">Desbloquear Dashboard</button>
+    <div id="errMsg" class="err-msg"></div>
+  </div>
+  <script>
+    async function login() {
+      const token = document.getElementById('tokenInput').value.trim();
+      const errDiv = document.getElementById('errMsg');
+      errDiv.style.display = 'none';
+      if (!token) {
+        errDiv.textContent = 'Por favor ingrese el token de sesión.';
+        errDiv.style.display = 'block';
+        return;
+      }
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token })
+        });
+        const data = await res.json();
+        if (data.ok) {
+          location.reload();
+        } else {
+          errDiv.textContent = data.error || 'Token inválido.';
+          errDiv.style.display = 'block';
+        }
+      } catch (err) {
+        errDiv.textContent = 'Error de conexión: ' + err.message;
+        errDiv.style.display = 'block';
+      }
+    }
+    document.getElementById('tokenInput').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') login();
+    });
+  </script>
+</body>
+</html>
+"""
+
+
+def _extract_token_from_request(headers: Any) -> str:
+    """Extrae el token de autenticación desde cabeceras HTTP o cookies de sesión.
+    
+    Descarta expresamente parámetros en URLs (?token=) para mitigar fugas en historial y referer.
+    """
+    auth_header = headers.get("Authorization") or ""
+    if auth_header.startswith("Bearer "):
+        token = auth_header[7:].strip()
+        if token:
+            return token
+    custom_header = headers.get("X-CPAZ-Session-Token") or ""
+    if custom_header.strip():
+        return custom_header.strip()
+    cookie_header = headers.get("Cookie") or ""
+    if cookie_header:
+        try:
+            simple_cookie = http.cookies.SimpleCookie()
+            simple_cookie.load(cookie_header)
+            if "cpaz_session" in simple_cookie:
+                return simple_cookie["cpaz_session"].value.strip()
+        except Exception:
+            pass
+    return ""
+
+
 MAX_BODY_BYTES = 64 * 1024  # 64 KB límite estricto para mitigar ataques de denegación de servicio
 
 
@@ -581,29 +754,15 @@ def create_dashboard_server(
                 self.send_error(403, "Host no autorizado (protección anti DNS rebinding activa).")
                 return
 
-            # Si el cliente proviene de Tailscale, exigir token de autenticación
-            try:
-                addr = ipaddress.ip_address(client_ip)
-                is_tailscale_client = addr in _TAILSCALE_NET
-            except ValueError:
-                is_tailscale_client = False
-
-            if is_tailscale_client:
-                auth_header = self.headers.get("Authorization") or ""
-                token_header = self.headers.get("X-CPAZ-Session-Token") or ""
-                query_token = ""
-                if "?" in self.path:
-                    parsed_q = parse_qs(self.path.split("?", 1)[1])
-                    query_token = parsed_q.get("token", [""])[0]
-                bearer = auth_header[7:].strip() if auth_header.startswith("Bearer ") else ""
-                presented = bearer or token_header or query_token
-                if not secrets.compare_digest(presented, active_token):
-                    self.send_error(401, "Acceso privado Tailscale requiere token de sesión (?token=<token> o cabecera Authorization).")
-                    return
+            token = _extract_token_from_request(self.headers)
+            is_authenticated = bool(token and secrets.compare_digest(token, active_token))
 
             clean_path = self.path.split("?")[0].rstrip("/") or "/"
-            snap = build_executive_snapshot(db_path=db_path, probe_videos=False)
             if clean_path == "/api/snapshot":
+                if not is_authenticated:
+                    self.send_error(401, "Autenticación requerida: endpoint protegido.")
+                    return
+                snap = build_executive_snapshot(db_path=db_path, probe_videos=False)
                 body = json.dumps(snap, ensure_ascii=False, indent=2).encode("utf-8")
                 self.send_response(200)
                 self._send_security_headers()
@@ -615,11 +774,16 @@ def create_dashboard_server(
                 return
 
             if clean_path in ("/", "/index.html"):
-                if output_path:
-                    html_path = render_dashboard_html(snap, output_path=output_path, session_token=active_token)
-                    body = html_path.read_bytes()
+                if is_authenticated:
+                    snap = build_executive_snapshot(db_path=db_path, probe_videos=False)
+                    if output_path:
+                        html_path = render_dashboard_html(snap, output_path=output_path, session_token=active_token)
+                        body = html_path.read_bytes()
+                    else:
+                        body = build_dashboard_html(snap, session_token=active_token).encode("utf-8")
                 else:
-                    body = build_dashboard_html(snap, session_token=active_token).encode("utf-8")
+                    body = build_dashboard_login_html().encode("utf-8")
+
                 self.send_response(200)
                 self._send_security_headers()
                 self.send_header("Content-Type", "text/html; charset=utf-8")
@@ -641,16 +805,7 @@ def create_dashboard_server(
                 self.send_error(403, "Host no autorizado (protección anti DNS rebinding activa).")
                 return
 
-            # Autenticación criptográfica obligatoria en todos los endpoints POST
-            auth_header = self.headers.get("Authorization") or ""
-            token_header = self.headers.get("X-CPAZ-Session-Token") or ""
-            bearer = auth_header[7:].strip() if auth_header.startswith("Bearer ") else ""
-            presented_token = bearer or token_header
-            if not secrets.compare_digest(presented_token, active_token):
-                self.send_error(401, "Autenticación requerida: token de sesión inválido o ausente.")
-                return
-
-            # Mitigación CSRF y Cross-Origin: rechazar explícitamente orígenes ajenos y Sec-Fetch-Site cross-site
+            # Mitigación CSRF y Cross-Origin: rechazar peticiones cross-site u orígenes no autorizados
             if self.headers.get("Sec-Fetch-Site") == "cross-site":
                 self.send_error(403, "Petición cross-site bloqueada por política CSRF.")
                 return
@@ -666,16 +821,6 @@ def create_dashboard_server(
                 return
 
             clean_path = self.path.split("?")[0].rstrip("/")
-            valid_endpoints = (
-                "/api/seed",
-                "/api/qa-all",
-                "/api/approve",
-                "/api/publish-dryrun",
-                "/api/export-n8n",
-            )
-            if clean_path not in valid_endpoints:
-                self.send_error(404, f"Endpoint no encontrado: {clean_path}")
-                return
 
             content_type = (self.headers.get("Content-Type") or "").split(";")[0].strip().lower()
             if content_type and content_type != "application/json":
@@ -703,6 +848,42 @@ def create_dashboard_server(
                 payload = json.loads(raw_body.decode("utf-8")) if raw_body else {}
             except Exception:
                 payload = {}
+
+            # Endpoint público de autenticación (/api/login) para establecer cookie segura sin secretos en URLs
+            if clean_path == "/api/login":
+                presented = payload.get("token", "").strip() if isinstance(payload, dict) else ""
+                if secrets.compare_digest(presented, active_token):
+                    resp = {"ok": True, "message": "Sesión autenticada correctamente."}
+                    out_bytes = json.dumps(resp).encode("utf-8")
+                    self.send_response(200)
+                    self._send_security_headers()
+                    self.send_header("Content-Type", "application/json; charset=utf-8")
+                    self.send_header("Set-Cookie", f"cpaz_session={active_token}; Path=/; SameSite=Strict; HttpOnly")
+                    self.send_header("Cache-Control", "no-store")
+                    self.send_header("Content-Length", str(len(out_bytes)))
+                    self.end_headers()
+                    self.wfile.write(out_bytes)
+                    return
+                else:
+                    self.send_error(401, "Token de sesión inválido.")
+                    return
+
+            valid_endpoints = (
+                "/api/seed",
+                "/api/qa-all",
+                "/api/approve",
+                "/api/publish-dryrun",
+                "/api/export-n8n",
+            )
+            if clean_path not in valid_endpoints:
+                self.send_error(404, f"Endpoint no encontrado: {clean_path}")
+                return
+
+            # Autenticación obligatoria en todos los endpoints operativos
+            presented_token = _extract_token_from_request(self.headers)
+            if not secrets.compare_digest(presented_token, active_token):
+                self.send_error(401, "Autenticación requerida: token de sesión inválido o ausente.")
+                return
 
             from media_os.calendar import EditorialCalendar, ApprovalRequiredError
             from media_os.publishers import DryRunLocalPublisher
@@ -796,7 +977,8 @@ def serve_loopback(
         allow_tailscale=allow_tailscale,
         session_token=session_token,
     )
-    print(f"CPAZ Media OS Dashboard en http://{host}:{port} (Token de sesión: {getattr(server, 'session_token', '')})")
+    print(f"CPAZ Media OS Dashboard en http://{host}:{port}")
+    print(f"Token de sesión activo: {getattr(server, 'session_token', '')}")
     try:
         server.serve_forever()
     except KeyboardInterrupt:

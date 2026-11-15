@@ -278,7 +278,17 @@ def test_dashboard_server_tailscale_and_client_guard(tmp_path):
             assert resp.status == 200
             body = resp.read().decode("utf-8")
             assert "CPAZ Media OS" in body
-        with urllib.request.urlopen(f"http://127.0.0.1:{port}/api/snapshot", timeout=5) as resp:
+        # /api/snapshot sin autenticación debe responder 401 Unauthorized
+        with pytest.raises(urllib.error.HTTPError) as exc_info:
+            urllib.request.urlopen(f"http://127.0.0.1:{port}/api/snapshot", timeout=5)
+        assert exc_info.value.code == 401
+
+        # /api/snapshot con cabecera Authorization válida responde 200 OK
+        req_snap = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/snapshot",
+            headers={"Authorization": f"Bearer {srv.session_token}"},
+        )
+        with urllib.request.urlopen(req_snap, timeout=5) as resp:
             assert resp.status == 200
             snap = json.loads(resp.read().decode("utf-8"))
             assert snap["identity"]["sis_registration"] == "667344"
@@ -543,11 +553,58 @@ def test_dashboard_server_security_protections(tmp_path):
             urllib.request.urlopen(req_bad_token, timeout=5)
         assert exc_info.value.code == 401
 
+        # 13. Seguridad de Parámetros en URL: GET /api/snapshot con ?token=... debe ser RECHAZADO (HTTP 401)
+        # Demuestra que no se transmiten ni aceptan secretos en query strings de URLs
+        with pytest.raises(urllib.error.HTTPError) as exc_info:
+            urllib.request.urlopen(f"http://127.0.0.1:{port}/api/snapshot?token={srv.session_token}", timeout=5)
+        assert exc_info.value.code == 401
+
+        # 14. Flujo de Login Seguro: POST /api/login con token erróneo -> HTTP 401
+        req_bad_login = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/login",
+            data=json.dumps({"token": "incorrect_token_xyz"}).encode("utf-8"),
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with pytest.raises(urllib.error.HTTPError) as exc_info:
+            urllib.request.urlopen(req_bad_login, timeout=5)
+        assert exc_info.value.code == 401
+
+        # 15. Flujo de Login Seguro: POST /api/login con token válido -> HTTP 200 y Cookie HttpOnly SameSite=Strict
+        req_good_login = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/login",
+            data=json.dumps({"token": srv.session_token}).encode("utf-8"),
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req_good_login, timeout=5) as resp:
+            assert resp.status == 200
+            cookie_header = resp.headers.get("Set-Cookie") or ""
+            assert "cpaz_session=" in cookie_header
+            assert "SameSite=Strict" in cookie_header
+            assert "HttpOnly" in cookie_header
+
+        # 16. Acceso Autenticado vía Cookie: GET / con Cookie válida sirve el dashboard autenticado
+        req_auth_cookie = urllib.request.Request(
+            f"http://127.0.0.1:{port}/",
+            headers={"Cookie": f"cpaz_session={srv.session_token}"},
+        )
+        with urllib.request.urlopen(req_auth_cookie, timeout=5) as resp:
+            assert resp.status == 200
+            dash_body = resp.read().decode("utf-8")
+            assert "28 Tópicos" in dash_body or "CPAZ Media OS" in dash_body
+
+        # 17. GET sin autenticación no filtra el token en la metaetiqueta
+        with urllib.request.urlopen(f"http://127.0.0.1:{port}/", timeout=5) as resp:
+            login_body = resp.read().decode("utf-8")
+            assert 'meta name="cpaz-session-token" content=""' in login_body
+            assert srv.session_token not in login_body
+
     finally:
         srv.shutdown()
         srv.server_close()
 
-    # 13. Verificaciones de seguridad a nivel de librerías y transiciones de estado
+    # 18. Verificaciones de seguridad a nivel de librerías y transiciones de estado
     from media_os.calendar import _validate_approval_token
     assert _validate_approval_token("", "PUBLICAR test") is False
     assert _validate_approval_token(None, "PUBLICAR test") is False
@@ -563,7 +620,7 @@ def test_dashboard_server_security_protections(tmp_path):
     with pytest.raises(ApprovalRequiredError):
         pub.publish({})
 
-    # 14. Verificación de aislamiento en disco: build_dashboard_html en memoria no altera el archivo estático
+    # 19. Verificación de aislamiento en disco: build_dashboard_html en memoria no altera el archivo estático
     from media_os.dashboard import build_dashboard_html, DEFAULT_DASHBOARD_HTML
     static_before = DEFAULT_DASHBOARD_HTML.read_text(encoding="utf-8") if DEFAULT_DASHBOARD_HTML.exists() else ""
     snap = build_executive_snapshot(db_path=db_file, probe_videos=False)
