@@ -522,7 +522,7 @@
     }
   ],
   "core_modules": {
-    "media_os/dashboard.py": "8ebae68d215727cd74ef199ce422e2cd7c1f29576f93505ae19deb6bdccf56c5",
+    "media_os/dashboard.py": "e0aaac01fe64a2ea8309edd1682f2556d05d7934b2f3d921f08baf8d8531a18a",
     "media_os/calendar.py": "39721ad3a086503d044f9f779adf28afe519d6f0fa456e71d34f94301ad59a02",
     "media_os/privacy.py": "0012ce01fa9c5f727d9598958d8d5a7b9ecc1d7891c8ef93eee5bd87c6c12f86",
     "media_os/intelligence.py": "890cac4382bfe5106fa1e7d2ef245af52ee7c1551c664833ad79a2117d58b789",

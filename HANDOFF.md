@@ -16,6 +16,12 @@ Lee `ROADMAP.md`, `ESTADO_ACTUAL.md`, `README.md` y documentación clínica. Con
 - **100% pruebas unitarias, de seguridad y E2E superadas**: 80 pruebas automatizadas en el repositorio (9 suites pytest, 64 pruebas en `audit_directory_consistency.py`, 7 pruebas en `test_full_suite_e2e.py`).
 - **Aislamiento Clínico y Ley 19.628:** Todos los 28 contenidos permanecen en estado `CLINICAL_QA` con 0 aprobaciones automáticas y 0 publicaciones en vivo sin aprobación explícita humana (`PUBLICAR <ID>`).
 - **Modelo de Amenazas Local:** El perímetro protege contra atacantes de red externos, sitios web maliciosos y ataques cross-site; se documenta que procesos locales que corran bajo el mismo UID del usuario escapan a las barreras HTTP de la aplicación y requieren aislamiento a nivel del sistema operativo.
+- **Acceso Permanente Local en macOS:**
+  * URL estable: `http://127.0.0.1:8765/` (escucha exclusiva en loopback).
+  * Gestor de servicio: `scripts/media_os_service.sh` (`start`, `stop`, `restart`, `status`, `token`, `open`, `install-launchd`, `uninstall-launchd`).
+  * Servicio residente macOS: `~/Library/LaunchAgents/cl.centropaz.media_os.plist` configurado y activo con `RunAtLoad` y `KeepAlive` para auto-recuperación ante reinicios del sistema.
+  * Acceso directo de escritorio: `tools/CPAZ Media OS.webloc` y en `~/Desktop/CPAZ Media OS.webloc`.
+  * Token persistente de usuario con permisos `0600` en `~/.cpaz/media_os_token`.
 - Pull Request #15 abierto y listo para revisión clínica final de Valentina antes del merge a `main`.
 
 

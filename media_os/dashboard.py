@@ -829,6 +829,45 @@ def _validate_host_header(host_header: Optional[str], *, allow_tailscale: bool) 
     return False
 
 
+def get_or_create_persistent_token(token: Optional[str] = None) -> str:
+    """Obtiene el token de sesión activo o recupera la credencial persistente local de 0600.
+    
+    Prioridad:
+    1. Token explícito pasado por argumento (CLI/tests).
+    2. Variable de entorno CPAZ_MEDIA_OS_SESSION_TOKEN.
+    3. Si se ejecuta bajo pytest (PYTEST_CURRENT_TEST), genera token efímero aislado.
+    4. Archivo persistente ~/.cpaz/media_os_token con permisos estrictos 0600.
+    """
+    if token and token.strip():
+        return token.strip()
+    env_token = os.getenv("CPAZ_MEDIA_OS_SESSION_TOKEN")
+    if env_token and env_token.strip():
+        return env_token.strip()
+    if os.getenv("PYTEST_CURRENT_TEST"):
+        return secrets.token_hex(24)
+
+    token_file = Path.home() / ".cpaz" / "media_os_token"
+    try:
+        if token_file.exists():
+            content = token_file.read_text(encoding="utf-8").strip()
+            if len(content) >= 32:
+                return content
+        token_file.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            os.chmod(token_file.parent, 0o700)
+        except Exception:
+            pass
+        new_token = secrets.token_hex(24)
+        token_file.write_text(new_token, encoding="utf-8")
+        try:
+            os.chmod(token_file, 0o600)
+        except Exception:
+            pass
+        return new_token
+    except Exception:
+        return secrets.token_hex(24)
+
+
 def create_dashboard_server(
     *,
     db_path: Optional[Path | str] = None,
@@ -847,7 +886,7 @@ def create_dashboard_server(
             "Host no permitido: solo se acepta loopback (127.0.0.1) o IP privada Tailscale (100.64.0.0/10 con allow_tailscale=True)."
         )
 
-    active_token = session_token or os.getenv("CPAZ_MEDIA_OS_SESSION_TOKEN") or secrets.token_hex(24)
+    active_token = get_or_create_persistent_token(session_token)
     session_mgr = SessionManager(master_token=active_token)
 
     class _Handler(BaseHTTPRequestHandler):
