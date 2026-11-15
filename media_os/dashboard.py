@@ -546,6 +546,12 @@ def create_dashboard_server(
             )
             self.send_header("Referrer-Policy", "strict-origin-when-cross-origin")
 
+        def do_OPTIONS(self) -> None:  # noqa: N802
+            self.send_response(405)
+            self._send_security_headers()
+            self.send_header("Allow", "GET, POST")
+            self.end_headers()
+
         def do_GET(self) -> None:  # noqa: N802
             client_ip = self.client_address[0] if self.client_address else ""
             if not _is_allowed_client_ip(client_ip):
@@ -556,8 +562,9 @@ def create_dashboard_server(
                 self.send_error(403, "Host no autorizado (protección anti DNS rebinding activa).")
                 return
 
+            clean_path = self.path.split("?")[0].rstrip("/") or "/"
             snap = build_executive_snapshot(db_path=db_path, probe_videos=False)
-            if self.path.startswith("/api/snapshot"):
+            if clean_path == "/api/snapshot":
                 body = json.dumps(snap, ensure_ascii=False, indent=2).encode("utf-8")
                 self.send_response(200)
                 self._send_security_headers()
@@ -568,15 +575,19 @@ def create_dashboard_server(
                 self.wfile.write(body)
                 return
 
-            html_path = render_dashboard_html(snap, output_path=output_path)
-            body = html_path.read_bytes()
-            self.send_response(200)
-            self._send_security_headers()
-            self.send_header("Content-Type", "text/html; charset=utf-8")
-            self.send_header("Cache-Control", "no-store")
-            self.send_header("Content-Length", str(len(body)))
-            self.end_headers()
-            self.wfile.write(body)
+            if clean_path in ("/", "/index.html"):
+                html_path = render_dashboard_html(snap, output_path=output_path)
+                body = html_path.read_bytes()
+                self.send_response(200)
+                self._send_security_headers()
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Cache-Control", "no-store")
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+                return
+
+            self.send_error(404, f"Ruta no encontrada: {clean_path}")
 
         def do_POST(self) -> None:  # noqa: N802
             client_ip = self.client_address[0] if self.client_address else ""
@@ -596,6 +607,28 @@ def create_dashboard_server(
             origin = self.headers.get("Origin")
             if origin and not _is_allowed_origin(origin):
                 self.send_error(403, "Origen HTTP no autorizado (protección anti-CSRF activa).")
+                return
+
+            referer = self.headers.get("Referer")
+            if referer and not _is_allowed_origin(referer):
+                self.send_error(403, "Referer HTTP no autorizado (protección anti-CSRF activa).")
+                return
+
+            clean_path = self.path.split("?")[0].rstrip("/")
+            valid_endpoints = (
+                "/api/seed",
+                "/api/qa-all",
+                "/api/approve",
+                "/api/publish-dryrun",
+                "/api/export-n8n",
+            )
+            if clean_path not in valid_endpoints:
+                self.send_error(404, f"Endpoint no encontrado: {clean_path}")
+                return
+
+            content_type = (self.headers.get("Content-Type") or "").split(";")[0].strip().lower()
+            if content_type and content_type != "application/json":
+                self.send_error(415, "Tipo de contenido no soportado. Se exige application/json.")
                 return
 
             content_length_str = self.headers.get("Content-Length")

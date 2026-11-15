@@ -13,6 +13,7 @@ Evitar duplicar motores de automatización y garantizar que únicamente piezas e
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -77,5 +78,9 @@ def export_n8n_approved_schedule(
     assert_path_not_clinical(dest)
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
+    try:
+        os.chmod(dest, 0o600)
+    except OSError:
+        pass
     payload["export_path"] = str(dest)
     return payload

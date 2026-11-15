@@ -474,6 +474,42 @@ def test_dashboard_server_security_protections(tmp_path):
             urllib.request.urlopen(req_malformed_item, timeout=5)
         assert exc_info.value.code == 400
 
+        # 7. Rechazo de Referer no autorizado -> HTTP 403
+        req_bad_referer = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/seed",
+            data=b"{}",
+            headers={"Content-Type": "application/json", "Referer": "https://evil-attacker.com/page"},
+            method="POST",
+        )
+        with pytest.raises(urllib.error.HTTPError) as exc_info:
+            urllib.request.urlopen(req_bad_referer, timeout=5)
+        assert exc_info.value.code == 403
+
+        # 8. Rechazo de Content-Type no JSON en POST (mitiga HTML forms simples) -> HTTP 415
+        req_bad_ct = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/seed",
+            data=b"dummy=1",
+            headers={"Content-Type": "application/x-www-form-urlencoded"},
+            method="POST",
+        )
+        with pytest.raises(urllib.error.HTTPError) as exc_info:
+            urllib.request.urlopen(req_bad_ct, timeout=5)
+        assert exc_info.value.code == 415
+
+        # 9. Método OPTIONS no permitido (CORS preflight cerrado) -> HTTP 405
+        req_options = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/seed",
+            method="OPTIONS",
+        )
+        with pytest.raises(urllib.error.HTTPError) as exc_info:
+            urllib.request.urlopen(req_options, timeout=5)
+        assert exc_info.value.code == 405
+
+        # 10. Rutas no existentes -> HTTP 404
+        with pytest.raises(urllib.error.HTTPError) as exc_info:
+            urllib.request.urlopen(f"http://127.0.0.1:{port}/unknown_route", timeout=5)
+        assert exc_info.value.code == 404
+
     finally:
         srv.shutdown()
         srv.server_close()
