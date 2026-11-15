@@ -574,7 +574,7 @@ def test_dashboard_server_security_protections(tmp_path):
         req_good_login = urllib.request.Request(
             f"http://127.0.0.1:{port}/api/login",
             data=json.dumps({"token": srv.session_token}).encode("utf-8"),
-            headers={"Content-Type": "application/json"},
+            headers={"Content-Type": "application/json", "X-Forwarded-Proto": "https"},
             method="POST",
         )
         with urllib.request.urlopen(req_good_login, timeout=5) as resp:
@@ -589,6 +589,7 @@ def test_dashboard_server_security_protections(tmp_path):
             assert "cpaz_session=" in cookie_header
             assert "SameSite=Strict" in cookie_header
             assert "HttpOnly" in cookie_header
+            assert "Secure" in cookie_header
             assert srv.session_token not in cookie_header
 
             # Extraer cookie de sesión
@@ -599,19 +600,24 @@ def test_dashboard_server_security_protections(tmp_path):
             f"http://127.0.0.1:{port}/",
             headers={"Cookie": session_cookie},
         )
-        with urllib.request.urlopen(req_auth_cookie, timeout=5) as resp:
-            assert resp.status == 200
-            dash_body = resp.read().decode("utf-8")
+        with urllib.request.urlopen(req_auth_cookie, timeout=5) as resp1:
+            assert resp1.status == 200
+            dash_body = resp1.read().decode("utf-8")
             assert "28 Temas" in dash_body or "CPAZ Media OS" in dash_body
             assert f'meta name="cpaz-csrf-token" content="{csrf_token}"' in dash_body
             assert "cpaz-session-token" not in dash_body
             assert srv.session_token not in dash_body
 
             # CSP con nonce dinámico y sin 'unsafe-inline' en script-src
-            csp_val = resp.headers.get("Content-Security-Policy") or ""
-            assert "script-src 'self' 'nonce-" in csp_val
-            script_csp_part = csp_val.split("script-src")[1].split(";")[0]
+            csp_val1 = resp1.headers.get("Content-Security-Policy") or ""
+            assert "script-src 'self' 'nonce-" in csp_val1
+            script_csp_part = csp_val1.split("script-src")[1].split(";")[0]
             assert "'unsafe-inline'" not in script_csp_part
+
+        # Rotación per-request de Nonce: dos peticiones reciben nonces distintos
+        with urllib.request.urlopen(req_auth_cookie, timeout=5) as resp2:
+            csp_val2 = resp2.headers.get("Content-Security-Policy") or ""
+            assert csp_val1 != csp_val2
 
         # 17. GET sin autenticación no expone tokens en metaetiqueta
         with urllib.request.urlopen(f"http://127.0.0.1:{port}/", timeout=5) as resp:
@@ -648,14 +654,32 @@ def test_dashboard_server_security_protections(tmp_path):
             seed_data = json.loads(resp.read().decode("utf-8"))
             assert seed_data["ok"] is True
 
-        # 19. Cierre de sesión seguro: POST /api/logout invalida la cookie y sesión
+        # 19. Expiración de TTL de Sesión (8 horas)
+        # Simular expiración temporal de sesión en el backend
+        sid = session_cookie.split("=")[1]
+        srv.session_mgr._sessions[sid]["created_at"] -= (9 * 3600)  # Forzar antigüedad > 8h
+        req_expired = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/snapshot",
+            headers={"Cookie": session_cookie},
+        )
+        with pytest.raises(urllib.error.HTTPError) as exc_info:
+            urllib.request.urlopen(req_expired, timeout=5)
+        assert exc_info.value.code == 401
+
+        # Re-autenticar sesión para probar logout explícito
+        with urllib.request.urlopen(req_good_login, timeout=5) as resp_renew:
+            renew_cookie = resp_renew.headers.get("Set-Cookie").split(";")[0].strip()
+            renew_csrf = json.loads(resp_renew.read().decode("utf-8"))["csrf_token"]
+
+        # 20. Cierre de sesión seguro: POST /api/logout invalida la cookie y sesión
         req_logout = urllib.request.Request(
             f"http://127.0.0.1:{port}/api/logout",
             data=b"{}",
             headers={
                 "Content-Type": "application/json",
-                "Cookie": session_cookie,
-                "X-CSRF-Token": csrf_token,
+                "Cookie": renew_cookie,
+                "X-CSRF-Token": renew_csrf,
+                "X-Forwarded-Proto": "https",
             },
             method="POST",
         )
@@ -663,11 +687,12 @@ def test_dashboard_server_security_protections(tmp_path):
             assert resp.status == 200
             logout_cookie = resp.headers.get("Set-Cookie") or ""
             assert "Max-Age=0" in logout_cookie
+            assert "Secure" in logout_cookie
 
         # Posterior intento de acceso con sesión cerrada a /api/snapshot -> HTTP 401
         req_post_logout = urllib.request.Request(
             f"http://127.0.0.1:{port}/api/snapshot",
-            headers={"Cookie": session_cookie},
+            headers={"Cookie": renew_cookie},
         )
         with pytest.raises(urllib.error.HTTPError) as exc_info:
             urllib.request.urlopen(req_post_logout, timeout=5)
@@ -677,7 +702,7 @@ def test_dashboard_server_security_protections(tmp_path):
         srv.shutdown()
         srv.server_close()
 
-    # 20. Verificaciones de seguridad a nivel de librerías y transiciones de estado
+    # 21. Verificaciones de seguridad a nivel de librerías y transiciones de estado
     from media_os.calendar import _validate_approval_token
     assert _validate_approval_token("", "PUBLICAR test") is False
     assert _validate_approval_token(None, "PUBLICAR test") is False

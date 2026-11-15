@@ -1003,7 +1003,9 @@ def create_dashboard_server(
                     self.send_response(200)
                     self._send_security_headers()
                     self.send_header("Content-Type", "application/json; charset=utf-8")
-                    self.send_header("Set-Cookie", f"cpaz_session={session_id}; Path=/; SameSite=Strict; HttpOnly")
+                    is_https = (self.headers.get("X-Forwarded-Proto") == "https")
+                    cookie_attrs = f"cpaz_session={session_id}; Path=/; SameSite=Strict; HttpOnly" + ("; Secure" if is_https else "")
+                    self.send_header("Set-Cookie", cookie_attrs)
                     self.send_header("Cache-Control", "no-store")
                     self.send_header("Content-Length", str(len(out_bytes)))
                     self.end_headers()
@@ -1029,10 +1031,9 @@ def create_dashboard_server(
                 self.send_response(200)
                 self._send_security_headers()
                 self.send_header("Content-Type", "application/json; charset=utf-8")
-                self.send_header(
-                    "Set-Cookie",
-                    "cpaz_session=; Path=/; Max-Age=0; SameSite=Strict; HttpOnly",
-                )
+                is_https = (self.headers.get("X-Forwarded-Proto") == "https")
+                cookie_attrs = "cpaz_session=; Path=/; Max-Age=0; SameSite=Strict; HttpOnly" + ("; Secure" if is_https else "")
+                self.send_header("Set-Cookie", cookie_attrs)
                 self.send_header("Cache-Control", "no-store")
                 self.send_header("Content-Length", str(len(out_bytes)))
                 self.end_headers()

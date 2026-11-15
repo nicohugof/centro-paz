@@ -21,8 +21,9 @@ Ecosistema digital centrado al 100% en la **Página Web ([www.centropaz.cl](http
     * **CSP Estricto con Nonce Criptográfico:** `script-src 'self' 'nonce-{nonce}'`, eliminando `'unsafe-inline'` para anular vectores de inyección XSS.
     * **Expiración y Revocación de Sesión:** Administrador de sesiones `SessionManager` con TTL (8h) y endpoint `/api/logout` que destruye la sesión y borra la cookie.
     * **Defensa Perimetral:** Anti-CSRF (`Sec-Fetch-Site`, `Origin`, `Referer`), anti-DNS Rebinding, método CORS `OPTIONS` bloqueado (405), límite de 64 KB en payload y descarte absoluto de tokens en parámetros URL (`?token=`).
-  - **Suite de Pruebas Automatizadas:** `pytest tests/test_cpaz_media_os_e2e.py`: **8/8 PASS** (21 verificaciones exhaustivas de seguridad HTTP, control de acceso y regresión funcional; 79 pruebas en total en el repositorio).
-  - **Integridad Clínica:** Los 28 contenidos se encuentran en estado `CLINICAL_QA` con sus 28 recursos gráficos PNG verificados en `assets/instagram/`.
+  - **Suite de Pruebas Automatizadas:** `pytest`: **9/9 PASS** (21 verificaciones exhaustivas de seguridad HTTP, control de acceso, rotación de nonce CSP, TTL y regresión funcional; total de **80 pruebas automatizadas** en el repositorio junto a `agent/audit_directory_consistency.py` [64/64] y `agent/test_full_suite_e2e.py` [7/7]).
+  - **Integridad Criptográfica y Clínica:** Los 28 contenidos se encuentran en estado `CLINICAL_QA` con sus 28 recursos gráficos PNG verificados físicamente e indexados en [`docs/INTEGRITY_MANIFEST_PR15.json`](docs/INTEGRITY_MANIFEST_PR15.json), auditados de forma automática en [`tests/test_integrity_manifest.py`](tests/test_integrity_manifest.py).
+  - **Modelo de Seguridad Local:** Perímetro blindado contra ataques de red y navegador (CSRF, DNS Rebinding, XSS); se delimita que los procesos locales ejecutados bajo el mismo UID escapan a las defensas de la capa de aplicación y dependen del aislamiento del sistema operativo.
 - **Resguardo clínico e integridad:** `video_engine/public/`, `data/patient_intakes.json`, las 54 páginas HTML y cuentas externas permanecen intactos y sin publicación en vivo. Ready para revisión humana en PR #15.
 
 ## Evidencia actual del sistema y Cierre de PR #14

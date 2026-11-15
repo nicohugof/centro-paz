@@ -3,17 +3,19 @@
 Lee `ROADMAP.md`, `ESTADO_ACTUAL.md`, `README.md` y documentación clínica. Conserva `video_engine/public/`: no borrar, reemplazar ni incluir accidentalmente. Usa dry-run hasta autorización. Todo contenido público exige QA clínico/marca y `PUBLICAR <ID>`; no automatizar WhatsApp clínico ni documentar datos de pacientes.
 
 **Estado Actual de CPAZ Media OS (`feat/cpaz-media-os`):**
-- Módulo funcional completo con 28 contenidos clínicos sembrados y auditados (28/28 PASS, 28 infografías PNG verificadas en `assets/instagram/`).
+- Módulo funcional completo con 28 contenidos clínicos sembrados y auditados (28/28 PASS, 28 infografías PNG verificadas físicamente e indexadas en `docs/INTEGRITY_MANIFEST_PR15.json`).
 - Submenú interactivo en `python3 cpaz.py` (opción `M`).
 - Dashboard interactivo en `tools/cpaz_media_os_dashboard.html` y servidor local `python3 -m media_os.cli serve` con arquitectura de seguridad de nivel bancario:
-  * Sesión de navegador autenticada **exclusivamente mediante cookie `HttpOnly; SameSite=Strict`** en memoria con TTL de expiración (8h) e invalidación (`POST /api/logout`).
-  * **Cero exposición de secretos de sesión en el DOM o JavaScript**: la metaetiqueta anterior fue eliminada por completo; mutaciones desde navegador exigen token CSRF independiente (`X-CSRF-Token`).
+  * Sesión de navegador autenticada **exclusivamente mediante cookie `HttpOnly; SameSite=Strict`** (con bandera `Secure` condicional ante proxy HTTPS) en memoria con TTL de expiración (8h) e invalidación (`POST /api/logout`).
+  * **Cero exposición de secretos de sesión en el DOM o JavaScript**: metaetiquetas obsoletas eliminadas; mutaciones desde navegador exigen token CSRF independiente (`X-CSRF-Token`).
   * Clientes programáticos y CLI conservan compatibilidad vía cabecera `Authorization: Bearer <master_token>`.
-  * Política de Seguridad de Contenido (CSP) con **nonce criptográfico dinámico (`'nonce-{nonce}'`)**, eliminando `'unsafe-inline'` para neutralizar vectores XSS.
+  * Política de Seguridad de Contenido (CSP) con **nonce criptográfico dinámico (`'nonce-{nonce}'`)** y rotación por petición, eliminando `'unsafe-inline'` para neutralizar vectores XSS.
   * `/api/snapshot` estrictamente protegido (`401 Unauthorized` ante peticiones anónimas).
 - Blindaje de seguridad HTTP multicapa verificado: anti-DNS rebinding, anti-CSRF (`Sec-Fetch-Site`, `Origin`, `Referer`), rechazo de preflight CORS `OPTIONS` (405), límite de 64 KB, descarte de tokens en query strings (`?token=`), y permisos restrictivos `0600` en cola de publicación.
-- 100% pruebas unitarias, de seguridad y E2E superadas (`pytest tests/test_cpaz_media_os_e2e.py` 8/8 PASS; 79 pruebas únicas en el repositorio).
-- Todos los 28 contenidos en estado `CLINICAL_QA`: Cero PII, cero publicaciones en vivo sin aprobación explícita humana (`PUBLICAR <ID>`).
+- **Manifiesto de Integridad Criptográfica:** [`docs/INTEGRITY_MANIFEST_PR15.json`](docs/INTEGRITY_MANIFEST_PR15.json) con hashes SHA-256 de base de datos, módulos y las 28 imágenes, auditado en `tests/test_integrity_manifest.py`.
+- **100% pruebas unitarias, de seguridad y E2E superadas**: 80 pruebas automatizadas en el repositorio (9 suites pytest, 64 pruebas en `audit_directory_consistency.py`, 7 pruebas en `test_full_suite_e2e.py`).
+- **Aislamiento Clínico y Ley 19.628:** Todos los 28 contenidos permanecen en estado `CLINICAL_QA` con 0 aprobaciones automáticas y 0 publicaciones en vivo sin aprobación explícita humana (`PUBLICAR <ID>`).
+- **Modelo de Amenazas Local:** El perímetro protege contra atacantes de red externos, sitios web maliciosos y ataques cross-site; se documenta que procesos locales que corran bajo el mismo UID del usuario escapan a las barreras HTTP de la aplicación y requieren aislamiento a nivel del sistema operativo.
 - Pull Request #15 abierto y listo para revisión clínica final de Valentina antes del merge a `main`.
 
 
