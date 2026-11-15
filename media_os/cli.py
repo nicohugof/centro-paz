@@ -243,6 +243,7 @@ def main(argv: Optional[list[str]] = None) -> int:
     p_srv.add_argument("--host", default="127.0.0.1")
     p_srv.add_argument("--port", type=int, default=8765)
     p_srv.add_argument("--tailscale", action="store_true", help="Permite enlace privado en red Tailscale 100.64.0.0/10")
+    p_srv.add_argument("--token", default=None, help="Token secreto de sesión para autenticación")
 
     args = parser.parse_args(argv)
 
@@ -299,7 +300,7 @@ def main(argv: Optional[list[str]] = None) -> int:
         print(f"Dashboard actualizado en: {path}")
         return 0
     if args.command == "serve":
-        serve_loopback(host=args.host, port=args.port, allow_tailscale=args.tailscale)
+        serve_loopback(host=args.host, port=args.port, allow_tailscale=args.tailscale, session_token=args.token)
         return 0
     return 1
 

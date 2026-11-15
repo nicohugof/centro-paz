@@ -16,11 +16,13 @@ from __future__ import annotations
 import html
 import ipaddress
 import json
+import os
 import re
+import secrets
 from http.server import BaseHTTPRequestHandler, HTTPServer, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any, Dict, List, Optional
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 
 _TAILSCALE_NET = ipaddress.ip_network("100.64.0.0/10")
 _LOOPBACK_NET = ipaddress.ip_network("127.0.0.0/8")
@@ -119,6 +121,7 @@ def render_dashboard_html(
     snapshot: Dict[str, Any],
     *,
     output_path: Optional[Path | str] = None,
+    session_token: str = "",
 ) -> Path:
     dest = Path(output_path) if output_path else DEFAULT_DASHBOARD_HTML
     dest.parent.mkdir(parents=True, exist_ok=True)
@@ -185,6 +188,7 @@ def render_dashboard_html(
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="cpaz-session-token" content="{html.escape(session_token)}" />
   <title>CPAZ Media OS — Dashboard Ejecutivo</title>
   <style>
     :root {{
@@ -441,12 +445,16 @@ def render_dashboard_html(
         return;
       }}
       showToast(loadingMsg);
+      const metaToken = document.querySelector('meta[name="cpaz-session-token"]');
+      const sessionToken = metaToken ? (metaToken.getAttribute('content') || '') : '';
       try {{
         const res = await fetch(endpoint, {{
           method: 'POST',
           headers: {{
             'Content-Type': 'application/json',
-            'X-CPAZ-Action': 'media-os-dashboard'
+            'X-CPAZ-Action': 'media-os-dashboard',
+            'X-CPAZ-Session-Token': sessionToken,
+            'Authorization': 'Bearer ' + sessionToken
           }},
           body: JSON.stringify({{}})
         }});
@@ -526,6 +534,7 @@ def create_dashboard_server(
     port: int = 8765,
     allow_tailscale: bool = False,
     output_path: Optional[Path | str] = None,
+    session_token: Optional[str] = None,
 ) -> ThreadingHTTPServer:
     if _is_loopback_host(host):
         pass
@@ -535,6 +544,8 @@ def create_dashboard_server(
         raise ValueError(
             "Host no permitido: solo se acepta loopback (127.0.0.1) o IP privada Tailscale (100.64.0.0/10 con allow_tailscale=True)."
         )
+
+    active_token = session_token or os.getenv("CPAZ_MEDIA_OS_SESSION_TOKEN") or secrets.token_hex(24)
 
     class _Handler(BaseHTTPRequestHandler):
         def _send_security_headers(self) -> None:
@@ -562,6 +573,26 @@ def create_dashboard_server(
                 self.send_error(403, "Host no autorizado (protección anti DNS rebinding activa).")
                 return
 
+            # Si el cliente proviene de Tailscale, exigir token de autenticación
+            try:
+                addr = ipaddress.ip_address(client_ip)
+                is_tailscale_client = addr in _TAILSCALE_NET
+            except ValueError:
+                is_tailscale_client = False
+
+            if is_tailscale_client:
+                auth_header = self.headers.get("Authorization") or ""
+                token_header = self.headers.get("X-CPAZ-Session-Token") or ""
+                query_token = ""
+                if "?" in self.path:
+                    parsed_q = parse_qs(self.path.split("?", 1)[1])
+                    query_token = parsed_q.get("token", [""])[0]
+                bearer = auth_header[7:].strip() if auth_header.startswith("Bearer ") else ""
+                presented = bearer or token_header or query_token
+                if not secrets.compare_digest(presented, active_token):
+                    self.send_error(401, "Acceso privado Tailscale requiere token de sesión (?token=<token> o cabecera Authorization).")
+                    return
+
             clean_path = self.path.split("?")[0].rstrip("/") or "/"
             snap = build_executive_snapshot(db_path=db_path, probe_videos=False)
             if clean_path == "/api/snapshot":
@@ -576,7 +607,7 @@ def create_dashboard_server(
                 return
 
             if clean_path in ("/", "/index.html"):
-                html_path = render_dashboard_html(snap, output_path=output_path)
+                html_path = render_dashboard_html(snap, output_path=output_path, session_token=active_token)
                 body = html_path.read_bytes()
                 self.send_response(200)
                 self._send_security_headers()
@@ -597,6 +628,15 @@ def create_dashboard_server(
 
             if not _validate_host_header(self.headers.get("Host"), allow_tailscale=allow_tailscale):
                 self.send_error(403, "Host no autorizado (protección anti DNS rebinding activa).")
+                return
+
+            # Autenticación criptográfica obligatoria en todos los endpoints POST
+            auth_header = self.headers.get("Authorization") or ""
+            token_header = self.headers.get("X-CPAZ-Session-Token") or ""
+            bearer = auth_header[7:].strip() if auth_header.startswith("Bearer ") else ""
+            presented_token = bearer or token_header
+            if not secrets.compare_digest(presented_token, active_token):
+                self.send_error(401, "Autenticación requerida: token de sesión inválido o ausente.")
                 return
 
             # Mitigación CSRF y Cross-Origin: rechazar explícitamente orígenes ajenos y Sec-Fetch-Site cross-site
@@ -725,7 +765,9 @@ def create_dashboard_server(
         def log_message(self, format: str, *args: Any) -> None:  # noqa: A002
             return
 
-    return ThreadingHTTPServer((host, port), _Handler)
+    srv = ThreadingHTTPServer((host, port), _Handler)
+    srv.session_token = active_token  # type: ignore[attr-defined]
+    return srv
 
 
 def serve_loopback(
@@ -734,14 +776,16 @@ def serve_loopback(
     host: str = "127.0.0.1",
     port: int = 8765,
     allow_tailscale: bool = False,
+    session_token: Optional[str] = None,
 ) -> None:
     server = create_dashboard_server(
         db_path=db_path,
         host=host,
         port=port,
         allow_tailscale=allow_tailscale,
+        session_token=session_token,
     )
-    print(f"CPAZ Media OS Dashboard en http://{host}:{port} (Ctrl+C para detener)")
+    print(f"CPAZ Media OS Dashboard en http://{host}:{port} (Token de sesión: {getattr(server, 'session_token', '')})")
     try:
         server.serve_forever()
     except KeyboardInterrupt:

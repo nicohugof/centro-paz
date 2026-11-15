@@ -33,13 +33,15 @@ class ApprovalRequiredError(PermissionError):
 
 
 def _validate_approval_token(item_id: str, approval_token: str) -> bool:
+    if not item_id or not isinstance(item_id, str) or not item_id.strip():
+        return False
     raw = (approval_token or "").strip()
     if not raw:
         return False
     # Rechaza explícitamente negaciones
     if re.search(r"\b(?:no\s+autorizo|no\s+publicar|cancelar|rechazar)\b", raw, flags=re.IGNORECASE):
         return False
-    pattern = re.compile(rf"^(?:PUBLICAR|AUTORIZO)\s+{re.escape(item_id)}$", re.IGNORECASE)
+    pattern = re.compile(rf"^(?:PUBLICAR|AUTORIZO)\s+{re.escape(item_id.strip())}$", re.IGNORECASE)
     return bool(pattern.match(raw))
 
 
@@ -165,6 +167,10 @@ class EditorialCalendar:
         item = self.get_item(item_id)
         if not item:
             raise KeyError(f"Pieza editorial '{item_id}' no encontrada.")
+        if item.get("status") == "PUBLISHED_DRYRUN":
+            raise ApprovalRequiredError(
+                f"La pieza '{item_id}' ya fue publicada (dry-run). No se permite re-aprobar directamente sin un nuevo ciclo de borrador."
+            )
         if not item["qa_passed"]:
             qa_check = self.run_qa(item_id)
             if not qa_check["qa_passed"]:

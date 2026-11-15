@@ -28,7 +28,9 @@ class PublisherAdapter(Protocol):
         ...
 
 
-def _assert_item_approved_for_publish(item: Dict[str, Any]) -> None:
+def _assert_item_approved_for_publish(item: Optional[Dict[str, Any]]) -> None:
+    if not isinstance(item, dict) or not item:
+        raise ApprovalRequiredError("Publicación bloqueada: la pieza editorial no existe o es nula.")
     if item.get("status") not in ("APPROVED", "SCHEDULED"):
         raise ApprovalRequiredError(
             f"Publicación bloqueada: '{item.get('item_id')}' está en estado '{item.get('status')}' (exige APPROVED/SCHEDULED)."

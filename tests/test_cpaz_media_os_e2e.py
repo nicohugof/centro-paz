@@ -305,10 +305,14 @@ def test_dashboard_server_post_endpoints_and_batch_calendar(tmp_path):
     t.start()
     try:
         # 1. POST /api/seed
+        auth_headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {srv.session_token}",
+        }
         req_seed = urllib.request.Request(
             f"http://127.0.0.1:{port}/api/seed",
             data=b"{}",
-            headers={"Content-Type": "application/json"},
+            headers=auth_headers,
             method="POST",
         )
         with urllib.request.urlopen(req_seed, timeout=5) as resp:
@@ -321,7 +325,7 @@ def test_dashboard_server_post_endpoints_and_batch_calendar(tmp_path):
         req_qa = urllib.request.Request(
             f"http://127.0.0.1:{port}/api/qa-all",
             data=b"{}",
-            headers={"Content-Type": "application/json"},
+            headers=auth_headers,
             method="POST",
         )
         with urllib.request.urlopen(req_qa, timeout=5) as resp:
@@ -336,7 +340,7 @@ def test_dashboard_server_post_endpoints_and_batch_calendar(tmp_path):
         req_bad_approve = urllib.request.Request(
             f"http://127.0.0.1:{port}/api/approve",
             data=json.dumps({"item_id": first_item_id, "approval_token": "NO AUTORIZO"}).encode("utf-8"),
-            headers={"Content-Type": "application/json"},
+            headers=auth_headers,
             method="POST",
         )
         with pytest.raises(urllib.error.HTTPError) as exc_info:
@@ -351,7 +355,7 @@ def test_dashboard_server_post_endpoints_and_batch_calendar(tmp_path):
                 "approval_token": f"PUBLICAR {first_item_id}",
                 "reviewer": "Nicolas",
             }).encode("utf-8"),
-            headers={"Content-Type": "application/json"},
+            headers=auth_headers,
             method="POST",
         )
         with urllib.request.urlopen(req_good_approve, timeout=5) as resp:
@@ -364,7 +368,7 @@ def test_dashboard_server_post_endpoints_and_batch_calendar(tmp_path):
         req_export = urllib.request.Request(
             f"http://127.0.0.1:{port}/api/export-n8n",
             data=b"{}",
-            headers={"Content-Type": "application/json"},
+            headers=auth_headers,
             method="POST",
         )
         with urllib.request.urlopen(req_export, timeout=5) as resp:
@@ -377,7 +381,7 @@ def test_dashboard_server_post_endpoints_and_batch_calendar(tmp_path):
         req_pub = urllib.request.Request(
             f"http://127.0.0.1:{port}/api/publish-dryrun",
             data=json.dumps({"item_id": first_item_id}).encode("utf-8"),
-            headers={"Content-Type": "application/json"},
+            headers=auth_headers,
             method="POST",
         )
         with urllib.request.urlopen(req_pub, timeout=5) as resp:
@@ -414,6 +418,10 @@ def test_dashboard_server_security_protections(tmp_path):
     port = srv.server_address[1]
     t = threading.Thread(target=srv.serve_forever, daemon=True)
     t.start()
+    auth_headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {srv.session_token}",
+    }
     try:
         # 1. Cabeceras de seguridad en GET
         with urllib.request.urlopen(f"http://127.0.0.1:{port}/", timeout=5) as resp:
@@ -434,7 +442,7 @@ def test_dashboard_server_security_protections(tmp_path):
         req_cross_site = urllib.request.Request(
             f"http://127.0.0.1:{port}/api/seed",
             data=b"{}",
-            headers={"Content-Type": "application/json", "Sec-Fetch-Site": "cross-site"},
+            headers={**auth_headers, "Sec-Fetch-Site": "cross-site"},
             method="POST",
         )
         with pytest.raises(urllib.error.HTTPError) as exc_info:
@@ -445,7 +453,7 @@ def test_dashboard_server_security_protections(tmp_path):
         req_bad_origin = urllib.request.Request(
             f"http://127.0.0.1:{port}/api/seed",
             data=b"{}",
-            headers={"Content-Type": "application/json", "Origin": "https://malicious-website.com"},
+            headers={**auth_headers, "Origin": "https://malicious-website.com"},
             method="POST",
         )
         with pytest.raises(urllib.error.HTTPError) as exc_info:
@@ -456,7 +464,7 @@ def test_dashboard_server_security_protections(tmp_path):
         req_oversized = urllib.request.Request(
             f"http://127.0.0.1:{port}/api/seed",
             data=b"x" * 70000,
-            headers={"Content-Type": "application/json"},
+            headers=auth_headers,
             method="POST",
         )
         with pytest.raises(urllib.error.HTTPError) as exc_info:
@@ -467,7 +475,7 @@ def test_dashboard_server_security_protections(tmp_path):
         req_malformed_item = urllib.request.Request(
             f"http://127.0.0.1:{port}/api/approve",
             data=json.dumps({"item_id": "' OR 1=1;--", "approval_token": "PUBLICAR test"}).encode("utf-8"),
-            headers={"Content-Type": "application/json"},
+            headers=auth_headers,
             method="POST",
         )
         with pytest.raises(urllib.error.HTTPError) as exc_info:
@@ -478,7 +486,7 @@ def test_dashboard_server_security_protections(tmp_path):
         req_bad_referer = urllib.request.Request(
             f"http://127.0.0.1:{port}/api/seed",
             data=b"{}",
-            headers={"Content-Type": "application/json", "Referer": "https://evil-attacker.com/page"},
+            headers={**auth_headers, "Referer": "https://evil-attacker.com/page"},
             method="POST",
         )
         with pytest.raises(urllib.error.HTTPError) as exc_info:
@@ -489,7 +497,7 @@ def test_dashboard_server_security_protections(tmp_path):
         req_bad_ct = urllib.request.Request(
             f"http://127.0.0.1:{port}/api/seed",
             data=b"dummy=1",
-            headers={"Content-Type": "application/x-www-form-urlencoded"},
+            headers={"Content-Type": "application/x-www-form-urlencoded", "Authorization": f"Bearer {srv.session_token}"},
             method="POST",
         )
         with pytest.raises(urllib.error.HTTPError) as exc_info:
@@ -510,8 +518,50 @@ def test_dashboard_server_security_protections(tmp_path):
             urllib.request.urlopen(f"http://127.0.0.1:{port}/unknown_route", timeout=5)
         assert exc_info.value.code == 404
 
+        # 11. Autenticación: POST sin cabecera de autenticación -> HTTP 401
+        req_no_auth = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/seed",
+            data=b"{}",
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with pytest.raises(urllib.error.HTTPError) as exc_info:
+            urllib.request.urlopen(req_no_auth, timeout=5)
+        assert exc_info.value.code == 401
+
+        # 12. Autenticación: POST con Bearer token falso -> HTTP 401
+        req_bad_token = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/seed",
+            data=b"{}",
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": "Bearer token_falso_invalido_1234567890",
+            },
+            method="POST",
+        )
+        with pytest.raises(urllib.error.HTTPError) as exc_info:
+            urllib.request.urlopen(req_bad_token, timeout=5)
+        assert exc_info.value.code == 401
+
     finally:
         srv.shutdown()
         srv.server_close()
+
+    # 13. Verificaciones de seguridad a nivel de librerías y transiciones de estado
+    from media_os.calendar import _validate_approval_token
+    assert _validate_approval_token("", "PUBLICAR test") is False
+    assert _validate_approval_token(None, "PUBLICAR test") is False
+    assert _validate_approval_token("test_id", "") is False
+    assert _validate_approval_token("test_id", None) is False
+
+    # Validar que DryRunLocalPublisher falle cerrado ante item nulo o malformado
+    from media_os.publishers import DryRunLocalPublisher, ApprovalRequiredError
+    cal = EditorialCalendar(db_path=db_file)
+    pub = DryRunLocalPublisher(calendar=cal)
+    with pytest.raises(ApprovalRequiredError):
+        pub.publish(None)
+    with pytest.raises(ApprovalRequiredError):
+        pub.publish({})
+
 
 
