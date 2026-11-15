@@ -117,15 +117,11 @@ def build_executive_snapshot(
     return snapshot
 
 
-def render_dashboard_html(
+def build_dashboard_html(
     snapshot: Dict[str, Any],
     *,
-    output_path: Optional[Path | str] = None,
     session_token: str = "",
-) -> Path:
-    dest = Path(output_path) if output_path else DEFAULT_DASHBOARD_HTML
-    dest.parent.mkdir(parents=True, exist_ok=True)
-
+) -> str:
     tot = snapshot["attribution"]["totals"]
     cal = snapshot["calendar_summary"]
     kb = snapshot["knowledge_audit"]
@@ -473,6 +469,18 @@ def render_dashboard_html(
 </body>
 </html>
 """
+    return html_doc
+
+
+def render_dashboard_html(
+    snapshot: Dict[str, Any],
+    *,
+    output_path: Optional[Path | str] = None,
+    session_token: str = "",
+) -> Path:
+    dest = Path(output_path) if output_path else DEFAULT_DASHBOARD_HTML
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    html_doc = build_dashboard_html(snapshot, session_token=session_token)
     dest.write_text(html_doc, encoding="utf-8")
     return dest
 
@@ -607,8 +615,11 @@ def create_dashboard_server(
                 return
 
             if clean_path in ("/", "/index.html"):
-                html_path = render_dashboard_html(snap, output_path=output_path, session_token=active_token)
-                body = html_path.read_bytes()
+                if output_path:
+                    html_path = render_dashboard_html(snap, output_path=output_path, session_token=active_token)
+                    body = html_path.read_bytes()
+                else:
+                    body = build_dashboard_html(snap, session_token=active_token).encode("utf-8")
                 self.send_response(200)
                 self._send_security_headers()
                 self.send_header("Content-Type", "text/html; charset=utf-8")

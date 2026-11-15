@@ -563,5 +563,17 @@ def test_dashboard_server_security_protections(tmp_path):
     with pytest.raises(ApprovalRequiredError):
         pub.publish({})
 
+    # 14. Verificación de aislamiento en disco: build_dashboard_html en memoria no altera el archivo estático
+    from media_os.dashboard import build_dashboard_html, DEFAULT_DASHBOARD_HTML
+    static_before = DEFAULT_DASHBOARD_HTML.read_text(encoding="utf-8") if DEFAULT_DASHBOARD_HTML.exists() else ""
+    snap = build_executive_snapshot(db_path=db_file, probe_videos=False)
+    mem_html = build_dashboard_html(snap, session_token="test_secret_in_memory_12345")
+    assert "test_secret_in_memory_12345" in mem_html
+    if DEFAULT_DASHBOARD_HTML.exists():
+        static_after = DEFAULT_DASHBOARD_HTML.read_text(encoding="utf-8")
+        assert "test_secret_in_memory_12345" not in static_after
+        assert static_after == static_before
+
+
 
 

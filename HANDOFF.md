@@ -5,7 +5,7 @@ Lee `ROADMAP.md`, `ESTADO_ACTUAL.md`, `README.md` y documentación clínica. Con
 **Estado Actual de CPAZ Media OS (`feat/cpaz-media-os`):**
 - Módulo funcional completo con 28 contenidos clínicos sembrados y auditados (28/28 PASS, 28 infografías PNG verificadas en `assets/instagram/`).
 - Submenú interactivo en `python3 cpaz.py` (opción `M`).
-- Dashboard interactivo en `tools/cpaz_media_os_dashboard.html` y servidor local `python3 -m media_os.cli serve` con autenticación por token de sesión criptográfico (`secrets.token_hex(24)`).
+- Dashboard interactivo en `tools/cpaz_media_os_dashboard.html` y servidor local `python3 -m media_os.cli serve` con autenticación por token de sesión criptográfico (`secrets.token_hex(24)`), servido estrictamente en memoria sin persistir secretos en el archivo HTML del repositorio.
 - Blindaje de seguridad HTTP multicapa verificado: anti-DNS rebinding, anti-CSRF (`Sec-Fetch-Site`, `Origin`, `Referer`), rechazo de preflight CORS `OPTIONS` (405), límite de 64 KB y permisos restrictivos `0600` en cola de publicación.
 - 100% pruebas unitarias, de seguridad y E2E superadas (`pytest tests/test_cpaz_media_os_e2e.py` 8/8 PASS).
 - Todos los 28 contenidos en estado `CLINICAL_QA`: Cero PII, cero publicaciones en vivo sin aprobación explícita humana (`PUBLICAR <ID>`).
