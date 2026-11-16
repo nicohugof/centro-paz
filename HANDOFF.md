@@ -28,9 +28,9 @@ Lee `ROADMAP.md`, `ESTADO_ACTUAL.md`, `README.md` y documentación clínica. Con
     - `bash scripts/media_os_service.sh open`: Copia el token al portapapeles y abre `http://127.0.0.1:8765/` en el navegador predeterminado.
     - `bash scripts/media_os_service.sh install-launchd`: Registra y activa el LaunchAgent residente en macOS (`~/Library/LaunchAgents/cl.centropaz.media_os.plist`).
     - `bash scripts/media_os_service.sh uninstall-launchd`: Descarga y elimina el LaunchAgent de macOS y detiene el proceso.
-  * Servicio residente macOS: `~/Library/LaunchAgents/cl.centropaz.media_os.plist` configurado con `RunAtLoad: true` y `KeepAlive: true`.
-  * **Procedimiento de Recuperación ante Caídas o Reinicios:**
-    1. Ante caída imprevista del proceso (`SIGKILL`, fallo de memoria o reinicio de macOS), `launchd` detecta el cierre y re-lanza el servidor en < 1 segundo manteniendo el mismo token persistente en `~/.cpaz/media_os_token`.
+  * Servicio residente macOS: `~/Library/LaunchAgents/cl.centropaz.media_os.plist` configurado con `RunAtLoad: true` y `KeepAlive: true` (probado con `kill -9`; reinicio real del Mac pendiente de verificación por Nicolás).
+  * **Procedimiento de Recuperación ante Caídas:**
+    1. Ante caída imprevista del proceso (`SIGKILL` o fallo de proceso), `launchd` detecta el cierre y re-lanza el servidor automáticamente manteniendo el mismo token persistente en `~/.cpaz/media_os_token` (probado con `kill -9`; reinicio real del Mac pendiente de verificación por Nicolás).
     2. Si el servicio no responde, verificar el estado con `bash scripts/media_os_service.sh status`.
     3. Para forzar reanudación limpia: ejecutar `bash scripts/media_os_service.sh restart`.
     4. Si se desinstaló el daemon de macOS: re-vincularlo con `bash scripts/media_os_service.sh install-launchd`.
