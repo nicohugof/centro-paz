@@ -1176,7 +1176,10 @@ def create_dashboard_server(
         def log_message(self, format: str, *args: Any) -> None:  # noqa: A002
             return
 
-    srv = ThreadingHTTPServer((host, port), _Handler)
+    class _DashboardServer(ThreadingHTTPServer):
+        allow_reuse_address = True
+
+    srv = _DashboardServer((host, port), _Handler)
     srv.session_token = active_token  # type: ignore[attr-defined]
     srv.session_mgr = session_mgr  # type: ignore[attr-defined]
     return srv
@@ -1197,8 +1200,9 @@ def serve_loopback(
         allow_tailscale=allow_tailscale,
         session_token=session_token,
     )
+    tok_len = len(getattr(server, "session_token", "") or "")
     print(f"CPAZ Media OS Dashboard en http://{host}:{port}")
-    print(f"Token de sesión activo: {getattr(server, 'session_token', '')}")
+    print(f"Token de sesión configurado: ({tok_len} caracteres, protegido en ~/.cpaz/media_os_token)")
     try:
         server.serve_forever()
     except KeyboardInterrupt:

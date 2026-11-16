@@ -17,10 +17,24 @@ Lee `ROADMAP.md`, `ESTADO_ACTUAL.md`, `README.md` y documentación clínica. Con
 - **Aislamiento Clínico y Ley 19.628:** Todos los 28 contenidos permanecen en estado `CLINICAL_QA` con 0 aprobaciones automáticas y 0 publicaciones en vivo sin aprobación explícita humana (`PUBLICAR <ID>`).
 - **Modelo de Amenazas Local:** El perímetro protege contra atacantes de red externos, sitios web maliciosos y ataques cross-site; se documenta que procesos locales que corran bajo el mismo UID del usuario escapan a las barreras HTTP de la aplicación y requieren aislamiento a nivel del sistema operativo.
 - **Acceso Permanente Local en macOS:**
-  * URL estable: `http://127.0.0.1:8765/` (escucha exclusiva en loopback).
-  * Gestor de servicio: `scripts/media_os_service.sh` (`start`, `stop`, `restart`, `status`, `token`, `open`, `install-launchd`, `uninstall-launchd`).
-  * Servicio residente macOS: `~/Library/LaunchAgents/cl.centropaz.media_os.plist` configurado y activo con `RunAtLoad` y `KeepAlive` para auto-recuperación ante reinicios del sistema.
-  * Acceso directo de escritorio: `tools/CPAZ Media OS.webloc` y en `~/Desktop/CPAZ Media OS.webloc`.
+  * URL estable: `http://127.0.0.1:8765/` (escucha exclusiva en loopback `127.0.0.1`).
+  * Gestor de servicio integral: `scripts/media_os_service.sh`
+    - `bash scripts/media_os_service.sh start`: Inicia el servidor loopback en background.
+    - `bash scripts/media_os_service.sh stop`: Detiene el servidor y limpia procesos huérfanos.
+    - `bash scripts/media_os_service.sh restart`: Reinicia el servicio y refresca sockets.
+    - `bash scripts/media_os_service.sh status`: Inspecciona PID, estado de escucha en 127.0.0.1:8765, token y salud HTTP.
+    - `bash scripts/media_os_service.sh token --copy`: Copia el token de sesión activo al portapapeles de macOS (`pbcopy`) sin imprimirlo en pantalla.
+    - `bash scripts/media_os_service.sh token --rotate`: Genera un nuevo token criptográfico seguro de 48 caracteres, actualiza `~/.cpaz/media_os_token` con permisos `0600` y reinicia el servidor de inmediato invalidando el token anterior.
+    - `bash scripts/media_os_service.sh open`: Copia el token al portapapeles y abre `http://127.0.0.1:8765/` en el navegador predeterminado.
+    - `bash scripts/media_os_service.sh install-launchd`: Registra y activa el LaunchAgent residente en macOS (`~/Library/LaunchAgents/cl.centropaz.media_os.plist`).
+    - `bash scripts/media_os_service.sh uninstall-launchd`: Descarga y elimina el LaunchAgent de macOS y detiene el proceso.
+  * Servicio residente macOS: `~/Library/LaunchAgents/cl.centropaz.media_os.plist` configurado con `RunAtLoad: true` y `KeepAlive: true`.
+  * **Procedimiento de Recuperación ante Caídas o Reinicios:**
+    1. Ante caída imprevista del proceso (`SIGKILL`, fallo de memoria o reinicio de macOS), `launchd` detecta el cierre y re-lanza el servidor en < 1 segundo manteniendo el mismo token persistente en `~/.cpaz/media_os_token`.
+    2. Si el servicio no responde, verificar el estado con `bash scripts/media_os_service.sh status`.
+    3. Para forzar reanudación limpia: ejecutar `bash scripts/media_os_service.sh restart`.
+    4. Si se desinstaló el daemon de macOS: re-vincularlo con `bash scripts/media_os_service.sh install-launchd`.
+  * Acceso directo de escritorio: `tools/CPAZ Media OS.webloc` y en `~/Desktop/CPAZ Media OS.webloc` (apuntando a `http://127.0.0.1:8765/`).
   * Token persistente de usuario con permisos `0600` en `~/.cpaz/media_os_token`.
 - Pull Request #15 abierto y listo para revisión clínica final de Valentina antes del merge a `main`.
 

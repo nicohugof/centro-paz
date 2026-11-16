@@ -42,19 +42,25 @@ is_running() {
 }
 
 cmd_start() {
-  if is_running; then
-    local pid
-    pid="$(lsof -i :8765 -sTCP:LISTEN -t 2>/dev/null || cat "${PID_FILE}" 2>/dev/null || echo 'desconocido')"
-    echo "✅ CPAZ Media OS ya está en ejecución (PID: ${pid}) en http://127.0.0.1:8765"
-    return 0
-  fi
+  if [[ -f "${LAUNCHD_PLIST}" ]]; then
+    echo "🚀 Iniciando CPAZ Media OS mediante LaunchAgent (launchd)..."
+    launchctl unload "${LAUNCHD_PLIST}" 2>/dev/null || true
+    launchctl load "${LAUNCHD_PLIST}"
+  else
+    if is_running; then
+      local pid
+      pid="$(lsof -i :8765 -sTCP:LISTEN -t 2>/dev/null || cat "${PID_FILE}" 2>/dev/null || echo 'desconocido')"
+      echo "✅ CPAZ Media OS ya está en ejecución (PID: ${pid}) en http://127.0.0.1:8765"
+      return 0
+    fi
 
-  echo "🚀 Iniciando CPAZ Media OS en segundo plano..."
-  cd "${ROOT_DIR}"
-  nohup "${PYTHON_BIN}" -m media_os.cli serve --host 127.0.0.1 --port 8765 >> "${LOG_FILE}" 2>&1 &
-  local new_pid=$!
-  echo "${new_pid}" > "${PID_FILE}"
-  chmod 600 "${PID_FILE}" 2>/dev/null || true
+    echo "🚀 Iniciando CPAZ Media OS en segundo plano..."
+    cd "${ROOT_DIR}"
+    nohup "${PYTHON_BIN}" -m media_os.cli serve --host 127.0.0.1 --port 8765 >> "${LOG_FILE}" 2>&1 &
+    local new_pid=$!
+    echo "${new_pid}" > "${PID_FILE}"
+    chmod 600 "${PID_FILE}" 2>/dev/null || true
+  fi
 
   # Esperar disponibilidad del socket
   local retries=15
@@ -72,7 +78,7 @@ cmd_start() {
     echo "=========================================================================="
     echo " 🌿 CPAZ Media OS OPERATIVO"
     echo " 🌐 URL Local: http://127.0.0.1:8765/"
-    echo " 🔑 Token de Sesión: ${tok}"
+    echo " 🔑 Token de Sesión: 🔒 Configurado (${#tok} caracteres, permisos 0600)"
     echo " 📄 Registro de logs: ${LOG_FILE}"
     echo "=========================================================================="
   else
@@ -82,13 +88,11 @@ cmd_start() {
 }
 
 cmd_stop() {
-  if ! is_running; then
-    echo "ℹ️ CPAZ Media OS no está en ejecución."
-    rm -f "${PID_FILE}"
-    return 0
+  if [[ -f "${LAUNCHD_PLIST}" ]]; then
+    echo "🛑 Deteniendo CPAZ Media OS (descargando LaunchAgent temporalmente)..."
+    launchctl unload "${LAUNCHD_PLIST}" 2>/dev/null || true
   fi
 
-  echo "🛑 Deteniendo CPAZ Media OS..."
   local pids
   pids="$(lsof -i :8765 -sTCP:LISTEN -t 2>/dev/null || true)"
   if [[ -z "${pids}" ]] && [[ -f "${PID_FILE}" ]]; then
@@ -135,11 +139,24 @@ cmd_status() {
     echo " • PID:             ${pid}"
     echo " • Puerto:          127.0.0.1:8765 (Loopback Privado)"
     echo " • Verificación:    HTTP ${http_status}"
-    echo " • Token Guardado:  $(get_token)"
+    if [[ -f "${TOKEN_FILE}" ]]; then
+      local perms len
+      perms="$(stat -f "%Lp" "${TOKEN_FILE}" 2>/dev/null || echo "0600")"
+      len="$(wc -c < "${TOKEN_FILE}" 2>/dev/null | tr -d ' ' || echo "48")"
+      echo " • Token de Sesión: 🔒 Configurado (${len} caracteres, permisos ${perms})"
+    else
+      echo " • Token de Sesión: ⚪ No generado"
+    fi
     echo " • URL:             http://127.0.0.1:8765/"
   else
     echo " • Estado:          🔴 DETENIDO"
     echo " • Puerto:          8765 (Libre)"
+    if [[ -f "${TOKEN_FILE}" ]]; then
+      local perms len
+      perms="$(stat -f "%Lp" "${TOKEN_FILE}" 2>/dev/null || echo "0600")"
+      len="$(wc -c < "${TOKEN_FILE}" 2>/dev/null | tr -d ' ' || echo "48")"
+      echo " • Token de Sesión: 🔒 Configurado (${len} caracteres, permisos ${perms})"
+    fi
   fi
 
   if [[ -f "${LAUNCHD_PLIST}" ]]; then
@@ -151,12 +168,42 @@ cmd_status() {
 }
 
 cmd_token() {
-  local tok
-  tok="$(get_token)"
-  echo "${tok}"
-  if [[ "${1:-}" == "--copy" ]] && command -v pbcopy >/dev/null 2>&1; then
-    echo -n "${tok}" | pbcopy
-    echo "📋 Token copiado al portapapeles de macOS."
+  local opt="${1:-}"
+  if [[ "${opt}" == "--rotate" ]]; then
+    local new_tok
+    new_tok="$("${PYTHON_BIN}" -c "import secrets; print(secrets.token_hex(24))")"
+    echo -n "${new_tok}" > "${TOKEN_FILE}"
+    chmod 600 "${TOKEN_FILE}"
+    if is_running; then
+      echo "🔄 Reiniciando servidor para aplicar nueva credencial..."
+      cmd_restart >/dev/null 2>&1
+    fi
+    local perms
+    perms="$(stat -f "%Lp" "${TOKEN_FILE}" 2>/dev/null || echo "0600")"
+    echo "✅ Token rotado exitosamente (${#new_tok} caracteres, permisos ${perms})."
+    return 0
+  elif [[ "${opt}" == "--copy" ]]; then
+    local tok
+    tok="$(get_token)"
+    if command -v pbcopy >/dev/null 2>&1; then
+      echo -n "${tok}" | pbcopy
+      echo "📋 Token copiado al portapapeles de macOS (sin imprimir en pantalla)."
+    else
+      echo "⚠️ pbcopy no disponible."
+    fi
+    return 0
+  elif [[ "${opt}" == "--show" ]]; then
+    get_token
+    return 0
+  else
+    local perms len
+    perms="$(stat -f "%Lp" "${TOKEN_FILE}" 2>/dev/null || echo "0600")"
+    len="$(wc -c < "${TOKEN_FILE}" 2>/dev/null | tr -d ' ' || echo "48")"
+    echo "🔒 Token configurado: ${len} caracteres en ${TOKEN_FILE} (permisos ${perms})."
+    echo "   • Para copiar al portapapeles sin mostrar en pantalla: bash scripts/media_os_service.sh token --copy"
+    echo "   • Para regenerar la credencial:                        bash scripts/media_os_service.sh token --rotate"
+    echo "   • Para mostrar en terminal (modo explícito):          bash scripts/media_os_service.sh token --show"
+    return 0
   fi
 }
 
