@@ -1,0 +1,35 @@
+# Caddyfile de Producción — CPAZ Media OS (panel.centropaz.cl)
+# Termina HTTPS con TLS automático (Let's Encrypt / ZeroSSL) y reenvía al backend local.
+
+panel.centropaz.cl {
+    # Encabezados de seguridad reforzados
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "strict-origin-when-cross-origin"
+    }
+
+    # Proxy inverso hacia el servicio loopback de CPAZ Media OS
+    reverse_proxy 127.0.0.1:8765 {
+        header_up Host {host}
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto "https"
+
+        # Tiempo de espera y resiliencia
+        transport http {
+            dial_timeout 5s
+            response_header_timeout 15s
+        }
+    }
+
+    # Registro de acceso estructurado (sin registrar tokens ni datos clínicos)
+    log {
+        output file /var/log/caddy/panel_centropaz_access.log {
+            roll_size 10MiB
+            roll_keep 5
+        }
+        format json
+    }
+}

@@ -2,6 +2,52 @@
 
 Lee `ROADMAP.md`, `ESTADO_ACTUAL.md`, `README.md` y documentación clínica. Conserva `video_engine/public/`: no borrar, reemplazar ni incluir accidentalmente. Usa dry-run hasta autorización. Todo contenido público exige QA clínico/marca y `PUBLICAR <ID>`; no automatizar WhatsApp clínico ni documentar datos de pacientes.
 
+**Estado Actual de CPAZ Media OS (`feat/cpaz-media-os`):**
+- Módulo funcional completo con 28 contenidos clínicos sembrados y auditados (28/28 PASS, 28 infografías PNG verificadas físicamente e indexadas en `docs/INTEGRITY_MANIFEST_PR15.json`).
+- Submenú interactivo en `python3 cpaz.py` (opción `M`).
+- Dashboard interactivo en `tools/cpaz_media_os_dashboard.html` y servidor local `python3 -m media_os.cli serve` con arquitectura de seguridad de nivel bancario:
+  * Sesión de navegador autenticada **exclusivamente mediante cookie `HttpOnly; SameSite=Strict`** (con bandera `Secure` condicional ante proxy HTTPS) en memoria con TTL de expiración (8h) e invalidación (`POST /api/logout`).
+  * **Cero exposición de secretos de sesión en el DOM o JavaScript**: metaetiquetas obsoletas eliminadas; mutaciones desde navegador exigen token CSRF independiente (`X-CSRF-Token`).
+  * Clientes programáticos y CLI conservan compatibilidad vía cabecera `Authorization: Bearer <master_token>`.
+  * Política de Seguridad de Contenido (CSP) con **nonce criptográfico dinámico (`'nonce-{nonce}'`)** y rotación por petición, eliminando `'unsafe-inline'` para neutralizar vectores XSS.
+  * `/api/snapshot` estrictamente protegido (`401 Unauthorized` ante peticiones anónimas).
+- Blindaje de seguridad HTTP multicapa verificado: anti-DNS rebinding, anti-CSRF (`Sec-Fetch-Site`, `Origin`, `Referer`), rechazo de preflight CORS `OPTIONS` (405), límite de 64 KB, descarte de tokens en query strings (`?token=`), y permisos restrictivos `0600` en cola de publicación.
+- **Manifiesto de Integridad Criptográfica:** [`docs/INTEGRITY_MANIFEST_PR15.json`](docs/INTEGRITY_MANIFEST_PR15.json) con hashes SHA-256 de base de datos, módulos y las 28 imágenes, auditado en `tests/test_integrity_manifest.py`.
+- **100% pruebas unitarias, de seguridad y E2E superadas**: 81 pruebas automatizadas en el repositorio (10 suites pytest incluyendo pruebas específicas de PWA y dominio `panel.centropaz.cl`, 64 pruebas en `audit_directory_consistency.py`, 7 pruebas en `test_full_suite_e2e.py`).
+- **Aislamiento Clínico y Ley 19.628:** Todos los 28 contenidos permanecen en estado `CLINICAL_QA` con 0 aprobaciones automáticas y 0 publicaciones en vivo sin aprobación explícita humana (`PUBLICAR <ID>`).
+- **Modelo de Amenazas Local:** El perímetro protege contra atacantes de red externos, sitios web maliciosos y ataques cross-site; se documenta que procesos locales que corran bajo el mismo UID del usuario escapan a las barreras HTTP de la aplicación y requieren aislamiento a nivel del sistema operativo.
+- **PWA Móvil e Instalación en iPhone:**
+  * Aplicación Web Progresiva instalable en Safari iOS (Compartir → "Añadir a pantalla de inicio") con modo standalone a pantalla completa.
+  * Iconos oficiales de Centro Paz en alta resolución (`apple-touch-icon.png` 180x180, `icon-192x192.png`, `icon-512x512.png`) y `manifest.webmanifest`.
+  * Service worker (`sw.js`) con aislamiento estricto: cachea únicamente interfaz estática, prohibiendo explícitamente almacenar en caché respuestas de `/api/*` o datos de pacientes.
+  * Interfaz optimizada para iPhone: soporte `viewport-fit=cover`, safe area insets, touch targets >= 44px, vista de tarjetas táctiles para el calendario editorial y logo oficial en login y cabecera.
+  * Manual de usuario completo en [`docs/MANUAL_OPERACION_IPHONE.md`](docs/MANUAL_OPERACION_IPHONE.md).
+- **Infraestructura de Dominio (`panel.centropaz.cl`):**
+  * Servidor loopback compatible con host y origen `panel.centropaz.cl` bajo HTTPS con cabeceras `Secure` en cookies.
+  * Configuraciones de despliegue reproducible en `deploy/`: Cloudflare Tunnel (`deploy/cloudflared-config.yml`), Caddy con SSL automático (`deploy/Caddyfile`), Nginx (`deploy/nginx-panel.conf`) y monitor de salud (`deploy/healthcheck.sh`).
+- **Acceso Permanente Local en macOS:**
+  * URL estable: `http://127.0.0.1:8765/` (escucha exclusiva en loopback `127.0.0.1`).
+  * Gestor de servicio integral: `scripts/media_os_service.sh`
+    - `bash scripts/media_os_service.sh start`: Inicia el servidor loopback en background.
+    - `bash scripts/media_os_service.sh stop`: Detiene el servidor y limpia procesos huérfanos.
+    - `bash scripts/media_os_service.sh restart`: Reinicia el servicio y refresca sockets.
+    - `bash scripts/media_os_service.sh status`: Inspecciona PID, estado de escucha en 127.0.0.1:8765, token y salud HTTP.
+    - `bash scripts/media_os_service.sh token --copy`: Copia el token de sesión activo al portapapeles de macOS (`pbcopy`) sin imprimirlo en pantalla.
+    - `bash scripts/media_os_service.sh token --rotate`: Genera un nuevo token criptográfico seguro de 48 caracteres, actualiza `~/.cpaz/media_os_token` con permisos `0600` y reinicia el servidor de inmediato invalidando el token anterior.
+    - `bash scripts/media_os_service.sh open`: Copia el token al portapapeles y abre `http://127.0.0.1:8765/` en el navegador predeterminado.
+    - `bash scripts/media_os_service.sh install-launchd`: Registra y activa el LaunchAgent residente en macOS (`~/Library/LaunchAgents/cl.centropaz.media_os.plist`).
+    - `bash scripts/media_os_service.sh uninstall-launchd`: Descarga y elimina el LaunchAgent de macOS y detiene el proceso.
+  * Servicio residente macOS: `~/Library/LaunchAgents/cl.centropaz.media_os.plist` configurado con `RunAtLoad: true` y `KeepAlive: true` (probado con `kill -9`; reinicio real del Mac pendiente de verificación por Nicolás).
+  * **Procedimiento de Recuperación ante Caídas:**
+    1. Ante caída imprevista del proceso (`SIGKILL` o fallo de proceso), `launchd` detecta el cierre y re-lanza el servidor automáticamente manteniendo el mismo token persistente en `~/.cpaz/media_os_token` (probado con `kill -9`; reinicio real del Mac pendiente de verificación por Nicolás).
+    2. Si el servicio no responde, verificar el estado con `bash scripts/media_os_service.sh status`.
+    3. Para forzar reanudación limpia: ejecutar `bash scripts/media_os_service.sh restart`.
+    4. Si se desinstaló el daemon de macOS: re-vincularlo con `bash scripts/media_os_service.sh install-launchd`.
+  * Acceso directo de escritorio: `tools/CPAZ Media OS.webloc` y en `~/Desktop/CPAZ Media OS.webloc` (apuntando a `http://127.0.0.1:8765/`).
+  * Token persistente de usuario con permisos `0600` en `~/.cpaz/media_os_token`.
+- Pull Request #15 abierto y listo para revisión clínica final de Valentina antes del merge a `main`.
+
+
 
 ---
 

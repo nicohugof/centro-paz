@@ -1,10 +1,44 @@
 # Estado actual — Centro Paz
 
-**Actualizado:** 2026-11-05 (PR #14 Integrado y Desplegado en Producción)
+**Actualizado:** 2026-11-11 (Lanzamiento CPAZ Media OS en rama `feat/cpaz-media-os` + PR #14 activo en producción)
 
 ## Función
 
-Ecosistema digital centrado al 100% en la **Página Web ([www.centropaz.cl](https://www.centropaz.cl))** como el motor principal de posicionamiento en Google (SEO / GEO / LLM Overviews), Google Ads y conversión directa de pacientes a WhatsApp.
+Ecosistema digital centrado al 100% en la **Página Web ([www.centropaz.cl](https://www.centropaz.cl))** como el motor principal de posicionamiento en Google (SEO / GEO / LLM Overviews), Google Ads y conversión directa de pacientes a WhatsApp, ahora coordinado internamente en desarrollo por **CPAZ Media OS** (`media_os/`).
+
+## CPAZ Media OS (Rama `feat/cpaz-media-os`, sin mergear ni publicar sin `AUTORIZO`)
+
+- **Arquitectura mínima verificada ([`docs/MEDIA_OS_ARQUITECTURA_Y_COMPARATIVA.md`](docs/MEDIA_OS_ARQUITECTURA_Y_COMPARATIVA.md)):** Auditoría comparativa de OpenPost (`AGPL-3.0`), BrightBean Studio (`AGPL-3.0`), Postiz (`AGPL-3.0`, descartado por 2-8 GB RAM), Activepieces (descartado para no duplicar `n8n`), Ollama (`MIT`, integrado local), ComfyUI (`GPL-3.0`, deshabilitado en Mac 8 GB), FFmpeg (`CLI` subprocess), Remotion (`video_engine/` reutilizado), Mixpost Lite, Umami y Shlink.
+- **Módulos locales implementados (`media_os/`):** firewall PII Ley 19.628 ([`media_os/privacy.py`](media_os/privacy.py)), SQLite WAL ([`media_os/storage.py`](media_os/storage.py)), inteligencia & QA clínico ([`media_os/intelligence.py`](media_os/intelligence.py)), estudio A/V `ffprobe`/`ffmpeg` ([`media_os/studio.py`](media_os/studio.py)), calendario editorial + gate `PUBLICAR <ID>` ([`media_os/calendar.py`](media_os/calendar.py)), publicadores dry-run/desacoplados ([`media_os/publishers.py`](media_os/publishers.py)), puente n8n aprobado-only ([`media_os/automation.py`](media_os/automation.py)), atribución UTM sin PII ([`media_os/attribution.py`](media_os/attribution.py)) y Dashboard Ejecutivo ([`tools/cpaz_media_os_dashboard.html`](tools/cpaz_media_os_dashboard.html)).
+- **Capacidades Operativas e Interactivas Validadas:**
+  - Calendario Editorial poblado con los **28 tópicos clínicos** oficiales.
+  - Auditoría de **QA Clínico 28/28 PASS** (verificación de arancel $45.000 CLP, Registro SIS Nº 667344 y ausencia de afirmaciones prohibidas).
+  - **Submenú interactivo en terminal** (`cpaz.py` opción `M` o `python3 -m media_os.cli`) para gestión en 1 paso: ver snapshot, poblar temas, auditar QA, aprobar (`PUBLICAR <ID>`), simular dry-run, exportar a n8n y abrir dashboard.
+  - **Dashboard Ejecutivo Web Interactivo** con botones de copiado rápido (`📋 Copiar "PUBLICAR <ID>"`), buscador y filtros de estado, endpoints locales blindados (`/api/snapshot`, `/api/login`, `/api/logout`, `/api/seed`, `/api/qa-all`, `/api/approve`, `/api/publish-dryrun`, `/api/export-n8n`):
+    * **Sesiones de Navegador en Cookie HttpOnly:** Autenticación de navegador gobernada 100% por cookies `HttpOnly; SameSite=Strict`, eliminando cualquier token de sesión del DOM o del alcance de JavaScript.
+    * **Token CSRF Independiente:** Endpoints mutantes (`POST`) ejecutados desde el navegador exigen validación de token CSRF (`X-CSRF-Token`) generado por el servidor y enlazado a la sesión en memoria.
+    * **Compatibilidad Dual CLI/API:** Soporte preservado para herramientas de línea de comandos mediante cabecera `Authorization: Bearer <master_token>`.
+    * **CSP Estricto con Nonce Criptográfico:** `script-src 'self' 'nonce-{nonce}'`, eliminando `'unsafe-inline'` para anular vectores de inyección XSS.
+    * **Expiración y Revocación de Sesión:** Administrador de sesiones `SessionManager` con TTL (8h) y endpoint `/api/logout` que destruye la sesión y borra la cookie.
+    * **Defensa Perimetral:** Anti-CSRF (`Sec-Fetch-Site`, `Origin`, `Referer`), anti-DNS Rebinding, método CORS `OPTIONS` bloqueado (405), límite de 64 KB en payload y descarte absoluto de tokens en parámetros URL (`?token=`).
+  - **Acceso Permanente y Residente Local:**
+    * Servidor loopback en `http://127.0.0.1:8765/` administrado por `scripts/media_os_service.sh` y automatizado mediante LaunchAgent de macOS (`~/Library/LaunchAgents/cl.centropaz.media_os.plist`) con `RunAtLoad` y `KeepAlive`.
+    * Comandos de servicio: `start`, `stop`, `restart`, `status`, `token --copy` (portapapeles sin imprimir), `token --rotate` (rotación segura 48 chars e invalidación inmediata), `open` (abre en navegador copiando token), `install-launchd` y `uninstall-launchd`.
+    * Procedimiento de recuperación: ante cierres anómalos, `launchd` restablece el servicio automáticamente (probado con `kill -9`; reinicio real del Mac pendiente de verificación por Nicolás); diagnóstico manual con `status` y recuperación forzada con `restart` o `install-launchd`.
+    * Acceso directo de escritorio `.webloc` en `tools/` y `~/Desktop/` apuntando a `http://127.0.0.1:8765/`, con credencial en `~/.cpaz/media_os_token` (permisos `0600`).
+  - **PWA Móvil e Instalación en iPhone:**
+    * App Web Progresiva instalable en Safari iOS con modo standalone, `viewport-fit=cover`, safe area insets y barra de estado temática (`#2c6e58`).
+    * Iconos oficiales derivados de la marca Centro Paz (`apple-touch-icon.png` 180x180, `icon-192x192.png`, `icon-512x512.png`) y `manifest.webmanifest`.
+    * Service worker `sw.js` con política de aislamiento clínico estricto (0 caché de APIs ni datos sensibles).
+    * Experiencia táctil optimizada en iPhone: tarjetas táctiles para el calendario editorial, touch targets >= 44px y botón de un solo toque para copiar `PUBLICAR <ID>`.
+    * Manual operativo detallado en [`docs/MANUAL_OPERACION_IPHONE.md`](docs/MANUAL_OPERACION_IPHONE.md).
+  - **Infraestructura y Dominio `panel.centropaz.cl`:**
+    * Backend preparado para escuchar bajo el dominio `panel.centropaz.cl` con validación de host, orígenes autorizados y cookies con atributo `Secure` ante conexiones HTTPS.
+    * Configuraciones listas en `deploy/`: Cloudflare Tunnel de $0/mes y 0 puertos abiertos (`deploy/cloudflared-config.yml`), proxy Caddy con TLS automático (`deploy/Caddyfile`), Nginx (`deploy/nginx-panel.conf`) y monitor de salud (`deploy/healthcheck.sh`).
+  - **Suite de Pruebas Automatizadas:** `pytest`: **10/10 PASS** (verificaciones de PWA, compatibilidad de dominio, seguridad HTTP, control de acceso, rotación de nonce CSP, TTL y regresión funcional; total de **81 pruebas automatizadas** en el repositorio junto a `agent/audit_directory_consistency.py` [64/64] y `agent/test_full_suite_e2e.py` [7/7]).
+  - **Integridad Criptográfica y Clínica:** Los 28 contenidos se encuentran en estado `CLINICAL_QA` con sus 28 recursos gráficos PNG verificados físicamente e indexados en [`docs/INTEGRITY_MANIFEST_PR15.json`](docs/INTEGRITY_MANIFEST_PR15.json), auditados de forma automática en [`tests/test_integrity_manifest.py`](tests/test_integrity_manifest.py).
+  - **Modelo de Seguridad Local:** Perímetro blindado contra ataques de red y navegador (CSRF, DNS Rebinding, XSS); se delimita que los procesos locales ejecutados bajo el mismo UID escapan a las defensas de la capa de aplicación y dependen del aislamiento del sistema operativo.
+- **Resguardo clínico e integridad:** `video_engine/public/`, `data/patient_intakes.json`, las 54 páginas HTML y cuentas externas permanecen intactos y sin publicación en vivo. Ready para revisión humana en PR #15.
 
 ## Evidencia actual del sistema y Cierre de PR #14
 

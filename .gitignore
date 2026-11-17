@@ -10,6 +10,11 @@ node_modules/
 video_engine/node_modules/
 video_engine/temp/
 .unlighthouse/
+.pytest_cache/
+
+# Runtime SQLite y artefactos temporales de CPAZ Media OS (solo local)
+data/media_os/
+backups/
 
 # Datos reales de pacientes: nunca al repo (Ley 19.628). Se crea solo en local.
 data/patient_intakes.json

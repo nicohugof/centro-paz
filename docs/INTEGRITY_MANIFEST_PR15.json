@@ -1,0 +1,536 @@
+{
+  "manifest_version": "1.0.0",
+  "project": "CPAZ Media OS",
+  "branch": "feat/cpaz-media-os",
+  "created_at": "2026-11-15T14:35:00-03:00",
+  "database": {
+    "path": "data/media_os/media_os.db",
+    "sha256": "2d76e9eda758d8d876e693882b5e4999b9e99db78b6d7be8a8547fd8f7fd7718",
+    "total_items": 28,
+    "status_summary": {
+      "CLINICAL_QA": 28,
+      "APPROVED": 0,
+      "PUBLISHED_DRYRUN": 0
+    },
+    "approved_by_count": 0,
+    "published_at_count": 0
+  },
+  "assets": [
+    {
+      "item_id": "cpaz-0211fc44",
+      "topic_key": "hiperfoco_burnout",
+      "title": "El ciclo del Hiperfoco: De la genialidad al colapso en 48 hrs",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_18_hiperfoco_burnout.png",
+      "sha256": "c4ee348fd106eb87302daea798e02af32c72281d9b6fd96ee4ea7b5a6b31d4ee",
+      "size_bytes": 116199,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-02b9d3c5",
+      "topic_key": "autocuidado_fin_de_semana",
+      "title": "Descanso pasivo vs. Descanso Sensorial: Cómo reponer energía",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_28_autocuidado_fin_de_semana.png",
+      "sha256": "6c3d00a821ead0caafaec25626a93802f4eb3ab6a3a141f6b7e9a2d9b8f8a1aa",
+      "size_bytes": 119924,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-094538ff",
+      "topic_key": "reembolso_matematica",
+      "title": "La matemática real del reembolso: ¿Cuánto pagas y cuánto recuperas?",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_14_reembolso_matematica.png",
+      "sha256": "06edbc9f246ee8a52e95986bcb266c2ad3a650ffc617730967aff33718505e43",
+      "size_bytes": 115643,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-11af821e",
+      "topic_key": "padres_regulacion_propia",
+      "title": "No puedes regular a tu hijo si tu sistema está en alarma",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_27_padres_regulacion_propia.png",
+      "sha256": "db230ffbd1e2e457cf903e0413f199c0010c78464ee4659a0f65096195eb0c68",
+      "size_bytes": 106795,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-28ee8d39",
+      "topic_key": "tdah_adultos",
+      "title": "¿Y si tu cansancio no es flojera, sino TDAH no diagnosticado?",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_01_tdah_adultos.png",
+      "sha256": "2888d9aa9c4288a7cfe2d58e64824a4d10511724a167e0ffb062f4146138dea4",
+      "size_bytes": 143537,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-32dc2b1f",
+      "topic_key": "tdah_rechazo_rsd",
+      "title": "Sensibilidad al Rechazo (RSD): Por qué una crítica duele tanto",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_21_tdah_rechazo_rsd.png",
+      "sha256": "6c5c041c5d745843214acd34573252f281c0fc4b073604ee76e7d0a86512c68c",
+      "size_bytes": 115137,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-33e3e8ef",
+      "topic_key": "paralisis_ejecutiva",
+      "title": "Parálisis Ejecutiva en TDAH: por qué tu cerebro no arranca y cómo destrabarlo",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_09_paralisis_ejecutiva.png",
+      "sha256": "fbc0f9ab91587817485c3776137d16fc62b662edd3bf8ca3dd48fca770a6ee70",
+      "size_bytes": 117521,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-4a5466a7",
+      "topic_key": "terapia_online",
+      "title": "3 Razones por las que la terapia online es tan efectiva",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_05_terapia_online.png",
+      "sha256": "c917ea45a1ae9602006cc9b051c8698f036b6588f92b174dc743dd3cc4e74055",
+      "size_bytes": 118983,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-4d41e8c0",
+      "topic_key": "crianza_rutinas_flexibles",
+      "title": "Rutinas visuales para niños sin batallas diarias ni gritos",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_19_crianza_rutinas_flexibles.png",
+      "sha256": "2871824694306cec4e1e911396ef65c4a84fcf435a6450543b7589441bc0bd29",
+      "size_bytes": 116272,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-53c1f8cb",
+      "topic_key": "tdah_mujeres",
+      "title": "¿Por qué el TDAH en mujeres se descubre 10 años más tarde?",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_15_tdah_mujeres.png",
+      "sha256": "3760c727cdcb01a9e34e7e093e083d0d0a78bd0f6045adc75c1fffdbd7615afc",
+      "size_bytes": 123619,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-557d941d",
+      "topic_key": "evaluacion_infantil",
+      "title": "¿Cuándo consultar por tu hijo/a? 4 señales clave en la infancia",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_06_evaluacion_infantil.png",
+      "sha256": "33337df1b75b0dec211e34e30cf8e998351139bdc39e6a8ed093b74a44581e5b",
+      "size_bytes": 119794,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-565bcd80",
+      "topic_key": "autocuidado_adultos",
+      "title": "No tienes que poder con todo tú solo/a: El valor de pedir ayuda",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_07_autocuidado_adultos.png",
+      "sha256": "42ac40f25598c6cd2b66b508a3e58beabc0433dce5a692de9646b28c6d94a6cb",
+      "size_bytes": 118424,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-5cc3bd0a",
+      "topic_key": "reembolso_seguros_cobertura",
+      "title": "Cómo combinar Isapre + Seguro para pagar el mínimo en terapia",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_17_reembolso_seguros_cobertura.png",
+      "sha256": "3f2495be5369f282a6011f5b69c4c341fe907cbd752b3d733f9b682b8c8e84c0",
+      "size_bytes": 115063,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-6478b654",
+      "topic_key": "primera_consulta_nunoa",
+      "title": "¿Cómo es una sesión presencial en Ñuñoa en Centro Paz?",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_22_primera_consulta_nunoa.png",
+      "sha256": "cddd9b5d10aeec780ffaefc0d7f49d29867680ecf0b3c745cab489a3df9a5b2c",
+      "size_bytes": 115122,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-73c7f8ae",
+      "topic_key": "primera_sesion",
+      "title": "¿Qué pasa realmente en tu primera sesión de terapia psicológica?",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_12_primera_sesion.png",
+      "sha256": "0ea63dc4727fa335c466af83ad1671ce8653bdab5be04290cf9f213b76f29e14",
+      "size_bytes": 111974,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-76b59fa1",
+      "topic_key": "ansiedad_somatica_cuerpo",
+      "title": "Cuando la ansiedad se siente en el cuerpo: Terapia integrativa",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_24_ansiedad_somatica_cuerpo.png",
+      "sha256": "5fa0189bcc7b773fd3c7ad6428583588dff3b0ccbb47bd53035ed16f0db7be02",
+      "size_bytes": 111036,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-930cd943",
+      "topic_key": "masking",
+      "title": "¿Qué es el 'Masking' y por qué te deja sin energía al llegar a casa?",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_04_masking.png",
+      "sha256": "c4a4c18b349635874c587366b67114ffa3032d3eab889ba58591b9323934aa75",
+      "size_bytes": 119482,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-9c769d0c",
+      "topic_key": "comunicacion_asertiva_limites",
+      "title": "Aprender a decir 'No tengo la energía' sin pedir perdón",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_20_comunicacion_asertiva_limites.png",
+      "sha256": "6e50685bdf4a11f6661c5e8b86618c4837ec4325c4cc48467caefed1b2e320fd",
+      "size_bytes": 108269,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-a704ce6a",
+      "topic_key": "isapre_licencia_boletas",
+      "title": "Boletas de Psicología: Todo lo que debes saber para tu Isapre",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_25_isapre_licencia_boletas.png",
+      "sha256": "6bf8d79b0fccd0b575e2f3adcc1c016f4fb5baeeff44aa34e1ad695fb2090ccc",
+      "size_bytes": 111614,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-a8406aab",
+      "topic_key": "culpa_parental",
+      "title": "Soltar la culpa en la crianza: no necesitas ser un padre o madre perfecto/a",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_13_culpa_parental.png",
+      "sha256": "e6a164881b1203a2cd93ae6687c304901f2b087221aaffdbdd215cb6b41c2025",
+      "size_bytes": 112452,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-b2d96e00",
+      "topic_key": "reembolso_isapre",
+      "title": "Cómo reembolsar tus sesiones en 3 simples pasos",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_02_reembolso_isapre.png",
+      "sha256": "66bcf2f9d641de937ad109bb40e826576f20d67e08b97d2ed72387ea1cfe7069",
+      "size_bytes": 130572,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-b8d7b7a0",
+      "topic_key": "regulacion_ansiedad",
+      "title": "3 Anclas para regularte cuando no puedes sobrepensar menos",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_10_regulacion_ansiedad.png",
+      "sha256": "3a496091f128545d9e83bf625b2accf44b69cc0dbe8b67320bfab33ce70f02fa",
+      "size_bytes": 130127,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-c4032b8c",
+      "topic_key": "sobrecarga_sensorial_ruido",
+      "title": "Hipersensibilidad al ruido: no es mal genio, es tu sistema nervioso",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_16_sobrecarga_sensorial_ruido.png",
+      "sha256": "46d13da58ec13b737a6f748f9e3b1e6685476e3b9defc580b64cda3d2436ba2d",
+      "size_bytes": 112822,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-c7520fad",
+      "topic_key": "desconexion_tecnologica_tdah",
+      "title": "La trampa del Doomscrolling en cerebros con TDAH",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_26_desconexion_tecnologica_tdah.png",
+      "sha256": "6ec563c3e26d487fe12f9c03fb1b78f3aded80a2ac138af857225cd65ca2dd8d",
+      "size_bytes": 114922,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-cd8bd31c",
+      "topic_key": "crianza_regulacion",
+      "title": "Una rabieta intensa no es manipulación: es sobrecarga sensorial",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_03_crianza_regulacion.png",
+      "sha256": "23088440aa10cbe03d3fda7181201774e43b0d6ae0fa0710e8383cc8d59827d4",
+      "size_bytes": 123866,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-cfa6d41e",
+      "topic_key": "burnout_autista",
+      "title": "¿Qué es el Burnout Autista y por qué no se quita descansando?",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_08_burnout_autista.png",
+      "sha256": "8ef5d2971a4904180199f1850c3205a18ffd778d99f6c3aeea050fdeb0cb04bd",
+      "size_bytes": 127036,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-e8389fc0",
+      "topic_key": "apoyo_neurodivergente_hijos",
+      "title": "Acompañar a tu hijo/a sin agotarte en el intento: Apoyo en TEA y TDAH",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_11_apoyo_neurodivergente_hijos.png",
+      "sha256": "c822604552c41ca6da3e7c7bc7fd2c6b5a87da55e31616787c76eaa39ab5e066",
+      "size_bytes": 117930,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    },
+    {
+      "item_id": "cpaz-f41c5d58",
+      "topic_key": "terapia_infantil_juego",
+      "title": "En terapia infantil el juego es la herramienta más rigurosa",
+      "channel": "instagram",
+      "format_type": "feed_png",
+      "file_path": "assets/instagram/post_23_terapia_infantil_juego.png",
+      "sha256": "419fca1ba0ebafbdef4319e30d72934b5e96a52c7045c39e6700d5d646908b3c",
+      "size_bytes": 108891,
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "mode": "RGB",
+      "format": "PNG",
+      "status": "CLINICAL_QA",
+      "qa_passed": true
+    }
+  ],
+  "core_modules": {
+    "media_os/dashboard.py": "04c0da9e443807608941b45d9f56bfb98de973d2e6578e8d9c23048aa4e146cb",
+    "media_os/calendar.py": "39721ad3a086503d044f9f779adf28afe519d6f0fa456e71d34f94301ad59a02",
+    "media_os/privacy.py": "0012ce01fa9c5f727d9598958d8d5a7b9ecc1d7891c8ef93eee5bd87c6c12f86",
+    "media_os/intelligence.py": "890cac4382bfe5106fa1e7d2ef245af52ee7c1551c664833ad79a2117d58b789",
+    "media_os/studio.py": "31d69de8c77c05d194a8c05c580e1a791453f659779ae768b637c7aa062c4e4e",
+    "media_os/storage.py": "ab976f83a4e20266b06934313f1ea85fd558b3afdc8fdb3ac70dd3f86f4114df",
+    "media_os/publishers.py": "08bc123ab3f7e3e3d1545c601890551177f08da3943258edcc533abf5ef2f4ae",
+    "media_os/automation.py": "ec7e30319ff64dfdcc3f813803a80f37fd7909f85b87b4fef1c7a5f2da023be6",
+    "media_os/attribution.py": "a6a177efe125330553768c577c9c7545eb68b77bb869154fb3b792c515eb2e88",
+    "media_os/cli.py": "4edb1e4bb29254f8c368393f7bcbd16f188e974fdd4c4b1045018aa5255fd599"
+  }
+}
