@@ -730,5 +730,95 @@ def test_dashboard_server_security_protections(tmp_path):
         assert static_after == static_before
 
 
+def test_dashboard_pwa_and_panel_domain(tmp_path):
+    import threading
+    import urllib.request
+    import urllib.error
+    import json
+
+    db_file = tmp_path / "pwa_test.db"
+    srv = create_dashboard_server(
+        db_path=db_file,
+        host="127.0.0.1",
+        port=0,
+    )
+    port = srv.server_address[1]
+    t = threading.Thread(target=srv.serve_forever, daemon=True)
+    t.start()
+    try:
+        # 1. PWA Manifest
+        req_manifest = urllib.request.Request(f"http://127.0.0.1:{port}/manifest.webmanifest")
+        with urllib.request.urlopen(req_manifest, timeout=5) as resp:
+            assert resp.status == 200
+            assert "application/manifest+json" in resp.headers.get("Content-Type", "")
+            manifest_data = json.loads(resp.read().decode("utf-8"))
+            assert manifest_data["name"] == "Centro Paz"
+            assert manifest_data["short_name"] == "Centro Paz"
+            assert manifest_data["display"] == "standalone"
+            assert manifest_data["theme_color"] == "#2c6e58"
+
+        # 2. Apple Touch Icon y Favicons
+        for path in ("/apple-touch-icon.png", "/icons/icon-192x192.png", "/icons/icon-512x512.png", "/icons/favicon-32x32.png"):
+            req_icon = urllib.request.Request(f"http://127.0.0.1:{port}{path}")
+            with urllib.request.urlopen(req_icon, timeout=5) as resp:
+                assert resp.status == 200
+                assert resp.headers.get("Content-Type") == "image/png"
+                data = resp.read()
+                assert len(data) > 0
+
+        # 3. Service Worker
+        req_sw = urllib.request.Request(f"http://127.0.0.1:{port}/sw.js")
+        with urllib.request.urlopen(req_sw, timeout=5) as resp:
+            assert resp.status == 200
+            assert "application/javascript" in resp.headers.get("Content-Type", "")
+            sw_code = resp.read().decode("utf-8")
+            assert "cpaz-media-os" in sw_code
+            assert "/api/" in sw_code  # Confirma regla de exclusión de APIs
+
+        # 4. Host header: panel.centropaz.cl permitido
+        req_panel = urllib.request.Request(
+            f"http://127.0.0.1:{port}/",
+            headers={"Host": "panel.centropaz.cl"}
+        )
+        with urllib.request.urlopen(req_panel, timeout=5) as resp:
+            assert resp.status == 200
+            body = resp.read().decode("utf-8")
+            assert "apple-touch-icon" in body
+            assert "manifest.webmanifest" in body
+            assert "viewport-fit=cover" in body
+
+        # 5. CSP headers contienen manifest-src y worker-src
+        req_csp = urllib.request.Request(f"http://127.0.0.1:{port}/")
+        with urllib.request.urlopen(req_csp, timeout=5) as resp:
+            csp = resp.headers.get("Content-Security-Policy", "")
+            assert "manifest-src 'self'" in csp
+            assert "worker-src 'self'" in csp
+
+        # 6. Origin panel.centropaz.cl permitido en POST /api/login
+        login_data = json.dumps({"token": srv.session_token}).encode("utf-8")
+        req_login_panel = urllib.request.Request(
+            f"http://127.0.0.1:{port}/api/login",
+            data=login_data,
+            headers={
+                "Content-Type": "application/json",
+                "Host": "panel.centropaz.cl",
+                "Origin": "https://panel.centropaz.cl",
+                "X-Forwarded-Proto": "https",
+            },
+            method="POST",
+        )
+        with urllib.request.urlopen(req_login_panel, timeout=5) as resp:
+            assert resp.status == 200
+            set_cookie = resp.headers.get("Set-Cookie", "")
+            assert "Secure" in set_cookie
+            assert "SameSite=Strict" in set_cookie
+            assert "HttpOnly" in set_cookie
+
+    finally:
+        srv.shutdown()
+        srv.server_close()
+
+
+
 
 

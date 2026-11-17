@@ -1,0 +1,38 @@
+{
+  "name": "Centro Paz",
+  "short_name": "Centro Paz",
+  "id": "cpaz-media-os",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f6f8f6",
+  "theme_color": "#2c6e58",
+  "description": "Centro Paz — CPAZ Media OS: Gestión de calendario editorial, atribución y QA clínico.",
+  "categories": [
+    "medical",
+    "business",
+    "productivity"
+  ],
+  "lang": "es-CL",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

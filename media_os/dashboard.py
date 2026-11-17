@@ -224,9 +224,18 @@ def build_dashboard_html(
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="cpaz-csrf-token" content="{html.escape(csrf_token)}" />
-  <title>CPAZ Media OS — Dashboard Ejecutivo</title>
+  <meta name="theme-color" content="#2c6e58" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Centro Paz" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
+  <title>Centro Paz — CPAZ Media OS</title>
   <style>
     :root {{
       --bg: #f6f8f6;
@@ -331,18 +340,76 @@ def build_dashboard_html(
     .toast.error {{ background-color: #b02a37; }}
     footer {{ text-align: center; color: var(--muted); font-size: 0.82rem; margin-top: 24px; }}
     code {{ background: #f1f4f2; padding: 2px 5px; border-radius: 5px; font-size: 0.82em; }}
+    @media (max-width: 768px) {{
+      body {{
+        padding: max(14px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+      }}
+      header {{
+        flex-direction: column;
+        padding: 16px;
+        gap: 12px;
+      }}
+      h1 {{ font-size: 1.25rem; }}
+      .grid {{ grid-template-columns: 1fr; gap: 10px; }}
+      .kpi {{ padding: 14px; }}
+      .table-toolbar {{
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }}
+      .search-box {{ min-width: 100%; }}
+      .search-input {{ min-height: 44px; font-size: 1rem; }}
+      .filter-pills {{
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        gap: 6px;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+      }}
+      .pill {{ min-height: 38px; padding: 6px 12px; display: inline-flex; align-items: center; }}
+      .ops-actions {{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        width: 100%;
+      }}
+      .btn-ops {{ min-height: 44px; font-size: 0.85rem; width: 100%; text-align: center; justify-content: center; display: inline-flex; align-items: center; }}
+      #editorialTable thead {{ display: none; }}
+      #editorialTable, #editorialTable tbody, #editorialTable tr, #editorialTable td {{
+        display: block; width: 100%;
+      }}
+      #editorialTable tr {{
+        background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+        margin-bottom: 12px; padding: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      }}
+      #editorialTable td {{
+        padding: 6px 0; border-bottom: none; display: flex; justify-content: space-between; align-items: center;
+      }}
+      #editorialTable td:nth-child(2) {{
+        display: block; font-size: 0.98rem; margin: 4px 0 8px 0; font-weight: 600;
+      }}
+      #editorialTable td:last-child {{
+        margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--border);
+      }}
+      .action-cell {{ width: 100%; justify-content: space-between; }}
+      .btn-copy {{ min-height: 42px; padding: 8px 14px; font-size: 0.85rem; }}
+    }}
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <div>
-        <h1>CPAZ Media OS — Dashboard Ejecutivo</h1>
-        <p class="sub">
-          Centro Paz · Valentina Castro Núñez (SIS Nº 667344) · Salvador 2302, Ñuñoa &amp; Online Chile ·
-          WhatsApp +56 9 6516 3893 · Arancel $45.000 CLP · www.centropaz.cl
-        </p>
-        <p class="sub">Actualizado: <code>{html.escape(snapshot['generated_at'])}</code></p>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <img src="/icons/icon-192x192.png" alt="Centro Paz" style="width: 52px; height: 52px; border-radius: 14px; box-shadow: 0 2px 10px rgba(44,110,88,0.18); flex-shrink: 0;" />
+        <div>
+          <h1>Centro Paz — CPAZ Media OS</h1>
+          <p class="sub">
+            Centro Paz · Valentina Castro Núñez (SIS Nº 667344) · Salvador 2302, Ñuñoa &amp; Online Chile ·
+            WhatsApp +56 9 6516 3893 · Arancel $45.000 CLP · www.centropaz.cl
+          </p>
+          <p class="sub">Actualizado: <code>{html.escape(snapshot['generated_at'])}</code></p>
+        </div>
       </div>
       <div class="guard-banner">
         Gate Activo: Sin publicación en vivo ni cuentas conectadas sin AUTORIZO · Aislamiento Clínico Ley 19.628 (0 PII)
@@ -559,6 +626,12 @@ def build_dashboard_html(
           copyCmd(btn.getAttribute('data-copy'));
         }});
       }});
+
+      if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost')) {{
+        window.addEventListener('load', () => {{
+          navigator.serviceWorker.register('/sw.js').catch(() => {{}});
+        }});
+      }}
     }});
   </script>
 </body>
@@ -590,9 +663,18 @@ def build_dashboard_login_html(*, nonce: str = "") -> str:
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="cpaz-csrf-token" content="" />
-  <title>CPAZ Media OS — Acceso Protegido</title>
+  <meta name="theme-color" content="#2c6e58" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Centro Paz" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
+  <title>Centro Paz — Acceso Protegido</title>
   <style>
     :root {{
       --bg: #f6f8f6;
@@ -614,30 +696,43 @@ def build_dashboard_login_html(*, nonce: str = "") -> str:
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      padding: 20px;
+      min-height: -webkit-fill-available;
+      padding: max(20px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
     }}
     .login-card {{
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px;
-      max-width: 440px;
+      border-radius: 18px;
+      padding: 36px 30px;
+      max-width: 420px;
       width: 100%;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }}
+    .login-logo {{
+      text-align: center;
+      margin-bottom: 16px;
+    }}
+    .login-logo img {{
+      width: 78px;
+      height: 78px;
+      border-radius: 18px;
+      box-shadow: 0 4px 14px rgba(44,110,88,0.18);
     }}
     h1 {{
-      margin: 0 0 8px 0;
-      font-size: 1.4rem;
+      margin: 0 0 6px 0;
+      font-size: 1.45rem;
       color: var(--accent);
+      text-align: center;
     }}
     p {{
-      margin: 0 0 20px 0;
+      margin: 0 0 24px 0;
       font-size: 0.9rem;
       color: var(--muted);
       line-height: 1.4;
+      text-align: center;
     }}
     .form-group {{
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }}
     label {{
       display: block;
@@ -649,10 +744,11 @@ def build_dashboard_login_html(*, nonce: str = "") -> str:
     }}
     input[type="password"] {{
       width: 100%;
-      padding: 10px 12px;
+      min-height: 48px;
+      padding: 10px 14px;
       border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.95rem;
+      border-radius: 10px;
+      font-size: 1rem;
     }}
     input[type="password"]:focus {{
       outline: none;
@@ -660,14 +756,19 @@ def build_dashboard_login_html(*, nonce: str = "") -> str:
     }}
     button {{
       width: 100%;
-      padding: 11px;
+      min-height: 48px;
+      padding: 12px;
       background: var(--accent);
       color: #fff;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 1rem;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s ease;
     }}
     button:hover {{
       background: #235846;
@@ -675,15 +776,19 @@ def build_dashboard_login_html(*, nonce: str = "") -> str:
     .err-msg {{
       color: var(--err);
       font-size: 0.85rem;
-      margin-top: 10px;
+      margin-top: 12px;
+      text-align: center;
       display: none;
     }}
   </style>
 </head>
 <body>
   <div class="login-card">
-    <h1>🔒 CPAZ Media OS</h1>
-    <p>Acceso Protegido. Ingrese el token de sesión generado en la terminal para desbloquear el Dashboard.</p>
+    <div class="login-logo">
+      <img src="/icons/icon-192x192.png" alt="Centro Paz" />
+    </div>
+    <h1>Centro Paz</h1>
+    <p>CPAZ Media OS · Acceso Protegido. Ingrese el token de sesión para desbloquear el Dashboard.</p>
     <div class="form-group">
       <label for="tokenInput">Token de Sesión</label>
       <input type="password" id="tokenInput" placeholder="Token efímero de 48 caracteres..." autocomplete="off" />
@@ -733,6 +838,12 @@ def build_dashboard_login_html(*, nonce: str = "") -> str:
       if (inp) inp.addEventListener('keydown', (e) => {{
         if (e.key === 'Enter') doLogin();
       }});
+
+      if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost')) {{
+        window.addEventListener('load', () => {{
+          navigator.serviceWorker.register('/sw.js').catch(() => {{}});
+        }});
+      }}
     }});
   </script>
 </body>
@@ -813,7 +924,7 @@ def _is_allowed_origin(origin: Optional[str]) -> bool:
         return True
     parsed = urlparse(origin)
     host = (parsed.hostname or "").lower()
-    if host in ("127.0.0.1", "localhost", "::1"):
+    if host in ("127.0.0.1", "localhost", "::1", "panel.centropaz.cl"):
         return True
     return _is_tailscale_host(host)
 
@@ -822,7 +933,7 @@ def _validate_host_header(host_header: Optional[str], *, allow_tailscale: bool) 
     if not host_header:
         return True
     bare_host = host_header.split(":")[0].strip().lower()
-    if bare_host in ("127.0.0.1", "localhost", "::1"):
+    if bare_host in ("127.0.0.1", "localhost", "::1", "panel.centropaz.cl"):
         return True
     if allow_tailscale and _is_tailscale_host(bare_host):
         return True
@@ -900,6 +1011,8 @@ def create_dashboard_server(
                     f"style-src 'self' 'unsafe-inline'; "
                     f"img-src 'self' data:; "
                     f"connect-src 'self'; "
+                    f"manifest-src 'self'; "
+                    f"worker-src 'self'; "
                     f"frame-ancestors 'none'; "
                     f"object-src 'none'; "
                     f"base-uri 'self'; "
@@ -912,6 +1025,8 @@ def create_dashboard_server(
                     "style-src 'self' 'unsafe-inline'; "
                     "img-src 'self' data:; "
                     "connect-src 'self'; "
+                    "manifest-src 'self'; "
+                    "worker-src 'self'; "
                     "frame-ancestors 'none'; "
                     "object-src 'none'; "
                     "base-uri 'self'; "
@@ -939,6 +1054,35 @@ def create_dashboard_server(
             is_authenticated, auth_type, sess = _authenticate_request(self.headers, session_mgr, active_token)
 
             clean_path = self.path.split("?")[0].rstrip("/") or "/"
+
+            pwa_static_map = {
+                "/manifest.webmanifest": ("assets/pwa/manifest.webmanifest", "application/manifest+json; charset=utf-8"),
+                "/sw.js": ("assets/pwa/sw.js", "application/javascript; charset=utf-8"),
+                "/apple-touch-icon.png": ("assets/pwa/apple-touch-icon.png", "image/png"),
+                "/apple-touch-icon-180x180.png": ("assets/pwa/apple-touch-icon-180x180.png", "image/png"),
+                "/icons/icon-192x192.png": ("assets/pwa/icon-192x192.png", "image/png"),
+                "/icons/icon-512x512.png": ("assets/pwa/icon-512x512.png", "image/png"),
+                "/icons/favicon-32x32.png": ("assets/pwa/favicon-32x32.png", "image/png"),
+                "/icons/favicon-16x16.png": ("assets/pwa/favicon-16x16.png", "image/png"),
+                "/favicon.ico": ("assets/pwa/favicon-32x32.png", "image/png"),
+            }
+            if clean_path in pwa_static_map:
+                rel_path, content_type = pwa_static_map[clean_path]
+                file_path = ROOT / rel_path
+                if file_path.exists() and file_path.is_file():
+                    data = file_path.read_bytes()
+                    self.send_response(200)
+                    self._send_security_headers()
+                    self.send_header("Content-Type", content_type)
+                    if clean_path in ("/sw.js", "/manifest.webmanifest"):
+                        self.send_header("Cache-Control", "no-cache")
+                    else:
+                        self.send_header("Cache-Control", "public, max-age=86400")
+                    self.send_header("Content-Length", str(len(data)))
+                    self.end_headers()
+                    self.wfile.write(data)
+                    return
+
             if clean_path == "/api/snapshot":
                 if not is_authenticated:
                     self.send_error(401, "Autenticación requerida: endpoint protegido.")

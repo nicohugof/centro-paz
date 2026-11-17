@@ -26,7 +26,16 @@ Ecosistema digital centrado al 100% en la **Página Web ([www.centropaz.cl](http
     * Comandos de servicio: `start`, `stop`, `restart`, `status`, `token --copy` (portapapeles sin imprimir), `token --rotate` (rotación segura 48 chars e invalidación inmediata), `open` (abre en navegador copiando token), `install-launchd` y `uninstall-launchd`.
     * Procedimiento de recuperación: ante cierres anómalos, `launchd` restablece el servicio automáticamente (probado con `kill -9`; reinicio real del Mac pendiente de verificación por Nicolás); diagnóstico manual con `status` y recuperación forzada con `restart` o `install-launchd`.
     * Acceso directo de escritorio `.webloc` en `tools/` y `~/Desktop/` apuntando a `http://127.0.0.1:8765/`, con credencial en `~/.cpaz/media_os_token` (permisos `0600`).
-  - **Suite de Pruebas Automatizadas:** `pytest`: **9/9 PASS** (21 verificaciones exhaustivas de seguridad HTTP, control de acceso, rotación de nonce CSP, TTL y regresión funcional; total de **80 pruebas automatizadas** en el repositorio junto a `agent/audit_directory_consistency.py` [64/64] y `agent/test_full_suite_e2e.py` [7/7]).
+  - **PWA Móvil e Instalación en iPhone:**
+    * App Web Progresiva instalable en Safari iOS con modo standalone, `viewport-fit=cover`, safe area insets y barra de estado temática (`#2c6e58`).
+    * Iconos oficiales derivados de la marca Centro Paz (`apple-touch-icon.png` 180x180, `icon-192x192.png`, `icon-512x512.png`) y `manifest.webmanifest`.
+    * Service worker `sw.js` con política de aislamiento clínico estricto (0 caché de APIs ni datos sensibles).
+    * Experiencia táctil optimizada en iPhone: tarjetas táctiles para el calendario editorial, touch targets >= 44px y botón de un solo toque para copiar `PUBLICAR <ID>`.
+    * Manual operativo detallado en [`docs/MANUAL_OPERACION_IPHONE.md`](docs/MANUAL_OPERACION_IPHONE.md).
+  - **Infraestructura y Dominio `panel.centropaz.cl`:**
+    * Backend preparado para escuchar bajo el dominio `panel.centropaz.cl` con validación de host, orígenes autorizados y cookies con atributo `Secure` ante conexiones HTTPS.
+    * Configuraciones listas en `deploy/`: Cloudflare Tunnel de $0/mes y 0 puertos abiertos (`deploy/cloudflared-config.yml`), proxy Caddy con TLS automático (`deploy/Caddyfile`), Nginx (`deploy/nginx-panel.conf`) y monitor de salud (`deploy/healthcheck.sh`).
+  - **Suite de Pruebas Automatizadas:** `pytest`: **10/10 PASS** (verificaciones de PWA, compatibilidad de dominio, seguridad HTTP, control de acceso, rotación de nonce CSP, TTL y regresión funcional; total de **81 pruebas automatizadas** en el repositorio junto a `agent/audit_directory_consistency.py` [64/64] y `agent/test_full_suite_e2e.py` [7/7]).
   - **Integridad Criptográfica y Clínica:** Los 28 contenidos se encuentran en estado `CLINICAL_QA` con sus 28 recursos gráficos PNG verificados físicamente e indexados en [`docs/INTEGRITY_MANIFEST_PR15.json`](docs/INTEGRITY_MANIFEST_PR15.json), auditados de forma automática en [`tests/test_integrity_manifest.py`](tests/test_integrity_manifest.py).
   - **Modelo de Seguridad Local:** Perímetro blindado contra ataques de red y navegador (CSRF, DNS Rebinding, XSS); se delimita que los procesos locales ejecutados bajo el mismo UID escapan a las defensas de la capa de aplicación y dependen del aislamiento del sistema operativo.
 - **Resguardo clínico e integridad:** `video_engine/public/`, `data/patient_intakes.json`, las 54 páginas HTML y cuentas externas permanecen intactos y sin publicación en vivo. Ready para revisión humana en PR #15.

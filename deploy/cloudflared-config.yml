@@ -1,0 +1,18 @@
+# Configuración de Cloudflare Tunnel — panel.centropaz.cl
+# Conecta el backend local directamente con la red Anycast de Cloudflare
+# Ventajas: $0/mes, CERO puertos abiertos en el router/firewall, HTTPS automático.
+
+tunnel: cpaz-media-os
+credentials-file: /etc/cloudflared/cpaz-media-os.json
+
+ingress:
+  # 1. Enrutamiento del subdominio de panel hacia el servidor local
+  - hostname: panel.centropaz.cl
+    service: http://127.0.0.1:8765
+    originRequest:
+      connectTimeout: 10s
+      noTLSVerify: false
+      httpHostHeader: panel.centropaz.cl
+
+  # 2. Regla por defecto (descarte de cualquier otro hostname)
+  - service: http_status:404

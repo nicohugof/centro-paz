@@ -13,9 +13,18 @@ Lee `ROADMAP.md`, `ESTADO_ACTUAL.md`, `README.md` y documentación clínica. Con
   * `/api/snapshot` estrictamente protegido (`401 Unauthorized` ante peticiones anónimas).
 - Blindaje de seguridad HTTP multicapa verificado: anti-DNS rebinding, anti-CSRF (`Sec-Fetch-Site`, `Origin`, `Referer`), rechazo de preflight CORS `OPTIONS` (405), límite de 64 KB, descarte de tokens en query strings (`?token=`), y permisos restrictivos `0600` en cola de publicación.
 - **Manifiesto de Integridad Criptográfica:** [`docs/INTEGRITY_MANIFEST_PR15.json`](docs/INTEGRITY_MANIFEST_PR15.json) con hashes SHA-256 de base de datos, módulos y las 28 imágenes, auditado en `tests/test_integrity_manifest.py`.
-- **100% pruebas unitarias, de seguridad y E2E superadas**: 80 pruebas automatizadas en el repositorio (9 suites pytest, 64 pruebas en `audit_directory_consistency.py`, 7 pruebas en `test_full_suite_e2e.py`).
+- **100% pruebas unitarias, de seguridad y E2E superadas**: 81 pruebas automatizadas en el repositorio (10 suites pytest incluyendo pruebas específicas de PWA y dominio `panel.centropaz.cl`, 64 pruebas en `audit_directory_consistency.py`, 7 pruebas en `test_full_suite_e2e.py`).
 - **Aislamiento Clínico y Ley 19.628:** Todos los 28 contenidos permanecen en estado `CLINICAL_QA` con 0 aprobaciones automáticas y 0 publicaciones en vivo sin aprobación explícita humana (`PUBLICAR <ID>`).
 - **Modelo de Amenazas Local:** El perímetro protege contra atacantes de red externos, sitios web maliciosos y ataques cross-site; se documenta que procesos locales que corran bajo el mismo UID del usuario escapan a las barreras HTTP de la aplicación y requieren aislamiento a nivel del sistema operativo.
+- **PWA Móvil e Instalación en iPhone:**
+  * Aplicación Web Progresiva instalable en Safari iOS (Compartir → "Añadir a pantalla de inicio") con modo standalone a pantalla completa.
+  * Iconos oficiales de Centro Paz en alta resolución (`apple-touch-icon.png` 180x180, `icon-192x192.png`, `icon-512x512.png`) y `manifest.webmanifest`.
+  * Service worker (`sw.js`) con aislamiento estricto: cachea únicamente interfaz estática, prohibiendo explícitamente almacenar en caché respuestas de `/api/*` o datos de pacientes.
+  * Interfaz optimizada para iPhone: soporte `viewport-fit=cover`, safe area insets, touch targets >= 44px, vista de tarjetas táctiles para el calendario editorial y logo oficial en login y cabecera.
+  * Manual de usuario completo en [`docs/MANUAL_OPERACION_IPHONE.md`](docs/MANUAL_OPERACION_IPHONE.md).
+- **Infraestructura de Dominio (`panel.centropaz.cl`):**
+  * Servidor loopback compatible con host y origen `panel.centropaz.cl` bajo HTTPS con cabeceras `Secure` en cookies.
+  * Configuraciones de despliegue reproducible en `deploy/`: Cloudflare Tunnel (`deploy/cloudflared-config.yml`), Caddy con SSL automático (`deploy/Caddyfile`), Nginx (`deploy/nginx-panel.conf`) y monitor de salud (`deploy/healthcheck.sh`).
 - **Acceso Permanente Local en macOS:**
   * URL estable: `http://127.0.0.1:8765/` (escucha exclusiva en loopback `127.0.0.1`).
   * Gestor de servicio integral: `scripts/media_os_service.sh`
